@@ -19,8 +19,8 @@ tokens:
 	<tipo, 1> //string
 	<tipo, 2> //boolean
 	<let, ->
-	<call_func, 0> // alert
-	<call_func, 1> // input
+	//<call_func, 0> // alert
+	//<call_func, 1> // input
 
 	<function, ->
 	<return, ->
