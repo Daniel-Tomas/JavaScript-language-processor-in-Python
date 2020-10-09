@@ -1,0 +1,17 @@
+//// Gramática no LL(1)
+Axioma = E
+
+NoTerminales = { E T F }
+
+Terminales = { + * ( ) id }
+
+//// El lenguaje que se genera el id*(id+id)
+Producciones = {
+	E -> E + T
+	E -> T
+	T -> T * F
+	T -> F
+	F -> ( E )
+	F -> id 
+	
+}    
