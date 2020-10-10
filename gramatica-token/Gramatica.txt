@@ -2,14 +2,14 @@ Axioma = A
 
 NoTerminales = { A D S C C' C'' I M E N }
 
-Terminales = { _ / * ( ) { } ; , ' " - = + & otroC }
+Terminales = { _ / * ( ) { } ; , ' " - = + & EOF otroC }
     del = {" " \t \n}
     d = {0 1 2 3 4 5 6 7 8 9}
     l = { a-zA-Z }
     otroC = {todoCaracterPosible - predecesorProduccion}
 
 Producciones = {
-    A -> del A | dD | "S | /C | lI | + | -M | =E | &N | ( | ) | { | } | ; | ,
+    A -> del A | dD | "S | /C | lI | + | -M | =E | &N | ( | ) | { | } | ; | , | EOF
     D -> dD | λ
     S -> " | otroC S
     C -> *C'
