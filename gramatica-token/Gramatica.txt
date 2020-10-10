@@ -6,15 +6,15 @@ Terminales = { _ / * ( ) { } ; , ' " - = + & EOF otroC }
     del = {" " \t \n}
     d = {0 1 2 3 4 5 6 7 8 9}
     l = { a-zA-Z }
-    otroC = {todoCaracterPosible - predecesorProduccion}
+    otroCS = {todoCaracterPosible - predecesorProduccion}
 
 Producciones = {
     A -> del A | dD | "S | /C | lI | + | -M | =E | &N | ( | ) | { | } | ; | , | EOF
     D -> dD | λ
-    S -> " | otroC S
+    S -> " | otroCS S
     C -> *C'
-    C' -> *C'' | otroC C'
-    C'' -> /S | otroC C'
+    C' -> *C'' | otroCS C'
+    C'' -> /A | otroCS C'
     I -> dI | lI | _I | λ
     M -> - | λ
     E -> = | λ

@@ -1,0 +1,8 @@
+Acciones semánticas:
+A: leer
+B: entero = valor(d), leer
+C: entero = entero*10 + valor(d), leer
+D: if(entero<=32767)
+    genToken(cte_entera,entero);
+   else
+    pError("Número fuera de rango")

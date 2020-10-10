@@ -2,41 +2,37 @@ tokens:
 	<cte_entera, valor>
 	<cadena, lexema>
 
-// 	<true, -> // REVISAR
-// 	<false, ->
+	<true, -> // REVISAR
+	<false, ->
 	
-	<cte_logica, 0> // false
-	<cte_logica, 1> // true
+	<cte_logica, 0> // true
+	<cte_logica, 1> // false
 	<op_arit, 0> // +
 	<op_arit, 1> // -
-	<op_esp, -> // i--
-	<op_rel, -> // ==
-	<op_log, -> // &&
-	<op_asig, -> // =
+	<op_esp, 0> // i--
+	<op_rel, 0> // ==
+	<op_log, 0> // && DE MOMENTO
+	<op_asig, 0> // = REVISAR
 
 	<id, punteroTS>
-	<number, ->
-	<string, ->
-	<boolean, ->
+	<tipo, 0> //number
+	<tipo, 1> //string
+	<tipo, 2> //boolean
 	<let, ->
-	<alert, ->
-	<input, ->
-
-//	<call_func, 0> // alert
-//	<call_func, 1> // input
+	//<call_func, 0> // alert
+	//<call_func, 1> // input
 
 	<function, ->
 	<return, ->
 	<if, ->
 	<for, ->
 
-	<ab_paren, -> // (
-	<ce_paren, -> // )
-	<ab_llave, -> // {
-	<ce_llave, -> // }
+	<paren, 0> // (
+	<paren, 1> // )
+	<llave, 0> // {
+	<llave, 1> // }
 	<coma, ->
 	<punto_coma, ->
-	<EOF, ->
 	  
 
 
