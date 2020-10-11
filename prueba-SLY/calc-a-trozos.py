@@ -8,6 +8,10 @@ class CalcLexer(Lexer):
     # String containing ignored characters between tokens
     ignore = ' \t'
 
+    # Other ignored patterns
+    ignore_comment = r'\#.*'
+    ignore_newline = r'\n+'
+
     # Regular expression rules for tokens
     ID      = r'[a-zA-Z][a-zA-Z0-9_]*'
     NUMBER  = r'\d+'
@@ -20,7 +24,10 @@ class CalcLexer(Lexer):
     RPAREN  = r'\)'
 
 if __name__ == '__main__':
-    data = 'x_Aa= 3 + 42 * (s - t)'
+    #data = 'x_Aa= 3 + 42 * (s - t)'
+    data = '''x = 3 + 42
+                * (s    # This is a comment
+                    - t)'''
     lexer = CalcLexer()
     for tok in lexer.tokenize(data):
         print('type=%r, value=%r' % (tok.type, tok.value))
