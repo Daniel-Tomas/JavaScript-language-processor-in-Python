@@ -76,4 +76,4 @@ if __name__ == '__main__':
      23410 /*on*/ fjr =23+2; let'''
     lexer = CalcLexer()
     for tok in lexer.tokenize(data):
-        print('type=%r, value=%r' % (tok.type, tok.value))
+        print(f'<{tok.type} , {tok.value}>')
