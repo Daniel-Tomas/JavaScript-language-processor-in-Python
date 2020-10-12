@@ -1,15 +1,12 @@
 tokens:
 	<cte_entera, valor>
 	<cadena, lexema>
-
-// 	<true, -> // REVISAR
-// 	<false, ->
 	
 	<cte_logica, 0> // false
 	<cte_logica, 1> // true
+	<op_esp, -> // i--
 	<op_arit, 0> // +
 	<op_arit, 1> // -
-	<op_esp, -> // i--
 	<op_rel, -> // ==
 	<op_log, -> // &&
 	<op_asig, -> // =
@@ -21,9 +18,6 @@ tokens:
 	<let, ->
 	<alert, ->
 	<input, ->
-
-//	<call_func, 0> // alert
-//	<call_func, 1> // input
 
 	<function, ->
 	<return, ->

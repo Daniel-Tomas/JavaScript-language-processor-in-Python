@@ -1,19 +1,20 @@
 from sly import Lexer
+import re
 
 class CalcLexer(Lexer):
     # Set of token names.   This is always required
     tokens = { ID, NUMBER, PLUS, MINUS, TIMES,
-               DIVIDE, ASSIGN, LPAREN, RPAREN }
+               DIVIDE, ASSIGN, LPAREN, RPAREN, COMEN }
 
     # String containing ignored characters between tokens
-    ignore = ' \t'
+    ignore_del = ' \t\n'
 
     # Other ignored patterns
     ignore_comment = r'\#.*'
     ignore_newline = r'\n+'
 
     # Regular expression rules for tokens
-    COMEN = r'/\*[a-zA-Z0-9_]*\*/'
+    COMEN   = r'[\*].*/n*[\*]'
     ID      = r'[a-zA-Z][a-zA-Z0-9_]*'
     NUMBER  = r'\d+'
     PLUS    = r'\+'
@@ -26,9 +27,7 @@ class CalcLexer(Lexer):
 
 if __name__ == '__main__':
     #data = 'x_Aa= 3 + 42 * (s - t)'
-    data = '''x = 3 + 42
-                * (s    # This is a comment
-                    - t)'''
+    data = '''/* Esto es un comentario */'''
     lexer = CalcLexer()
     for tok in lexer.tokenize(data):
         print('type=%r, value=%r' % (tok.type, tok.value))

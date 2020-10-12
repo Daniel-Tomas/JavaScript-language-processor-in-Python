@@ -5,18 +5,42 @@
 from sly import Lexer, Parser
 
 class CalcLexer(Lexer):
-    tokens = { CTE_ENTERA, CADENA, TRUE, FALSE, CTE_LOGICA, OP_ARIT, OP_ESP,
+    tokens = { CTE_ENTERA, CADENA, CTE_LOGICA, OP_ARIT, OP_ESP,
                OP_REL, OP_LOG, OP_ASIG, ID, NUMBER, STRING, BOOLEAN, LET, ALERT,
-               INPUT, CALL_FUNC,}
-    ignore = ' \t'
-    literals = { '=', '+', '-', '*', '/', '(', ')' }
+               INPUT, FUNCTION, RETURN, IF, FOR, AB_PAREN, CE_PAREN,
+               COMA, PUNTO_COMA, EOF}
+
+    ignore_del = ' \t\n'
+    ignore_comment = r'/\*.*|/n*\*/'
 
     # Tokens
-    NAME = r'[a-zA-Z_][a-zA-Z0-9_]*'
+    CTE_ENTERA = r'\d+'
+    CADENA = r'".*"'
+    CTE_LOGICA = r'true|false'
+    OP_ESP = r'--'
+    OP_ARIT = r'\+|-'
+    OP_REL = r'=='
+    OP_LOG = r'&&'
+
+    ID = r'[a-zA-Z][a-zA-Z0-9_]*'
+    ID['number'] = NUMBER
+    ID['string'] = STRING
+    ID['boolean'] = BOOLEAN
+    ID['let'] = LET
+    ID['alert'] = ALERT
+    ID['input'] = INPUT
+    ID['function'] = FUNCTION
+    ID['return'] = RETURN
+    ID['if'] = IF
+    ID['for'] = FOR
+
+
+    literals = {'=', '(', ')','{', '}', ',', ';', ''}
 
     @_(r'\d+')
-    def NUMBER(self, t):
+    def CTE_ENTERA(self, t):
         t.value = int(t.value)
+        if t.value > 3500
         return t
 
     @_(r'\n+')
