@@ -7,11 +7,10 @@ from sly import Lexer, Parser
 class CalcLexer(Lexer):
     tokens = { CTE_ENTERA, CADENA, CTE_LOGICA, OP_ARIT, OP_ESP,
                OP_REL, OP_LOG, OP_ASIG, ID, NUMBER, STRING, BOOLEAN, LET, ALERT,
-               INPUT, FUNCTION, RETURN, IF, FOR, AB_PAREN, CE_PAREN,
-               COMA, PUNTO_COMA, EOF}
+               INPUT, FUNCTION, RETURN, IF, FOR,EOF}
 
-    ignore_del = ' \t\n'
-    ignore_comment = r'/\*.*|/n*\*/'
+    ignore = ' \t\n'
+    ignore_comment = r'(?s)/\*.*?\*/'
 
     # Tokens
     CTE_ENTERA = r'\d+'
@@ -20,6 +19,7 @@ class CalcLexer(Lexer):
     OP_ESP = r'--'
     OP_ARIT = r'\+|-'
     OP_REL = r'=='
+    OP_ASIG = r'='
     OP_LOG = r'&&'
 
     ID = r'[a-zA-Z][a-zA-Z0-9_]*'
@@ -34,13 +34,31 @@ class CalcLexer(Lexer):
     ID['if'] = IF
     ID['for'] = FOR
 
+    # Revisar EOF quizá lo hace automáticamente
+    literals = {'(', ')','{', '}', ',', ';', '/d'}
 
-    literals = {'=', '(', ')','{', '}', ',', ';', ''}
-
-    @_(r'\d+')
     def CTE_ENTERA(self, t):
         t.value = int(t.value)
-        if t.value > 3500
+        if t.value > 32767:
+            print(f'Número fuera de rango: "{t.value}"')
+            raise IOError
+        return t
+
+    def CADENA(self,t):
+        t.value = t.value[1:-2]
+        if len(t.value) > 64:
+            print(f'Cadena demasiado larga: "{t.value}"')
+            raise IOError
+        return t
+
+    #TODO: Para hacer cuando se de la TS
+    #def ID(self,t):
+
+    def OP_ARIT(self,t):
+        if t.value == '+':
+            t.value = 0
+        else:
+            t.value = 1
         return t
 
     @_(r'\n+')
@@ -51,69 +69,11 @@ class CalcLexer(Lexer):
         print("Illegal character '%s'" % t.value[0])
         self.index += 1
 
-class CalcParser(Parser):
-    tokens = CalcLexer.tokens
-
-    precedence = (
-        ('left', '+', '-'),
-        ('left', '*', '/'),
-        ('right', 'UMINUS'),
-        )
-
-    def __init__(self):
-        self.names = { }
-
-    @_('NAME "=" expr')
-    def statement(self, p):
-        self.names[p.NAME] = p.expr
-
-    @_('expr')
-    def statement(self, p):
-        print(p.expr)
-
-    @_('expr "+" expr')
-    def expr(self, p):
-        return p.expr0 + p.expr1
-
-    @_('expr "-" expr')
-    def expr(self, p):
-        return p.expr0 - p.expr1
-
-    @_('expr "*" expr')
-    def expr(self, p):
-        return p.expr0 * p.expr1
-
-    @_('expr "/" expr')
-    def expr(self, p):
-        return p.expr0 / p.expr1
-
-    @_('"-" expr %prec UMINUS')
-    def expr(self, p):
-        return -p.expr
-
-    @_('"(" expr ")"')
-    def expr(self, p):
-        return p.expr
-
-    @_('NUMBER')
-    def expr(self, p):
-        return p.NUMBER
-
-    @_('NAME')
-    def expr(self, p):
-        try:
-            return self.names[p.NAME]
-        except LookupError:
-            print("Undefined name '%s'" % p.NAME)
-            return 0
-
 if __name__ == '__main__':
+    #data = 'x_Aa= 3 + 42 * (s - t)'
+    data = '''/* Esto es un
+     comentario */ "hola " string
+     23410 /*on*/ fjr =23+2; let'''
     lexer = CalcLexer()
-    parser = CalcParser()
-    while True:
-        try:
-            text = input('calc > ')
-        except EOFError:
-            break
-        if text:
-            parser.parse(lexer.tokenize(text))
+    for tok in lexer.tokenize(data):
+        print('type=%r, value=%r' % (tok.type, tok.value))
