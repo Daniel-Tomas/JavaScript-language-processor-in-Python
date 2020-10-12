@@ -13,6 +13,7 @@ class CalcLexer(Lexer):
     ignore_newline = r'\n+'
 
     # Regular expression rules for tokens
+    COMEN = r'/\*[a-zA-Z0-9_]*\*/'
     ID      = r'[a-zA-Z][a-zA-Z0-9_]*'
     NUMBER  = r'\d+'
     PLUS    = r'\+'
