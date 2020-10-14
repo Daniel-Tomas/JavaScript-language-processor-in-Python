@@ -14,7 +14,7 @@ class CalcLexer(Lexer):
     ignore_comment = r'(?s:/\*.*?\*/)'  # re.DOTALL only for this r.e. expression
 
     # Tokens
-    CTE_ENTERA = r'\d+\s'
+    CTE_ENTERA = r'\d+[\s;]'
     CADENA = r'".*?"'
     CTE_LOGICA = r'true|false'
     OP_ESP = r'--'
@@ -50,11 +50,14 @@ class CalcLexer(Lexer):
         Raises:
             IOError: If value is bigger than the maximum integer allowed.
         """
+        if t.value[-1]==';':
+            t.value = t.value[0:-1]
+            print('<; , ;>' )
         t.value = int(t.value)
         if t.value > 32767:
             print(f'Número fuera de rango: "{t.value}"')
             exit()
-            #raise IOError
+            # raise IOError
         return t
 
     def CADENA(self, t):
@@ -71,9 +74,9 @@ class CalcLexer(Lexer):
             """
         t.value = t.value[1:-1]
         if len(t.value) > 64:
-            print(f'Cadena demasiado larga: "{t.value}"')
+            print(f'Cadena demasiado larga: "{t.value, len(t.value)}"')
             exit()
-            #raise IOError
+            # raise IOError
         return t
 
     # TODO: Para hacer cuando se de la TS
@@ -115,7 +118,8 @@ class CalcLexer(Lexer):
 
 if __name__ == '__main__':
     # data = 'x_Aa= 3 + 42 * (s - t)'
-    data = '''"aa   a"'''
+    data = '''int a=2;
+    a--;'''
     lexer = CalcLexer()
     for tok in lexer.tokenize(data):
         print(f'<{tok.type} , {tok.value}>')
