@@ -2,19 +2,20 @@
 # calc.py
 # -----------------------------------------------------------------------------
 
-from sly import Lexer, Parser
+from sly import Lexer
+
 
 class CalcLexer(Lexer):
-    tokens = { CTE_ENTERA, CADENA, CTE_LOGICA, OP_ARIT, OP_ESP,
-               OP_REL, OP_LOG, OP_ASIG, ID, NUMBER, STRING, BOOLEAN, LET, ALERT,
-               INPUT, FUNCTION, RETURN, IF, FOR,EOF}
+    tokens = {CTE_ENTERA, CADENA, CTE_LOGICA, OP_ARIT, OP_ESP,
+              OP_REL, OP_LOG, OP_ASIG, ID, NUMBER, STRING, BOOLEAN, LET, ALERT,
+              INPUT, FUNCTION, RETURN, IF, FOR, EOF}
 
-    ignore = ' \t\n'
-    ignore_comment = r'(?s)/\*.*?\*/'
+    ignore = r' \t\n'
+    ignore_comment = r'(?s:/\*.*?\*/)'  # re.DOTALL only for this r.e. expression
 
     # Tokens
     CTE_ENTERA = r'\d+'
-    CADENA = r'".*"'
+    CADENA = r'".*?"'
     CTE_LOGICA = r'true|false'
     OP_ESP = r'--'
     OP_ARIT = r'\+|-'
@@ -35,7 +36,7 @@ class CalcLexer(Lexer):
     ID['for'] = FOR
 
     # Revisar EOF quizá lo hace automáticamente
-    literals = {'(', ')','{', '}', ',', ';', '/d'}
+    literals = {'(', ')', '{', '}', ',', ';', '/d'}
 
     def CTE_ENTERA(self, t):
         t.value = int(t.value)
@@ -44,17 +45,17 @@ class CalcLexer(Lexer):
             raise IOError
         return t
 
-    def CADENA(self,t):
-        t.value = t.value[1:-2]
+    def CADENA(self, t):
+        t.value = t.value[1:-1]
         if len(t.value) > 64:
             print(f'Cadena demasiado larga: "{t.value}"')
             raise IOError
         return t
 
-    #TODO: Para hacer cuando se de la TS
-    #def ID(self,t):
+    # TODO: Para hacer cuando se de la TS
+    # def ID(self,t):
 
-    def OP_ARIT(self,t):
+    def OP_ARIT(self, t):
         if t.value == '+':
             t.value = 0
         else:
@@ -69,11 +70,15 @@ class CalcLexer(Lexer):
         print("Illegal character '%s'" % t.value[0])
         self.index += 1
 
+
 if __name__ == '__main__':
-    #data = 'x_Aa= 3 + 42 * (s - t)'
-    data = '''/* Esto es un
-     comentario */ "hola " string
-     23410 /*on*/ fjr =23+2; let'''
+    # data = 'x_Aa= 3 + 42 * (s - t)'
+    data = '''/* Esto es un 
+    comentario */ /*on*/ 
+    /*otro comment*/ "err
+    or" 
+    "puto" string
+     23410 /*on*/ /*on*/fjr =23+2; let'''
     lexer = CalcLexer()
     for tok in lexer.tokenize(data):
         print(f'<{tok.type} , {tok.value}>')
