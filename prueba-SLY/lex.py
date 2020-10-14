@@ -1,7 +1,3 @@
-# -----------------------------------------------------------------------------
-# calc.py
-# -----------------------------------------------------------------------------
-
 from sly import Lexer
 
 
@@ -11,10 +7,9 @@ class CalcLexer(Lexer):
               INPUT, FUNCTION, RETURN, IF, FOR, EOF}
 
     ignore = r' \t\n'
-    ignore_comment = r'(?s:/\*.*?\*/)'  # re.DOTALL only for this r.e. expression
 
     # Tokens
-    CTE_ENTERA = r'\d+[\s;]'
+    CTE_ENTERA = r'\d+'
     CADENA = r'".*?"'
     CTE_LOGICA = r'true|false'
     OP_ESP = r'--'
@@ -35,6 +30,7 @@ class CalcLexer(Lexer):
     ID['if'] = IF
     ID['for'] = FOR
 
+
     # Revisar EOF quizá lo hace automáticamente
     literals = {'(', ')', '{', '}', ',', ';', '/d'}
 
@@ -50,14 +46,11 @@ class CalcLexer(Lexer):
         Raises:
             IOError: If value is bigger than the maximum integer allowed.
         """
-        if t.value[-1]==';':
-            t.value = t.value[0:-1]
-            print('<; , ;>' )
+
         t.value = int(t.value)
         if t.value > 32767:
             print(f'Número fuera de rango: "{t.value}"')
             exit()
-            # raise IOError
         return t
 
     def CADENA(self, t):
@@ -76,7 +69,6 @@ class CalcLexer(Lexer):
         if len(t.value) > 64:
             print(f'Cadena demasiado larga: "{t.value, len(t.value)}"')
             exit()
-            # raise IOError
         return t
 
     # TODO: Para hacer cuando se de la TS
@@ -98,28 +90,35 @@ class CalcLexer(Lexer):
             t.value = 1
         return t
 
-    @_(r'\n+')
+    @_(r'\n+',
+       r'(?s:/\*.*?\*/)')  # re.DOTALL only for this re expression
     def newline(self, t):
         self.lineno += t.value.count('\n')
 
     def error(self, t):
         """Function called when a wrong character is found.
+
         A character is wrong if it does not belong to a correct token in that very position.
+        It prints and exit
 
             Args:
                t(token): The only parameter.
-            Returns:
-                nothing. This method just print the wrong character by standard output.
+
         """
-        print("Illegal character '%s'" % t.value[0])
+        print(f'Illegal character "{t.value[0]}" in line {self.lineno}')
         exit()
-        self.index += 1
 
 
 if __name__ == '__main__':
     # data = 'x_Aa= 3 + 42 * (s - t)'
-    data = '''int a=2;
+    data = '''int a=2; 
+    a = a + 2; a_1/*a 
+    
+    adasdas */ 
+    /* asd/asd*/ true
+    false true
+    if (a ==1 & b == 2) _
     a--;'''
     lexer = CalcLexer()
     for tok in lexer.tokenize(data):
-        print(f'<{tok.type} , {tok.value}>')
+        print(f'< {tok.type} , {tok.value} >')
