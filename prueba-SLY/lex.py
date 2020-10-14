@@ -14,7 +14,7 @@ class CalcLexer(Lexer):
     ignore_comment = r'(?s:/\*.*?\*/)'  # re.DOTALL only for this r.e. expression
 
     # Tokens
-    CTE_ENTERA = r'\d+'
+    CTE_ENTERA = r'\d+\s'
     CADENA = r'".*?"'
     CTE_LOGICA = r'true|false'
     OP_ESP = r'--'
@@ -72,7 +72,8 @@ class CalcLexer(Lexer):
         t.value = t.value[1:-1]
         if len(t.value) > 64:
             print(f'Cadena demasiado larga: "{t.value}"')
-            raise IOError
+            exit()
+            #raise IOError
         return t
 
     # TODO: Para hacer cuando se de la TS
@@ -108,12 +109,13 @@ class CalcLexer(Lexer):
                 nothing. This method just print the wrong character by standard output.
         """
         print("Illegal character '%s'" % t.value[0])
+        exit()
         self.index += 1
 
 
 if __name__ == '__main__':
     # data = 'x_Aa= 3 + 42 * (s - t)'
-    data = '''2a000'''
+    data = '''"aa   a"'''
     lexer = CalcLexer()
     for tok in lexer.tokenize(data):
         print(f'<{tok.type} , {tok.value}>')
