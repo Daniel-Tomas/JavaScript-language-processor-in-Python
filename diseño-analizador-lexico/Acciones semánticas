@@ -16,10 +16,29 @@ G: if contador>64
    #Revisar cuando se vea TS. Empieza aquí
 H: string = l, leer
 I: string = string + l/D/_ , leer
-J: if (puntero = TS.get(string)) == None
-        TS.update({string:''})
-        puntero = TS.get(string);
-    genToken(ID,puntero)
+J:   if palabrasReservadas.contains(string)
+        if string == "number"
+            genToken(number,-)
+        elif string == "string"
+            genToken(string,-)
+        elif string == "boolean"
+            genToken(boolean,-)
+        elif string == "let"
+            genToken(let,-)
+        elif string == "alert"
+            genToken(alert,-)
+        elif string == "input"
+            genToken(input,-)
+        elif string == "return"
+            genToken(return,-)
+        elif string == "if"
+            genToken(if,-)
+        else
+            genToken(for,-)
+    elif (puntero = TS.get(string)) == None
+            TS.update({string:''})
+            puntero = TS.get(string);
+            genToken(ID,puntero)
    #Acaba aquí
 K: genToken(op_arit,0), leer
 L: genToken(op_arit,1)
