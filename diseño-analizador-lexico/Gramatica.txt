@@ -12,8 +12,8 @@ Producciones = {
     D -> dD | λ
     S -> " | otroC S
     C -> *C'
-    C' -> *C'' | otroC C'
-    C'' -> /A | otroC C'
+    C' -> *C'' | otro_c C'
+    C'' -> /A | otro_c C'
     I -> dI | lI | _I | λ
     M -> - | λ
     E -> = | λ

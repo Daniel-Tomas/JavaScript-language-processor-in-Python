@@ -30,7 +30,6 @@ class CalcLexer(Lexer):
     ID['if'] = IF
     ID['for'] = FOR
 
-
     # Revisar EOF quizá lo hace automáticamente
     literals = {'(', ')', '{', '}', ',', ';', '/d'}
 
@@ -49,8 +48,7 @@ class CalcLexer(Lexer):
 
         t.value = int(t.value)
         if t.value > 32767:
-            print(f'Número fuera de rango: "{t.value}"')
-            exit()
+            self.error(t, "CTE_ENTERA")
         return t
 
     def CADENA(self, t):
@@ -67,8 +65,26 @@ class CalcLexer(Lexer):
             """
         t.value = t.value[1:-1]
         if len(t.value) > 64:
-            print(f'Cadena demasiado larga: "{t.value, len(t.value)}"')
-            exit()
+            self.error(t, "CADENA")
+        return t
+
+    def CTE_LOGICA(self, t):
+        """Called when a token which is a logical constant is found
+
+        It modifies the argument token changing its str value to an int value.
+        The token value will be 0 if "false" is found or 1 if "true"
+
+        Args:
+            t(Token): Token which matches the logical constant pattern
+
+        Returns:
+            Token: Token modified
+        """
+
+        if t.value == 'false':
+            t.value = 0
+        else:
+            t.value = 1
         return t
 
     # TODO: Para hacer cuando se de la TS
@@ -95,7 +111,7 @@ class CalcLexer(Lexer):
     def newline(self, t):
         self.lineno += t.value.count('\n')
 
-    def error(self, t):
+    def error(self, t, type_error="default"):
         """Function called when a wrong character is found.
 
         A character is wrong if it does not belong to a correct token in that very position.
@@ -105,7 +121,14 @@ class CalcLexer(Lexer):
                t(token): The only parameter.
 
         """
-        print(f'Illegal character "{t.value[0]}" in line {self.lineno}')
+
+        if type_error == "CADENA":
+            res = f'Cadena demasiado larga: "{t.value}", con logitud mayor que 64: {len(t.value)},'
+        elif type_error == "CTE_ENTERA":
+            res = f'Número fuera de rango: "{t.value}"'
+        else:
+            res = f'Illegal character "{t.value[0]}"'
+        print(f'{res} en la linea {self.lineno}')
         exit()
 
 
@@ -117,7 +140,9 @@ if __name__ == '__main__':
     adasdas */ 
     /* asd/asd*/ true
     false true
-    if (a ==1 & b == 2) _
+    /*"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"*/
+   
+    if (a ==32766 & b == 2) _
     a--;'''
     lexer = CalcLexer()
     for tok in lexer.tokenize(data):
