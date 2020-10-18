@@ -1,7 +1,11 @@
 from sly import Lexer
 
 
-class CalcLexer(Lexer):
+class JSLexer(Lexer):
+
+    def __init__(self, data):
+        self.data = data
+
     tokens = {CTEENTERA, CADENA, CTELOGICA, OPARIT, OPESP,
               OPREL, OPLOG, OPASIG, ID, NUMBER, STRING, BOOLEAN, LET, ALERT,
               INPUT, FUNCTION, ABPAREN, CEPAREN, ABLLAVE, CELLAVE, COMA, PUNTOYCOMA, RETURN, IF, FOR, EOF}
@@ -24,6 +28,7 @@ class CalcLexer(Lexer):
     CELLAVE = r'[}]'
     COMA = r'[,]'
     PUNTOYCOMA = r'[;]'
+    # EOF = '\Z'
 
     ID = r'[a-zA-Z][a-zA-Z0-9_]*'
     ID['number'] = NUMBER
@@ -118,6 +123,16 @@ class CalcLexer(Lexer):
     def newline(self, t):
         self.lineno += t.value.count('\n')
 
+    # Compute column.
+    #     input is the input text string
+    #     token is a token instance
+    def find_column(self, token):
+        last_cr = self.text.rfind('\n', 0, token.index)
+        if last_cr < 0:
+            last_cr = 0
+        column = (token.index - last_cr)
+        return column
+
     def error(self, t, type_error="default"):
         """Function called when a wrong character is found.
 
@@ -135,13 +150,24 @@ class CalcLexer(Lexer):
             res = f'Número fuera de rango: "{t.value}"'
         else:
             res = f'Illegal character "{t.value[0]}"'
-        print(f'{res} en la linea {self.lineno}')
+        print(f'{res} en la linea {self.lineno} y columna {self.find_column(t)}')
         exit()
 
 
 if __name__ == '__main__':
     # data = 'x_Aa= 3 + 42 * (s - t)'
-    data = '''+'''
-    lexer = CalcLexer()
+    # data = '''int a=2;
+    #     a = a + 2; a_1/*a &
+    #
+    #     adasdas */
+    #     /* asd/asd*/ true
+    #     false true
+    #     /*"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"*/
+    #
+    #     if (a ==32766 & b == 2) _
+    #     a--;'''
+    f = open('prueba.txt', 'r')
+    data = f.read()
+    lexer = JSLexer(data)
     for tok in lexer.tokenize(data):
         print(f'< {tok.type} , {tok.value} >')
