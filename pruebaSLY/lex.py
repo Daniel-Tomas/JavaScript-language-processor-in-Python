@@ -2,21 +2,28 @@ from sly import Lexer
 
 
 class CalcLexer(Lexer):
-    tokens = {CTE_ENTERA, CADENA, CTE_LOGICA, OP_ARIT, OP_ESP,
-              OP_REL, OP_LOG, OP_ASIG, ID, NUMBER, STRING, BOOLEAN, LET, ALERT,
-              INPUT, FUNCTION, RETURN, IF, FOR, EOF}
+    tokens = {CTEENTERA, CADENA, CTELOGICA, OPARIT, OPESP,
+              OPREL, OPLOG, OPASIG, ID, NUMBER, STRING, BOOLEAN, LET, ALERT,
+              INPUT, FUNCTION, ABPAREN, CEPAREN, ABLLAVE, CELLAVE, COMA, PUNTOYCOMA, RETURN, IF, FOR, EOF}
 
-    ignore = r' \t\n'
+    ignore = ' \t'
 
     # Tokens
-    CTE_ENTERA = r'\d+'
+    CTEENTERA = r'\d+'
     CADENA = r'".*?"'
-    CTE_LOGICA = r'true|false'
-    OP_ESP = r'--'
-    OP_ARIT = r'\+|-'
-    OP_REL = r'=='
-    OP_ASIG = r'='
-    OP_LOG = r'&&'
+    CTELOGICA = r'true|false'
+    OPESP = r'--'
+    OPARIT = r'\+|-'
+    OPREL = r'=='
+    OPASIG = r'='
+    OPLOG = r'&&'
+
+    ABPAREN = r'[(]'
+    CEPAREN = r'[)]'
+    ABLLAVE = r'[{]'
+    CELLAVE = r'[}]'
+    COMA = r'[,]'
+    PUNTOYCOMA = r'[;]'
 
     ID = r'[a-zA-Z][a-zA-Z0-9_]*'
     ID['number'] = NUMBER
@@ -31,9 +38,9 @@ class CalcLexer(Lexer):
     ID['for'] = FOR
 
     # Revisar EOF quizá lo hace automáticamente
-    literals = {'(', ')', '{', '}', ',', ';', '/d'}
+    literals = {'{', '}', ',', ';', '/d'}
 
-    def CTE_ENTERA(self, t):
+    def CTEENTERA(self, t):
         """Function called when a token which belongs to an integer constant is found.
 
         Args:
@@ -68,7 +75,7 @@ class CalcLexer(Lexer):
             self.error(t, "CADENA")
         return t
 
-    def CTE_LOGICA(self, t):
+    def CTELOGICA(self, t):
         """Called when a token which is a logical constant is found
 
         It modifies the argument token changing its str value to an int value.
@@ -90,7 +97,7 @@ class CalcLexer(Lexer):
     # TODO: Para hacer cuando se de la TS
     # def ID(self,t):
 
-    def OP_ARIT(self, t):
+    def OPARIT(self, t):
         """Function called when a token which arithmetical operator is found.
 
             Args:
@@ -106,7 +113,7 @@ class CalcLexer(Lexer):
             t.value = 1
         return t
 
-    @_(r'\n+',
+    @_('\n+',
        r'(?s:/\*.*?\*/)')  # re.DOTALL only for this re expression
     def newline(self, t):
         self.lineno += t.value.count('\n')
@@ -134,16 +141,7 @@ class CalcLexer(Lexer):
 
 if __name__ == '__main__':
     # data = 'x_Aa= 3 + 42 * (s - t)'
-    data = '''int a=2; 
-    a = a + 2; a_1/*a 
-
-    adasdas */ 
-    /* asd/asd*/ true
-    false true
-    /*"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"*/
-
-    if (a ==32766 & b == 2) _
-    a--;'''
+    data = '''+'''
     lexer = CalcLexer()
     for tok in lexer.tokenize(data):
         print(f'< {tok.type} , {tok.value} >')

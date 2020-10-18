@@ -7,7 +7,7 @@ class MyTestCase(unittest.TestCase):
     def test_cteEntera(self):
         lexer = CalcLexer()
         for tok in lexer.tokenize('23'):
-            self.assertEqual("CTE_ENTERA", tok.type)
+            self.assertEqual("CTEENTERA", tok.type)
             self.assertEqual(23, tok.value)
 
     def test_cadena(self):
@@ -19,46 +19,46 @@ class MyTestCase(unittest.TestCase):
     def test_true(self):
         lexer = CalcLexer()
         for tok in lexer.tokenize('true'):
-            self.assertEqual("CTE_LOGICA", tok.type)
+            self.assertEqual("CTELOGICA", tok.type)
             self.assertEqual(1, tok.value)
 
     def test_false(self):
         lexer = CalcLexer()
         for tok in lexer.tokenize('false'):
-            self.assertEqual("CTE_LOGICA", tok.type)
+            self.assertEqual("CTELOGICA", tok.type)
             self.assertEqual(0, tok.value)
 
     def test_esp(self):
         lexer = CalcLexer()
         for tok in lexer.tokenize('--'):
-            self.assertEqual("OP_ESP", tok.type)
+            self.assertEqual("OPESP", tok.type)
 
     def test_add(self):
         lexer = CalcLexer()
         for tok in lexer.tokenize('+'):
-            self.assertEqual("OP_ARIT", tok.type)
+            self.assertEqual("OPARIT", tok.type)
             self.assertEqual(0, tok.value)
 
     def test_minus(self):
         lexer = CalcLexer()
         for tok in lexer.tokenize('-'):
-            self.assertEqual("OP_ARIT", tok.type)
+            self.assertEqual("OPARIT", tok.type)
             self.assertEqual(1, tok.value)
 
     def test_rel(self):
         lexer = CalcLexer()
         for tok in lexer.tokenize('=='):
-            self.assertEqual("OP_REL", tok.type)
+            self.assertEqual("OPREL", tok.type)
 
     def test_log(self):
         lexer = CalcLexer()
         for tok in lexer.tokenize('&&'):
-            self.assertEqual("OP_LOG", tok.type)
+            self.assertEqual("OPLOG", tok.type)
 
     def test_asig(self):
         lexer = CalcLexer()
         for tok in lexer.tokenize('='):
-            self.assertEqual("OP_ASIG", tok.type)
+            self.assertEqual("OPASIG", tok.type)
 
     # TODO: Implementar TS
     def test_var(self):
@@ -120,32 +120,32 @@ class MyTestCase(unittest.TestCase):
     def test_openBracket(self):
         lexer = CalcLexer()
         for tok in lexer.tokenize('('):
-            self.assertEqual("(", tok.type)
+            self.assertEqual("ABPAREN", tok.type)
 
     def test_closeBracket(self):
         lexer = CalcLexer()
         for tok in lexer.tokenize(')'):
-            self.assertEqual(")", tok.type)
+            self.assertEqual("CEPAREN", tok.type)
 
     def test_openKey(self):
         lexer = CalcLexer()
         for tok in lexer.tokenize('{'):
-            self.assertEqual("{", tok.type)
+            self.assertEqual("ABLLAVE", tok.type)
 
     def test_closeKey(self):
         lexer = CalcLexer()
         for tok in lexer.tokenize('}'):
-            self.assertEqual("}", tok.type)
+            self.assertEqual("CELLAVE", tok.type)
 
     def test_for(self):
         lexer = CalcLexer()
         for tok in lexer.tokenize(','):
-            self.assertEqual(",", tok.type)
+            self.assertEqual("COMA", tok.type)
 
     def test_for(self):
         lexer = CalcLexer()
         for tok in lexer.tokenize(';'):
-            self.assertEqual(";", tok.type)
+            self.assertEqual("PUNTOYCOMA", tok.type)
 
     # ************************************************************************************#
     #                                                                                    #
@@ -156,8 +156,7 @@ class MyTestCase(unittest.TestCase):
     def test_miniFunction(self):
         lexer = CalcLexer()
         data = '''function string salto ()
-                    {
-	                    return "\n";
+                    {return "hola" ;
                     }'''
         for indx, tok in enumerate(lexer.tokenize(data)):
             if indx == 0:
@@ -167,20 +166,20 @@ class MyTestCase(unittest.TestCase):
             elif indx == 2:
                 self.assertEqual("ID", tok.type)
             elif indx == 3:
-                self.assertEqual("(", tok.type)
+                self.assertEqual("ABPAREN", tok.type)
             elif indx == 4:
-                self.assertEqual(")", tok.type)
+                self.assertEqual("CEPAREN", tok.type)
             elif indx == 5:
-                self.assertEqual("{", tok.type)
+                self.assertEqual("ABLLAVE", tok.type)
             elif indx == 6:
                 self.assertEqual("RETURN", tok.type)
             elif indx == 7:
                 self.assertEqual("CADENA", tok.type)
-                self.assertEqual("\n", tok.value)
+                self.assertEqual("hola", tok.value)
             elif indx == 8:
-                self.assertEqual(";", tok.type)
+                self.assertEqual("PUNTOYCOMA", tok.type)
             else:
-                self.assertEqual("}", tok.type)
+                self.assertEqual("CELLAVE", tok.type)
 
     def test_mediumFunction(self):
         lexer = CalcLexer()
@@ -199,60 +198,60 @@ class MyTestCase(unittest.TestCase):
             elif indx == 2:
                 self.assertEqual("ID", tok.type)
             elif indx == 3:
-                self.assertEqual("(", tok.type)
+                self.assertEqual("ABPAREN", tok.type)
             elif indx == 4:
                 self.assertEqual("NUMBER", tok.type)
             elif indx == 5:
                 self.assertEqual("ID", tok.type)
             elif indx == 6:
-                self.assertEqual(")", tok.type)
+                self.assertEqual("CEPAREN", tok.type)
             elif indx == 7:
-                self.assertEqual("{", tok.type)
+                self.assertEqual("ABLLAVE", tok.type)
             elif indx == 8:
                 self.assertEqual("IF", tok.type)
             elif indx == 9:
-                self.assertEqual("(", tok.type)
+                self.assertEqual("ABPAREN", tok.type)
             elif indx == 10:
                 self.assertEqual("ID", tok.type)
             elif indx == 11:
-                self.assertEqual("OP_REL", tok.type)
+                self.assertEqual("OPREL", tok.type)
             elif indx == 12:
-                self.assertEqual("CTE_ENTERA", tok.type)
+                self.assertEqual("CTEENTERA", tok.type)
                 self.assertEqual(0, tok.value)
             elif indx == 13:
-                self.assertEqual(")", tok.type)
+                self.assertEqual("CEPAREN", tok.type)
             elif indx == 14:
                 self.assertEqual("RETURN", tok.type)
             elif indx == 15:
-                self.assertEqual("CTE_ENTERA", tok.type)
+                self.assertEqual("CTEENTERA", tok.type)
                 self.assertEqual(1, tok.value)
             elif indx == 16:
-                self.assertEqual(";", tok.type)
+                self.assertEqual("PUNTOYCOMA", tok.type)
             elif indx == 17:
                 self.assertEqual("RETURN", tok.type)
             elif indx == 18:
                 self.assertEqual("ID", tok.type)
             elif indx == 19:
-                self.assertEqual("OP_ARIT", tok.type)
+                self.assertEqual("OPARIT", tok.type)
                 self.assertEqual(0, tok.value)
             elif indx == 20:
                 self.assertEqual("ID", tok.type)
             elif indx == 21:
-                self.assertEqual("(", tok.type)
+                self.assertEqual("ABPAREN", tok.type)
             elif indx == 22:
                 self.assertEqual("ID", tok.type)
             elif indx == 23:
-                self.assertEqual("OP_ARIT", tok.type)
+                self.assertEqual("OPARIT", tok.type)
                 self.assertEqual(1, tok.value)
             elif indx == 24:
-                self.assertEqual("CTE_ENTERA", tok.type)
+                self.assertEqual("CTEENTERA", tok.type)
                 self.assertEqual(1, tok.value)
             elif indx == 25:
-                self.assertEqual(")", tok.type)
+                self.assertEqual("CEPAREN", tok.type)
             elif indx == 26:
-                self.assertEqual(";", tok.type)
+                self.assertEqual("PUNTOYCOMA", tok.type)
             else:
-                self.assertEqual("}", tok.type)
+                self.assertEqual("CELLAVE", tok.type)
 
     def test_mediumFunctionDev1(self):
         lexer = CalcLexer()
@@ -269,60 +268,60 @@ class MyTestCase(unittest.TestCase):
             elif indx == 2:
                 self.assertEqual("ID", tok.type)
             elif indx == 3:
-                self.assertEqual("(", tok.type)
+                self.assertEqual("ABPAREN", tok.type)
             elif indx == 4:
                 self.assertEqual("NUMBER", tok.type)
             elif indx == 5:
                 self.assertEqual("ID", tok.type)
             elif indx == 6:
-                self.assertEqual(")", tok.type)
+                self.assertEqual("CEPAREN", tok.type)
             elif indx == 7:
-                self.assertEqual("{", tok.type)
+                self.assertEqual("ABLLAVE", tok.type)
             elif indx == 8:
                 self.assertEqual("IF", tok.type)
             elif indx == 9:
-                self.assertEqual("(", tok.type)
+                self.assertEqual("ABPAREN", tok.type)
             elif indx == 10:
                 self.assertEqual("ID", tok.type)
             elif indx == 11:
-                self.assertEqual("OP_REL", tok.type)
+                self.assertEqual("OPREL", tok.type)
             elif indx == 12:
-                self.assertEqual("CTE_ENTERA", tok.type)
+                self.assertEqual("CTEENTERA", tok.type)
                 self.assertEqual(0, tok.value)
             elif indx == 13:
-                self.assertEqual(")", tok.type)
+                self.assertEqual("CEPAREN", tok.type)
             elif indx == 14:
                 self.assertEqual("RETURN", tok.type)
             elif indx == 15:
-                self.assertEqual("CTE_ENTERA", tok.type)
+                self.assertEqual("CTEENTERA", tok.type)
                 self.assertEqual(1, tok.value)
             elif indx == 16:
-                self.assertEqual(";", tok.type)
+                self.assertEqual("PUNTOYCOMA", tok.type)
             elif indx == 17:
                 self.assertEqual("RETURN", tok.type)
             elif indx == 18:
                 self.assertEqual("ID", tok.type)
             elif indx == 19:
-                self.assertEqual("OP_ARIT", tok.type)
+                self.assertEqual("OPARIT", tok.type)
                 self.assertEqual(0, tok.value)
             elif indx == 20:
                 self.assertEqual("ID", tok.type)
             elif indx == 21:
-                self.assertEqual("(", tok.type)
+                self.assertEqual("ABPAREN", tok.type)
             elif indx == 22:
                 self.assertEqual("ID", tok.type)
             elif indx == 23:
-                self.assertEqual("OP_ARIT", tok.type)
+                self.assertEqual("OPARIT", tok.type)
                 self.assertEqual(1, tok.value)
             elif indx == 24:
-                self.assertEqual("CTE_ENTERA", tok.type)
+                self.assertEqual("CTEENTERA", tok.type)
                 self.assertEqual(1, tok.value)
             elif indx == 25:
-                self.assertEqual(")", tok.type)
+                self.assertEqual("CEPAREN", tok.type)
             elif indx == 26:
-                self.assertEqual(";", tok.type)
+                self.assertEqual("PUNTOYCOMA", tok.type)
             else:
-                self.assertEqual("}", tok.type)
+                self.assertEqual("CELLAVE", tok.type)
 
     # ************************************************************************************#
     #                                                                                    #
@@ -338,9 +337,12 @@ class MyTestCase(unittest.TestCase):
 
     def test_negateToken2(self):
         lexer = CalcLexer()
-        for tok in lexer.tokenize('&A&'):
-            self.assertEqual("ID", tok.type)
-            self.assertEqual("A", tok.value)
+        for idx, tok in enumerate(lexer.tokenize('A&')):
+            if idx == 0:
+                self.assertEqual("ID", tok.type)
+                self.assertEqual("A", tok.value)
+            else:
+                break
 
 
 if __name__ == '__main__':
