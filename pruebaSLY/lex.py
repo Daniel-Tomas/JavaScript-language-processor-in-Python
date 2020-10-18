@@ -148,7 +148,7 @@ class JSLexer(Lexer):
             res = f'Cadena demasiado larga: "{t.value}", con logitud mayor que 64: {len(t.value)},'
         elif type_error == "CTE_ENTERA":
             res = f'Número fuera de rango: "{t.value}"'
-        else:
+        else: # TODO: hacer cambios de idioma, para que tenga consistencia, en español el output, y en ingles todo lo demas, ¿no?
             res = f'Illegal character "{t.value[0]}"'
         print(f'{res} en la linea {self.lineno} y columna {self.find_column(t)}')
         exit()
