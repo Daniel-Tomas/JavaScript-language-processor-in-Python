@@ -1,4 +1,5 @@
 from sly import Lexer
+import sys
 
 
 class JSLexer(Lexer):
@@ -148,9 +149,9 @@ class JSLexer(Lexer):
             res = f'Cadena demasiado larga: "{t.value}", con logitud mayor que 64: {len(t.value)},'
         elif type_error == "CTE_ENTERA":
             res = f'Número fuera de rango: "{t.value}"'
-        else: # TODO: hacer cambios de idioma, para que tenga consistencia, en español el output, y en ingles todo lo demas, ¿no?
+        else:  # TODO: hacer cambios de idioma, para que tenga consistencia, en español el output, y en ingles todo lo demas, ¿no?
             res = f'Illegal character "{t.value[0]}"'
-        print(f'{res} en la linea {self.lineno} y columna {self.find_column(t)}')
+        print(f'{res} en la linea {self.lineno} y columna {self.find_column(t)}', file=sys.stderr)
         exit()
 
 
@@ -168,6 +169,8 @@ if __name__ == '__main__':
     #     a--;'''
     f = open('prueba.txt', 'r')
     data = f.read()
+    sys.stdout = open("Tokens.txt", "w")
+    sys.stderr = open("Error.txt", "w")
     lexer = JSLexer(data)
     for tok in lexer.tokenize(data):
         print(f'< {tok.type} , {tok.value} >')
