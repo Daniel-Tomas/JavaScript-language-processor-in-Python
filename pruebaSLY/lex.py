@@ -1,4 +1,6 @@
 from sly import Lexer
+from sly.lex import Token
+# from Lexer import Token
 import sys
 
 
@@ -167,10 +169,22 @@ if __name__ == '__main__':
     #
     #     if (a ==32766 & b == 2) _
     #     a--;'''
-    f = open('prueba.txt', 'r')
+
+    f = open('Prueba.txt', 'r')
     data = f.read()
     sys.stdout = open("Tokens.txt", "w")
     sys.stderr = open("Error.txt", "w")
     lexer = JSLexer(data)
-    for tok in lexer.tokenize(data):
-        print(f'< {tok.type} , {tok.value} >')
+
+
+    def get_token(lexer_, data_):
+        for tok in lexer_.tokenize(data_):
+            yield f'< {tok.type} , {tok.value}, {tok.lineno} >'
+        tok_EOF = Token()
+        tok_EOF.type = 'EOF'
+        tok_EOF.value = '-'
+        yield f'< {tok_EOF.type} , {tok_EOF.value}>'
+
+
+    for token in get_token(lexer, data):
+        print(token)
