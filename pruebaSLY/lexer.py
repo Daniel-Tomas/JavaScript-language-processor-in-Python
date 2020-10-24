@@ -156,6 +156,15 @@ class JSLexer(Lexer):
         print(f'{res} en la linea {self.lineno} y columna {self.find_column(t)}', file=sys.stderr)
         exit()
 
+    def get_token(self):
+        for tok in self.tokenize(self.data):
+            yield tok
+
+        tok_EOF = Token()
+        tok_EOF.type = 'EOF'
+        tok_EOF.value = '-'
+        yield tok_EOF
+
 
 if __name__ == '__main__':
     # data = 'x_Aa= 3 + 42 * (s - t)'
@@ -176,15 +185,5 @@ if __name__ == '__main__':
     sys.stderr = open("Error.txt", "w")
     lexer = JSLexer(data)
 
-
-    def get_token(lexer_, data_):
-        for tok in lexer_.tokenize(data_):
-            yield f'< {tok.type} , {tok.value}, {tok.lineno} >'
-        tok_EOF = Token()
-        tok_EOF.type = 'EOF'
-        tok_EOF.value = '-'
-        yield f'< {tok_EOF.type} , {tok_EOF.value}>'
-
-
-    for token in get_token(lexer, data):
-        print(token)
+    for tok in lexer.get_token():
+        print(f'< {tok.type} , {tok.value} >')

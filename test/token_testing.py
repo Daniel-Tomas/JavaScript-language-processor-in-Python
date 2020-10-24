@@ -1,14 +1,15 @@
 import unittest
-from pruebaSLY.lex import JSLexer
+from pruebaSLY.lexer import JSLexer
 
 
 class MyTestCase(unittest.TestCase):
 
     def test_cteEntera(self):
-        lexer = JSLexer()
-        for tok in lexer.tokenize('23'):
-            self.assertEqual("CTEENTERA", tok.type)
-            self.assertEqual(23, tok.value)
+        lexer = JSLexer('23')
+        generator = lexer.get_token()
+        tok = next(generator)
+        self.assertEqual("CTEENTERA", tok.type)
+        self.assertEqual(23, tok.value)
 
     def test_cadena(self):
         lexer = JSLexer()
