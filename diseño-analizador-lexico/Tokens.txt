@@ -24,12 +24,12 @@ tokens:
 	<if, ->
 	<for, ->
 
-	<(, -> // (
-	<), -> // )
-	<{, -> // {
-	<}, -> // }
-	<,, ->
-	<;, ->
+	<ABREPAR, -> // (
+	<CIERRAPAR,> // )
+	<ABRELLAVE, -> // {
+	<CIERRALLAVE, -> // }
+	<COMA, ->
+	<PUNTOYCOMA, ->
 	<EOF, ->
 	  
 

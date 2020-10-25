@@ -1,0 +1,10 @@
+number a=2;
+         a = a + 2; a_1/*a &
+    
+         adasdas */
+         /* asd/asd*/ true
+         false true
+         /*"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"*/
+    
+         if (a ==32766 & b == 2) _
+         a--;
