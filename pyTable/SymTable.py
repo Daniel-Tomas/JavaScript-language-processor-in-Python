@@ -7,25 +7,49 @@ from pyTable import Table
 
 
 class SymTable():
+    """The class which makes an instance of a symbol table.
+
+    Attributes:
+        tables (list): A list which represents the different tables.
+        nextId (int): The next number which a new table will take to identify itself.
+
+    """
 
     def __init__(self):
         self.tables = []
         self.nextId = 0
 
     def newTable(self):
-        "Creates a new symbol table and returns its ID"
+        """Function create a new symbol table.
+
+        Returns:
+            nextId: which represents the ID of the new symbol table.
+        """
         a = Table.Table(self.nextId)
         self.tables.append(a)
         self.nextId = self.nextId + 1
         return self.nextId - 1
 
     def destroyTable(self, id):
-        "Deletes table ID"
+        """Function destroy a new symbol table.
+
+        Args:
+            id (int): Represents the identifying of the symbol table.
+
+        Returns:
+            int: which represents the ID of the new symbol table.
+        """
         self.tables[id].delete()
         pass
 
     def existTable(self, id):
-        "Checks wether Table ID exists or not"
+        """Function which checks wether the table symbol identify by id exists or not
+
+        Args:
+            id (int): Represents the identifying of the symbol table.
+        Returns:
+            bool: True if it exists, False otherwise.
+        """
         a = self.tables[id]
         if not a or not a.exist():
             return False
@@ -33,39 +57,99 @@ class SymTable():
             return True
 
     def add(self, id, lex):
-        """Adds the lexem lex to table ID.
-        Returns the ID of the lex if everything is OK or false if lex already exist on that table"""
+        """Function used to add the lexem lex into the symbol table identify by id
+
+        Args:
+            id (int): Represents the identifying of the symbol table.
+            lex (str): The lexem to add in the symbol table.
+
+        Returns:
+            bool or str: str id if everithing was Ok, false if lex is already on the table.
+        """
         return self.tables[id].add(lex)
 
     def getPos(self, id, lex):
-        """Returns the id of lex into table id"""
+        """Function to know where the lex is located into the symbol table id.
+
+        Args:
+            id (int): Represents the identifying of the symbol table.
+            lex (str): The lexem to find into the symbol table
+
+        Returns:
+            int: the position where the lexem is located into the symbol table.
+        """
         return self.tables[id].getPos(lex)
 
     def getLex(self, idTable, posLex):
-        """Returns the lex of the specified table at the specified position"""
+        """Function to know what lexem is located in a given position.
+
+        Args:
+            idTable (int): Represents the identifying of the symbol table.
+            posLex (int): The position into the table
+
+        Returns:
+            str: the lexem located in the given table and in the given position.
+        """
         return self.tables[idTable].getLex(posLex)
 
     def removeLexAt(self, idTable, posLex):
-        """Remove the lex of the specified table at the specified position"""
+        """Function remove a lexem in a given position from a table.
+
+        Args:
+            idTable (int): Represents the identifying of the symbol table.
+            posLex (str): The position that is going to be removed.
+
+        Returns:
+            str: the lexem deleted.
+        """
         return self.tables[idTable].removeLexAt(posLex)
 
     def addType(self, id, lex, type):
-        """Sets the type of lex in table id to type.
-        Returns True if everything is OK and false if lex does not exist on that table"""
+        """Function set the type of a lexem.
 
+        Args:
+            id (int): Represents the identifying of the symbol table.
+            lex (str): The lexem to find into the symbol table.
+            type (str): The type to set.
+
+        Returns:
+            bool: True if everithing is OK, false otherwise(lex does not exist an the table).
+        """
         return self.tables[id].setType(lex, type)
 
     def checkType(self, id, lex):
-        """Returns the type of lex on table id"""
+        """Function to know the type of a lexem.
 
+        Args:
+            id (int): Represents the identifying of the symbol table.
+            lex (str): The lexem to find into the symbol table
+
+        Returns:
+            str: the type of a lexem given.
+        """
         return self.tables[id].getType(lex)
 
     def existsEntry(self, id, lex):
-        """checks wether lex exists on table id"""
+        """Function destroy a new symbol table.
+
+        Args:
+            id (int): Represents the identifying of the symbol table.
+            lex (str): The lexem to find into the symbol table
+
+        Returns:
+            bool: True if lex exists, False otherwise.
+        """
         return self.tables[id].contains(lex)
 
     def writeTable(self, path):
-        """This function writes the content of all the tables into file pointed by path"""
+        """Function print the contents of all the tables into a file pointed by path.
+
+        Args:
+            path (str): the path of the file.
+
+        Returns:
+            bool: True always.
+        """
 
         for tab in self.tables:
             tab.write(path)
