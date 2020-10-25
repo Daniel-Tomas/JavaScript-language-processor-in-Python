@@ -182,7 +182,6 @@ if __name__ == '__main__':
     print(e) #Imprimimos el lex eliminado
     print(tables.getPos(id0,(1,"hola"))) #Intentamos buscar el lex eliminado previamente y mostramos por stdout su resultado
 
-
     # data = 'x_Aa= 3 + 42 * (s - t)'
     # data = '''int a=2;
     #     a = a + 2; a_1/*a &
