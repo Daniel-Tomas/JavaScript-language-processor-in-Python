@@ -109,7 +109,10 @@ class JSLexer(Lexer):
         return t
 
     # TODO: Para hacer cuando se de la TS
-    # def ID(self,t):
+    def ID(self, t):
+        tables.add(id0, t.value)
+        t.value = tables.getPos(id0, t.value)
+        return t
 
     def OPARIT(self, t):
         """Function called when a token which arithmetical operator is found.
@@ -196,7 +199,7 @@ class JSLexer(Lexer):
 
 
 if __name__ == '__main__':
-    tables = SymTable.SymTable()  # Creación de la instancia para el manejador de tablas
+    '''tables = SymTable.SymTable()  # Creación de la instancia para el manejador de tablas
     id0 = tables.newTable()  # Creación de la tabla global (id = 0)
     id1 = tables.newTable()  # Creación de la tabla local (id = 1)
     tables.add(id0, ("string", 0))  # Añadimos en la tabla global el lex string con desplazamiento 0
@@ -210,23 +213,15 @@ if __name__ == '__main__':
     print(e)  # Imprimimos el lex eliminado
     print(tables.getPos(id0, (
         1, "hola")))  # Intentamos buscar el lex eliminado previamente y mostramos por stdout su resultado
-    # data = 'x_Aa= 3 + 42 * (s - t)'
-    # data = '''int a=2;
-    #     a = a + 2; a_1/*a &
-    #
-    #     adasdas */
-    #     /* asd/asd*/ true
-    #     false true
-    #     /*"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"*/
-    #
-    #     if (a ==32766 & b == 2) _
-    #     a--;'''
+    '''
 
-    # f = open('Prueba.txt', 'r')
-    # data = f.read()
-    # sys.stdout = open("Tokens.txt", "w")
-    # sys.stderr = open("Error.txt", "w")
-    # lexer = JSLexer(data)
+    f = open('Prueba.txt', 'r')
+    data = f.read()
+    tables = SymTable.SymTable()
+    id0 = tables.newTable()
+    sys.stdout = open("Tokens.txt", "w")
+    sys.stderr = open("Error.txt", "w")
+    lexer = JSLexer(data)
 
-    # for tok in lexer.get_token():
-    #    print(f'< {tok.type} , {tok.value} >')
+    for tok in lexer.get_token():
+        print(f'<{tok.type} , {tok.value}>')
