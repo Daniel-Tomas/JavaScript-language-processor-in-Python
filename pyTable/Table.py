@@ -3,7 +3,15 @@ Software distributed under a Creative Commons Attribution-ShareAlike 3.0 Unporte
 Full legal text of this license can be found on http://creativecommons.org/licenses/by-sa/3.0/legalcode
 """
 
+
 class Table():
+    """The class which makes an instance of a symbol table.
+
+    Attributes:
+        lexems (list): A list which represents lexems in the table.
+        exist (bool): Represents if the table exists or not.
+        id (int): Represents the identifying of the table.
+    """
 
     def __init__(self, id):
         self.lexems = {}
@@ -11,20 +19,31 @@ class Table():
         self.id = id
 
     def delete(self):
-        """This function marks this table as deleted"""
+        """Function to mark the table as deleted.
 
+        Returns:
+            bool: True always.
+        """
         self.exists = False
         return True
 
     def exist(self):
-        """Checks if this table is deleted or not"""
+        """Function which checks wether the table symbol exists or not.
 
+        Returns:
+            bool: True if it exists, False otherwise.
+        """
         return self.exists
 
     def add(self, lex):
-        """Adds lex to this table.
-        Returns the position of the lex if it was added correctly. Otherwise, it returns False"""
+        """Function used to add the lexem lex into the symbol table identify by id
 
+        Args:
+            lex (str): The lexem to add in the symbol table.
+
+        Returns:
+            bool or str: str lexem if everithing was Ok, false if lex is already on the table.
+        """
         if not lex in self.lexems:
             self.lexems[lex] = ''
             return self.getPos(lex)
@@ -32,8 +51,15 @@ class Table():
             return False
 
     def setType(self, lex, type):
-        """Sets the type of lex.
-        Returns True if everything went OK. Otherwise, returns False"""
+        """Function set the type of a lexem.
+
+        Args:
+            lex (str): The lexem to find into the symbol table.
+            type (str): The type to set.
+
+        Returns:
+            bool: True if everithing is OK, false otherwise(lex does not exist an the table).
+        """
 
         if lex in self.lexems:
             self.lexems[lex] = type
@@ -42,7 +68,14 @@ class Table():
             return False
 
     def getLex(self, posLex):
-        "Returns the lex at the pos specified. If the posLex > length(table) returns False"
+        """Function to know what lexem is located in a given position.
+
+        Args:
+            posLex (int): The position into the table
+
+        Returns:
+            str: the lexem located into the given position.
+        """
         i = 0
         for e in self.lexems.keys():
             if i == posLex:
@@ -52,6 +85,14 @@ class Table():
         return False
 
     def removeLexAt(self, posLex):
+        """Function to remove a lexem in a given position from the table.
+
+        Args:
+            posLex (str): The position that is going to be removed.
+
+        Returns:
+            str: the lexem deleted.
+        """
         newlexems = {}
         i = 0
         removed = ()
