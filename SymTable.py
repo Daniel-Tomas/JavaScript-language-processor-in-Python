@@ -3,7 +3,7 @@ Software distributed under a Creative Commons Attribution-ShareAlike 3.0 Unporte
 Full legal text of this license can be found on http://creativecommons.org/licenses/by-sa/3.0/legalcode
 """
 
-from pyTable import Table
+from pySimbolTable import Table
 
 
 class SymTable():
