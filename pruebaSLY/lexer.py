@@ -1,6 +1,6 @@
 from sly import Lexer
 from sly.lex import Token
-from pySimbolTable import SymTable
+from pyTable import SymTable
 # from Lexer import Token
 import sys
 
@@ -15,7 +15,6 @@ class JSLexer(Lexer):
               INPUT, FUNCTION, ABPAREN, CEPAREN, ABLLAVE, CELLAVE, COMA, PUNTOYCOMA, RETURN, IF, FOR, EOF}
 
     ignore = ' \t'
-    #
 
     # Tokens
     CTEENTERA = r'\d+'
