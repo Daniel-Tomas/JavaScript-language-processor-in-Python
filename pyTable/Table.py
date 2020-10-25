@@ -106,16 +106,37 @@ class Table():
         return removed
 
     def getType(self, lex):
-        "Returns the type of lex"
+        """Function to know the type of a lexem.
+
+        Args:
+            lex (str): The lexem to find into the symbol table
+
+        Returns:
+            str: the type of a lexem given.
+        """
         return self.lexems[lex]
 
     def contains(self, lex):
-        "Checks if lex is in the table or not"
+        """Checks if lex is in the table or not"
+
+        Args:
+            lex (str): The lexem to find into the symbol table
+
+        Returns:
+            bool: True if lex exists, False otherwise.
+        """
 
         return self.lexems.has_key[lex]
 
     def write(self, path):
-        "Writes the contents of this table to the file pointed to by path"
+        """Prints the content of the table into a file pointed by path.
+
+        Args:
+            path (str): the path of the file.
+
+        Returns:
+            bool: True if the table exists. False otherwise.
+        """
 
         if self.exist():
             f = open(path, 'a')
@@ -133,7 +154,15 @@ class Table():
             return False
 
     def getPos(self, lex):
-        "returns the ID of lex or False if lex is not in this table"
+        """Function to know where the lex is located into the symbol table id.
+
+        Args:
+            lex (str): The lexem to find into the symbol table.
+
+        Returns:
+            bool or int: the position where the lexem is located into the symbol table if the lexeme
+            is in the table, False otherwise.
+        """
 
         i = 0
         for e in self.lexems.keys():

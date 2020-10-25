@@ -64,7 +64,7 @@ class SymTable():
             lex (str): The lexem to add in the symbol table.
 
         Returns:
-            bool or str: str id if everithing was Ok, false if lex is already on the table.
+            bool or str: str id if everything was Ok, false if lex is already on the table.
         """
         return self.tables[id].add(lex)
 
@@ -142,7 +142,7 @@ class SymTable():
         return self.tables[id].contains(lex)
 
     def writeTable(self, path):
-        """Function print the contents of all the tables into a file pointed by path.
+        """Prints the content of all the tables into a file pointed by path.
 
         Args:
             path (str): the path of the file.

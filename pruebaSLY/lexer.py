@@ -182,6 +182,9 @@ class JSLexer(Lexer):
         """Principal function which is responsible for give the different tokens one by one.
 
         Finally, it gives a different token which represents the end of file.
+
+        Yields:
+            token: The next token.
         """
         for tok in self.tokenize(self.data):
             yield tok
@@ -226,4 +229,4 @@ if __name__ == '__main__':
     # lexer = JSLexer(data)
 
     # for tok in lexer.get_token():
-    #   print(f'< {tok.type} , {tok.value} >')
+    #    print(f'< {tok.type} , {tok.value} >')
