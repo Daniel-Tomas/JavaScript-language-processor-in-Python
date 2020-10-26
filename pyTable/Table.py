@@ -14,7 +14,7 @@ class Table():
     """
 
     def __init__(self, id):
-        self.lexems = {}
+        self.lexems = []
         self.exists = True
         self.id = id
 
@@ -35,39 +35,46 @@ class Table():
         """
         return self.exists
 
-    def add(self, lex):
+    def addLex(self, lex):
         """Function used to add the lexem lex into the symbol table identify by id
 
         Args:
             lex (str): The lexem to add in the symbol table.
 
         Returns:
-            bool or str: str lexem if everithing was Ok, false if lex is already on the table.
+            bool or int: int pos in table if everithing was Ok, false if lex is already on the table.
         """
-        if not lex in self.lexems:
-            self.lexems[lex] = ''
-            return self.getPos(lex)
-        else:
-            return False
+        for element in self.lexems:
+            if element["lex"] == lex:
+                return False
+        self.lexems.append({"lex":lex})
+        return len(self.lexems)-1
 
-    def setType(self, lex, type):
-        """Function set the type of a lexem.
+    def addCharacteristic(self, lex, type, content):
+        """Function adds a characteristic to the lexem.
 
         Args:
             lex (str): The lexem to find into the symbol table.
             type (str): The type to set.
+            content (any): The value of the type
 
         Returns:
             bool: True if everithing is OK, false otherwise(lex does not exist an the table).
         """
-
-        if lex in self.lexems:
-            self.lexems[lex] = type
-            return True
-        else:
+        lexDict = self.getLexDict(lex)
+        if not lexDict:
             return False
+        lexDict[type] = content
+        return True
 
-    def getLex(self, posLex):
+    def getLexDict(self, lex):
+        """Function to get the dict of a specified lex"""
+        for e in self.lexems:
+            if e["lex"] == lex:
+                return e
+        return False
+
+    def getLexEntry(self, posLex):
         """Function to know what lexem is located in a given position.
 
         Args:
@@ -77,7 +84,7 @@ class Table():
             str: the lexem located into the given position.
         """
         i = 0
-        for e in self.lexems.keys():
+        for e in self.lexems:
             if i == posLex:
                 return e
             else:
@@ -88,25 +95,17 @@ class Table():
         """Function to remove a lexem in a given position from the table.
 
         Args:
-            posLex (str): The position that is going to be removed.
+            posLex (int): The position that is going to be removed.
 
         Returns:
-            str: the lexem deleted.
+            dict: the lexem deleted.
         """
-        newlexems = {}
-        i = 0
-        removed = ()
-        for e in self.lexems:
-            if i != posLex:
-                newlexems[e] = ''
-            else:
-                removed = e
-            i = i + 1
-        self.lexems = newlexems
+        removed = self.lexems[posLex]
+        del self.lexems[posLex]
         return removed
 
-    def getType(self, lex):
-        """Function to know the type of a lexem.
+    def getCharacteristic(self, lex, characteristic):
+        """Function to know the characteristic of a lexem.
 
         Args:
             lex (str): The lexem to find into the symbol table
@@ -114,7 +113,8 @@ class Table():
         Returns:
             str: the type of a lexem given.
         """
-        return self.lexems[lex]
+        lexDict =  self.lexems[self.getPos(lex)]
+        return lexDict.get(characteristic)
 
     def contains(self, lex):
         """Checks if lex is in the table or not"
@@ -126,7 +126,7 @@ class Table():
             bool: True if lex exists, False otherwise.
         """
 
-        return self.lexems.has_key[lex]
+        return self.lexems[self.getPos(lex)]
 
     def write(self, path):
         """Prints the content of the table into a file pointed by path.
@@ -165,8 +165,8 @@ class Table():
         """
 
         i = 0
-        for e in self.lexems.keys():
-            if e == lex:
+        for e in self.lexems:
+            if e["lex"] == lex:
                 break
             else:
                 i = i + 1

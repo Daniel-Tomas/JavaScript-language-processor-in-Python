@@ -198,30 +198,33 @@ class JSLexer(Lexer):
         yield tok_EOF
 
 
+#TS:
+
 if __name__ == '__main__':
-    '''tables = SymTable.SymTable()  # Creación de la instancia para el manejador de tablas
+
+    tables = SymTable.SymTable()  # Creación de la instancia para el manejador de tablas
     id0 = tables.newTable()  # Creación de la tabla global (id = 0)
     id1 = tables.newTable()  # Creación de la tabla local (id = 1)
-    tables.add(id0, ("string", 0))  # Añadimos en la tabla global el lex string con desplazamiento 0
-    lex = ("number", 8)  # Se define number con desplazamiento 8
+    tables.add(id0, "hola")  # Añadimos en la tabla global el lex string con desplazamiento 0
+    tables.addCharacteristic(id0,"hola","desplazamiento",0)
+    lex = "number"           #{"tipo":"number", "desp":0}  # Se define number con desplazamiento 8
     pos = tables.add(id0, lex)  # Se añade en la tabla global lex
     print(pos)  # Imprime posición de escritura
     quizaFalse = tables.add(id0, lex)  # Se intenta añadir otra vez lex
     print(quizaFalse)
-    pos = tables.getPos(id0, ("string", 0))  # Buscamos posición del lex insertado en la línea 174
+    pos = tables.getPos(id0, "string")  # Buscamos posición del lex insertado en la línea 174
     e = tables.removeLexAt(id0, pos)  # Eliminamos el lex en la posición encontrada previamente
     print(e)  # Imprimimos el lex eliminado
-    print(tables.getPos(id0, (
-        1, "hola")))  # Intentamos buscar el lex eliminado previamente y mostramos por stdout su resultado
-    '''
+    print(tables.getPos(id0, "hola"))  # Intentamos buscar el lex eliminado previamente y mostramos por stdout su resultado
 
-    f = open('Prueba.txt', 'r')
-    data = f.read()
-    tables = SymTable.SymTable()
-    id0 = tables.newTable()
-    sys.stdout = open("Tokens.txt", "w")
-    sys.stderr = open("Error.txt", "w")
-    lexer = JSLexer(data)
 
-    for tok in lexer.get_token():
-        print(f'<{tok.type} , {tok.value}>')
+    #f = open('Prueba.txt', 'r')
+    #data = f.read()
+    #tables = SymTable.SymTable()
+    #id0 = tables.newTable()
+    #sys.stdout = open("Tokens.txt", "w")
+    #sys.stderr = open("Error.txt", "w")
+    #lexer = JSLexer(data)
+
+    #for tok in lexer.get_token():
+        #print(f'<{tok.type} , {tok.value}>')
