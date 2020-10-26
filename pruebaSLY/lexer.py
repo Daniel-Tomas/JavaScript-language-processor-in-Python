@@ -1,7 +1,6 @@
 from sly import Lexer
 from sly.lex import Token
-from pyTable import SymTable
-# from Lexer import Token
+from pyTable.SymTable import SymTable
 import sys
 
 
@@ -38,7 +37,6 @@ class JSLexer(Lexer):
     CELLAVE = r'[}]'
     COMA = r'[,]'
     PUNTOYCOMA = r'[;]'
-    # EOF = '\Z'
 
     ID = r'[a-zA-Z][a-zA-Z0-9_]*'
     ID['number'] = NUMBER
@@ -62,10 +60,10 @@ class JSLexer(Lexer):
         by stderr and will stop the lexer.
 
         Args:
-            t(token): An integer constant token.
+            t(Token): An integer constant token.
 
         Returns:
-            token: The return value. It's modified to change its value from an String value to an Integer value.
+            Token: The return value. It's modified to change its value from an String value to an Integer value.
         """
 
         t.value = int(t.value)
@@ -79,10 +77,10 @@ class JSLexer(Lexer):
         If the string length is bigger than 64 it will print an error by stderr and will stop the lexer.
 
         Args:
-            t(token): The String constant token.
+            t(Token): The String constant token.
 
         Returns:
-            token: The return value which is modified to delete the quotation marks.
+            Token: The return value which is modified to delete the quotation marks.
         """
         t.value = t.value[1:-1]
         if len(t.value) > 64:
@@ -121,10 +119,10 @@ class JSLexer(Lexer):
         This token's integer value will be 0 if "+" is found or 1 if "-"
 
         Args:
-            t(token): The token which matches an arithmetic operation.
+            t(Token): The token which matches an arithmetic operation.
 
         Returns:
-            token: The return token modified.
+            Token: The return token modified.
         """
         if t.value == '+':
             t.value = 0
@@ -141,18 +139,18 @@ class JSLexer(Lexer):
         provide a correct information when an error is found.
 
         Args:
-            t(token): The token which contains a comment or a newline.
+            t(Token): The token which contains a comment or a newline.
         """
         self.lineno += t.value.count('\n')
 
     # Compute column.
     #     input is the input text string
-    #     token is a token instance
+    #     token is a Token instance
     def find_column(self, token):
         """Function called to provide the column where the error has been found.
 
         Args:
-            t(token): The only parameter.
+            t(Token): The only parameter.
         """
         last_cr = self.text.rfind('\n', 0, token.index)
         if last_cr < 0:
@@ -169,7 +167,7 @@ class JSLexer(Lexer):
         been found.
 
         Args:
-            t(token): The only parameter.
+            t(Token): The only parameter.
         """
 
         if type_error == "CADENA":
@@ -187,14 +185,14 @@ class JSLexer(Lexer):
         Finally, it gives a different token which represents the end of file.
 
         Yields:
-            token: The next token.
+            Token: The next token.
         """
         for tok in self.tokenize(self.data):
             yield tok
 
         tok_EOF = Token()
         tok_EOF.type = 'EOF'
-        tok_EOF.value = '-'
+        tok_EOF.value = ''
         yield tok_EOF
 
 
@@ -202,11 +200,11 @@ class JSLexer(Lexer):
 
 if __name__ == '__main__':
 
-    tables = SymTable.SymTable()  # Creación de la instancia para el manejador de tablas
+    tables = SymTable()  # Creación de la instancia para el manejador de tablas
     id0 = tables.newTable()  # Creación de la tabla global (id = 0)
     id1 = tables.newTable()  # Creación de la tabla local (id = 1)
     tables.add(id0, "hola")  # Añadimos en la tabla global el lex string con desplazamiento 0
-    tables.addCharacteristic(id0,"hola","desplazamiento",0)
+    tables.addAttribute(id0, "hola", "desplazamiento", 0)
     lex = "number"           #{"tipo":"number", "desp":0}  # Se define number con desplazamiento 8
     pos = tables.add(id0, lex)  # Se añade en la tabla global lex
     print(pos)  # Imprime posición de escritura

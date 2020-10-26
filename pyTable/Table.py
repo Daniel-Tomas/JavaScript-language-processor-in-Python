@@ -4,28 +4,24 @@ Full legal text of this license can be found on http://creativecommons.org/licen
 """
 
 
-class Table():
+class Table:
     """The class which makes an instance of a symbol table.
 
     Attributes:
         lexems (list): A list which represents lexems in the table.
-        exist (bool): Represents if the table exists or not.
-        id (int): Represents the identifying of the table.
+        exists (bool): Represents if the table exists or not.
+        id_ (int): Represents the identifying of the table.
     """
 
-    def __init__(self, id):
+    def __init__(self, id_):
         self.lexems = []
         self.exists = True
-        self.id = id
+        self.id = id_
 
     def delete(self):
         """Function to mark the table as deleted.
-
-        Returns:
-            bool: True always.
         """
         self.exists = False
-        return True
 
     def exist(self):
         """Function which checks wether the table symbol exists or not.
@@ -36,35 +32,35 @@ class Table():
         return self.exists
 
     def addLex(self, lex):
-        """Function used to add the lexem lex into the symbol table identify by id
+        """Function used to add the lexem lex into the symbol table identify by id.
 
         Args:
             lex (str): The lexem to add in the symbol table.
 
         Returns:
-            bool or int: int pos in table if everithing was Ok, false if lex is already on the table.
+            int or bool: int pos in table if everything was Ok, false if lex is already on the table.
         """
         for element in self.lexems:
             if element["lex"] == lex:
                 return False
-        self.lexems.append({"lex":lex})
-        return len(self.lexems)-1
+        self.lexems.append({"lex": lex})
+        return len(self.lexems) - 1
 
-    def addCharacteristic(self, lex, type, content):
+    def addAttribute(self, lex, type_, content):
         """Function adds a characteristic to the lexem.
 
         Args:
             lex (str): The lexem to find into the symbol table.
-            type (str): The type to set.
+            type_ (str): The type to set.
             content (any): The value of the type
 
         Returns:
-            bool: True if everithing is OK, false otherwise(lex does not exist an the table).
+            bool: True if everything is OK, false otherwise(lex does not exist an the table).
         """
         lexDict = self.getLexDict(lex)
         if not lexDict:
             return False
-        lexDict[type] = content
+        lexDict[type_] = content
         return True
 
     def getLexDict(self, lex):
@@ -75,21 +71,19 @@ class Table():
         return False
 
     def getLexEntry(self, posLex):
-        """Function to know what lexem is located in a given position.
+        """Gets the lexem which is located in a given position.
 
         Args:
             posLex (int): The position into the table
 
         Returns:
-            str: the lexem located into the given position.
+            str or bool: str lexem located into the given position, false otherwise(lex does not exist an the table).
         """
-        i = 0
-        for e in self.lexems:
-            if i == posLex:
-                return e
-            else:
-                i = i + 1
-        return False
+
+        if posLex >= len(self.lexems):
+            return False
+
+        return self.lexems[posLex]
 
     def removeLexAt(self, posLex):
         """Function to remove a lexem in a given position from the table.
@@ -100,33 +94,35 @@ class Table():
         Returns:
             dict: the lexem deleted.
         """
-        removed = self.lexems[posLex]
-        del self.lexems[posLex]
-        return removed
+        if posLex >= len(self.lexems):
+            return False
 
-    def getCharacteristic(self, lex, characteristic):
-        """Function to know the characteristic of a lexem.
+        return self.lexems.pop(posLex)
+
+    def getAttribute(self, lex, feature):
+        """Gets features of a lexeme.
 
         Args:
-            lex (str): The lexem to find into the symbol table
+            lex (str): The lexeme to find into the symbol table
 
         Returns:
-            str: the type of a lexem given.
+            str: the type of a lexeme given.
         """
-        lexDict =  self.lexems[self.getPos(lex)]
-        return lexDict.get(characteristic)
+
+        lexDict = self.lexems[self.getPos(lex)]
+        return lexDict.get(feature)
 
     def contains(self, lex):
-        """Checks if lex is in the table or not"
+        """Checks if lex is in the table or not."
 
         Args:
-            lex (str): The lexem to find into the symbol table
+            lex (str): The lexeme to find into the symbol table
 
         Returns:
             bool: True if lex exists, False otherwise.
         """
 
-        return self.lexems[self.getPos(lex)]
+        return True if self.getPos(lex) else False
 
     def write(self, path):
         """Prints the content of the table into a file pointed by path.
@@ -138,36 +134,35 @@ class Table():
             bool: True if the table exists. False otherwise.
         """
 
-        if self.exist():
-            f = open(path, 'a')
-            f.write('--------------------| Tabla' + str(self.id) + ' |--------------------\n')
-            f.write('----------------------------------------------------\n')
-            for e in self.lexems.keys():
-                f.write('\t' + str(e))
-                if self.lexems[e] != '':
-                    f.write(' (' + self.lexems[e] + ')')
-                f.write('\n')
-            f.write('\n\n\n')
-            f.close()
-            return True
-        else:
+        if not self.exist():
             return False
 
+        to_write = f'--------------------| Tabla {str(self.id)} |--------------------\n'
+        to_write += '----------------------------------------------------\n'
+        for dict_ in self.lexems:
+            to_write += f'\t{str(dict_)}'
+            if self.lexems[dict_] != '':
+                to_write += f' ({self.lexems[dict_]})'
+            to_write += '\n'
+        to_write += '\n\n\n'
+
+        with open(path, 'a') as f:
+            f.write(to_write)
+        return True
+
     def getPos(self, lex):
-        """Function to know where the lex is located into the symbol table id.
+        """Gets the lex position in symbol table.
 
         Args:
             lex (str): The lexem to find into the symbol table.
 
         Returns:
-            bool or int: the position where the lexem is located into the symbol table if the lexeme
+            bool or int: the position where lex is located into the symbol table if the lexeme
             is in the table, False otherwise.
         """
 
-        i = 0
-        for e in self.lexems:
-            if e["lex"] == lex:
-                break
-            else:
-                i = i + 1
-        return False if i == len(self.lexems) else i
+        for index, dict_ in enumerate(self.lexems):
+            if dict_["lex"] == lex:
+                return index
+
+        return False
