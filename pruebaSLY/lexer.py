@@ -31,27 +31,100 @@ class JSLexer(Lexer):
     OPASIG = r'='
     OPLOG = r'&&'
 
-    ABPAREN = r'[(]'
-    CEPAREN = r'[)]'
-    ABLLAVE = r'[{]'
-    CELLAVE = r'[}]'
-    COMA = r'[,]'
-    PUNTOYCOMA = r'[;]'
+    ABPAREN = r'\('
+    CEPAREN = r'\)'
+    ABLLAVE = r'\{'
+    CELLAVE = r'\}'
+    COMA = r','
+    PUNTOYCOMA = r';'
+
+    NUMBER = r'number'
+    STRING = r'string'
+    BOOLEAN = r'boolean'
+    LET = r'let'
+    ALERT = r'alert'
+    INPUT = r'input'
+    FUNCTION = r'function'
+    RETURN = r'return'
+    IF = r'if'
+    FOR = r'for'
 
     ID = r'[a-zA-Z][a-zA-Z0-9_]*'
-    ID['number'] = NUMBER
-    ID['string'] = STRING
-    ID['boolean'] = BOOLEAN
-    ID['let'] = LET
-    ID['alert'] = ALERT
-    ID['input'] = INPUT
-    ID['function'] = FUNCTION
-    ID['return'] = RETURN
-    ID['if'] = IF
-    ID['for'] = FOR
 
-    # Revisar EOF quizá lo hace automáticamente
-    literals = {'{', '}', ',', ';', '/d'}
+    # ID['number'] = NUMBER
+    # ID['string'] = STRING
+    # ID['boolean'] = BOOLEAN
+    # ID['let'] = LET
+    # ID['alert'] = ALERT
+    # ID['input'] = INPUT
+    # ID['function'] = FUNCTION
+    # ID['return'] = RETURN
+    # ID['if'] = IF
+    # ID['for'] = FOR
+
+    def empty(self, t):
+        t.value = ''
+        return t
+
+    def OPESP(self, t):
+        return self.empty(t)
+
+    def OPREL(self, t):
+        return self.empty(t)
+
+    def OPASIG(self, t):
+        return self.empty(t)
+
+    def OPLOG(self, t):
+        return self.empty(t)
+
+    def ABPAREN(self, t):
+        return self.empty(t)
+
+    def CEPAREN(self, t):
+        return self.empty(t)
+
+    def ABLLAVE(self, t):
+        return self.empty(t)
+
+    def CELLAVE(self, t):
+        return self.empty(t)
+
+    def COMA(self, t):
+        return self.empty(t)
+
+    def PUNTOYCOMA(self, t):
+        return self.empty(t)
+
+    def NUMBER(self, t):
+        return self.empty(t)
+
+    def STRING(self, t):
+        return self.empty(t)
+
+    def BOOLEAN(self, t):
+        return self.empty(t)
+
+    def LET(self, t):
+        return self.empty(t)
+
+    def ALERT(self, t):
+        return self.empty(t)
+
+    def INPUT(self, t):
+        return self.empty(t)
+
+    def FUNCTION(self, t):
+        return self.empty(t)
+
+    def RETURN(self, t):
+        return self.empty(t)
+
+    def IF(self, t):
+        return self.empty(t)
+
+    def FOR(self, t):
+        return self.empty(t)
 
     def CTEENTERA(self, t):
         """Function called when a token which belongs to an integer constant is found.
@@ -68,7 +141,7 @@ class JSLexer(Lexer):
 
         t.value = int(t.value)
         if t.value > 32767:
-            self.error(t, "CTE_ENTERA")
+            self.error(t, "CTEENTERA")
         return t
 
     def CADENA(self, t):
@@ -150,7 +223,7 @@ class JSLexer(Lexer):
         """Function called to provide the column where the error has been found.
 
         Args:
-            t(Token): The only parameter.
+            token(Token): The only parameter.
         """
         last_cr = self.text.rfind('\n', 0, token.index)
         if last_cr < 0:
@@ -161,10 +234,12 @@ class JSLexer(Lexer):
     def error(self, t, type_error="default"):
         """Function called when an error has been found.
 
-        An error is reported when a wrong character is found, a token which contains
-        a number bigger than 32767 is found or when a String token is found whom length is bigger than 64.
-        It prints a description of the error and provides the number of the line and the column where the error has
+        An error is reported when a wrong character is found.
+        Prints a description of the error and provides the number of the line and the column where the error has
         been found.
+        **Particular errors**:
+            1. Value of a token which type is "CADENA" has a length greater than 64
+            2. Value of a token which type is "CTE_ENTERA" is bigger than 32767
 
         Args:
             t(Token): The only parameter.
@@ -172,7 +247,7 @@ class JSLexer(Lexer):
 
         if type_error == "CADENA":
             res = f'Cadena demasiado larga: "{t.value}", con logitud mayor que 64: {len(t.value)},'
-        elif type_error == "CTE_ENTERA":
+        elif type_error == "CTEENTERA":
             res = f'Número fuera de rango: "{t.value}"'
         else:  # TODO: hacer cambios de idioma, para que tenga consistencia, en español el output, y en ingles todo lo demas, ¿no?
             res = f'Illegal character "{t.value[0]}"'
@@ -196,33 +271,32 @@ class JSLexer(Lexer):
         yield tok_EOF
 
 
-#TS:
+# TS:
 
 if __name__ == '__main__':
+    # tables = SymTable()  # Creación de la instancia para el manejador de tablas
+    # id0 = tables.newTable()  # Creación de la tabla global (id = 0)
+    # id1 = tables.newTable()  # Creación de la tabla local (id = 1)
+    # tables.add(id0, "hola")  # Añadimos en la tabla global el lex string con desplazamiento 0
+    # tables.addAttribute(id0, "hola", "desplazamiento", 0)
+    # lex = "number"  # {"tipo":"number", "desp":0}  # Se define number con desplazamiento 8
+    # pos = tables.add(id0, lex)  # Se añade en la tabla global lex
+    # print(pos)  # Imprime posición de escritura
+    # quizaFalse = tables.add(id0, lex)  # Se intenta añadir otra vez lex
+    # print(quizaFalse)
+    # pos = tables.getPos(id0, "string")  # Buscamos posición del lex insertado en la línea 174
+    # e = tables.removeLexAt(id0, pos)  # Eliminamos el lex en la posición encontrada previamente
+    # print(e)  # Imprimimos el lex eliminado
+    # print(tables.getPos(id0,
+    #                     "hola"))  # Intentamos buscar el lex eliminado previamente y mostramos por stdout su resultado
 
-    tables = SymTable()  # Creación de la instancia para el manejador de tablas
-    id0 = tables.newTable()  # Creación de la tabla global (id = 0)
-    id1 = tables.newTable()  # Creación de la tabla local (id = 1)
-    tables.add(id0, "hola")  # Añadimos en la tabla global el lex string con desplazamiento 0
-    tables.addAttribute(id0, "hola", "desplazamiento", 0)
-    lex = "number"           #{"tipo":"number", "desp":0}  # Se define number con desplazamiento 8
-    pos = tables.add(id0, lex)  # Se añade en la tabla global lex
-    print(pos)  # Imprime posición de escritura
-    quizaFalse = tables.add(id0, lex)  # Se intenta añadir otra vez lex
-    print(quizaFalse)
-    pos = tables.getPos(id0, "string")  # Buscamos posición del lex insertado en la línea 174
-    e = tables.removeLexAt(id0, pos)  # Eliminamos el lex en la posición encontrada previamente
-    print(e)  # Imprimimos el lex eliminado
-    print(tables.getPos(id0, "hola"))  # Intentamos buscar el lex eliminado previamente y mostramos por stdout su resultado
+    f = open('prueba.txt', 'r')
+    data = f.read()
+    tables = SymTable()
+    id0 = tables.newTable()
+    sys.stdout = open("Tokens.txt", "w")
+    sys.stderr = open("Error.txt", "w")
+    lexer = JSLexer(data)
 
-
-    #f = open('Prueba.txt', 'r')
-    #data = f.read()
-    #tables = SymTable.SymTable()
-    #id0 = tables.newTable()
-    #sys.stdout = open("Tokens.txt", "w")
-    #sys.stderr = open("Error.txt", "w")
-    #lexer = JSLexer(data)
-
-    #for tok in lexer.get_token():
-        #print(f'<{tok.type} , {tok.value}>')
+    for tok in lexer.get_token():
+        print(f'<{tok.type} , {tok.value}>')
