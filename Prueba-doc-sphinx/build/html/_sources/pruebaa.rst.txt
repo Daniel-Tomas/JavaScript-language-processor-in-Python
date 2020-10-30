@@ -1,0 +1,7 @@
+pruebaa module
+==============
+
+.. automodule:: pruebaa
+   :members:
+   :undoc-members:
+   :show-inheritance:
