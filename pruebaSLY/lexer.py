@@ -5,7 +5,7 @@ import sys
 
 
 class JSLexer(Lexer):
-    """Represents a lexer from javascript.
+    """Represents a javascript lexer.
 
     Args:
         data (str): the text to be set.
