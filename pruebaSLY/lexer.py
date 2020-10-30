@@ -5,10 +5,13 @@ import sys
 
 
 class JSLexer(Lexer):
-    """The class which makes an lexer from javascript.
+    """Represents a lexer from javascript.
+
+    Args:
+        data (str): the text to be set.
 
     Attributes:
-        data (str): the code which is going to be analyzed by the lexer
+        data (str): the code which is going to be analyzed by the lexer.
 
     """
 
@@ -127,16 +130,15 @@ class JSLexer(Lexer):
         return self.empty(t)
 
     def CTEENTERA(self, t):
-        """Function called when a token which belongs to an integer constant is found.
+        """ If the number found is bigger than 32767 calls self.error.
 
-        If the number found is bigger than 32767, this function will print an error
-        by stderr and will stop the lexer.
+        Casts the token values from str to int.
 
         Args:
-            t(Token): An integer constant token.
+            t(Token): The integer constant token.
 
         Returns:
-            Token: The return value. It's modified to change its value from an String value to an Integer value.
+            Token: The token modified.
         """
 
         t.value = int(t.value)
@@ -145,26 +147,22 @@ class JSLexer(Lexer):
         return t
 
     def CADENA(self, t):
-        """Function called when a token which belongs to an string constant is found.
-
-        If the string length is bigger than 64 it will print an error by stderr and will stop the lexer.
+        """If the string length is bigger than 64 calls self.error.
 
         Args:
-            t(Token): The String constant token.
+            t(Token): The string constant token.
 
         Returns:
-            Token: The return value which is modified to delete the quotation marks.
+            Token: the same token.
         """
-        t.value = t.value[1:-1]
         if len(t.value) > 64:
             self.error(t, "CADENA")
         return t
 
     def CTELOGICA(self, t):
-        """Called when a token which is a logical constant is found
+        """Modifies the argument token changing its str value to an integer value.
 
-        It modifies the argument token changing its str value to an integer value.
-        The token value will be 0 if "false" is found or 1 if "true"
+        The token value is set 0 if "false" is found or 1 if "true"
 
         Args:
             t(Token): Token which matches the logical constant pattern
@@ -179,17 +177,15 @@ class JSLexer(Lexer):
             t.value = 1
         return t
 
-    # TODO: To be done when the semantic analyzer is studied
     def ID(self, t):
         tables.add(id0, t.value)
         t.value = tables.getPos(id0, t.value)
         return t
 
     def OPARIT(self, t):
-        """Function called when a token which arithmetical operator is found.
+        """Modifies the argument token changing its str value to an integer value.
 
-        The token is modified to change the str value to an Integer value.
-        This token's integer value will be 0 if "+" is found or 1 if "-"
+        The token value is set 0 if "+" is found or 1 if "-"
 
         Args:
             t(Token): The token which matches an arithmetic operation.
@@ -206,21 +202,17 @@ class JSLexer(Lexer):
     @_('\n+',
        r'(?s:/\*.*?\*/)')
     def newline(self, t):
-        """Function called when a comment or a newline (\n) are found.
+        """Increases the line number.
 
-        It's used to increase the line number where the lexer is working to
-        provide a correct information when an error is found.
+        Increases the line number where the lexer is working to provide a correct information when an error is found.
 
         Args:
             t(Token): The token which contains a comment or a newline.
         """
         self.lineno += t.value.count('\n')
 
-    # Compute column.
-    #     input is the input text string
-    #     token is a Token instance
     def find_column(self, token):
-        """Function called to provide the column where the error has been found.
+        """Finds the column where the first letter of a token is placed.
 
         Args:
             token(Token): The only parameter.
@@ -232,11 +224,10 @@ class JSLexer(Lexer):
         return column
 
     def error(self, t, type_error="default"):
-        """Function called when an error has been found.
+        """Handles lexer errors.
 
         An error is reported when a wrong character is found.
-        Prints a description of the error and provides the number of the line and the column where the error has
-        been found.
+        Prints a description of the error and provides the number of the line and the column where it has been found.
         **Particular errors**:
             1. Value of a token which type is "CADENA" has a length greater than 64
             2. Value of a token which type is "CTE_ENTERA" is bigger than 32767
@@ -249,19 +240,19 @@ class JSLexer(Lexer):
         if type_error == "CADENA":
             res += f'Cadena demasiado larga: "{t.value}", con logitud mayor que 64: {len(t.value)},'
         elif type_error == "CTEENTERA":
-            res += f'Número fuera de rango: "{t.value}"'
-        else:  # TODO: hacer cambios de idioma, para que tenga consistencia, en español el output, y en ingles todo lo demas, ¿no?
-            res += f'Illegal character "{t.value[0]}"'
+            res += f'Número fuera de rango: "{t.value},"'
+        else:
+            res += f'Caracter ilegal "{t.value[0]}"'
         print(f'{res} en la linea {self.lineno} y columna {self.find_column(t)}', file=sys.stderr)
         exit()
 
     def get_token(self):
-        """Principal function which is responsible for give the different tokens one by one.
+        """Generator that yields tokens of the data text one by one.
 
-        Finally, it gives a different token which represents the end of file.
+        Finally, gives a different token which represents the end of file.
 
         Yields:
-            Token: The next token.
+            Token: The next token until EOF.
         """
         for tok in self.tokenize(self.data):
             yield tok
@@ -276,8 +267,8 @@ class JSLexer(Lexer):
 
 if __name__ == '__main__':
     # tables = SymTable()  # Creación de la instancia para el manejador de tablas
-    # id0 = tables.newTable()  # Creación de la tabla global (id = 0)
-    # id1 = tables.newTable()  # Creación de la tabla local (id = 1)
+    # id0 = tables.newTable()  # Creación de la tabla global (id_ = 0)
+    # id1 = tables.newTable()  # Creación de la tabla local (id_ = 1)
     # tables.add(id0, "hola")  # Añadimos en la tabla global el lex string con desplazamiento 0
     # tables.addAttribute(id0, "hola", "desplazamiento", 0)
     # lex = "number"  # {"tipo":"number", "desp":0}  # Se define number con desplazamiento 8
