@@ -14,9 +14,9 @@
 \maketitle
 En este documento se realizará la memoria del analizador léxico y la tabla de símbolos correspondiente a la primera entrega de la practica de PDL.
 \clearpage%para saltar a otra página
+
+
 %dividimos en secciones
-
-
 \section {Tokens}
 \begin{flushleft}
 \begin{itemize}
@@ -48,7 +48,6 @@ En este documento se realizará la memoria del analizador léxico y la tabla de 
 \item , \qquad\qquad<COMA, ->
 \item ; \qquad\qquad<PUNTOYCOMA, ->
 \item End Of File \qquad\qquad<EOF, ->
-
 \end{itemize}
 \end{flushleft}
 \clearpage
@@ -138,9 +137,156 @@ Error léxico (siempre se lanza cuando el Analizador Léxico encuentra un error)
 \item Carácter ilegal. 
 \end{enumerate}
 Todo error va acompañado de la $linea$ y $columna$ en el que se ha encontrado dicho error.
+\clearpage
+
+
 \section{Casos de Prueba}
 %En este caso hay subsecciones
+
+
 \subsection{Casos de Prueba Correctos}
+\subsubsection{Caso de Prueba Correcto Nº1}
+\begin{center} 
+El programa empleado es el siguiente:
+\end{center}
+\begin{flushleft}
+let string texto;\\
+function print (string msg)\{ \\
+\qquad	alert (msg);\\
+\} \\
+function pideTexto ()\{ \\
+\qquad	alert ("Introduce un texto");\\
+\qquad	input (texto);\\
+\}\\
+pideTexto();\\
+let string textoAux;\\
+textoAux = texto;\\
+print (textoAux);\\
+\quad\\
+Los $tokens$ generados son los siguientes:\\
+<LET , >\\
+<STRING , >\\
+<ID , 0>\\
+<PUNTOYCOMA , >\\
+<FUNCTION , >\\
+<ID , 1>\\
+<ABPAREN , >\\
+<STRING , >\\
+<ID , 2>\\
+<CEPAREN , >\\
+<ABLLAVE , >\\
+<ALERT , >\\
+<ABPAREN , >\\
+<ID , 2>\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<CELLAVE , >\\
+<FUNCTION , >\\
+<ID , 3>\\
+<ABPAREN , >\\
+<CEPAREN , >\\
+<ABLLAVE , >\\
+<ALERT , >\\
+<ABPAREN , >\\
+<CADENA , ''Introduce un texto" >\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<INPUT , >\\
+<ABPAREN , >\\
+<ID , 0>\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<CELLAVE , >\\
+<ID , 3>\\
+<ABPAREN , >\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<LET , >\\
+<STRING , >\\
+<ID , 4>\\
+<PUNTOYCOMA , >\\
+<ID , 4>\\
+<OPASIG , >\\
+<ID , 0>\\
+<PUNTOYCOMA , >\\
+<ID , 1>\\
+<ABPAREN , >\\
+<ID , 4>\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<EOF , >\\
+\end{flushleft}
+\clearpage
+
+\subsubsection{Caso de Prueba Correcto Nº2}
+\begin{center} 
+El programa empleado es el siguiente:
+\end{center}
+\begin{flushleft}
+let string texto;\\
+function print (string msg)\{\\
+\qquad	alert ("Mensage introducido:");\\
+\qquad	alert (msg);\\
+\}
+function pideTexto ()\{\\
+\qquad	alert ("Introduce un texto");\\
+\qquad	input (texto);\\
+\}\\
+pideTexto();\\
+print (texto);\\
+\quad\\
+Los $tokens$ generados son los siguientes:\\
+<LET , >\\
+<STRING , >\\
+<ID , 0>\\
+<PUNTOYCOMA , >\\
+<FUNCTION , >\\
+<ID , 1>\\
+<ABPAREN , >\\
+<STRING , >\\
+<ID , 2>\\
+<CEPAREN , >\\
+<ABLLAVE , >\\
+<ALERT , >\\
+<ABPAREN , >\\
+<CADENA , ''Mensage introducido:''>\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<ALERT , >\\
+<ABPAREN , >\\
+<ID , 2>\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<CELLAVE , >\\
+<FUNCTION , >\\
+<ID , 3>\\
+<ABPAREN , >\\
+<CEPAREN , >\\
+<ABLLAVE , >\\
+<ALERT , >\\
+<ABPAREN , >\\
+<CADENA , ''Introduce un texto''>\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<INPUT , >\\
+<ABPAREN , >\\
+<ID , 0>\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<CELLAVE , >\\
+<ID , 3>\\
+<ABPAREN , >\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<ID , 1>\\
+<ABPAREN , >\\
+<ID , 0>\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<EOF , >\\
+\end{flushleft}
+
+
 \subsection{Casos de Prueba Fallidos}
 \clearpage
 
