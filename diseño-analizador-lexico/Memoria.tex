@@ -188,7 +188,7 @@ Los $tokens$ generados son los siguientes:\\
 <ABLLAVE , >\\
 <ALERT , >\\
 <ABPAREN , >\\
-<CADENA , ''Introduce un texto" >\\
+<CADENA , ''Introduce un texto''>\\
 <CEPAREN , >\\
 <PUNTOYCOMA , >\\
 <INPUT , >\\
@@ -288,6 +288,35 @@ Los $tokens$ generados son los siguientes:\\
 
 
 \subsection{Casos de Prueba Fallidos}
+
+
+\subsubsection{Caso de Prueba Fallido Nº1}
+\begin{center} 
+El programa empleado es el siguiente:
+\end{center}
+\begin{flushleft}
+var number b;\\
+b = 5;\\
+print("hola);\\
+\quad\\
+Errores generados:\\
+Error lexico: \\
+	\qquad Illegal character ' '' ' en la linea 3 y columna 7
+\end{flushleft}
+
+\subsubsection{Caso de Prueba Fallido Nº2}
+\begin{center} 
+El programa empleado es el siguiente:
+\end{center}
+\begin{flushleft}
+var number a=3;\\
+if((a==2) \& (b==1))\\
+alert("No se que poner")\\
+\quad\\
+Errores generados:\\
+Error léxico: \\
+\qquad Illegal character '\&' en la linea 2 y columna 11
+\end{flushleft}
 \clearpage
 
 
