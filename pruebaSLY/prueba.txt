@@ -1,4 +1,4 @@
-{ ) , number
+&{ ) , number
 number a=2;
          a = a + 2; a_1/*a &
     

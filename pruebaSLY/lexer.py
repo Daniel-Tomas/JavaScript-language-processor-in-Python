@@ -179,7 +179,7 @@ class JSLexer(Lexer):
             t.value = 1
         return t
 
-    # TODO: Para hacer cuando se de la TS
+    # TODO: To be done when the semantic analyzer is studied
     def ID(self, t):
         tables.add(id0, t.value)
         t.value = tables.getPos(id0, t.value)
@@ -245,12 +245,13 @@ class JSLexer(Lexer):
             t(Token): The only parameter.
         """
 
+        res = 'Error lexico: \n\t'
         if type_error == "CADENA":
-            res = f'Cadena demasiado larga: "{t.value}", con logitud mayor que 64: {len(t.value)},'
+            res += f'Cadena demasiado larga: "{t.value}", con logitud mayor que 64: {len(t.value)},'
         elif type_error == "CTEENTERA":
-            res = f'Número fuera de rango: "{t.value}"'
+            res += f'Número fuera de rango: "{t.value}"'
         else:  # TODO: hacer cambios de idioma, para que tenga consistencia, en español el output, y en ingles todo lo demas, ¿no?
-            res = f'Illegal character "{t.value[0]}"'
+            res += f'Illegal character "{t.value[0]}"'
         print(f'{res} en la linea {self.lineno} y columna {self.find_column(t)}', file=sys.stderr)
         exit()
 

@@ -1,0 +1,2 @@
+Error lexico: 
+	Illegal character "&" en la linea 1 y columna 0
