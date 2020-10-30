@@ -229,7 +229,7 @@ function print (string msg)\{\\
 \qquad	alert (msg);\\
 \}
 function pideTexto ()\{\\
-\qquad	alert ("Introduce un texto");\\
+\qquad	alert (" Introduce un texto");\\
 \qquad	input (texto);\\
 \}\\
 pideTexto();\\
@@ -317,6 +317,20 @@ Errores generados:\\
 Error léxico: \\
 \qquad Illegal character '\&' en la linea 2 y columna 11
 \end{flushleft}
+\clearpage
+
+\subsubsection{Caso de Prueba Fallido Nº3}
+\begin{center} 
+El programa empleado es el siguiente:
+\end{center}
+\begin{flushleft}
+alert("Vamos a crear un número muy grande");\\
+let number x=2341234134;\\
+\quad\\
+Errores generados:\\
+Error léxico: \\
+	\qquad Número fuera de rango: ''2341234134'' en la linea 2 y columna 14
+	\end{flushleft}
 \clearpage
 
 
