@@ -8,14 +8,14 @@ class JSLexer(Lexer):
     """Represents a javascript lexer.
 
     Args:
-        data (str): the text to be set.
+        data_ (str): the text to be set.
 
     Attributes:
         data (str): the code which is going to be analyzed by the lexer.
 
     """
 
-    def __init__(self, data):
+    def __init__(self, data_):
         self.data = data
 
     tokens = {CTEENTERA, CADENA, CTELOGICA, OPARIT, OPESP,
@@ -187,7 +187,7 @@ class JSLexer(Lexer):
 
     def OPARIT(self, t):
         """Modifies the argument token changing its str value
-            to an integer value.
+         to an integer value.
 
         The token value is set 0 if "+" is found or 1 if "-"
 
@@ -209,7 +209,7 @@ class JSLexer(Lexer):
         """Increases the line number.
 
         Increases the line number where the lexer is working to provide a
-         correct information when an error is found.
+        correct information when an error is found.
 
         Args:
             t(Token): The token which contains_lex a comment or a newline.
@@ -236,12 +236,13 @@ class JSLexer(Lexer):
          line and the column where it has been found.
         **Particular errors**:
             1. Value of a token which type is "CADENA" has a length
-             greater than 64
+                greater than 64
             2. Value of a token which type is "CTE_ENTERA" is bigger
-             than 32767
+                than 32767
 
         Args:
             t(Token): The only parameter.
+            type_error(:obj:`str`, optional): Particular error. Defaults to "default".
         """
 
         res = 'Error lexico: \n\t'
@@ -270,6 +271,7 @@ class JSLexer(Lexer):
         tok_EOF.type = 'EOF'
         tok_EOF.value = ''
         yield tok_EOF
+
 
 if __name__ == '__main__':
 

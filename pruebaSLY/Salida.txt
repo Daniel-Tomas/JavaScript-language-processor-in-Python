@@ -1,7 +1,3 @@
-
-
-
-
 CONTENIDO DE LA TABLA # 0 :
 
 *	LEXEMA : 'a'
