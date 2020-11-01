@@ -50,7 +50,7 @@
 
   // Export the Underscore object for **Node.js**, with
   // backwards-compatibility for the old `require()` API. If we're in
-  // the browser, add `_` as a global object via a string identifier,
+  // the browser, add_entry `_` as a global object via a string identifier,
   // for Closure Compiler "advanced" mode.
   if (typeof exports !== 'undefined') {
     if (typeof module !== 'undefined' && module.exports) {
@@ -198,7 +198,7 @@
   };
 
   // Determine if a given value is included in the array or object using `===`.
-  // Aliased as `contains`.
+  // Aliased as `contains_lex`.
   _.include = _.contains = function(obj, target) {
     var found = false;
     if (obj == null) return found;
@@ -383,13 +383,13 @@
     return result;
   };
 
-  // Produce an array that contains the union: each distinct element from all of
+  // Produce an array that contains_lex the union: each distinct element from all of
   // the passed-in arrays.
   _.union = function() {
     return _.uniq(_.flatten(arguments, true));
   };
 
-  // Produce an array that contains every item shared between all the
+  // Produce an array that contains_lex every item shared between all the
   // passed-in arrays. (Aliased as "intersect" for back-compat.)
   _.intersection = _.intersect = function(array) {
     var rest = slice.call(arguments, 1);
@@ -953,7 +953,7 @@
     return chain ? _(obj).chain() : obj;
   };
 
-  // A method to easily add functions to the OOP wrapper.
+  // A method to easily add_entry functions to the OOP wrapper.
   var addToWrapper = function(name, func) {
     wrapper.prototype[name] = function() {
       var args = slice.call(arguments);

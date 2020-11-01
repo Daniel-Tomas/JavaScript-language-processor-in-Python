@@ -66,7 +66,8 @@ class MyTestCase(unittest.TestCase):
         lexer = JSLexer()
         for tok in lexer.tokenize('n0mbrEVariab_e'):
             self.assertEqual("ID", tok.type)
-            self.assertEqual("n0mbrEVariab_e", tok.value)  # Debe ser un puntero a la tabla de símbolos
+            self.assertEqual("n0mbrEVariab_e", tok.value)
+            # Debe ser un puntero a la tabla de símbolos
 
     def test_string(self):
         lexer = JSLexer()
@@ -148,11 +149,11 @@ class MyTestCase(unittest.TestCase):
         for tok in lexer.tokenize(';'):
             self.assertEqual("PUNTOYCOMA", tok.type)
 
-    # ************************************************************************************#
-    #                                                                                    #
-    #                      Comienzo de las pruebas de integración                        #
-    #                            #TODO: Add TS to ID part                                #
-    # ************************************************************************************#
+    # ****************************************************************#
+    #                                                                 #
+    #                      Comienzo de las pruebas de integración     #
+    #                            #TODO: Add TS to ID part             #
+    # ****************************************************************#
 
     def test_miniFunction(self):
         lexer = JSLexer()
@@ -256,11 +257,12 @@ class MyTestCase(unittest.TestCase):
 
     def test_mediumFunctionDev1(self):
         lexer = JSLexer()
-        data = '''function number SumatorioRecursivo(number n)	/* n: parámetro formal de la función entera */
-                        {if(n==0)return 1;
-	                        /* llamada recursiva ç
-	                        */return n+FactorialRecursivo(n-1);}
-                            '''
+        data = '''function number SumatorioRecursivo(number n)	
+                /* n: parámetro formal de la función entera */
+                    {if(n==0)return 1;
+	                /* llamada recursiva ç
+                */return n+FactorialRecursivo(n-1);
+                '''
         for indx, tok in enumerate(lexer.tokenize(data)):
             if indx == 0:
                 self.assertEqual("FUNCTION", tok.type)
@@ -324,11 +326,11 @@ class MyTestCase(unittest.TestCase):
             else:
                 self.assertEqual("CELLAVE", tok.type)
 
-    # ************************************************************************************#
-    #                                                                                    #
-    #                      Comienzo de las pruebas de negación                           #
-    #                                                                                    #
-    # ************************************************************************************#
+    # ****************************************************************#
+    #                                                                 #
+    #                      Comienzo de las pruebas de negación        #
+    #                                                                 #
+    # ****************************************************************#
 
     def test_negateToken(self):
         lexer = JSLexer()

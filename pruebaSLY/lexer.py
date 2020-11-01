@@ -20,7 +20,9 @@ class JSLexer(Lexer):
 
     tokens = {CTEENTERA, CADENA, CTELOGICA, OPARIT, OPESP,
               OPREL, OPLOG, OPASIG, ID, NUMBER, STRING, BOOLEAN, LET, ALERT,
-              INPUT, FUNCTION, ABPAREN, CEPAREN, ABLLAVE, CELLAVE, COMA, PUNTOYCOMA, RETURN, IF, FOR, EOF}
+              INPUT, FUNCTION, ABPAREN, CEPAREN, ABLLAVE, CELLAVE, COMA,
+              PUNTOYCOMA, RETURN, IF, FOR, EOF
+              }
 
     ignore = ' \t'
 
@@ -160,7 +162,8 @@ class JSLexer(Lexer):
         return t
 
     def CTELOGICA(self, t):
-        """Modifies the argument token changing its str value to an integer value.
+        """Modifies the argument token changing its str value
+            to an integer value.
 
         The token value is set 0 if "false" is found or 1 if "true"
 
@@ -178,12 +181,13 @@ class JSLexer(Lexer):
         return t
 
     def ID(self, t):
-        tables.add(id0, t.value)
-        t.value = tables.getPos(id0, t.value)
+        tables.add_entry(id0, t.value)
+        t.value = tables.get_pos(id0, t.value)
         return t
 
     def OPARIT(self, t):
-        """Modifies the argument token changing its str value to an integer value.
+        """Modifies the argument token changing its str value
+            to an integer value.
 
         The token value is set 0 if "+" is found or 1 if "-"
 
@@ -201,13 +205,14 @@ class JSLexer(Lexer):
 
     @_('\n+',
        r'(?s:/\*.*?\*/)')
-    def newline(self, t):
+    def new_line(self, t):
         """Increases the line number.
 
-        Increases the line number where the lexer is working to provide a correct information when an error is found.
+        Increases the line number where the lexer is working to provide a
+         correct information when an error is found.
 
         Args:
-            t(Token): The token which contains a comment or a newline.
+            t(Token): The token which contains_lex a comment or a newline.
         """
         self.lineno += t.value.count('\n')
 
@@ -227,10 +232,13 @@ class JSLexer(Lexer):
         """Handles lexer errors.
 
         An error is reported when a wrong character is found.
-        Prints a description of the error and provides the number of the line and the column where it has been found.
+        Prints a description of the error and provides the number of the
+         line and the column where it has been found.
         **Particular errors**:
-            1. Value of a token which type is "CADENA" has a length greater than 64
-            2. Value of a token which type is "CTE_ENTERA" is bigger than 32767
+            1. Value of a token which type is "CADENA" has a length
+             greater than 64
+            2. Value of a token which type is "CTE_ENTERA" is bigger
+             than 32767
 
         Args:
             t(Token): The only parameter.
@@ -249,7 +257,8 @@ class JSLexer(Lexer):
     def get_token(self):
         """Generator that yields tokens of the data text one by one.
 
-        Finally, gives a different token which represents the end of file.
+        Finally, gives a different token which represents the end of
+        file.
 
         Yields:
             Token: The next token until EOF.
@@ -262,34 +271,16 @@ class JSLexer(Lexer):
         tok_EOF.value = ''
         yield tok_EOF
 
-
-# TS:
-
 if __name__ == '__main__':
-    # tables = SymTable()  # Creación de la instancia para el manejador de tablas
-    # id0 = tables.newTable()  # Creación de la tabla global (id_ = 0)
-    # id1 = tables.newTable()  # Creación de la tabla local (id_ = 1)
-    # tables.add(id0, "hola")  # Añadimos en la tabla global el lex string con desplazamiento 0
-    # tables.addAttribute(id0, "hola", "desplazamiento", 0)
-    # lex = "number"  # {"tipo":"number", "desp":0}  # Se define number con desplazamiento 8
-    # pos = tables.add(id0, lex)  # Se añade en la tabla global lex
-    # print(pos)  # Imprime posición de escritura
-    # quizaFalse = tables.add(id0, lex)  # Se intenta añadir otra vez lex
-    # print(quizaFalse)
-    # pos = tables.getPos(id0, "string")  # Buscamos posición del lex insertado en la línea 174
-    # e = tables.removeLexAt(id0, pos)  # Eliminamos el lex en la posición encontrada previamente
-    # print(e)  # Imprimimos el lex eliminado
-    # print(tables.getPos(id0,
-    #                     "hola"))  # Intentamos buscar el lex eliminado previamente y mostramos por stdout su resultado
 
     f = open('prueba.txt', 'r')
     data = f.read()
     tables = SymTable()
-    id0 = tables.newTable()
+    id0 = tables.new_table()
     sys.stdout = open("Tokens.txt", "w")
     sys.stderr = open("Error.txt", "w")
     lexer = JSLexer(data)
 
     for tok in lexer.get_token():
         print(f'<{tok.type} , {tok.value}>')
-    tables.writeTable("Salida.txt")
+    tables.write_table("Salida.txt")

@@ -185,7 +185,7 @@ var Documentation = {
   },
 
   /**
-   * add context elements like header anchor links
+   * add_entry context elements like header anchor links
    */
   addContextElements : function() {
     $('div[id_] > :header:first').each(function() {

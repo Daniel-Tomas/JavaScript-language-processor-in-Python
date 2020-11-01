@@ -92,7 +92,7 @@ G: if contador>64\\
   \quad leer\\
 H: string = l, leer\\
 I: string = string + l/D/\_ , leer\\
-J: if palabrasReservadas.contains(string)\\
+J: if palabrasReservadas.contains_lex(string)\\
        \qquad if string == "number"\\
       \qquad \quad      genToken(NUMBER,-)\\
        \qquad elif string == "string"\\

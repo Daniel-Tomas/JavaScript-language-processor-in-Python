@@ -16,7 +16,7 @@ G: if contador>64
    #Revisar cuando se vea TS. Empieza aquí
 H: string = l, leer
 I: string = string + l/D/_ , leer
-J:   if palabrasReservadas.contains(string)
+J:   if palabrasReservadas.contains_lex(string)
         if string == "number"
             genToken(number,-)
         elif string == "string"

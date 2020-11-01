@@ -1,4 +1,4 @@
-from pyTable.Table import Table
+from . Table import Table
 
 
 class SymTable:
@@ -14,7 +14,7 @@ class SymTable:
         self.tables = []
         self.nextId = 0
 
-    def existTable(self, id_):
+    def exist_table(self, id_):
         """Checks if the table symbol identified by an id_ exists.
 
         Args:
@@ -24,12 +24,9 @@ class SymTable:
             bool: True if it exists, False otherwise.
         """
         a = self.tables[id_]
-        if not a or not a.exist():
-            return False
-        else:
-            return True
+        return a and a.exist()
 
-    def destroyTable(self, id_):
+    def destroy_table(self, id_):
         """Destroys a symbol table identified by an id_.
 
         Args:
@@ -37,7 +34,7 @@ class SymTable:
         """
         self.tables[id_].delete()
 
-    def existsEntry(self, id_, lex):
+    def exists_entry(self, id_, lex):
         """Checks if lex is in the table identified by an id_.
 
         Args:
@@ -47,9 +44,9 @@ class SymTable:
         Returns:
             bool: True if lex exists, False otherwise.
         """
-        return self.tables[id_].contains(lex)
+        return self.tables[id_].contains_lex(lex)
 
-    def newTable(self):
+    def new_table(self):
         """Creates a new symbol table.
 
         Returns:
@@ -60,44 +57,49 @@ class SymTable:
         self.nextId += 1
         return self.nextId - 1
 
-    def getPos(self, id_, lex):
-        """Gets the position where a lexeme is located into the symbol table identified by an id_.
+    def get_pos(self, id_, lex):
+        """Gets the position where a lexeme is located into the symbol
+         table identified by an id_.
 
         Args:
             id_ (int): Identifier of the symbol table.
             lex (str): The lexeme to find into the symbol table
 
         Returns:
-           int or None: the position where lex is located into the symbol table if the lexeme
+           int or None: the position where lex is located into the
+            symbol table if the lexeme
                 is in the table, None otherwise.
         """
-        return self.tables[id_].getPos(lex)
+        return self.tables[id_].get_pos(lex)
 
-    def add(self, id_, lex):
+    def add_entry(self, id_, lex):
         """Adds a lexeme into the symbol table identified by an id_.
 
         Args:
             id_ (int): The identifier of the symbol table.
-            lex (str): The lexeme to add in the symbol table.
+            lex (str): The lexeme to add_entry in the symbol table.
 
         Returns:
-            int or None: int pos in table if the lexeme has been added, None if lex is already on the table.
+            int or None: int pos in table if the lexeme has been added,
+             None if lex is already on the table.
         """
-        return self.tables[id_].addLex(lex)
+        return self.tables[id_].add_lex(lex)
 
-    def removeLexAt(self, idTable, posLex):
-        """Removes a lexeme in a given position from the table identified by an id_.
+    def remove_lex_at(self, idTable, posLex):
+        """Removes a lexeme in a given position from the
+         table identified by an id_.
 
         Args:
             idTable (int): Represents the identifying of the symbol table.
             posLex (int): The position that is going to be removed.
 
         Returns:
-            dict or None: dict the lexeme deleted, None if index is out of bounds.
+            dict or None: dict the lexeme deleted, None if index is out
+             of bounds.
         """
-        return self.tables[idTable].removeLexAt(posLex)
+        return self.tables[idTable].remove_lex_at(posLex)
 
-    def addAttribute(self, id_, lex, type_, content):
+    def add_attribute(self, id_, lex, type_, content):
         """Adds an attribute to a lexeme in the table identified by an id_.
 
         Args:
@@ -107,12 +109,14 @@ class SymTable:
             content (any): The value of the attribute.
 
         Returns:
-            bool: True if the attribute has been added, false otherwise(lex does not exist an the table).
+            bool: True if the attribute has been added, false otherwise
+            (lex does not exist an the table).
         """
-        return self.tables[id_].addAttribute(lex, type_, content)
+        return self.tables[id_].add_attribute(lex, type_, content)
 
-    def getAttribute(self, id_, lex, type_):
-        """Gets value of an attribute of a lexeme in the table identified by an id_.
+    def get_attribute(self, id_, lex, type_):
+        """Gets value of an attribute of a lexeme in the table
+         identified by an id_.
 
         Args:
             id_ (int): Identifier of the symbol table.
@@ -120,49 +124,41 @@ class SymTable:
             type_ (str): The type of the attribute.
 
         Returns:
-             any or None: any the value of the attribute, False if the type of the attribute does not exists.
+             any or None: any the value of the attribute, False
+              if the type of the attribute does not exists.
         """
-        return self.tables[id_].getAttribute(lex, type_)
+        return self.tables[id_].get_attribute(lex, type_)
 
-    def getLexDict(self, idTable, lex):
-        """Gets the dict of a specified lexeme contained in the symbol table identified by an id_.
+    def get_lex_dict(self, idTable, lex):
+        """Gets the dict of a specified lexeme contained in the symbol
+         table identified by an id_.
 
          Returns:
-            dict or None: dict dictionary of lexeme lex, None if lex is not in the symbol table.
+            dict or None: dict dictionary of lexeme lex, None if lex
+             is not in the symbol table.
         """
-        return self.tables[idTable].getLexDict(lex)
+        return self.tables[idTable].get_lex_dict(lex)
 
-    def getLexEntry(self, idTable, posLex):
+    def get_lex_entry(self, idTable, posLex):
         """Gets lexem entry is located in a given position.
 
         Args:
-            idTable (int): Represents the identifying of the symbol table.
+            idTable (int): Represents the identifying of the
+             symbol table.
             posLex (int): The position into the table
 
         Returns:
-            dict or None: dict attributes of a lexeme located into the given position, None if index is out of bounds.
+            dict or None: dict attributes of a lexeme located into
+             the given position, None if index is out of bounds.
         """
 
-        return self.tables[idTable].getLexEntry(posLex)
+        return self.tables[idTable].get_lex_entry(posLex)
 
-    def writeTable(self, path):
-        """Prints the content of all the tables into a file pointed by path.
-            Prints the table using this format:
-                CONTENIDO DE LA TABLA # 0 :
-
-                *	LEXEMA : 'a'
-                    ATRIBUTOS :
-                    + DESPLAZAMIENTO : '0'
-                ---------------- ----------------
-                *	LEXEMA : 'a_1'
-                    ATRIBUTOS :
-                    + DESPLAZAMIENTO : '1'
-                ---------------- ----------------
-                *	LEXEMA : 'b'
-                    ATRIBUTOS :
-                    + DESPLAZAMIENTO : '2'
-                ---------------- ----------------
-                Prints one table after another
+    def write_table(self, path):
+        """Prints the content of all the tables into a file pointed by
+         path.
+            Prints the table using the format provided in
+            FormatoImpresiónTablaDeSímbolos.txt
         Args:
             path (str): the path of the file.
 
