@@ -5,8 +5,7 @@ class Table:
         id_ (int): id to be set.
 
     Attributes:
-        lexems (list of dict): A list which represents lexems in the
-        table.
+        lexems (list of dict): A list which represents lexems in the table.
         exists (bool): Represents if the table exists or not.
         id_ (int): Represents the identifying of the table.
 
@@ -48,9 +47,7 @@ class Table:
             lex (str): The lexeme to find into the symbol table.
 
         Returns:
-             int or None: the position where lex is located into the
-              symbol table if the lexeme
-                is in the table, None otherwise.
+             int or None: the position where lex is located, None otherwise.
         """
 
         for index, dict_ in enumerate(self.lexems):
@@ -66,8 +63,7 @@ class Table:
             lex (str): The lexeme to add_entry in the symbol table.
 
         Returns:
-            int or None: int pos in table if the lexeme has been added,
-             None if lex is already on the table.
+            int or None: int pos in table if lex was added, None otherwise.
         """
         for element in self.lexems:
             if element["LEXEMA"] == lex:
@@ -83,8 +79,7 @@ class Table:
             pos_lex (int): The position that is going to be removed.
 
         Returns:
-            dict or None: dict the lexeme deleted, None if index is out
-             of bounds.
+            dict or None: dict the lexeme deleted, None if index is out of bounds.
         """
         if pos_lex >= len(self.lexems):
             return None
@@ -100,8 +95,7 @@ class Table:
             content (any): The value of the attribute.
 
         Returns:
-            bool: True if the attribute has been added, false otherwise
-            (lex does not exist an the table).
+            bool: True if the attribute has been added, false otherwise.
         """
         lex_dict = self.get_lex_dict(lex)
         if not lex_dict:
@@ -118,8 +112,7 @@ class Table:
             type_ (str): The type of the attribute.
 
         Returns:
-            any or None: any the value of the attribute, False if the
-             type of the attribute does not exists.
+            any or None: any the value of the attribute if exists, False otherwise.
         """
 
         lex_dict = self.lexems[self.get_pos(lex)]
@@ -130,8 +123,7 @@ class Table:
         """Gets the dict of a specified lexeme.
 
          Returns:
-            dict or None: dict dictionary of lexeme lex, None if lex is
-             not in the symbol table.
+            dict or None: dict dictionary of lexeme lex if exists, None otherwise.
         """
         for entry in self.lexems:
             if entry["LEXEMA"] == lex:
@@ -145,8 +137,7 @@ class Table:
             pos_lex (int): The position into the table
 
         Returns:
-            dict or None: dict attributes of a lexeme located into the
-             given position, None if index is out of bounds.
+            dict or None: dict lexeme located into pos_lex, None otherwise.
         """
 
         if pos_lex >= len(self.lexems):
@@ -156,6 +147,7 @@ class Table:
 
     def write(self, path):
         """Prints the content of the table into a file pointed by path.
+
             Prints the using the format provided in
             FormatoImpresiónTablaDeSímbolos.txt
         Args:
