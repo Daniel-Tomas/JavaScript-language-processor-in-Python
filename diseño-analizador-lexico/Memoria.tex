@@ -91,7 +91,7 @@ G: if contador>64\\
   \quad leer\\
 H: string = l, leer\\
 I: string = string + l/D/\_ , leer\\
-J: if palabrasReservadas.contains_lex(string)\\
+J: if palabrasReservadas.contains(string)\\
        \qquad if string == "number"\\
       \qquad \quad      genToken(NUMBER,-)\\
        \qquad elif string == "string"\\
@@ -229,12 +229,16 @@ CONTENIDO DE LA TABLA \# 0 :\\
 
 *	LEXEMA : 'texto'\\
 ---------------- ----------------\\
+
 *	LEXEMA : 'print'\\
 ---------------- ----------------\\
+
 *	LEXEMA : 'msg'\\
 ---------------- ----------------\\
+
 *	LEXEMA : 'pideTexto'\\
 ---------------- ----------------\\
+
 *	LEXEMA : 'textoAux'\\
 ---------------- ----------------\\
 \end{flushleft}
@@ -312,10 +316,13 @@ CONTENIDO DE LA TABLA \# 0 :\\
 
 *	LEXEMA : 'texto'\\
 ---------------- ----------------\\
+
 *	LEXEMA : 'print'\\
 ---------------- ----------------\\
+
 *	LEXEMA : 'msg'\\
 ---------------- ----------------\\
+
 *	LEXEMA : 'pideTexto'\\
 ---------------- ----------------\\
 \end{flushleft}
@@ -411,14 +418,19 @@ CONTENIDO DE LA TABLA \# 0 :\\
 
 *	LEXEMA : 'a'\\
 ---------------- ----------------\\
+
 *	LEXEMA : 'b'\\
 ---------------- ----------------\\
+
 *	LEXEMA : 'int'\\
 ---------------- ----------------\\
+
 *	LEXEMA : 'operacion'\\
 ---------------- ----------------\\
+
 *	LEXEMA : 'num1'\\
 ---------------- ----------------\\
+
 *	LEXEMA : 'num2'\\
 ---------------- ----------------\\
 \end{flushleft}
