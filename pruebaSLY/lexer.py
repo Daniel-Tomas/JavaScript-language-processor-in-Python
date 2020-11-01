@@ -275,7 +275,7 @@ class JSLexer(Lexer):
 
 if __name__ == '__main__':
 
-    f = open('prueba.txt', 'r')
+    f = open('Prueba.txt', 'r')
     data = f.read()
     tables = SymTable()
     id0 = tables.new_table()
