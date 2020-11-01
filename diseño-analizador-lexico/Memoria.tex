@@ -13,10 +13,9 @@
 
 \maketitle
 En este documento se realizará la memoria del analizador léxico y la tabla de símbolos correspondiente a la primera entrega de la practica de PDL.
-\clearpage%para saltar a otra página
-
-
 %dividimos en secciones
+\tableofcontents
+\clearpage
 \section {Tokens}
 \begin{flushleft}
 \begin{itemize}
@@ -70,7 +69,7 @@ N $\rightarrow$ \&\\
 Siendo $d$ un dígito, $l$ una letra, $c$ cualquier otro carácter y $del$ un delimitador.
 \section{Autómata Finito Determinista}
 \begin{center}
-\includegraphics[scale=0.26]{automata.jpg}
+\includegraphics[scale=0.27]{automata.jpg}
 \end{center}
 
 
@@ -137,9 +136,18 @@ Error léxico (siempre se lanza cuando el Analizador Léxico encuentra un error)
 \item Carácter ilegal. 
 \end{enumerate}
 Todo error va acompañado de la $linea$ y $columna$ en el que se ha encontrado dicho error.
+\section{Formato inicial de la Tabla de Símbolos}
+La tabla de símbolos sigue el formato presentado en la página web de la asignatura:
+\begin{center}
+\begin{verbatim}
+TS Global #0:
+* Lexema: 'variable1'
+* Lexema: 'funcion1'
+\end{verbatim}
+\end{center}
+Por el momento la tabla solo dispone de la capacidad de guardar los $tokens$ y asignarles un número para su identificación. Los otros módulos del procesador serán los encargados de terminar la tabla añadiendo el resto de campos\\ necesarios. \\
+Las tablas generadas a partir del ámbito de las funciones tendrán el mismo formato presentado arriba pero con un número asignado correspondiente a su posición en la tabla de símbolos global.
 \clearpage
-
-
 \section{Casos de Prueba}
 %En este caso hay subsecciones
 
@@ -215,9 +223,22 @@ Los $tokens$ generados son los siguientes:\\
 <CEPAREN , >\\
 <PUNTOYCOMA , >\\
 <EOF , >\\
+La tabla de símbolos generada es la siguiente:\\
+\quad\\
+CONTENIDO DE LA TABLA \# 0 :\\
+
+*	LEXEMA : 'texto'\\
+---------------- ----------------\\
+*	LEXEMA : 'print'\\
+---------------- ----------------\\
+*	LEXEMA : 'msg'\\
+---------------- ----------------\\
+*	LEXEMA : 'pideTexto'\\
+---------------- ----------------\\
+*	LEXEMA : 'textoAux'\\
+---------------- ----------------\\
 \end{flushleft}
 \clearpage
-
 \subsubsection{Caso de Prueba Correcto Nº2}
 \begin{center} 
 El programa empleado es el siguiente:
@@ -284,12 +305,125 @@ Los $tokens$ generados son los siguientes:\\
 <CEPAREN , >\\
 <PUNTOYCOMA , >\\
 <EOF , >\\
+\quad\\
+La tabla de símbolos generada es la siguiente:\\
+\quad\\
+CONTENIDO DE LA TABLA \# 0 :\\
+
+*	LEXEMA : 'texto'\\
+---------------- ----------------\\
+*	LEXEMA : 'print'\\
+---------------- ----------------\\
+*	LEXEMA : 'msg'\\
+---------------- ----------------\\
+*	LEXEMA : 'pideTexto'\\
+---------------- ----------------\\
 \end{flushleft}
+\subsubsection{Caso de Prueba Correcto Nº3}
+\begin{center} 
+El programa empleado es el siguiente:
+\end{center}
+\begin{flushleft}
+let number a;\\
+let number b;\\
+let number int;\\
+alert (''Introduce el primer operando");\\
+input (a);\\
+alert (''Introduce el segundo operando");\\
+input (b);\\
+function number operacion (number num1, number num2)\{\\
+\qquad	return num1 + num2-77;\\
+\}\\
+int = 0;\\
+alert (operacion (a, b));\\
+\quad\\
+Los $tokens$ generados son los siguientes:\\
+<LET , >\\
+<NUMBER , >\\
+<ID , 0>\\
+<PUNTOYCOMA , >\\
+<LET , >\\
+<NUMBER , >\\
+<ID , 1>\\
+<PUNTOYCOMA , >\\
+<LET , >\\
+<NUMBER , >\\
+<ID , 2>\\
+<PUNTOYCOMA , >\\
+<ALERT , >\\
+<ABPAREN , >\\
+<CADENA , "Introduce el primer operando">\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<INPUT , >\\
+<ABPAREN , >\\
+<ID , 0>\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<ALERT , >\\
+<ABPAREN , >\\
+<CADENA , "Introduce el segundo operando">\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<INPUT , >\\
+<ABPAREN , >\\
+<ID , 1>\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<FUNCTION , >\\
+<NUMBER , >\\
+<ID , 3>\\
+<ABPAREN , >\\
+<NUMBER , >\\
+<ID , 4>\\
+<COMA , >\\
+<NUMBER , >\\
+<ID , 5>\\
+<CEPAREN , >\\
+<ABLLAVE , >\\
+<RETURN , >\\
+<ID , 4>\\
+<OPARIT , 0>\\
+<ID , 5>\\
+<OPARIT , 1>\\
+<CTEENTERA , 77>\\
+<PUNTOYCOMA , >\\
+<CELLAVE , >\\
+<ID , 2>\\
+<OPASIG , >\\
+<CTEENTERA , 0>\\
+<PUNTOYCOMA , >\\
+<ALERT , >\\
+<ABPAREN , >\\
+<ID , 3>\\
+<ABPAREN , >\\
+<ID , 0>\\
+<COMA , >\\
+<ID , 1>\\
+<CEPAREN , >\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<EOF , >\\
+\quad\\
+La tabla de símbolos generada es la siguiente:\\
+\quad\\
+CONTENIDO DE LA TABLA \# 0 :\\
 
-
+*	LEXEMA : 'a'\\
+---------------- ----------------\\
+*	LEXEMA : 'b'\\
+---------------- ----------------\\
+*	LEXEMA : 'int'\\
+---------------- ----------------\\
+*	LEXEMA : 'operacion'\\
+---------------- ----------------\\
+*	LEXEMA : 'num1'\\
+---------------- ----------------\\
+*	LEXEMA : 'num2'\\
+---------------- ----------------\\
+\end{flushleft}
+\clearpage
 \subsection{Casos de Prueba Fallidos}
-
-
 \subsubsection{Caso de Prueba Fallido Nº1}
 \begin{center} 
 El programa empleado es el siguiente:
@@ -300,6 +434,7 @@ b = 5;\\
 print("hola);\\
 \quad\\
 Errores generados:\\
+\quad\\
 Error lexico: \\
 	\qquad Illegal character ' '' ' en la linea 3 y columna 7
 \end{flushleft}
@@ -314,10 +449,10 @@ if((a==2) \& (b==1))\\
 alert("No se que poner")\\
 \quad\\
 Errores generados:\\
+\quad\\
 Error léxico: \\
 \qquad Illegal character '\&' en la linea 2 y columna 11
 \end{flushleft}
-\clearpage
 
 \subsubsection{Caso de Prueba Fallido Nº3}
 \begin{center} 
@@ -328,6 +463,7 @@ alert("Vamos a crear un número muy grande");\\
 let number x=2341234134;\\
 \quad\\
 Errores generados:\\
+\quad\\
 Error léxico: \\
 	\qquad Número fuera de rango: ''2341234134'' en la linea 2 y columna 14
 	\end{flushleft}
