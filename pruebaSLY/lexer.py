@@ -162,7 +162,8 @@ class JSLexer(Lexer):
         return t
 
     def CTELOGICA(self, t):
-        """Modifies the argument token changing its str value to an integer value.
+        """Modifies the argument token changing its str value
+            to an integer value.
 
         The token value is set 0 if "false" is found or 1 if "true"
 
@@ -185,7 +186,8 @@ class JSLexer(Lexer):
         return t
 
     def OPARIT(self, t):
-        """Modifies the argument token changing it to a integer value.
+        """Modifies the argument token changing its str value
+            to an integer value.
 
         The token value is set 0 if "+" is found or 1 if "-"
 
@@ -206,7 +208,8 @@ class JSLexer(Lexer):
     def new_line(self, t):
         """Increases the line number.
 
-        Increases the line number where the lexer is working.
+        Increases the line number where the lexer is working to provide a
+         correct information when an error is found.
 
         Args:
             t(Token): The token which contains_lex a comment or a newline.
@@ -232,8 +235,10 @@ class JSLexer(Lexer):
         Prints a description of the error and provides the number of the
          line and the column where it has been found.
         **Particular errors**:
-            1. Value of a token which type is "CADENA" has a length greater than 64
-            2. Value of a token which type is "CTE_ENTERA" is bigger than 32767
+            1. Value of a token which type is "CADENA" has a length
+             greater than 64
+            2. Value of a token which type is "CTE_ENTERA" is bigger
+             than 32767
 
         Args:
             t(Token): The only parameter.
@@ -252,7 +257,8 @@ class JSLexer(Lexer):
     def get_token(self):
         """Generator that yields tokens of the data text one by one.
 
-        Finally, gives a different token which represents the end of file.
+        Finally, gives a different token which represents the end of
+        file.
 
         Yields:
             Token: The next token until EOF.

@@ -164,9 +164,9 @@ class Table:
         to_write += '\n'
         for dict_ in self.lexems:
             for i, keys in enumerate(dict_.keys()):
-                if (i == 0):
+                if i == 0:
                     to_write += f'*\t{keys} : \'{dict_[keys]}\''
-                elif (i == 1):
+                elif i == 1:
                     to_write += f'\tATRIBUTOS :\n'
                     to_write += f'\t+ {keys} : \'{dict_[keys]}\''
                 else:
@@ -175,6 +175,6 @@ class Table:
             to_write += f'---------------- ----------------\n'
         to_write += '\n\n\n'
 
-        with open(path, 'a') as f:
+        with open(path, 'w') as f:
             f.write(to_write)
         return True

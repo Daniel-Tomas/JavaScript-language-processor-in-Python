@@ -5,6 +5,17 @@
 \usepackage[T1]{fontenc}    % Para usar fuentes con letras acentuadas, etc.
 \usepackage[spanish]{babel} % Definimos el idioma principal
 \usepackage{graphicx} %Para las imagenes
+\usepackage{vmargin}
+
+\setpapersize{A4}
+\setmargins{2.5cm}       % margen izquierdo
+{1cm}                        % margen superior
+{16.5cm}                      % anchura del texto
+{23.42cm}                    % altura del texto
+{10pt}                           % altura de los encabezados
+{2cm}                           % espacio entre el texto y los encabezados
+{0pt}                             % altura del pie de página
+{2cm}                           % espacio entre el texto y el pie de página
 
 \title{Analizador Léxico y Tabla de Símbolos}
 \author{Aarón Cabero Blanco \\ Daniel Tomás Sanchez \\ Alejandro Cuadrón Lafuente}
@@ -69,10 +80,10 @@ N $\rightarrow$ \&\\
 Siendo $d$ un dígito, $l$ una letra, $c$ cualquier otro carácter y $del$ un delimitador.
 \section{Autómata Finito Determinista}
 \begin{center}
-\includegraphics[scale=0.27]{automata.jpg}
+\includegraphics[scale=0.33]{automata.jpg}
 \end{center}
 
-
+\clearpage
 \section{Acciones Semánticas}
 \begin{flushleft}
 A: leer\\
@@ -91,7 +102,7 @@ G: if contador>64\\
   \quad leer\\
 H: string = l, leer\\
 I: string = string + l/D/\_ , leer\\
-J: if palabrasReservadas.contains_lex(string)\\
+J: if palabrasReservadas.contains(string)\\
        \qquad if string == "number"\\
       \qquad \quad      genToken(NUMBER,-)\\
        \qquad elif string == "string"\\
@@ -147,7 +158,6 @@ TS Global #0:
 \end{center}
 Por el momento la tabla solo dispone de la capacidad de guardar los $tokens$ y asignarles un número para su identificación. Los otros módulos del procesador serán los encargados de terminar la tabla añadiendo el resto de campos\\ necesarios. \\
 Las tablas generadas a partir del ámbito de las funciones tendrán el mismo formato presentado arriba pero con un número asignado correspondiente a su posición en la tabla de símbolos global.
-\clearpage
 \section{Casos de Prueba}
 %En este caso hay subsecciones
 
@@ -229,12 +239,16 @@ CONTENIDO DE LA TABLA \# 0 :\\
 
 *	LEXEMA : 'texto'\\
 ---------------- ----------------\\
+
 *	LEXEMA : 'print'\\
 ---------------- ----------------\\
+
 *	LEXEMA : 'msg'\\
 ---------------- ----------------\\
+
 *	LEXEMA : 'pideTexto'\\
 ---------------- ----------------\\
+
 *	LEXEMA : 'textoAux'\\
 ---------------- ----------------\\
 \end{flushleft}
@@ -312,10 +326,13 @@ CONTENIDO DE LA TABLA \# 0 :\\
 
 *	LEXEMA : 'texto'\\
 ---------------- ----------------\\
+
 *	LEXEMA : 'print'\\
 ---------------- ----------------\\
+
 *	LEXEMA : 'msg'\\
 ---------------- ----------------\\
+
 *	LEXEMA : 'pideTexto'\\
 ---------------- ----------------\\
 \end{flushleft}
@@ -405,20 +422,26 @@ Los $tokens$ generados son los siguientes:\\
 <PUNTOYCOMA , >\\
 <EOF , >\\
 \quad\\
+\clearpage
 La tabla de símbolos generada es la siguiente:\\
 \quad\\
 CONTENIDO DE LA TABLA \# 0 :\\
 
 *	LEXEMA : 'a'\\
 ---------------- ----------------\\
+
 *	LEXEMA : 'b'\\
 ---------------- ----------------\\
+
 *	LEXEMA : 'int'\\
 ---------------- ----------------\\
+
 *	LEXEMA : 'operacion'\\
 ---------------- ----------------\\
+
 *	LEXEMA : 'num1'\\
 ---------------- ----------------\\
+
 *	LEXEMA : 'num2'\\
 ---------------- ----------------\\
 \end{flushleft}
