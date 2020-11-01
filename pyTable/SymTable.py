@@ -147,14 +147,28 @@ class SymTable:
 
     def writeTable(self, path):
         """Prints the content of all the tables into a file pointed by path.
+            Prints the table using this format:
+                CONTENIDO DE LA TABLA # 0 :
 
+                *	LEXEMA : 'a'
+                    ATRIBUTOS :
+                    + DESPLAZAMIENTO : '0'
+                ---------------- ----------------
+                *	LEXEMA : 'a_1'
+                    ATRIBUTOS :
+                    + DESPLAZAMIENTO : '1'
+                ---------------- ----------------
+                *	LEXEMA : 'b'
+                    ATRIBUTOS :
+                    + DESPLAZAMIENTO : '2'
+                ---------------- ----------------
+                Prints one table after another
         Args:
             path (str): the path of the file.
 
         Returns:
             bool: True if the table exists. False otherwise.
         """
-        # TODO: cambiar @Alejandro, ambos comentarios tmb, de ambas funciones
         for tab in self.tables:
             tab.write(path)
         return True

@@ -1,12 +1,14 @@
-&{ ) , number
-number a=2;
-         a = a + 2; a_1/*a &
-    
-         adasdas */
-         "Hola" --
-         /* asd/asd*/ true
-         false true
-         /*"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"*/
-    
-         if (a ==32766 && b == 2)
-         a--;
+let number a;
+let number b;
+let number int;
+alert ("Introduce el primer operando");
+input (a);
+alert ("Introduce el segundo operando");
+input (b);
+function number operacion (number num1, number num2)
+{
+	return num1 + num2-77;
+}
+
+int = 0;
+alert (operacion (a, b));

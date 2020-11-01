@@ -52,7 +52,7 @@ class Table:
         """
 
         for index, dict_ in enumerate(self.lexems):
-            if dict_["lex"] == lex:
+            if dict_["LEXEMA"] == lex:
                 return index
 
         return None
@@ -67,10 +67,10 @@ class Table:
             int or None: int pos in table if the lexeme has been added, None if lex is already on the table.
         """
         for element in self.lexems:
-            if element["lex"] == lex:
+            if element["LEXEMA"] == lex:
                 return None
 
-        self.lexems.append({"lex": lex})
+        self.lexems.append({"LEXEMA": lex})
         return len(self.lexems) - 1
 
     def removeLexAt(self, posLex):
@@ -127,7 +127,7 @@ class Table:
             dict or None: dict dictionary of lexeme lex, None if lex is not in the symbol table.
         """
         for e in self.lexems:
-            if e["lex"] == lex:
+            if e["LEXEMA"] == lex:
                 return e
         return None
 
@@ -148,7 +148,21 @@ class Table:
 
     def write(self, path):
         """Prints the content of the table into a file pointed by path.
+            Prints the table using this format:
+                CONTENIDO DE LA TABLA # 0 :
 
+                *	LEXEMA : 'a'
+                    ATRIBUTOS :
+                    + DESPLAZAMIENTO : '0'
+                ---------------- ----------------
+                *	LEXEMA : 'a_1'
+                    ATRIBUTOS :
+                    + DESPLAZAMIENTO : '1'
+                ---------------- ----------------
+                *	LEXEMA : 'b'
+                    ATRIBUTOS :
+                    + DESPLAZAMIENTO : '2'
+                ---------------- ----------------
         Args:
             path (str): the path of the file.
 
@@ -159,13 +173,19 @@ class Table:
         if not self.exist():
             return False
 
-        to_write = f'--------------------| Tabla {str(self.id_)} |--------------------\n'
-        to_write += '----------------------------------------------------\n'
+        to_write = f'CONTENIDO DE LA TABLA # {str(self.id_)} :\n'
+        to_write += '\n'
         for dict_ in self.lexems:
-            to_write += f'\t{str(dict_)}'
-            if self.lexems[dict_] != '':
-                to_write += f' ({self.lexems[dict_]})'
-            to_write += '\n'
+            for i, keys in enumerate(dict_.keys()):
+                if (i == 0):
+                    to_write += f'*\t{keys} : \'{dict_[keys]}\''
+                elif (i == 1):
+                    to_write += f'\tATRIBUTOS :\n'
+                    to_write += f'\t+ {keys} : \'{dict_[keys]}\''
+                else:
+                    to_write += f'\t+ {keys} : \'{dict_[keys]}\''
+                to_write += '\n'
+            to_write += f'---------------- ----------------\n'
         to_write += '\n\n\n'
 
         with open(path, 'a') as f:

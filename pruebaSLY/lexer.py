@@ -292,3 +292,4 @@ if __name__ == '__main__':
 
     for tok in lexer.get_token():
         print(f'<{tok.type} , {tok.value}>')
+    tables.writeTable("Salida.txt")
