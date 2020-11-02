@@ -1,6 +1,6 @@
 from sly import Lexer
 from sly.lex import Token
-from pyTable.SymTable import SymTable
+from src.tabla_simbolos.sym_table import SymTable
 import sys
 
 
@@ -244,7 +244,7 @@ class JSLexer(Lexer):
             t(Token): The only parameter.
         """
 
-        res = 'Error lexico: \n\t'
+        res = 'Error analizador_lexico: \n\t'
         if type_error == "CADENA":
             res += f'Cadena demasiado larga: "{t.value}", con logitud mayor que 64: {len(t.value)},'
         elif type_error == "CTEENTERA":

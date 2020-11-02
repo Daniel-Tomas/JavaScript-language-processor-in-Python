@@ -1,5 +1,5 @@
 import unittest
-from pruebaSLY.lexer import JSLexer
+from src.analizador_lexico.js_lexer import JSLexer
 
 
 class MyTestCase(unittest.TestCase):
@@ -67,7 +67,7 @@ class MyTestCase(unittest.TestCase):
         for tok in lexer.tokenize('n0mbrEVariab_e'):
             self.assertEqual("ID", tok.type)
             self.assertEqual("n0mbrEVariab_e", tok.value)
-            # Debe ser un puntero a la tabla de símbolos
+            # Debe ser un puntero a la tabla_simbolos de símbolos
 
     def test_string(self):
         lexer = JSLexer()
