@@ -273,7 +273,7 @@ class JSLexer(Lexer):
 
 if __name__ == '__main__':
 
-    f = open('prueba.txt', 'r')
+    f = open('Input.txt', 'r')
     data = f.read()
     tables = SymTable()
     id0 = tables.new_table()
@@ -283,4 +283,4 @@ if __name__ == '__main__':
 
     for tok in lexer.get_token():
         print(f'<{tok.type} , {tok.value}>')
-    tables.write_table("Salida.txt")
+    tables.write_table("TS-Output.txt")
