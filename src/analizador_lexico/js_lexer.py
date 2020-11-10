@@ -43,29 +43,18 @@ class JSLexer(Lexer):
     COMA = r','
     PUNTOYCOMA = r';'
 
-    NUMBER = r'number'
-    STRING = r'string'
-    BOOLEAN = r'boolean'
-    LET = r'let'
-    ALERT = r'alert'
-    INPUT = r'input'
-    FUNCTION = r'function'
-    RETURN = r'return'
-    IF = r'if'
-    FOR = r'for'
-
     ID = r'[a-zA-Z][a-zA-Z0-9_]*'
 
-    # ID['number'] = NUMBER
-    # ID['string'] = STRING
-    # ID['boolean'] = BOOLEAN
-    # ID['let'] = LET
-    # ID['alert'] = ALERT
-    # ID['input'] = INPUT
-    # ID['function'] = FUNCTION
-    # ID['return'] = RETURN
-    # ID['if'] = IF
-    # ID['for'] = FOR
+    ID['number'] = NUMBER
+    ID['string'] = STRING
+    ID['boolean'] = BOOLEAN
+    ID['let'] = LET
+    ID['alert'] = ALERT
+    ID['input'] = INPUT
+    ID['function'] = FUNCTION
+    ID['return'] = RETURN
+    ID['if'] = IF
+    ID['for'] = FOR
 
     def empty(self, t):
         t.value = ''
