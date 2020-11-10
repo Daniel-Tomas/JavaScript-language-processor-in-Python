@@ -1,6 +1,6 @@
 from sly import Lexer
 from sly.lex import Token
-from pyTable.SymTable import SymTable
+from src.tabla_simbolos.sym_table import SymTable
 import sys
 
 
@@ -45,7 +45,7 @@ class JSLexer(Lexer):
 
     NUMBER = r'number'
     STRING = r'string'
-    #BOOLEAN = r' boolean '
+    BOOLEAN = r'boolean'
     LET = r'let'
     ALERT = r'alert'
     INPUT = r'input'
@@ -56,16 +56,16 @@ class JSLexer(Lexer):
 
     ID = r'[a-zA-Z][a-zA-Z0-9_]*'
 
-    ID['number'] = NUMBER
-    ID['string'] = STRING
-    ID['boolean'] = BOOLEAN
-    ID['let'] = LET
-    ID['alert'] = ALERT
-    ID['input'] = INPUT
-    ID['function'] = FUNCTION
-    ID['return'] = RETURN
-    ID['if'] = IF
-    ID['for'] = FOR
+    # ID['number'] = NUMBER
+    # ID['string'] = STRING
+    # ID['boolean'] = BOOLEAN
+    # ID['let'] = LET
+    # ID['alert'] = ALERT
+    # ID['input'] = INPUT
+    # ID['function'] = FUNCTION
+    # ID['return'] = RETURN
+    # ID['if'] = IF
+    # ID['for'] = FOR
 
     def empty(self, t):
         t.value = ''
@@ -244,7 +244,7 @@ class JSLexer(Lexer):
             t(Token): The only parameter.
         """
 
-        res = 'Error lexico: \n\t'
+        res = 'Error analizador_lexico: \n\t'
         if type_error == "CADENA":
             res += f'Cadena demasiado larga: "{t.value}", con logitud mayor que 64: {len(t.value)},'
         elif type_error == "CTEENTERA":
@@ -273,7 +273,7 @@ class JSLexer(Lexer):
 
 if __name__ == '__main__':
 
-    f = open('Prueba.txt', 'r')
+    f = open('Input.txt', 'r')
     data = f.read()
     tables = SymTable()
     id0 = tables.new_table()
@@ -283,4 +283,4 @@ if __name__ == '__main__':
 
     for tok in lexer.get_token():
         print(f'<{tok.type} , {tok.value}>')
-    tables.write_table("Salida.txt")
+    tables.write_table("TS-Output.txt")
