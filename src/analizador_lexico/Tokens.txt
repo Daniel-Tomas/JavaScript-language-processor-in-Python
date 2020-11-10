@@ -1,9 +1,9 @@
 <LET , >
-<BOOLEAN , boolean>
+<BOOLEAN , >
 <ID , 0>
 <PUNTOYCOMA , >
 <FUNCTION , >
-<BOOLEAN , boolean>
+<BOOLEAN , >
 <ID , 1>
 <ABPAREN , >
 <NUMBER , >
@@ -93,7 +93,7 @@
 <PUNTOYCOMA , >
 <CELLAVE , >
 <FUNCTION , >
-<BOOLEAN , boolean>
+<BOOLEAN , >
 <ID , 7>
 <ABPAREN , >
 <NUMBER , >

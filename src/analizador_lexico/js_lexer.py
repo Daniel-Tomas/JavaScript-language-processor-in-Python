@@ -90,33 +90,43 @@ class JSLexer(Lexer):
     def PUNTOYCOMA(self, t):
         return self.empty(t)
 
+    @_(r'[a-zA-Z][a-zA-Z0-9_]*')
     def NUMBER(self, t):
         return self.empty(t)
 
+    @_(r'[a-zA-Z][a-zA-Z0-9_]*')
     def STRING(self, t):
         return self.empty(t)
 
+    @_(r'[a-zA-Z][a-zA-Z0-9_]*')
     def BOOLEAN(self, t):
         return self.empty(t)
 
+    @_(r'[a-zA-Z][a-zA-Z0-9_]*')
     def LET(self, t):
         return self.empty(t)
 
+    @_(r'[a-zA-Z][a-zA-Z0-9_]*')
     def ALERT(self, t):
         return self.empty(t)
 
+    @_(r'[a-zA-Z][a-zA-Z0-9_]*')
     def INPUT(self, t):
         return self.empty(t)
 
+    @_(r'[a-zA-Z][a-zA-Z0-9_]*')
     def FUNCTION(self, t):
         return self.empty(t)
 
+    @_(r'[a-zA-Z][a-zA-Z0-9_]*')
     def RETURN(self, t):
         return self.empty(t)
 
+    @_(r'[a-zA-Z][a-zA-Z0-9_]*')
     def IF(self, t):
         return self.empty(t)
 
+    @_(r'[a-zA-Z][a-zA-Z0-9_]*')
     def FOR(self, t):
         return self.empty(t)
 
