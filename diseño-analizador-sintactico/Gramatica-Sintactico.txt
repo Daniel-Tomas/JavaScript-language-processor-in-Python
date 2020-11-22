@@ -26,8 +26,9 @@ E -> E && R
 E -> R
 R -> R == U 
 R -> U
-U -> U + V
-U -> U - V
+U -> U O V
+O -> +
+O -> -
 U -> V
 V -> -- id
 V -> id

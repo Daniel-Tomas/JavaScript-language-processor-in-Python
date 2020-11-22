@@ -1,0 +1,1486 @@
+Grammar:
+
+Rule 0     S' -> Y
+Rule 1     Y -> P
+Rule 2     P -> <empty>
+Rule 3     P -> F P
+Rule 4     P -> B P
+Rule 5     B -> FOR ABPAREN D PUNTOYCOMA E PUNTOYCOMA Z CEPAREN ABLLAVE C CELLAVE
+Rule 6     B -> S
+Rule 7     B -> LET T ID PUNTOYCOMA
+Rule 8     B -> IF ABPAREN E CEPAREN S
+Rule 9     S -> RETURN X PUNTOYCOMA
+Rule 10    S -> INPUT ABPAREN ID CEPAREN PUNTOYCOMA
+Rule 11    S -> ALERT ABPAREN E CEPAREN PUNTOYCOMA
+Rule 12    S -> ID ABPAREN L CEPAREN PUNTOYCOMA
+Rule 13    S -> ID OPASIG E PUNTOYCOMA
+Rule 14    T -> STRING
+Rule 15    T -> BOOLEAN
+Rule 16    T -> NUMBER
+Rule 17    F -> F1 F2 F3
+Rule 18    F1 -> FUNCTION H ID
+Rule 19    F2 -> ABPAREN A CEPAREN
+Rule 20    F3 -> ABLLAVE C CELLAVE
+Rule 21    E -> R
+Rule 22    E -> E OPLOG R
+Rule 23    R -> U
+Rule 24    R -> R OPREL U
+Rule 25    U -> V
+Rule 26    U -> U O V
+Rule 27    O -> OPARIT
+Rule 28    V -> CTELOGICA
+Rule 29    V -> CADENA
+Rule 30    V -> CTEENTERA
+Rule 31    V -> ID ABPAREN L CEPAREN
+Rule 32    V -> ABPAREN E CEPAREN
+Rule 33    V -> ID
+Rule 34    V -> OPESP ID
+Rule 35    X -> <empty>
+Rule 36    X -> E
+Rule 37    L -> <empty>
+Rule 38    L -> E Q
+Rule 39    Q -> <empty>
+Rule 40    Q -> COMA E Q
+Rule 41    D -> <empty>
+Rule 42    D -> ID OPASIG E
+Rule 43    Z -> <empty>
+Rule 44    Z -> OPESP ID
+Rule 45    Z -> ID OPASIG E
+Rule 46    H -> <empty>
+Rule 47    H -> T
+Rule 48    A -> <empty>
+Rule 49    A -> T ID K
+Rule 50    K -> <empty>
+Rule 51    K -> COMA T ID K
+Rule 52    C -> <empty>
+Rule 53    C -> B C
+
+Terminals, with rules where they appear:
+
+ABLLAVE              : 5 20
+ABPAREN              : 5 8 10 11 12 19 31 32
+ALERT                : 11
+BOOLEAN              : 15
+CADENA               : 29
+CELLAVE              : 5 20
+CEPAREN              : 5 8 10 11 12 19 31 32
+COMA                 : 40 51
+CTEENTERA            : 30
+CTELOGICA            : 28
+FOR                  : 5
+FUNCTION             : 18
+ID                   : 7 10 12 13 18 31 33 34 42 44 45 49 51
+IF                   : 8
+INPUT                : 10
+LET                  : 7
+NUMBER               : 16
+OPARIT               : 27
+OPASIG               : 13 42 45
+OPESP                : 34 44
+OPLOG                : 22
+OPREL                : 24
+PUNTOYCOMA           : 5 5 7 9 10 11 12 13
+RETURN               : 9
+STRING               : 14
+error                : 
+
+Nonterminals, with rules where they appear:
+
+A                    : 19
+B                    : 4 53
+C                    : 5 20 53
+D                    : 5
+E                    : 5 8 11 13 22 32 36 38 40 42 45
+F                    : 3
+F1                   : 17
+F2                   : 17
+F3                   : 17
+H                    : 18
+K                    : 49 51
+L                    : 12 31
+O                    : 26
+P                    : 1 3 4
+Q                    : 38 40
+R                    : 21 22 24
+S                    : 6 8
+T                    : 7 47 49 51
+U                    : 23 24 26
+V                    : 25 26
+X                    : 9
+Y                    : 0
+Z                    : 5
+
+
+state 0
+
+    (0) S' -> . Y
+    (1) Y -> . P
+    (2) P -> .
+    (3) P -> . F P
+    (4) P -> . B P
+    (17) F -> . F1 F2 F3
+    (5) B -> . FOR ABPAREN D PUNTOYCOMA E PUNTOYCOMA Z CEPAREN ABLLAVE C CELLAVE
+    (6) B -> . S
+    (7) B -> . LET T ID PUNTOYCOMA
+    (8) B -> . IF ABPAREN E CEPAREN S
+    (18) F1 -> . FUNCTION H ID
+    (9) S -> . RETURN X PUNTOYCOMA
+    (10) S -> . INPUT ABPAREN ID CEPAREN PUNTOYCOMA
+    (11) S -> . ALERT ABPAREN E CEPAREN PUNTOYCOMA
+    (12) S -> . ID ABPAREN L CEPAREN PUNTOYCOMA
+    (13) S -> . ID OPASIG E PUNTOYCOMA
+    $end            reduce using rule 2 (P -> .)
+    FOR             shift and go to state 6
+    LET             shift and go to state 8
+    IF              shift and go to state 10
+    FUNCTION        shift and go to state 11
+    RETURN          shift and go to state 12
+    INPUT           shift and go to state 13
+    ALERT           shift and go to state 14
+    ID              shift and go to state 9
+
+    Y                              shift and go to state 1
+    P                              shift and go to state 2
+    F                              shift and go to state 3
+    B                              shift and go to state 4
+    F1                             shift and go to state 5
+    S                              shift and go to state 7
+
+state 1
+
+    (0) S' -> Y .
+
+
+state 2
+
+    (1) Y -> P .
+    $end            reduce using rule 1 (Y -> P .)
+
+
+state 3
+
+    (3) P -> F . P
+    (2) P -> .
+    (3) P -> . F P
+    (4) P -> . B P
+    (17) F -> . F1 F2 F3
+    (5) B -> . FOR ABPAREN D PUNTOYCOMA E PUNTOYCOMA Z CEPAREN ABLLAVE C CELLAVE
+    (6) B -> . S
+    (7) B -> . LET T ID PUNTOYCOMA
+    (8) B -> . IF ABPAREN E CEPAREN S
+    (18) F1 -> . FUNCTION H ID
+    (9) S -> . RETURN X PUNTOYCOMA
+    (10) S -> . INPUT ABPAREN ID CEPAREN PUNTOYCOMA
+    (11) S -> . ALERT ABPAREN E CEPAREN PUNTOYCOMA
+    (12) S -> . ID ABPAREN L CEPAREN PUNTOYCOMA
+    (13) S -> . ID OPASIG E PUNTOYCOMA
+    $end            reduce using rule 2 (P -> .)
+    FOR             shift and go to state 6
+    LET             shift and go to state 8
+    IF              shift and go to state 10
+    FUNCTION        shift and go to state 11
+    RETURN          shift and go to state 12
+    INPUT           shift and go to state 13
+    ALERT           shift and go to state 14
+    ID              shift and go to state 9
+
+    F                              shift and go to state 3
+    P                              shift and go to state 15
+    B                              shift and go to state 4
+    F1                             shift and go to state 5
+    S                              shift and go to state 7
+
+state 4
+
+    (4) P -> B . P
+    (2) P -> .
+    (3) P -> . F P
+    (4) P -> . B P
+    (17) F -> . F1 F2 F3
+    (5) B -> . FOR ABPAREN D PUNTOYCOMA E PUNTOYCOMA Z CEPAREN ABLLAVE C CELLAVE
+    (6) B -> . S
+    (7) B -> . LET T ID PUNTOYCOMA
+    (8) B -> . IF ABPAREN E CEPAREN S
+    (18) F1 -> . FUNCTION H ID
+    (9) S -> . RETURN X PUNTOYCOMA
+    (10) S -> . INPUT ABPAREN ID CEPAREN PUNTOYCOMA
+    (11) S -> . ALERT ABPAREN E CEPAREN PUNTOYCOMA
+    (12) S -> . ID ABPAREN L CEPAREN PUNTOYCOMA
+    (13) S -> . ID OPASIG E PUNTOYCOMA
+    $end            reduce using rule 2 (P -> .)
+    FOR             shift and go to state 6
+    LET             shift and go to state 8
+    IF              shift and go to state 10
+    FUNCTION        shift and go to state 11
+    RETURN          shift and go to state 12
+    INPUT           shift and go to state 13
+    ALERT           shift and go to state 14
+    ID              shift and go to state 9
+
+    B                              shift and go to state 4
+    P                              shift and go to state 16
+    F                              shift and go to state 3
+    F1                             shift and go to state 5
+    S                              shift and go to state 7
+
+state 5
+
+    (17) F -> F1 . F2 F3
+    (19) F2 -> . ABPAREN A CEPAREN
+    ABPAREN         shift and go to state 18
+
+    F2                             shift and go to state 17
+
+state 6
+
+    (5) B -> FOR . ABPAREN D PUNTOYCOMA E PUNTOYCOMA Z CEPAREN ABLLAVE C CELLAVE
+    ABPAREN         shift and go to state 19
+
+
+state 7
+
+    (6) B -> S .
+    FOR             reduce using rule 6 (B -> S .)
+    LET             reduce using rule 6 (B -> S .)
+    IF              reduce using rule 6 (B -> S .)
+    FUNCTION        reduce using rule 6 (B -> S .)
+    RETURN          reduce using rule 6 (B -> S .)
+    INPUT           reduce using rule 6 (B -> S .)
+    ALERT           reduce using rule 6 (B -> S .)
+    ID              reduce using rule 6 (B -> S .)
+    $end            reduce using rule 6 (B -> S .)
+    CELLAVE         reduce using rule 6 (B -> S .)
+
+
+state 8
+
+    (7) B -> LET . T ID PUNTOYCOMA
+    (14) T -> . STRING
+    (15) T -> . BOOLEAN
+    (16) T -> . NUMBER
+    STRING          shift and go to state 21
+    BOOLEAN         shift and go to state 22
+    NUMBER          shift and go to state 23
+
+    T                              shift and go to state 20
+
+state 9
+
+    (12) S -> ID . ABPAREN L CEPAREN PUNTOYCOMA
+    (13) S -> ID . OPASIG E PUNTOYCOMA
+    ABPAREN         shift and go to state 24
+    OPASIG          shift and go to state 25
+
+
+state 10
+
+    (8) B -> IF . ABPAREN E CEPAREN S
+    ABPAREN         shift and go to state 26
+
+
+state 11
+
+    (18) F1 -> FUNCTION . H ID
+    (46) H -> .
+    (47) H -> . T
+    (14) T -> . STRING
+    (15) T -> . BOOLEAN
+    (16) T -> . NUMBER
+    ID              reduce using rule 46 (H -> .)
+    STRING          shift and go to state 21
+    BOOLEAN         shift and go to state 22
+    NUMBER          shift and go to state 23
+
+    H                              shift and go to state 27
+    T                              shift and go to state 28
+
+state 12
+
+    (9) S -> RETURN . X PUNTOYCOMA
+    (35) X -> .
+    (36) X -> . E
+    (21) E -> . R
+    (22) E -> . E OPLOG R
+    (23) R -> . U
+    (24) R -> . R OPREL U
+    (25) U -> . V
+    (26) U -> . U O V
+    (28) V -> . CTELOGICA
+    (29) V -> . CADENA
+    (30) V -> . CTEENTERA
+    (31) V -> . ID ABPAREN L CEPAREN
+    (32) V -> . ABPAREN E CEPAREN
+    (33) V -> . ID
+    (34) V -> . OPESP ID
+    PUNTOYCOMA      reduce using rule 35 (X -> .)
+    CTELOGICA       shift and go to state 34
+    CADENA          shift and go to state 35
+    CTEENTERA       shift and go to state 36
+    ID              shift and go to state 37
+    ABPAREN         shift and go to state 38
+    OPESP           shift and go to state 39
+
+    X                              shift and go to state 29
+    E                              shift and go to state 30
+    R                              shift and go to state 31
+    U                              shift and go to state 32
+    V                              shift and go to state 33
+
+state 13
+
+    (10) S -> INPUT . ABPAREN ID CEPAREN PUNTOYCOMA
+    ABPAREN         shift and go to state 40
+
+
+state 14
+
+    (11) S -> ALERT . ABPAREN E CEPAREN PUNTOYCOMA
+    ABPAREN         shift and go to state 41
+
+
+state 15
+
+    (3) P -> F P .
+    $end            reduce using rule 3 (P -> F P .)
+
+
+state 16
+
+    (4) P -> B P .
+    $end            reduce using rule 4 (P -> B P .)
+
+
+state 17
+
+    (17) F -> F1 F2 . F3
+    (20) F3 -> . ABLLAVE C CELLAVE
+    ABLLAVE         shift and go to state 43
+
+    F3                             shift and go to state 42
+
+state 18
+
+    (19) F2 -> ABPAREN . A CEPAREN
+    (48) A -> .
+    (49) A -> . T ID K
+    (14) T -> . STRING
+    (15) T -> . BOOLEAN
+    (16) T -> . NUMBER
+    CEPAREN         reduce using rule 48 (A -> .)
+    STRING          shift and go to state 21
+    BOOLEAN         shift and go to state 22
+    NUMBER          shift and go to state 23
+
+    A                              shift and go to state 44
+    T                              shift and go to state 45
+
+state 19
+
+    (5) B -> FOR ABPAREN . D PUNTOYCOMA E PUNTOYCOMA Z CEPAREN ABLLAVE C CELLAVE
+    (41) D -> .
+    (42) D -> . ID OPASIG E
+    PUNTOYCOMA      reduce using rule 41 (D -> .)
+    ID              shift and go to state 47
+
+    D                              shift and go to state 46
+
+state 20
+
+    (7) B -> LET T . ID PUNTOYCOMA
+    ID              shift and go to state 48
+
+
+state 21
+
+    (14) T -> STRING .
+    ID              reduce using rule 14 (T -> STRING .)
+
+
+state 22
+
+    (15) T -> BOOLEAN .
+    ID              reduce using rule 15 (T -> BOOLEAN .)
+
+
+state 23
+
+    (16) T -> NUMBER .
+    ID              reduce using rule 16 (T -> NUMBER .)
+
+
+state 24
+
+    (12) S -> ID ABPAREN . L CEPAREN PUNTOYCOMA
+    (37) L -> .
+    (38) L -> . E Q
+    (21) E -> . R
+    (22) E -> . E OPLOG R
+    (23) R -> . U
+    (24) R -> . R OPREL U
+    (25) U -> . V
+    (26) U -> . U O V
+    (28) V -> . CTELOGICA
+    (29) V -> . CADENA
+    (30) V -> . CTEENTERA
+    (31) V -> . ID ABPAREN L CEPAREN
+    (32) V -> . ABPAREN E CEPAREN
+    (33) V -> . ID
+    (34) V -> . OPESP ID
+    CEPAREN         reduce using rule 37 (L -> .)
+    CTELOGICA       shift and go to state 34
+    CADENA          shift and go to state 35
+    CTEENTERA       shift and go to state 36
+    ID              shift and go to state 37
+    ABPAREN         shift and go to state 38
+    OPESP           shift and go to state 39
+
+    L                              shift and go to state 49
+    E                              shift and go to state 50
+    R                              shift and go to state 31
+    U                              shift and go to state 32
+    V                              shift and go to state 33
+
+state 25
+
+    (13) S -> ID OPASIG . E PUNTOYCOMA
+    (21) E -> . R
+    (22) E -> . E OPLOG R
+    (23) R -> . U
+    (24) R -> . R OPREL U
+    (25) U -> . V
+    (26) U -> . U O V
+    (28) V -> . CTELOGICA
+    (29) V -> . CADENA
+    (30) V -> . CTEENTERA
+    (31) V -> . ID ABPAREN L CEPAREN
+    (32) V -> . ABPAREN E CEPAREN
+    (33) V -> . ID
+    (34) V -> . OPESP ID
+    CTELOGICA       shift and go to state 34
+    CADENA          shift and go to state 35
+    CTEENTERA       shift and go to state 36
+    ID              shift and go to state 37
+    ABPAREN         shift and go to state 38
+    OPESP           shift and go to state 39
+
+    E                              shift and go to state 51
+    R                              shift and go to state 31
+    U                              shift and go to state 32
+    V                              shift and go to state 33
+
+state 26
+
+    (8) B -> IF ABPAREN . E CEPAREN S
+    (21) E -> . R
+    (22) E -> . E OPLOG R
+    (23) R -> . U
+    (24) R -> . R OPREL U
+    (25) U -> . V
+    (26) U -> . U O V
+    (28) V -> . CTELOGICA
+    (29) V -> . CADENA
+    (30) V -> . CTEENTERA
+    (31) V -> . ID ABPAREN L CEPAREN
+    (32) V -> . ABPAREN E CEPAREN
+    (33) V -> . ID
+    (34) V -> . OPESP ID
+    CTELOGICA       shift and go to state 34
+    CADENA          shift and go to state 35
+    CTEENTERA       shift and go to state 36
+    ID              shift and go to state 37
+    ABPAREN         shift and go to state 38
+    OPESP           shift and go to state 39
+
+    E                              shift and go to state 52
+    R                              shift and go to state 31
+    U                              shift and go to state 32
+    V                              shift and go to state 33
+
+state 27
+
+    (18) F1 -> FUNCTION H . ID
+    ID              shift and go to state 53
+
+
+state 28
+
+    (47) H -> T .
+    ID              reduce using rule 47 (H -> T .)
+
+
+state 29
+
+    (9) S -> RETURN X . PUNTOYCOMA
+    PUNTOYCOMA      shift and go to state 54
+
+
+state 30
+
+    (36) X -> E .
+    (22) E -> E . OPLOG R
+    PUNTOYCOMA      reduce using rule 36 (X -> E .)
+    OPLOG           shift and go to state 55
+
+
+state 31
+
+    (21) E -> R .
+    (24) R -> R . OPREL U
+    OPLOG           reduce using rule 21 (E -> R .)
+    PUNTOYCOMA      reduce using rule 21 (E -> R .)
+    COMA            reduce using rule 21 (E -> R .)
+    CEPAREN         reduce using rule 21 (E -> R .)
+    OPREL           shift and go to state 56
+
+
+state 32
+
+    (23) R -> U .
+    (26) U -> U . O V
+    (27) O -> . OPARIT
+    OPREL           reduce using rule 23 (R -> U .)
+    OPLOG           reduce using rule 23 (R -> U .)
+    PUNTOYCOMA      reduce using rule 23 (R -> U .)
+    COMA            reduce using rule 23 (R -> U .)
+    CEPAREN         reduce using rule 23 (R -> U .)
+    OPARIT          shift and go to state 58
+
+    O                              shift and go to state 57
+
+state 33
+
+    (25) U -> V .
+    OPARIT          reduce using rule 25 (U -> V .)
+    OPREL           reduce using rule 25 (U -> V .)
+    OPLOG           reduce using rule 25 (U -> V .)
+    PUNTOYCOMA      reduce using rule 25 (U -> V .)
+    COMA            reduce using rule 25 (U -> V .)
+    CEPAREN         reduce using rule 25 (U -> V .)
+
+
+state 34
+
+    (28) V -> CTELOGICA .
+    OPARIT          reduce using rule 28 (V -> CTELOGICA .)
+    OPREL           reduce using rule 28 (V -> CTELOGICA .)
+    OPLOG           reduce using rule 28 (V -> CTELOGICA .)
+    PUNTOYCOMA      reduce using rule 28 (V -> CTELOGICA .)
+    COMA            reduce using rule 28 (V -> CTELOGICA .)
+    CEPAREN         reduce using rule 28 (V -> CTELOGICA .)
+
+
+state 35
+
+    (29) V -> CADENA .
+    OPARIT          reduce using rule 29 (V -> CADENA .)
+    OPREL           reduce using rule 29 (V -> CADENA .)
+    OPLOG           reduce using rule 29 (V -> CADENA .)
+    PUNTOYCOMA      reduce using rule 29 (V -> CADENA .)
+    COMA            reduce using rule 29 (V -> CADENA .)
+    CEPAREN         reduce using rule 29 (V -> CADENA .)
+
+
+state 36
+
+    (30) V -> CTEENTERA .
+    OPARIT          reduce using rule 30 (V -> CTEENTERA .)
+    OPREL           reduce using rule 30 (V -> CTEENTERA .)
+    OPLOG           reduce using rule 30 (V -> CTEENTERA .)
+    PUNTOYCOMA      reduce using rule 30 (V -> CTEENTERA .)
+    COMA            reduce using rule 30 (V -> CTEENTERA .)
+    CEPAREN         reduce using rule 30 (V -> CTEENTERA .)
+
+
+state 37
+
+    (31) V -> ID . ABPAREN L CEPAREN
+    (33) V -> ID .
+    ABPAREN         shift and go to state 59
+    OPARIT          reduce using rule 33 (V -> ID .)
+    OPREL           reduce using rule 33 (V -> ID .)
+    OPLOG           reduce using rule 33 (V -> ID .)
+    PUNTOYCOMA      reduce using rule 33 (V -> ID .)
+    COMA            reduce using rule 33 (V -> ID .)
+    CEPAREN         reduce using rule 33 (V -> ID .)
+
+
+state 38
+
+    (32) V -> ABPAREN . E CEPAREN
+    (21) E -> . R
+    (22) E -> . E OPLOG R
+    (23) R -> . U
+    (24) R -> . R OPREL U
+    (25) U -> . V
+    (26) U -> . U O V
+    (28) V -> . CTELOGICA
+    (29) V -> . CADENA
+    (30) V -> . CTEENTERA
+    (31) V -> . ID ABPAREN L CEPAREN
+    (32) V -> . ABPAREN E CEPAREN
+    (33) V -> . ID
+    (34) V -> . OPESP ID
+    CTELOGICA       shift and go to state 34
+    CADENA          shift and go to state 35
+    CTEENTERA       shift and go to state 36
+    ID              shift and go to state 37
+    ABPAREN         shift and go to state 38
+    OPESP           shift and go to state 39
+
+    E                              shift and go to state 60
+    R                              shift and go to state 31
+    U                              shift and go to state 32
+    V                              shift and go to state 33
+
+state 39
+
+    (34) V -> OPESP . ID
+    ID              shift and go to state 61
+
+
+state 40
+
+    (10) S -> INPUT ABPAREN . ID CEPAREN PUNTOYCOMA
+    ID              shift and go to state 62
+
+
+state 41
+
+    (11) S -> ALERT ABPAREN . E CEPAREN PUNTOYCOMA
+    (21) E -> . R
+    (22) E -> . E OPLOG R
+    (23) R -> . U
+    (24) R -> . R OPREL U
+    (25) U -> . V
+    (26) U -> . U O V
+    (28) V -> . CTELOGICA
+    (29) V -> . CADENA
+    (30) V -> . CTEENTERA
+    (31) V -> . ID ABPAREN L CEPAREN
+    (32) V -> . ABPAREN E CEPAREN
+    (33) V -> . ID
+    (34) V -> . OPESP ID
+    CTELOGICA       shift and go to state 34
+    CADENA          shift and go to state 35
+    CTEENTERA       shift and go to state 36
+    ID              shift and go to state 37
+    ABPAREN         shift and go to state 38
+    OPESP           shift and go to state 39
+
+    E                              shift and go to state 63
+    R                              shift and go to state 31
+    U                              shift and go to state 32
+    V                              shift and go to state 33
+
+state 42
+
+    (17) F -> F1 F2 F3 .
+    FOR             reduce using rule 17 (F -> F1 F2 F3 .)
+    LET             reduce using rule 17 (F -> F1 F2 F3 .)
+    IF              reduce using rule 17 (F -> F1 F2 F3 .)
+    FUNCTION        reduce using rule 17 (F -> F1 F2 F3 .)
+    RETURN          reduce using rule 17 (F -> F1 F2 F3 .)
+    INPUT           reduce using rule 17 (F -> F1 F2 F3 .)
+    ALERT           reduce using rule 17 (F -> F1 F2 F3 .)
+    ID              reduce using rule 17 (F -> F1 F2 F3 .)
+    $end            reduce using rule 17 (F -> F1 F2 F3 .)
+
+
+state 43
+
+    (20) F3 -> ABLLAVE . C CELLAVE
+    (52) C -> .
+    (53) C -> . B C
+    (5) B -> . FOR ABPAREN D PUNTOYCOMA E PUNTOYCOMA Z CEPAREN ABLLAVE C CELLAVE
+    (6) B -> . S
+    (7) B -> . LET T ID PUNTOYCOMA
+    (8) B -> . IF ABPAREN E CEPAREN S
+    (9) S -> . RETURN X PUNTOYCOMA
+    (10) S -> . INPUT ABPAREN ID CEPAREN PUNTOYCOMA
+    (11) S -> . ALERT ABPAREN E CEPAREN PUNTOYCOMA
+    (12) S -> . ID ABPAREN L CEPAREN PUNTOYCOMA
+    (13) S -> . ID OPASIG E PUNTOYCOMA
+    CELLAVE         reduce using rule 52 (C -> .)
+    FOR             shift and go to state 6
+    LET             shift and go to state 8
+    IF              shift and go to state 10
+    RETURN          shift and go to state 12
+    INPUT           shift and go to state 13
+    ALERT           shift and go to state 14
+    ID              shift and go to state 9
+
+    C                              shift and go to state 64
+    B                              shift and go to state 65
+    S                              shift and go to state 7
+
+state 44
+
+    (19) F2 -> ABPAREN A . CEPAREN
+    CEPAREN         shift and go to state 66
+
+
+state 45
+
+    (49) A -> T . ID K
+    ID              shift and go to state 67
+
+
+state 46
+
+    (5) B -> FOR ABPAREN D . PUNTOYCOMA E PUNTOYCOMA Z CEPAREN ABLLAVE C CELLAVE
+    PUNTOYCOMA      shift and go to state 68
+
+
+state 47
+
+    (42) D -> ID . OPASIG E
+    OPASIG          shift and go to state 69
+
+
+state 48
+
+    (7) B -> LET T ID . PUNTOYCOMA
+    PUNTOYCOMA      shift and go to state 70
+
+
+state 49
+
+    (12) S -> ID ABPAREN L . CEPAREN PUNTOYCOMA
+    CEPAREN         shift and go to state 71
+
+
+state 50
+
+    (38) L -> E . Q
+    (22) E -> E . OPLOG R
+    (39) Q -> .
+    (40) Q -> . COMA E Q
+    OPLOG           shift and go to state 55
+    CEPAREN         reduce using rule 39 (Q -> .)
+    COMA            shift and go to state 73
+
+    Q                              shift and go to state 72
+
+state 51
+
+    (13) S -> ID OPASIG E . PUNTOYCOMA
+    (22) E -> E . OPLOG R
+    PUNTOYCOMA      shift and go to state 74
+    OPLOG           shift and go to state 55
+
+
+state 52
+
+    (8) B -> IF ABPAREN E . CEPAREN S
+    (22) E -> E . OPLOG R
+    CEPAREN         shift and go to state 75
+    OPLOG           shift and go to state 55
+
+
+state 53
+
+    (18) F1 -> FUNCTION H ID .
+    ABPAREN         reduce using rule 18 (F1 -> FUNCTION H ID .)
+
+
+state 54
+
+    (9) S -> RETURN X PUNTOYCOMA .
+    FOR             reduce using rule 9 (S -> RETURN X PUNTOYCOMA .)
+    LET             reduce using rule 9 (S -> RETURN X PUNTOYCOMA .)
+    IF              reduce using rule 9 (S -> RETURN X PUNTOYCOMA .)
+    FUNCTION        reduce using rule 9 (S -> RETURN X PUNTOYCOMA .)
+    RETURN          reduce using rule 9 (S -> RETURN X PUNTOYCOMA .)
+    INPUT           reduce using rule 9 (S -> RETURN X PUNTOYCOMA .)
+    ALERT           reduce using rule 9 (S -> RETURN X PUNTOYCOMA .)
+    ID              reduce using rule 9 (S -> RETURN X PUNTOYCOMA .)
+    $end            reduce using rule 9 (S -> RETURN X PUNTOYCOMA .)
+    CELLAVE         reduce using rule 9 (S -> RETURN X PUNTOYCOMA .)
+
+
+state 55
+
+    (22) E -> E OPLOG . R
+    (23) R -> . U
+    (24) R -> . R OPREL U
+    (25) U -> . V
+    (26) U -> . U O V
+    (28) V -> . CTELOGICA
+    (29) V -> . CADENA
+    (30) V -> . CTEENTERA
+    (31) V -> . ID ABPAREN L CEPAREN
+    (32) V -> . ABPAREN E CEPAREN
+    (33) V -> . ID
+    (34) V -> . OPESP ID
+    CTELOGICA       shift and go to state 34
+    CADENA          shift and go to state 35
+    CTEENTERA       shift and go to state 36
+    ID              shift and go to state 37
+    ABPAREN         shift and go to state 38
+    OPESP           shift and go to state 39
+
+    R                              shift and go to state 76
+    U                              shift and go to state 32
+    V                              shift and go to state 33
+
+state 56
+
+    (24) R -> R OPREL . U
+    (25) U -> . V
+    (26) U -> . U O V
+    (28) V -> . CTELOGICA
+    (29) V -> . CADENA
+    (30) V -> . CTEENTERA
+    (31) V -> . ID ABPAREN L CEPAREN
+    (32) V -> . ABPAREN E CEPAREN
+    (33) V -> . ID
+    (34) V -> . OPESP ID
+    CTELOGICA       shift and go to state 34
+    CADENA          shift and go to state 35
+    CTEENTERA       shift and go to state 36
+    ID              shift and go to state 37
+    ABPAREN         shift and go to state 38
+    OPESP           shift and go to state 39
+
+    U                              shift and go to state 77
+    V                              shift and go to state 33
+
+state 57
+
+    (26) U -> U O . V
+    (28) V -> . CTELOGICA
+    (29) V -> . CADENA
+    (30) V -> . CTEENTERA
+    (31) V -> . ID ABPAREN L CEPAREN
+    (32) V -> . ABPAREN E CEPAREN
+    (33) V -> . ID
+    (34) V -> . OPESP ID
+    CTELOGICA       shift and go to state 34
+    CADENA          shift and go to state 35
+    CTEENTERA       shift and go to state 36
+    ID              shift and go to state 37
+    ABPAREN         shift and go to state 38
+    OPESP           shift and go to state 39
+
+    V                              shift and go to state 78
+
+state 58
+
+    (27) O -> OPARIT .
+    CTELOGICA       reduce using rule 27 (O -> OPARIT .)
+    CADENA          reduce using rule 27 (O -> OPARIT .)
+    CTEENTERA       reduce using rule 27 (O -> OPARIT .)
+    ID              reduce using rule 27 (O -> OPARIT .)
+    ABPAREN         reduce using rule 27 (O -> OPARIT .)
+    OPESP           reduce using rule 27 (O -> OPARIT .)
+
+
+state 59
+
+    (31) V -> ID ABPAREN . L CEPAREN
+    (37) L -> .
+    (38) L -> . E Q
+    (21) E -> . R
+    (22) E -> . E OPLOG R
+    (23) R -> . U
+    (24) R -> . R OPREL U
+    (25) U -> . V
+    (26) U -> . U O V
+    (28) V -> . CTELOGICA
+    (29) V -> . CADENA
+    (30) V -> . CTEENTERA
+    (31) V -> . ID ABPAREN L CEPAREN
+    (32) V -> . ABPAREN E CEPAREN
+    (33) V -> . ID
+    (34) V -> . OPESP ID
+    CEPAREN         reduce using rule 37 (L -> .)
+    CTELOGICA       shift and go to state 34
+    CADENA          shift and go to state 35
+    CTEENTERA       shift and go to state 36
+    ID              shift and go to state 37
+    ABPAREN         shift and go to state 38
+    OPESP           shift and go to state 39
+
+    L                              shift and go to state 79
+    E                              shift and go to state 50
+    R                              shift and go to state 31
+    U                              shift and go to state 32
+    V                              shift and go to state 33
+
+state 60
+
+    (32) V -> ABPAREN E . CEPAREN
+    (22) E -> E . OPLOG R
+    CEPAREN         shift and go to state 80
+    OPLOG           shift and go to state 55
+
+
+state 61
+
+    (34) V -> OPESP ID .
+    OPARIT          reduce using rule 34 (V -> OPESP ID .)
+    OPREL           reduce using rule 34 (V -> OPESP ID .)
+    OPLOG           reduce using rule 34 (V -> OPESP ID .)
+    PUNTOYCOMA      reduce using rule 34 (V -> OPESP ID .)
+    COMA            reduce using rule 34 (V -> OPESP ID .)
+    CEPAREN         reduce using rule 34 (V -> OPESP ID .)
+
+
+state 62
+
+    (10) S -> INPUT ABPAREN ID . CEPAREN PUNTOYCOMA
+    CEPAREN         shift and go to state 81
+
+
+state 63
+
+    (11) S -> ALERT ABPAREN E . CEPAREN PUNTOYCOMA
+    (22) E -> E . OPLOG R
+    CEPAREN         shift and go to state 82
+    OPLOG           shift and go to state 55
+
+
+state 64
+
+    (20) F3 -> ABLLAVE C . CELLAVE
+    CELLAVE         shift and go to state 83
+
+
+state 65
+
+    (53) C -> B . C
+    (52) C -> .
+    (53) C -> . B C
+    (5) B -> . FOR ABPAREN D PUNTOYCOMA E PUNTOYCOMA Z CEPAREN ABLLAVE C CELLAVE
+    (6) B -> . S
+    (7) B -> . LET T ID PUNTOYCOMA
+    (8) B -> . IF ABPAREN E CEPAREN S
+    (9) S -> . RETURN X PUNTOYCOMA
+    (10) S -> . INPUT ABPAREN ID CEPAREN PUNTOYCOMA
+    (11) S -> . ALERT ABPAREN E CEPAREN PUNTOYCOMA
+    (12) S -> . ID ABPAREN L CEPAREN PUNTOYCOMA
+    (13) S -> . ID OPASIG E PUNTOYCOMA
+    CELLAVE         reduce using rule 52 (C -> .)
+    FOR             shift and go to state 6
+    LET             shift and go to state 8
+    IF              shift and go to state 10
+    RETURN          shift and go to state 12
+    INPUT           shift and go to state 13
+    ALERT           shift and go to state 14
+    ID              shift and go to state 9
+
+    B                              shift and go to state 65
+    C                              shift and go to state 84
+    S                              shift and go to state 7
+
+state 66
+
+    (19) F2 -> ABPAREN A CEPAREN .
+    ABLLAVE         reduce using rule 19 (F2 -> ABPAREN A CEPAREN .)
+
+
+state 67
+
+    (49) A -> T ID . K
+    (50) K -> .
+    (51) K -> . COMA T ID K
+    CEPAREN         reduce using rule 50 (K -> .)
+    COMA            shift and go to state 86
+
+    K                              shift and go to state 85
+
+state 68
+
+    (5) B -> FOR ABPAREN D PUNTOYCOMA . E PUNTOYCOMA Z CEPAREN ABLLAVE C CELLAVE
+    (21) E -> . R
+    (22) E -> . E OPLOG R
+    (23) R -> . U
+    (24) R -> . R OPREL U
+    (25) U -> . V
+    (26) U -> . U O V
+    (28) V -> . CTELOGICA
+    (29) V -> . CADENA
+    (30) V -> . CTEENTERA
+    (31) V -> . ID ABPAREN L CEPAREN
+    (32) V -> . ABPAREN E CEPAREN
+    (33) V -> . ID
+    (34) V -> . OPESP ID
+    CTELOGICA       shift and go to state 34
+    CADENA          shift and go to state 35
+    CTEENTERA       shift and go to state 36
+    ID              shift and go to state 37
+    ABPAREN         shift and go to state 38
+    OPESP           shift and go to state 39
+
+    E                              shift and go to state 87
+    R                              shift and go to state 31
+    U                              shift and go to state 32
+    V                              shift and go to state 33
+
+state 69
+
+    (42) D -> ID OPASIG . E
+    (21) E -> . R
+    (22) E -> . E OPLOG R
+    (23) R -> . U
+    (24) R -> . R OPREL U
+    (25) U -> . V
+    (26) U -> . U O V
+    (28) V -> . CTELOGICA
+    (29) V -> . CADENA
+    (30) V -> . CTEENTERA
+    (31) V -> . ID ABPAREN L CEPAREN
+    (32) V -> . ABPAREN E CEPAREN
+    (33) V -> . ID
+    (34) V -> . OPESP ID
+    CTELOGICA       shift and go to state 34
+    CADENA          shift and go to state 35
+    CTEENTERA       shift and go to state 36
+    ID              shift and go to state 37
+    ABPAREN         shift and go to state 38
+    OPESP           shift and go to state 39
+
+    E                              shift and go to state 88
+    R                              shift and go to state 31
+    U                              shift and go to state 32
+    V                              shift and go to state 33
+
+state 70
+
+    (7) B -> LET T ID PUNTOYCOMA .
+    FOR             reduce using rule 7 (B -> LET T ID PUNTOYCOMA .)
+    LET             reduce using rule 7 (B -> LET T ID PUNTOYCOMA .)
+    IF              reduce using rule 7 (B -> LET T ID PUNTOYCOMA .)
+    FUNCTION        reduce using rule 7 (B -> LET T ID PUNTOYCOMA .)
+    RETURN          reduce using rule 7 (B -> LET T ID PUNTOYCOMA .)
+    INPUT           reduce using rule 7 (B -> LET T ID PUNTOYCOMA .)
+    ALERT           reduce using rule 7 (B -> LET T ID PUNTOYCOMA .)
+    ID              reduce using rule 7 (B -> LET T ID PUNTOYCOMA .)
+    $end            reduce using rule 7 (B -> LET T ID PUNTOYCOMA .)
+    CELLAVE         reduce using rule 7 (B -> LET T ID PUNTOYCOMA .)
+
+
+state 71
+
+    (12) S -> ID ABPAREN L CEPAREN . PUNTOYCOMA
+    PUNTOYCOMA      shift and go to state 89
+
+
+state 72
+
+    (38) L -> E Q .
+    CEPAREN         reduce using rule 38 (L -> E Q .)
+
+
+state 73
+
+    (40) Q -> COMA . E Q
+    (21) E -> . R
+    (22) E -> . E OPLOG R
+    (23) R -> . U
+    (24) R -> . R OPREL U
+    (25) U -> . V
+    (26) U -> . U O V
+    (28) V -> . CTELOGICA
+    (29) V -> . CADENA
+    (30) V -> . CTEENTERA
+    (31) V -> . ID ABPAREN L CEPAREN
+    (32) V -> . ABPAREN E CEPAREN
+    (33) V -> . ID
+    (34) V -> . OPESP ID
+    CTELOGICA       shift and go to state 34
+    CADENA          shift and go to state 35
+    CTEENTERA       shift and go to state 36
+    ID              shift and go to state 37
+    ABPAREN         shift and go to state 38
+    OPESP           shift and go to state 39
+
+    E                              shift and go to state 90
+    R                              shift and go to state 31
+    U                              shift and go to state 32
+    V                              shift and go to state 33
+
+state 74
+
+    (13) S -> ID OPASIG E PUNTOYCOMA .
+    FOR             reduce using rule 13 (S -> ID OPASIG E PUNTOYCOMA .)
+    LET             reduce using rule 13 (S -> ID OPASIG E PUNTOYCOMA .)
+    IF              reduce using rule 13 (S -> ID OPASIG E PUNTOYCOMA .)
+    FUNCTION        reduce using rule 13 (S -> ID OPASIG E PUNTOYCOMA .)
+    RETURN          reduce using rule 13 (S -> ID OPASIG E PUNTOYCOMA .)
+    INPUT           reduce using rule 13 (S -> ID OPASIG E PUNTOYCOMA .)
+    ALERT           reduce using rule 13 (S -> ID OPASIG E PUNTOYCOMA .)
+    ID              reduce using rule 13 (S -> ID OPASIG E PUNTOYCOMA .)
+    $end            reduce using rule 13 (S -> ID OPASIG E PUNTOYCOMA .)
+    CELLAVE         reduce using rule 13 (S -> ID OPASIG E PUNTOYCOMA .)
+
+
+state 75
+
+    (8) B -> IF ABPAREN E CEPAREN . S
+    (9) S -> . RETURN X PUNTOYCOMA
+    (10) S -> . INPUT ABPAREN ID CEPAREN PUNTOYCOMA
+    (11) S -> . ALERT ABPAREN E CEPAREN PUNTOYCOMA
+    (12) S -> . ID ABPAREN L CEPAREN PUNTOYCOMA
+    (13) S -> . ID OPASIG E PUNTOYCOMA
+    RETURN          shift and go to state 12
+    INPUT           shift and go to state 13
+    ALERT           shift and go to state 14
+    ID              shift and go to state 9
+
+    S                              shift and go to state 91
+
+state 76
+
+    (22) E -> E OPLOG R .
+    (24) R -> R . OPREL U
+    OPLOG           reduce using rule 22 (E -> E OPLOG R .)
+    PUNTOYCOMA      reduce using rule 22 (E -> E OPLOG R .)
+    COMA            reduce using rule 22 (E -> E OPLOG R .)
+    CEPAREN         reduce using rule 22 (E -> E OPLOG R .)
+    OPREL           shift and go to state 56
+
+
+state 77
+
+    (24) R -> R OPREL U .
+    (26) U -> U . O V
+    (27) O -> . OPARIT
+    OPREL           reduce using rule 24 (R -> R OPREL U .)
+    OPLOG           reduce using rule 24 (R -> R OPREL U .)
+    PUNTOYCOMA      reduce using rule 24 (R -> R OPREL U .)
+    COMA            reduce using rule 24 (R -> R OPREL U .)
+    CEPAREN         reduce using rule 24 (R -> R OPREL U .)
+    OPARIT          shift and go to state 58
+
+    O                              shift and go to state 57
+
+state 78
+
+    (26) U -> U O V .
+    OPARIT          reduce using rule 26 (U -> U O V .)
+    OPREL           reduce using rule 26 (U -> U O V .)
+    OPLOG           reduce using rule 26 (U -> U O V .)
+    PUNTOYCOMA      reduce using rule 26 (U -> U O V .)
+    COMA            reduce using rule 26 (U -> U O V .)
+    CEPAREN         reduce using rule 26 (U -> U O V .)
+
+
+state 79
+
+    (31) V -> ID ABPAREN L . CEPAREN
+    CEPAREN         shift and go to state 92
+
+
+state 80
+
+    (32) V -> ABPAREN E CEPAREN .
+    OPARIT          reduce using rule 32 (V -> ABPAREN E CEPAREN .)
+    OPREL           reduce using rule 32 (V -> ABPAREN E CEPAREN .)
+    OPLOG           reduce using rule 32 (V -> ABPAREN E CEPAREN .)
+    PUNTOYCOMA      reduce using rule 32 (V -> ABPAREN E CEPAREN .)
+    COMA            reduce using rule 32 (V -> ABPAREN E CEPAREN .)
+    CEPAREN         reduce using rule 32 (V -> ABPAREN E CEPAREN .)
+
+
+state 81
+
+    (10) S -> INPUT ABPAREN ID CEPAREN . PUNTOYCOMA
+    PUNTOYCOMA      shift and go to state 93
+
+
+state 82
+
+    (11) S -> ALERT ABPAREN E CEPAREN . PUNTOYCOMA
+    PUNTOYCOMA      shift and go to state 94
+
+
+state 83
+
+    (20) F3 -> ABLLAVE C CELLAVE .
+    FOR             reduce using rule 20 (F3 -> ABLLAVE C CELLAVE .)
+    LET             reduce using rule 20 (F3 -> ABLLAVE C CELLAVE .)
+    IF              reduce using rule 20 (F3 -> ABLLAVE C CELLAVE .)
+    FUNCTION        reduce using rule 20 (F3 -> ABLLAVE C CELLAVE .)
+    RETURN          reduce using rule 20 (F3 -> ABLLAVE C CELLAVE .)
+    INPUT           reduce using rule 20 (F3 -> ABLLAVE C CELLAVE .)
+    ALERT           reduce using rule 20 (F3 -> ABLLAVE C CELLAVE .)
+    ID              reduce using rule 20 (F3 -> ABLLAVE C CELLAVE .)
+    $end            reduce using rule 20 (F3 -> ABLLAVE C CELLAVE .)
+
+
+state 84
+
+    (53) C -> B C .
+    CELLAVE         reduce using rule 53 (C -> B C .)
+
+
+state 85
+
+    (49) A -> T ID K .
+    CEPAREN         reduce using rule 49 (A -> T ID K .)
+
+
+state 86
+
+    (51) K -> COMA . T ID K
+    (14) T -> . STRING
+    (15) T -> . BOOLEAN
+    (16) T -> . NUMBER
+    STRING          shift and go to state 21
+    BOOLEAN         shift and go to state 22
+    NUMBER          shift and go to state 23
+
+    T                              shift and go to state 95
+
+state 87
+
+    (5) B -> FOR ABPAREN D PUNTOYCOMA E . PUNTOYCOMA Z CEPAREN ABLLAVE C CELLAVE
+    (22) E -> E . OPLOG R
+    PUNTOYCOMA      shift and go to state 96
+    OPLOG           shift and go to state 55
+
+
+state 88
+
+    (42) D -> ID OPASIG E .
+    (22) E -> E . OPLOG R
+    PUNTOYCOMA      reduce using rule 42 (D -> ID OPASIG E .)
+    OPLOG           shift and go to state 55
+
+
+state 89
+
+    (12) S -> ID ABPAREN L CEPAREN PUNTOYCOMA .
+    FOR             reduce using rule 12 (S -> ID ABPAREN L CEPAREN PUNTOYCOMA .)
+    LET             reduce using rule 12 (S -> ID ABPAREN L CEPAREN PUNTOYCOMA .)
+    IF              reduce using rule 12 (S -> ID ABPAREN L CEPAREN PUNTOYCOMA .)
+    FUNCTION        reduce using rule 12 (S -> ID ABPAREN L CEPAREN PUNTOYCOMA .)
+    RETURN          reduce using rule 12 (S -> ID ABPAREN L CEPAREN PUNTOYCOMA .)
+    INPUT           reduce using rule 12 (S -> ID ABPAREN L CEPAREN PUNTOYCOMA .)
+    ALERT           reduce using rule 12 (S -> ID ABPAREN L CEPAREN PUNTOYCOMA .)
+    ID              reduce using rule 12 (S -> ID ABPAREN L CEPAREN PUNTOYCOMA .)
+    $end            reduce using rule 12 (S -> ID ABPAREN L CEPAREN PUNTOYCOMA .)
+    CELLAVE         reduce using rule 12 (S -> ID ABPAREN L CEPAREN PUNTOYCOMA .)
+
+
+state 90
+
+    (40) Q -> COMA E . Q
+    (22) E -> E . OPLOG R
+    (39) Q -> .
+    (40) Q -> . COMA E Q
+    OPLOG           shift and go to state 55
+    CEPAREN         reduce using rule 39 (Q -> .)
+    COMA            shift and go to state 73
+
+    Q                              shift and go to state 97
+
+state 91
+
+    (8) B -> IF ABPAREN E CEPAREN S .
+    FOR             reduce using rule 8 (B -> IF ABPAREN E CEPAREN S .)
+    LET             reduce using rule 8 (B -> IF ABPAREN E CEPAREN S .)
+    IF              reduce using rule 8 (B -> IF ABPAREN E CEPAREN S .)
+    FUNCTION        reduce using rule 8 (B -> IF ABPAREN E CEPAREN S .)
+    RETURN          reduce using rule 8 (B -> IF ABPAREN E CEPAREN S .)
+    INPUT           reduce using rule 8 (B -> IF ABPAREN E CEPAREN S .)
+    ALERT           reduce using rule 8 (B -> IF ABPAREN E CEPAREN S .)
+    ID              reduce using rule 8 (B -> IF ABPAREN E CEPAREN S .)
+    $end            reduce using rule 8 (B -> IF ABPAREN E CEPAREN S .)
+    CELLAVE         reduce using rule 8 (B -> IF ABPAREN E CEPAREN S .)
+
+
+state 92
+
+    (31) V -> ID ABPAREN L CEPAREN .
+    OPARIT          reduce using rule 31 (V -> ID ABPAREN L CEPAREN .)
+    OPREL           reduce using rule 31 (V -> ID ABPAREN L CEPAREN .)
+    OPLOG           reduce using rule 31 (V -> ID ABPAREN L CEPAREN .)
+    PUNTOYCOMA      reduce using rule 31 (V -> ID ABPAREN L CEPAREN .)
+    COMA            reduce using rule 31 (V -> ID ABPAREN L CEPAREN .)
+    CEPAREN         reduce using rule 31 (V -> ID ABPAREN L CEPAREN .)
+
+
+state 93
+
+    (10) S -> INPUT ABPAREN ID CEPAREN PUNTOYCOMA .
+    FOR             reduce using rule 10 (S -> INPUT ABPAREN ID CEPAREN PUNTOYCOMA .)
+    LET             reduce using rule 10 (S -> INPUT ABPAREN ID CEPAREN PUNTOYCOMA .)
+    IF              reduce using rule 10 (S -> INPUT ABPAREN ID CEPAREN PUNTOYCOMA .)
+    FUNCTION        reduce using rule 10 (S -> INPUT ABPAREN ID CEPAREN PUNTOYCOMA .)
+    RETURN          reduce using rule 10 (S -> INPUT ABPAREN ID CEPAREN PUNTOYCOMA .)
+    INPUT           reduce using rule 10 (S -> INPUT ABPAREN ID CEPAREN PUNTOYCOMA .)
+    ALERT           reduce using rule 10 (S -> INPUT ABPAREN ID CEPAREN PUNTOYCOMA .)
+    ID              reduce using rule 10 (S -> INPUT ABPAREN ID CEPAREN PUNTOYCOMA .)
+    $end            reduce using rule 10 (S -> INPUT ABPAREN ID CEPAREN PUNTOYCOMA .)
+    CELLAVE         reduce using rule 10 (S -> INPUT ABPAREN ID CEPAREN PUNTOYCOMA .)
+
+
+state 94
+
+    (11) S -> ALERT ABPAREN E CEPAREN PUNTOYCOMA .
+    FOR             reduce using rule 11 (S -> ALERT ABPAREN E CEPAREN PUNTOYCOMA .)
+    LET             reduce using rule 11 (S -> ALERT ABPAREN E CEPAREN PUNTOYCOMA .)
+    IF              reduce using rule 11 (S -> ALERT ABPAREN E CEPAREN PUNTOYCOMA .)
+    FUNCTION        reduce using rule 11 (S -> ALERT ABPAREN E CEPAREN PUNTOYCOMA .)
+    RETURN          reduce using rule 11 (S -> ALERT ABPAREN E CEPAREN PUNTOYCOMA .)
+    INPUT           reduce using rule 11 (S -> ALERT ABPAREN E CEPAREN PUNTOYCOMA .)
+    ALERT           reduce using rule 11 (S -> ALERT ABPAREN E CEPAREN PUNTOYCOMA .)
+    ID              reduce using rule 11 (S -> ALERT ABPAREN E CEPAREN PUNTOYCOMA .)
+    $end            reduce using rule 11 (S -> ALERT ABPAREN E CEPAREN PUNTOYCOMA .)
+    CELLAVE         reduce using rule 11 (S -> ALERT ABPAREN E CEPAREN PUNTOYCOMA .)
+
+
+state 95
+
+    (51) K -> COMA T . ID K
+    ID              shift and go to state 98
+
+
+state 96
+
+    (5) B -> FOR ABPAREN D PUNTOYCOMA E PUNTOYCOMA . Z CEPAREN ABLLAVE C CELLAVE
+    (43) Z -> .
+    (44) Z -> . OPESP ID
+    (45) Z -> . ID OPASIG E
+    CEPAREN         reduce using rule 43 (Z -> .)
+    OPESP           shift and go to state 100
+    ID              shift and go to state 101
+
+    Z                              shift and go to state 99
+
+state 97
+
+    (40) Q -> COMA E Q .
+    CEPAREN         reduce using rule 40 (Q -> COMA E Q .)
+
+
+state 98
+
+    (51) K -> COMA T ID . K
+    (50) K -> .
+    (51) K -> . COMA T ID K
+    CEPAREN         reduce using rule 50 (K -> .)
+    COMA            shift and go to state 86
+
+    K                              shift and go to state 102
+
+state 99
+
+    (5) B -> FOR ABPAREN D PUNTOYCOMA E PUNTOYCOMA Z . CEPAREN ABLLAVE C CELLAVE
+    CEPAREN         shift and go to state 103
+
+
+state 100
+
+    (44) Z -> OPESP . ID
+    ID              shift and go to state 104
+
+
+state 101
+
+    (45) Z -> ID . OPASIG E
+    OPASIG          shift and go to state 105
+
+
+state 102
+
+    (51) K -> COMA T ID K .
+    CEPAREN         reduce using rule 51 (K -> COMA T ID K .)
+
+
+state 103
+
+    (5) B -> FOR ABPAREN D PUNTOYCOMA E PUNTOYCOMA Z CEPAREN . ABLLAVE C CELLAVE
+    ABLLAVE         shift and go to state 106
+
+
+state 104
+
+    (44) Z -> OPESP ID .
+    CEPAREN         reduce using rule 44 (Z -> OPESP ID .)
+
+
+state 105
+
+    (45) Z -> ID OPASIG . E
+    (21) E -> . R
+    (22) E -> . E OPLOG R
+    (23) R -> . U
+    (24) R -> . R OPREL U
+    (25) U -> . V
+    (26) U -> . U O V
+    (28) V -> . CTELOGICA
+    (29) V -> . CADENA
+    (30) V -> . CTEENTERA
+    (31) V -> . ID ABPAREN L CEPAREN
+    (32) V -> . ABPAREN E CEPAREN
+    (33) V -> . ID
+    (34) V -> . OPESP ID
+    CTELOGICA       shift and go to state 34
+    CADENA          shift and go to state 35
+    CTEENTERA       shift and go to state 36
+    ID              shift and go to state 37
+    ABPAREN         shift and go to state 38
+    OPESP           shift and go to state 39
+
+    E                              shift and go to state 107
+    R                              shift and go to state 31
+    U                              shift and go to state 32
+    V                              shift and go to state 33
+
+state 106
+
+    (5) B -> FOR ABPAREN D PUNTOYCOMA E PUNTOYCOMA Z CEPAREN ABLLAVE . C CELLAVE
+    (52) C -> .
+    (53) C -> . B C
+    (5) B -> . FOR ABPAREN D PUNTOYCOMA E PUNTOYCOMA Z CEPAREN ABLLAVE C CELLAVE
+    (6) B -> . S
+    (7) B -> . LET T ID PUNTOYCOMA
+    (8) B -> . IF ABPAREN E CEPAREN S
+    (9) S -> . RETURN X PUNTOYCOMA
+    (10) S -> . INPUT ABPAREN ID CEPAREN PUNTOYCOMA
+    (11) S -> . ALERT ABPAREN E CEPAREN PUNTOYCOMA
+    (12) S -> . ID ABPAREN L CEPAREN PUNTOYCOMA
+    (13) S -> . ID OPASIG E PUNTOYCOMA
+    CELLAVE         reduce using rule 52 (C -> .)
+    FOR             shift and go to state 6
+    LET             shift and go to state 8
+    IF              shift and go to state 10
+    RETURN          shift and go to state 12
+    INPUT           shift and go to state 13
+    ALERT           shift and go to state 14
+    ID              shift and go to state 9
+
+    C                              shift and go to state 108
+    B                              shift and go to state 65
+    S                              shift and go to state 7
+
+state 107
+
+    (45) Z -> ID OPASIG E .
+    (22) E -> E . OPLOG R
+    CEPAREN         reduce using rule 45 (Z -> ID OPASIG E .)
+    OPLOG           shift and go to state 55
+
+
+state 108
+
+    (5) B -> FOR ABPAREN D PUNTOYCOMA E PUNTOYCOMA Z CEPAREN ABLLAVE C . CELLAVE
+    CELLAVE         shift and go to state 109
+
+
+state 109
+
+    (5) B -> FOR ABPAREN D PUNTOYCOMA E PUNTOYCOMA Z CEPAREN ABLLAVE C CELLAVE .
+    FOR             reduce using rule 5 (B -> FOR ABPAREN D PUNTOYCOMA E PUNTOYCOMA Z CEPAREN ABLLAVE C CELLAVE .)
+    LET             reduce using rule 5 (B -> FOR ABPAREN D PUNTOYCOMA E PUNTOYCOMA Z CEPAREN ABLLAVE C CELLAVE .)
+    IF              reduce using rule 5 (B -> FOR ABPAREN D PUNTOYCOMA E PUNTOYCOMA Z CEPAREN ABLLAVE C CELLAVE .)
+    FUNCTION        reduce using rule 5 (B -> FOR ABPAREN D PUNTOYCOMA E PUNTOYCOMA Z CEPAREN ABLLAVE C CELLAVE .)
+    RETURN          reduce using rule 5 (B -> FOR ABPAREN D PUNTOYCOMA E PUNTOYCOMA Z CEPAREN ABLLAVE C CELLAVE .)
+    INPUT           reduce using rule 5 (B -> FOR ABPAREN D PUNTOYCOMA E PUNTOYCOMA Z CEPAREN ABLLAVE C CELLAVE .)
+    ALERT           reduce using rule 5 (B -> FOR ABPAREN D PUNTOYCOMA E PUNTOYCOMA Z CEPAREN ABLLAVE C CELLAVE .)
+    ID              reduce using rule 5 (B -> FOR ABPAREN D PUNTOYCOMA E PUNTOYCOMA Z CEPAREN ABLLAVE C CELLAVE .)
+    $end            reduce using rule 5 (B -> FOR ABPAREN D PUNTOYCOMA E PUNTOYCOMA Z CEPAREN ABLLAVE C CELLAVE .)
+    CELLAVE         reduce using rule 5 (B -> FOR ABPAREN D PUNTOYCOMA E PUNTOYCOMA Z CEPAREN ABLLAVE C CELLAVE .)

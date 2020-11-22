@@ -1,3 +1,5 @@
+import sys
+
 from sly import Parser
 from src.analizador_lexico.js_lexer import JSLexer
 from src.tabla_simbolos.sym_table import SymTable
@@ -5,6 +7,12 @@ from src.tabla_simbolos.sym_table import SymTable
 
 class JSParser(Parser):
     debugfile = 'parser.out'
+
+    tokens = {CTEENTERA, CADENA, CTELOGICA, OPARIT, OPESP,
+              OPREL, OPLOG, OPASIG, ID, NUMBER, STRING, BOOLEAN, LET, ALERT,
+              INPUT, FUNCTION, ABPAREN, CEPAREN, ABLLAVE, CELLAVE, COMA,
+              PUNTOYCOMA, RETURN, IF, FOR
+              }
 
     def __init__(self, lista_reglas_, TS_):
         self.lista_reglas = lista_reglas_
@@ -30,7 +38,7 @@ class JSParser(Parser):
         self.lista_reglas.append(4)
         return
 
-    @_('IF ABREPAR E CIERRAPAR S')
+    @_('IF ABPAREN E CEPAREN S')
     def B(self, p):
         self.lista_reglas.append(5)
         return
@@ -45,7 +53,7 @@ class JSParser(Parser):
         self.lista_reglas.append(7)
         return
 
-    @_('FOR ABREPAR D PUNTOYCOMA E PUNTOYCOMA Z CIERRAPAR ABRELLAVE C CIERRALLAVE')
+    @_('FOR ABPAREN D PUNTOYCOMA E PUNTOYCOMA Z CEPAREN ABLLAVE C CELLAVE')
     def B(self, p):
         self.lista_reglas.append(8)
         return
@@ -55,17 +63,17 @@ class JSParser(Parser):
         self.lista_reglas.append(9)
         return
 
-    @_('ID ABREPAR L CIERRAPAR PUNTOYCOMA')
+    @_('ID ABPAREN L CEPAREN PUNTOYCOMA')
     def S(self, p):
         self.lista_reglas.append(10)
         return
 
-    @_('ALERT ABREPAR E CIERRAPAR PUNTOYCOMA')
+    @_('ALERT ABPAREN E CEPAREN PUNTOYCOMA')
     def S(self, p):
         self.lista_reglas.append(11)
         return
 
-    @_('INPUT ABREPAR ID CIERRAPAR PUNTOYCOMA')
+    @_('INPUT ABPAREN ID CEPAREN PUNTOYCOMA')
     def S(self, p):
         self.lista_reglas.append(12)
         return
@@ -100,13 +108,13 @@ class JSParser(Parser):
         self.lista_reglas.append(18)
         return
 
-    @_('ABREPAR A CIERRAPAR')
+    @_('ABPAREN A CEPAREN')
     def F2(self, p):
         self.lista_reglas.append(19)
         return
 
-    @_('ABRELLAVE C CIERRALLAVE')
-    def B(self, p):
+    @_('ABLLAVE C CELLAVE')
+    def F3(self, p):
         self.lista_reglas.append(20)
         return
 
@@ -130,144 +138,177 @@ class JSParser(Parser):
         self.lista_reglas.append(24)
         return
 
-    @_('U OPARIT V')
+    @_('U O V')
     def U(self, p):
         self.lista_reglas.append(25)
         return
 
-    # TODO: A LAS 19:00 COMENTAR EL POR QUÉ DE LA UNIFICACIÓN DE 25 Y 26 EN 25 (DEJA DE SER AFD)
+    @_('OPARIT')
+    def O(self, p):
+        if p.value == 0:
+            self.lista_reglas.append(26)
+        else:
+            self.lista_reglas.append(27)
+        return
+
 
     @_('V')
     def U(self, p):
-        self.lista_reglas.append(27)
-        return
-
-    @_('OPESP ID')
-    def V(self, p):
         self.lista_reglas.append(28)
         return
 
-    @_('ID')
+    @_('OPESP ID')
     def V(self, p):
         self.lista_reglas.append(29)
         return
 
-    @_('ABREPAR E CIERRAPAR')
+    @_('ID')
     def V(self, p):
         self.lista_reglas.append(30)
         return
 
-    @_('ID ABREPAR L CIERRAPAR')
+    @_('ABPAREN E CEPAREN')
     def V(self, p):
         self.lista_reglas.append(31)
         return
 
-    @_('CTEENTERA')
+    @_('ID ABPAREN L CEPAREN')
     def V(self, p):
         self.lista_reglas.append(32)
         return
 
-    @_('CADENA')
+    @_('CTEENTERA')
     def V(self, p):
         self.lista_reglas.append(33)
         return
 
-    @_('CTELOGICA')
+    @_('CADENA')
     def V(self, p):
         self.lista_reglas.append(34)
         return
 
-    @_('E')
-    def X(self, p):
+    @_('CTELOGICA')
+    def V(self, p):
         self.lista_reglas.append(35)
         return
 
-    @_('')
+    @_('E')
     def X(self, p):
         self.lista_reglas.append(36)
         return
 
-    @_('E Q')
-    def L(self, p):
+    @_('')
+    def X(self, p):
         self.lista_reglas.append(37)
         return
 
-    @_('')
+    @_('E Q')
     def L(self, p):
         self.lista_reglas.append(38)
         return
 
-    @_('COMA E Q')
-    def Q(self, p):
+    @_('')
+    def L(self, p):
         self.lista_reglas.append(39)
         return
 
-    @_('')
+    @_('COMA E Q')
     def Q(self, p):
         self.lista_reglas.append(40)
         return
 
-    @_('ID OPASIGN E')
-    def D(self, p):
+    @_('')
+    def Q(self, p):
         self.lista_reglas.append(41)
         return
 
-    @_('')
+    @_('ID OPASIG E')
     def D(self, p):
         self.lista_reglas.append(42)
         return
 
-    @_('ID OPASIGN E')
-    def Z(self, p):
+    @_('')
+    def D(self, p):
         self.lista_reglas.append(43)
         return
 
-    @_('OPESP ID')
+    @_('ID OPASIG E')
     def Z(self, p):
         self.lista_reglas.append(44)
         return
 
-    @_('')
+    @_('OPESP ID')
     def Z(self, p):
         self.lista_reglas.append(45)
         return
 
-    @_('T')
-    def H(self, p):
+    @_('')
+    def Z(self, p):
         self.lista_reglas.append(46)
         return
 
-    @_('')
+    @_('T')
     def H(self, p):
         self.lista_reglas.append(47)
         return
 
-    @_('T ID K')
-    def A(self, p):
+    @_('')
+    def H(self, p):
         self.lista_reglas.append(48)
         return
 
-    @_('')
+    @_('T ID K')
     def A(self, p):
         self.lista_reglas.append(49)
         return
 
-    @_('COMA T ID K')
-    def K(self, p):
+    @_('')
+    def A(self, p):
         self.lista_reglas.append(50)
         return
 
-    @_('')
+    @_('COMA T ID K')
     def K(self, p):
         self.lista_reglas.append(51)
         return
 
+    @_('')
+    def K(self, p):
+        self.lista_reglas.append(52)
+        return
+
     @_('B C')
     def C(self, p):
-        self.lista_reglas.append(52)
+        self.lista_reglas.append(53)
         return
 
     @_('')
     def C(self, p):
-        self.lista_reglas.append(53)
+        self.lista_reglas.append(54)
         return
+
+    def error(self, p):
+        print("Error sintáctico: ")
+        if not p:
+            print("End of File!")
+            exit(1)
+        else:
+            print(f'Token ilegal {p.type} en la linea {p.lineno} con índice {p.index}', file=sys.stderr)
+
+if __name__ == '__main__':
+    listaReglas = []
+    ts = SymTable()
+    id0 = ts.new_table()
+
+    lexer = JSLexer()
+    parser = JSParser(listaReglas, ts)
+
+    sys.stdout = open("Parse.txt", "w")
+    sys.stderr = open("Error.txt", "w")
+
+    #f = open('Input.txt', 'r')
+    #data = f.read()
+    result = parser.parse(lexer.tokenize('''hola = 2;'''))
+    print(result)
+    print(listaReglas)
+    ts.write_table("TS-Output.txt")
