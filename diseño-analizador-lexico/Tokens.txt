@@ -24,10 +24,10 @@ tokens:
 	<IF, ->
 	<FOR, ->
 
-	<ABREPAR, -> // (
-	<CIERRAPAR,> // )
-	<ABRELLAVE, -> // {
-	<CIERRALLAVE, -> // }
+	<ABPAREN, -> // (
+	<CEPAREN,> // )
+	<ABLLAVE, -> // {
+	<CELLAVE, -> // }
 	<COMA, ->
 	<PUNTOYCOMA, ->
 	<EOF, ->
