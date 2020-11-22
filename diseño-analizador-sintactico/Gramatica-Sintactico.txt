@@ -6,6 +6,22 @@ Y -> P
 P -> B P
 P -> F P
 P -> lambda
+B -> if ( E ) S
+B -> let T id ;
+B -> S
+B -> for ( D ; E ; Z ) { C }
+S -> id = E ;
+S -> id ( L ) ;
+S -> alert ( E ) ;
+S -> input ( id ) ;
+S -> return X ;
+T -> number
+T -> boolean
+T -> string
+F -> F1 F2 F3
+F1 -> function H id
+F2 -> ( A )
+F3 -> { C }
 E -> E && R
 E -> R
 R -> R == U 
@@ -13,40 +29,24 @@ R -> U
 U -> U + V
 U -> U - V
 U -> V
-V -> --id
+V -> -- id
 V -> id
 V -> ( E )
 V -> id ( L )
 V -> ent
 V -> cad
 V -> log
-S -> id = E ;
-S -> id ( L ) ;
-S -> alert ( E ) ; 
-S -> input ( id ) ;
-S -> return X ;
 X -> E
 X -> lambda
 L -> E Q
 L -> lambda
 Q -> , E Q
 Q -> lambda
-B -> if ( E ) S
-B -> let T id ;
-B -> S
-B -> for ( D ; E ; Z ) { C }
 D -> id = E
 D -> lambda
 Z -> id = E
 Z -> -- id
 Z -> lambda
-T -> number 
-T -> boolean
-T -> string
-F -> F1 F2 F3
-F1 -> function H id 
-F2 -> ( A )
-F3 -> { C }
 H -> T 
 H -> lambda
 A -> T id K 
