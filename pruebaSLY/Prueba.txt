@@ -1,7 +1,4 @@
-&erflet number=2; /*adasdasdasd
-adsasdasad
-adssda*/
-a a a a a a
-if(b==2 && c==2){
-return true
-}
+
+demo();
+
+

@@ -1,26 +1,36 @@
 CONTENIDO DE LA TABLA # 0 :
 
-*	LEXEMA : 'booleano'
+*	LEXEMA : 'entero'
 ---------------- ----------------
-*	LEXEMA : 'bisiesto'
+*	LEXEMA : 'cadena'
 ---------------- ----------------
-*	LEXEMA : 'a'
+*	LEXEMA : 'logico'
 ---------------- ----------------
-*	LEXEMA : 'bis'
+*	LEXEMA : 'abcdefghij________'
 ---------------- ----------------
-*	LEXEMA : 'dias'
+*	LEXEMA : 'FuncionNumero'
 ---------------- ----------------
-*	LEXEMA : 'm'
+*	LEXEMA : 'i'
 ---------------- ----------------
-*	LEXEMA : 'dd'
+*	LEXEMA : 'j'
 ---------------- ----------------
-*	LEXEMA : 'esFechaCorrecta'
+*	LEXEMA : 'FuncionRetorno'
 ---------------- ----------------
-*	LEXEMA : 'd'
+*	LEXEMA : 'hola'
 ---------------- ----------------
-*	LEXEMA : 'demo'
+*	LEXEMA : 'x'
 ---------------- ----------------
-*	LEXEMA : 'a_1_b_2'
+*	LEXEMA : 'z'
+---------------- ----------------
+*	LEXEMA : 'FuncionSentencia'
+---------------- ----------------
+*	LEXEMA : 'b'
+---------------- ----------------
+*	LEXEMA : 'Funcion'
+---------------- ----------------
+*	LEXEMA : 'iii'
+---------------- ----------------
+*	LEXEMA : 'bbb'
 ---------------- ----------------
 
 
