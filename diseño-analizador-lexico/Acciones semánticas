@@ -1,8 +1,57 @@
 Acciones semánticas:
 A: leer
-B: entero = valor(d), leer
-C: entero = entero*10 + valor(d), leer
-D: if(entero<=32767)
-    genToken(cte_entera,entero);
+B: number = int(d), leer
+C: number = number*10 + int(d), leer
+D: if number>32767
+        pError("Número fuera de rango")
    else
-    pError("Número fuera de rango")
+        genToken(cte_entera,number);
+E: string = '', contador = 0, leer
+F: string = string + otroCS, contador++ leer
+G: if contador>64
+        pError("Cadena demasiado larga")
+    else
+        genToken(cadena,string)
+   leer
+   #Revisar cuando se vea TS. Empieza aquí
+H: string = l, leer
+I: string = string + l/D/_ , leer
+J:   if palabrasReservadas.contains_lex(string)
+        if string == "number"
+            genToken(number,-)
+        elif string == "string"
+            genToken(string,-)
+        elif string == "boolean"
+            genToken(boolean,-)
+        elif string == "let"
+            genToken(let,-)
+        elif string == "alert"
+            genToken(alert,-)
+        elif string == "input"
+            genToken(input,-)
+        elif string == "return"
+            genToken(return,-)
+        elif string == "if"
+            genToken(if,-)
+        else
+            genToken(for,-)
+    elif (puntero = TS.get(string)) == None
+            TS.update({string:''})
+            puntero = TS.get(string);
+            genToken(ID,puntero)
+   #Acaba aquí
+K: genToken(op_arit,0), leer
+L: genToken(op_arit,1)
+M: genToken(op_esp,-), leer
+N: genToken(op_asig, -)
+O: genToken(op_rel,-), leer
+P: genToken(op_log,-), leer
+Q: genToken( ( , - ), leer
+R: genToken( ) , - ), leer
+S: genToken( { , - ), leer
+T: genToken( } , - ), leer
+U: genToken( , , - ), leer
+V: genToken( ; , - ), leer
+W: genToken( EOF , - ), leer
+
+

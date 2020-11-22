@@ -138,6 +138,12 @@ class ExampleClass:
         attr1 (str): Description of `attr1`.
         attr2 (:obj:`int`, optional): Description of `attr2`.
 
+    Args:
+        param1 (str): Description of `param1`.
+        param2 (:obj:`int`, optional): Description of `param2`. Multiple
+            lines are supported.
+        param3 (:obj:`list` of :obj:`str`): Description of `param3`.
+
     """
 
     def __init__(self, param1, param2, param3):

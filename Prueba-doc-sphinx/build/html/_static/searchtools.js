@@ -154,7 +154,7 @@ var Search = {
   query : function(query) {
     var i;
 
-    // stem the searchterms and add them to the correct list
+    // stem the searchterms and add_entry them to the correct list
     var stemmer = new Stemmer();
     var searchterms = [];
     var excluded = [];
@@ -186,7 +186,7 @@ var Search = {
         toAppend = searchterms;
         hlterms.push(tmp[i].toLowerCase());
       }
-      // only add if not already in the list
+      // only add_entry if not already in the list
       if (!$u.contains(toAppend, word))
         toAppend.push(word);
     }
@@ -365,7 +365,7 @@ var Search = {
             anchor = fullname;
           else if (anchor == '-')
             anchor = objnames[match[1]][1] + '-' + fullname;
-          // add custom score for some objects according to scorer
+          // add_entry custom score for some objects according to scorer
           if (Scorer.objPrio.hasOwnProperty(match[2])) {
             score += Scorer.objPrio[match[2]];
           } else {
@@ -400,7 +400,7 @@ var Search = {
         {files: terms[word], score: Scorer.term},
         {files: titleterms[word], score: Scorer.title}
       ];
-      // add support for partial matches
+      // add_entry support for partial matches
       if (word.length > 2) {
         for (var w in terms) {
           if (w.match(word) && !terms[word]) {
@@ -470,7 +470,7 @@ var Search = {
         }
       }
 
-      // if we have still a valid result we can add it to the result list
+      // if we have still a valid result we can add_entry it to the result list
       if (valid) {
         // select one (max) score for the file.
         // for better ranking, we should calculate ranking by using words statistics like basic tf-idf...

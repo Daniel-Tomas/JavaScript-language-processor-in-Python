@@ -1,41 +1,35 @@
 tokens:
-	<cte_entera, valor>
-	<cadena, lexema>
-
-// 	<true, -> // REVISAR
-// 	<false, ->
+	<CTEENTERA, valor>
+	<CADENA, lexema>
 	
-	<cte_logica, 0> // false
-	<cte_logica, 1> // true
-	<op_arit, 0> // +
-	<op_arit, 1> // -
-	<op_esp, -> // i--
-	<op_rel, -> // ==
-	<op_log, -> // &&
-	<op_asig, -> // =
+	<CTELOGICA, 0> // false
+	<CTELOGICA, 1> // true
+	<OPESP, -> // i--
+	<OPARIT, 0> // +
+	<OPARIT, 1> // -
+	<OPREL, -> // ==
+	<OPLOG, -> // &&
+	<OPASIGN, -> // =
 
-	<id, punteroTS>
-	<number, ->
-	<string, ->
-	<boolean, ->
-	<let, ->
-	<alert, ->
-	<input, ->
+	<ID, punteroTS>
+	<NUMBER, ->
+	<STRING, ->
+	<BOOLEAN, ->
+	<LET, ->
+	<ALERT, ->
+	<INPUT, ->
 
-//	<call_func, 0> // alert
-//	<call_func, 1> // input
+	<FUNCTION, ->
+	<RETURN, ->
+	<IF, ->
+	<FOR, ->
 
-	<function, ->
-	<return, ->
-	<if, ->
-	<for, ->
-
-	<ab_paren, -> // (
-	<ce_paren, -> // )
-	<ab_llave, -> // {
-	<ce_llave, -> // }
-	<coma, ->
-	<punto_coma, ->
+	<ABREPAR, -> // (
+	<CIERRAPAR,> // )
+	<ABRELLAVE, -> // {
+	<CIERRALLAVE, -> // }
+	<COMA, ->
+	<PUNTOYCOMA, ->
 	<EOF, ->
 	  
 
