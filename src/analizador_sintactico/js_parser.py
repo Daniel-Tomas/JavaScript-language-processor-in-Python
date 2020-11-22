@@ -111,171 +111,6 @@ class JSParser(Parser):
         self.lista_reglas.append(20)
         return
 
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
     @_('E OPLOG R')
     def E(self, p):
         self.lista_reglas.append(21)
@@ -341,4 +176,169 @@ class JSParser(Parser):
     @_('CTELOGICA')
     def V(self, p):
         self.lista_reglas.append(34)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
+        return
+
+    @_('S')
+    def B(self, p):
+        self.lista_reglas.append(7)
         return
