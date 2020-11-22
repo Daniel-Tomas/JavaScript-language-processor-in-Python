@@ -9,7 +9,7 @@ tokens:
 	<OPARIT, 1> // -
 	<OPREL, -> // ==
 	<OPLOG, -> // &&
-	<OPASIGN, -> // =
+	<OPASIG, -> // =
 
 	<ID, punteroTS>
 	<NUMBER, ->
