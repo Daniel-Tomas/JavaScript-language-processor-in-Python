@@ -61,52 +61,52 @@ class JSParser(Parser):
         self.lista_reglas.append(10)
         return
 
-    @_('S')
-    def B(self, p):
+    @_('ALERT ABREPAR E CIERRAPAR PUNTOYCOMA')
+    def S(self, p):
         self.lista_reglas.append(11)
         return
 
-    @_('S')
-    def B(self, p):
+    @_('INPUT ABREPAR ID CIERRAPAR PUNTOYCOMA')
+    def S(self, p):
         self.lista_reglas.append(12)
         return
 
-    @_('S')
-    def B(self, p):
+    @_('RETURN X PUNTOYCOMA')
+    def S(self, p):
         self.lista_reglas.append(13)
         return
 
-    @_('S')
-    def B(self, p):
+    @_('NUMBER')
+    def T(self, p):
         self.lista_reglas.append(14)
         return
 
-    @_('S')
-    def B(self, p):
+    @_('BOOLEAN')
+    def T(self, p):
         self.lista_reglas.append(15)
         return
 
-    @_('S')
-    def B(self, p):
+    @_('STRING')
+    def T(self, p):
         self.lista_reglas.append(16)
         return
 
-    @_('S')
-    def B(self, p):
+    @_('F1 F2 F3')
+    def F(self, p):
         self.lista_reglas.append(17)
         return
 
-    @_('S')
-    def B(self, p):
+    @_('FUNCTION H ID')
+    def F1(self, p):
         self.lista_reglas.append(18)
         return
 
-    @_('S')
-    def B(self, p):
+    @_('ABREPAR A CIERRAPAR')
+    def F2(self, p):
         self.lista_reglas.append(19)
         return
 
-    @_('S')
+    @_('ABRELLAVE C CIERRALLAVE')
     def B(self, p):
         self.lista_reglas.append(20)
         return
