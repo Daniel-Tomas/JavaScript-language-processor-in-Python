@@ -5,23 +5,23 @@ import sys
 
 
 class JSLexer(Lexer):
-    """Represents a javascript lexer.
+    """Represents a javascript lexer."""
 
-    Args:
-        data (str): the text to be set.
-
-    Attributes:
-        data (str): the code which is going to be analyzed by the lexer.
-
-    """
-
-    def __init__(self, data):
-        self.data = data
+    # Args:
+    #     data (str): the text to be set.
+    #
+    # Attributes:
+    #     data (str): the code which is going to be analyzed by the lexer.
+    #
+    # """
+    #
+    # def __init__(self, data):
+    #     self.data = data
 
     tokens = {CTEENTERA, CADENA, CTELOGICA, OPARIT, OPESP,
               OPREL, OPLOG, OPASIG, ID, NUMBER, STRING, BOOLEAN, LET, ALERT,
               INPUT, FUNCTION, ABPAREN, CEPAREN, ABLLAVE, CELLAVE, COMA,
-              PUNTOYCOMA, RETURN, IF, FOR, EOF
+              PUNTOYCOMA, RETURN, IF, FOR
               }
 
     ignore = ' \t'
@@ -253,22 +253,22 @@ class JSLexer(Lexer):
         print(f'{res} en la linea {self.lineno} y columna {self.find_column(t)}', file=sys.stderr)
         exit()
 
-    def get_token(self):
-        """Generator that yields tokens of the data text one by one.
-
-        Finally, gives a different token which represents the end of
-        file.
-
-        Yields:
-            Token: The next token until EOF.
-        """
-        for tok in self.tokenize(self.data):
-            yield tok
-
-        tok_EOF = Token()
-        tok_EOF.type = 'EOF'
-        tok_EOF.value = ''
-        yield tok_EOF
+    # def get_token(self):
+    #     """Generator that yields tokens of the data text one by one.
+    #
+    #     Finally, gives a different token which represents the end of
+    #     file.
+    #
+    #     Yields:
+    #         Token: The next token until EOF.
+    #     """
+    #     for tok in self.tokenize(self.data):
+    #         yield tok
+    #
+    #     tok_EOF = Token()
+    #     tok_EOF.type = 'EOF'
+    #     tok_EOF.value = ''
+    #     yield tok_EOF
 
 if __name__ == '__main__':
 
@@ -278,8 +278,8 @@ if __name__ == '__main__':
     id0 = tables.new_table()
     sys.stdout = open("Tokens.txt", "w")
     sys.stderr = open("Error.txt", "w")
-    lexer = JSLexer(data)
+    lexer = JSLexer()
 
-    for tok in lexer.get_token():
+    for tok in lexer.tokenize(data):
         print(f'<{tok.type} , {tok.value}>')
     tables.write_table("TS-Output.txt")
