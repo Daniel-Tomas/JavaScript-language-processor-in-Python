@@ -276,3 +276,69 @@ class JSParser(Parser):
         self.lista_reglas.append(7)
         return
 
+    @_('E OPLOG R')
+    def E(self, p):
+        self.lista_reglas.append(21)
+        return
+
+    @_('R')
+    def E(self, p):
+        self.lista_reglas.append(22)
+        return
+
+    @_('R OPREL U')
+    def R(self, p):
+        self.lista_reglas.append(23)
+        return
+
+    @_('U')
+    def R(self, p):
+        self.lista_reglas.append(24)
+        return
+
+    @_('U OPARIT V')
+    def U(self, p):
+        self.lista_reglas.append(25)
+        return
+
+    # TODO: A LAS 19:00 COMENTAR EL POR QUÉ DE LA UNIFICACIÓN DE 25 Y 26 EN 25 (DEJA DE SER AFD)
+
+    @_('V')
+    def U(self, p):
+        self.lista_reglas.append(27)
+        return
+
+    @_('OPESP ID')
+    def V(self, p):
+        self.lista_reglas.append(28)
+        return
+
+    @_('ID')
+    def V(self, p):
+        self.lista_reglas.append(29)
+        return
+
+    @_('ABREPAR E CIERRAPAR')
+    def V(self, p):
+        self.lista_reglas.append(30)
+        return
+
+    @_('ID ABREPAR L CIERRAPAR')
+    def V(self, p):
+        self.lista_reglas.append(31)
+        return
+
+    @_('CTEENTERA')
+    def V(self, p):
+        self.lista_reglas.append(32)
+        return
+
+    @_('CADENA')
+    def V(self, p):
+        self.lista_reglas.append(33)
+        return
+
+    @_('CTELOGICA')
+    def V(self, p):
+        self.lista_reglas.append(34)
+        return
