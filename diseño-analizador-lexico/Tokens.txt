@@ -15,7 +15,7 @@ tokens:
 	<NUMBER, ->
 	<STRING, ->
 	<BOOLEAN, ->
-	<LET, ->	
+	<LET, ->
 	<ALERT, ->
 	<INPUT, ->
 
