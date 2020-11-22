@@ -1,7 +1,3 @@
-Axioma = Y
-NoTerminales = { Y P B F E R U V D L S X Q T Z F1 F2 F3 A C H K }
-Terminales = { && == + - -- ( ) = ; , { } id ent cad log let alert input return for if number boolean string function }
-Producciones = {
 Y -> P
 P -> B P
 P -> F P

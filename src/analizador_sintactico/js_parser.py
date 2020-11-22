@@ -1,7 +1,6 @@
 from sly import Parser
 from src.analizador_lexico.js_lexer import JSLexer
 from src.tabla_simbolos.sym_table import SymTable
-import sys
 
 
 class JSParser(Parser):
@@ -22,7 +21,7 @@ class JSParser(Parser):
         return
 
     @_('F P')
-    def P(self,p):
+    def P(self, p):
         self.lista_reglas.append(3)
         return
 
@@ -178,167 +177,97 @@ class JSParser(Parser):
         self.lista_reglas.append(34)
         return
 
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
+    @_('E')
+    def X(self, p):
+        self.lista_reglas.append(35)
         return
 
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
+    @_('')
+    def X(self, p):
+        self.lista_reglas.append(36)
         return
 
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
+    @_('E Q')
+    def L(self, p):
+        self.lista_reglas.append(37)
         return
 
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
+    @_('')
+    def L(self, p):
+        self.lista_reglas.append(38)
         return
 
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
+    @_('COMA E Q')
+    def Q(self, p):
+        self.lista_reglas.append(39)
         return
 
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
+    @_('')
+    def Q(self, p):
+        self.lista_reglas.append(40)
         return
 
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
+    @_('ID OPASIGN E')
+    def D(self, p):
+        self.lista_reglas.append(41)
         return
 
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
+    @_('')
+    def D(self, p):
+        self.lista_reglas.append(42)
         return
 
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
+    @_('ID OPASIGN E')
+    def Z(self, p):
+        self.lista_reglas.append(43)
         return
 
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
+    @_('OPESP ID')
+    def Z(self, p):
+        self.lista_reglas.append(44)
         return
 
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
+    @_('')
+    def Z(self, p):
+        self.lista_reglas.append(45)
         return
 
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
+    @_('T')
+    def H(self, p):
+        self.lista_reglas.append(46)
         return
 
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
+    @_('')
+    def H(self, p):
+        self.lista_reglas.append(47)
         return
 
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
+    @_('T ID K')
+    def A(self, p):
+        self.lista_reglas.append(48)
         return
 
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
+    @_('')
+    def A(self, p):
+        self.lista_reglas.append(49)
         return
 
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
+    @_('COMA T ID K')
+    def K(self, p):
+        self.lista_reglas.append(50)
         return
 
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
+    @_('')
+    def K(self, p):
+        self.lista_reglas.append(51)
         return
 
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
+    @_('B C')
+    def C(self, p):
+        self.lista_reglas.append(52)
         return
 
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
-        return
-
-    @_('S')
-    def B(self, p):
-        self.lista_reglas.append(7)
+    @_('')
+    def C(self, p):
+        self.lista_reglas.append(53)
         return
