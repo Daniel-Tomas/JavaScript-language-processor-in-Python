@@ -1,24 +1,24 @@
 let boolean booleano;
+
+alert (4+5-77);
 function boolean bisiesto (number a)
 {	let number bis;
 	alert ("Es bisiesto?");
 	input(bis);
-	return ((a + 4 == 0));
+	return ((a - 4 == 0));
 }
-
-alert (4-5+77);
 function number dias (number m, number a)
 {
 	let number dd;
 	alert ("di cuantos dias tiene el mes ");
 	alert (m);
 	input(dd);
-	if (bisiesto(a)) dd = dd + 1;
+	if (bisiesto(a)) dd = dd - 1;
 	return dd;
 }
 function boolean esFechaCorrecta (number d, number m, number a)
 {
-	return (d == dias (m, a));
+	return m==1 && m==12 && d==1 && d == dias (m, a);
 }
 function demo ()
 {
@@ -26,4 +26,5 @@ function demo ()
 	if (esFechaCorrecta(20, 10, 2020)) alert ("ok");
 }
 demo();
-let string a_1_b_2;
+let string aaaa1111;
+
