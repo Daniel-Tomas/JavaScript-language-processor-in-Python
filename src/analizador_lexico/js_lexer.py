@@ -15,8 +15,8 @@ class JSLexer(Lexer):
     #
     # """
     #
-    # def __init__(self, data):
-    #     self.data = data
+    def __init__(self, ts_):
+        self.ts = ts_
 
     tokens = {CTEENTERA, CADENA, CTELOGICA, OPARIT, OPESP,
               OPREL, OPLOG, OPASIG, ID, NUMBER, STRING, BOOLEAN, LET, ALERT,
@@ -180,8 +180,8 @@ class JSLexer(Lexer):
         return t
 
     def ID(self, t):
-        tables.add_entry(id0, t.value)
-        t.value = tables.get_pos(id0, t.value)
+        self.ts.add_entry(0, t.value)
+        t.value = self.ts.get_pos(0, t.value)
         return t
 
     def OPARIT(self, t):
@@ -272,13 +272,16 @@ class JSLexer(Lexer):
 
 if __name__ == '__main__':
 
-    f = open('Input.txt', 'r')
-    data = f.read()
-    tables = SymTable()
-    id0 = tables.new_table()
     sys.stdout = open("Tokens.txt", "w")
     sys.stderr = open("Error.txt", "w")
-    lexer = JSLexer()
+
+    f = open('Input.txt', 'r')
+    data = f.read()
+
+    tables = SymTable()
+    id0 = tables.new_table()
+    lexer = JSLexer(tables)
+
 
     for tok in lexer.tokenize(data):
         print(f'<{tok.type} , {tok.value}>')

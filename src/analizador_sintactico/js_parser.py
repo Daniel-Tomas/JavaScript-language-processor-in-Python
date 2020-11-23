@@ -8,11 +8,7 @@ from src.tabla_simbolos.sym_table import SymTable
 class JSParser(Parser):
     debugfile = 'parser.out'
 
-    tokens = {CTEENTERA, CADENA, CTELOGICA, OPARIT, OPESP,
-              OPREL, OPLOG, OPASIG, ID, NUMBER, STRING, BOOLEAN, LET, ALERT,
-              INPUT, FUNCTION, ABPAREN, CEPAREN, ABLLAVE, CELLAVE, COMA,
-              PUNTOYCOMA, RETURN, IF, FOR
-              }
+    tokens = JSLexer.tokens
 
     def __init__(self, lista_reglas_, TS_):
         self.lista_reglas = lista_reglas_
@@ -296,19 +292,18 @@ class JSParser(Parser):
             print(f'Token ilegal {p.type} en la linea {p.lineno} con índice {p.index}', file=sys.stderr)
 
 if __name__ == '__main__':
-    listaReglas = []
-    ts = SymTable()
-    id0 = ts.new_table()
-
-    lexer = JSLexer()
-    parser = JSParser(listaReglas, ts)
-
     sys.stdout = open("Parse.txt", "w")
     sys.stderr = open("Error.txt", "w")
 
-    #f = open('Input.txt', 'r')
-    #data = f.read()
+    tables = SymTable()
+    id0 = tables.new_table()
+    listaReglas = []
+
+    lexer = JSLexer(tables)
+    parser = JSParser(listaReglas, tables)
+
     result = parser.parse(lexer.tokenize('''hola = 2;'''))
+
     print(result)
     print(listaReglas)
-    ts.write_table("TS-Output.txt")
+    tables.write_table("TS-Output.txt")
