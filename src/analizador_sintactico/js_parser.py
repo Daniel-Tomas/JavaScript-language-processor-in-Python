@@ -141,12 +141,11 @@ class JSParser(Parser):
 
     @_('OPARIT')
     def O(self, p):
-        if p.value == 0:
+        if p[0].value == 0:
             self.lista_reglas.append(26)
         else:
             self.lista_reglas.append(27)
         return
-
 
     @_('V')
     def U(self, p):
@@ -284,12 +283,14 @@ class JSParser(Parser):
         return
 
     def error(self, p):
-        print("Error sintáctico: ")
+        print("Error sintáctico: ", file=sys.stderr)
         if not p:
-            print("End of File!")
-            exit(1)
+            print("End of File!", file=sys.stderr)
+            exit(2)
         else:
-            print(f'Token ilegal {p.type} en la linea {p.lineno} con índice {p.index}', file=sys.stderr)
+            print(f'Token ilegal {p.type} en la linea {p.lineno}', file=sys.stderr)
+            exit(3)
+
 
 if __name__ == '__main__':
     sys.stdout = open("Parse.txt", "w")
@@ -301,9 +302,10 @@ if __name__ == '__main__':
 
     lexer = JSLexer(tables)
     parser = JSParser(listaReglas, tables)
-
-    result = parser.parse(lexer.tokenize('''hola = 2;'''))
-
-    print(result)
-    print(listaReglas)
+    f = open('Input.txt', 'r')
+    data = f.read()
+    result = parser.parse(lexer.tokenize(data))
+    res = str(listaReglas).strip('[]')
+    res = res.replace(',', '')
+    print(f'Ascendente {res}')
     tables.write_table("TS-Output.txt")
