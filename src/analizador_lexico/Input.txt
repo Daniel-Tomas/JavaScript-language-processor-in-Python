@@ -1,6 +1,6 @@
 let boolean booleano;
 
-alert (4+5-77);
+alert (4-5-77);
 function boolean bisiesto (number a)
 {	let number bis;
 	alert ("Es bisiesto?");

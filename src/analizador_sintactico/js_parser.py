@@ -134,152 +134,144 @@ class JSParser(Parser):
         self.lista_reglas.append(24)
         return
 
-    @_('U O V')
+    @_('U OPARIT V')
     def U(self, p):
         self.lista_reglas.append(25)
         return
 
-    @_('OPARIT')
-    def O(self, p):
-        if p[0].value == 0:
-            self.lista_reglas.append(26)
-        else:
-            self.lista_reglas.append(27)
-        return
-
     @_('V')
     def U(self, p):
-        self.lista_reglas.append(28)
+        self.lista_reglas.append(26)
         return
 
     @_('OPESP ID')
     def V(self, p):
-        self.lista_reglas.append(29)
+        self.lista_reglas.append(27)
         return
 
     @_('ID')
     def V(self, p):
-        self.lista_reglas.append(30)
+        self.lista_reglas.append(28)
         return
 
     @_('ABPAREN E CEPAREN')
     def V(self, p):
-        self.lista_reglas.append(31)
+        self.lista_reglas.append(29)
         return
 
     @_('ID ABPAREN L CEPAREN')
     def V(self, p):
-        self.lista_reglas.append(32)
+        self.lista_reglas.append(30)
         return
 
     @_('CTEENTERA')
     def V(self, p):
-        self.lista_reglas.append(33)
+        self.lista_reglas.append(31)
         return
 
     @_('CADENA')
     def V(self, p):
-        self.lista_reglas.append(34)
+        self.lista_reglas.append(32)
         return
 
     @_('CTELOGICA')
     def V(self, p):
-        self.lista_reglas.append(35)
+        self.lista_reglas.append(33)
         return
 
     @_('E')
     def X(self, p):
-        self.lista_reglas.append(36)
+        self.lista_reglas.append(34)
         return
 
     @_('')
     def X(self, p):
-        self.lista_reglas.append(37)
+        self.lista_reglas.append(35)
         return
 
     @_('E Q')
     def L(self, p):
-        self.lista_reglas.append(38)
+        self.lista_reglas.append(36)
         return
 
     @_('')
     def L(self, p):
-        self.lista_reglas.append(39)
+        self.lista_reglas.append(37)
         return
 
     @_('COMA E Q')
     def Q(self, p):
-        self.lista_reglas.append(40)
+        self.lista_reglas.append(38)
         return
 
     @_('')
     def Q(self, p):
+        self.lista_reglas.append(39)
+        return
+
+    @_('ID OPASIG E')
+    def D(self, p):
+        self.lista_reglas.append(40)
+        return
+
+    @_('')
+    def D(self, p):
         self.lista_reglas.append(41)
         return
 
     @_('ID OPASIG E')
-    def D(self, p):
-        self.lista_reglas.append(42)
-        return
-
-    @_('')
-    def D(self, p):
-        self.lista_reglas.append(43)
-        return
-
-    @_('ID OPASIG E')
     def Z(self, p):
-        self.lista_reglas.append(44)
+        self.lista_reglas.append(42)
         return
 
     @_('OPESP ID')
     def Z(self, p):
-        self.lista_reglas.append(45)
+        self.lista_reglas.append(43)
         return
 
     @_('')
     def Z(self, p):
-        self.lista_reglas.append(46)
+        self.lista_reglas.append(44)
         return
 
     @_('T')
     def H(self, p):
-        self.lista_reglas.append(47)
+        self.lista_reglas.append(45)
         return
 
     @_('')
     def H(self, p):
-        self.lista_reglas.append(48)
+        self.lista_reglas.append(46)
         return
 
     @_('T ID K')
     def A(self, p):
-        self.lista_reglas.append(49)
+        self.lista_reglas.append(47)
         return
 
     @_('')
     def A(self, p):
-        self.lista_reglas.append(50)
+        self.lista_reglas.append(48)
         return
 
     @_('COMA T ID K')
     def K(self, p):
-        self.lista_reglas.append(51)
+        self.lista_reglas.append(49)
         return
 
     @_('')
     def K(self, p):
-        self.lista_reglas.append(52)
+        self.lista_reglas.append(50)
         return
 
     @_('B C')
     def C(self, p):
-        self.lista_reglas.append(53)
+        self.lista_reglas.append(51)
         return
 
     @_('')
     def C(self, p):
-        self.lista_reglas.append(54)
+        self.lista_reglas.append(52)
         return
 
     def error(self, p):
