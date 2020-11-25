@@ -5,9 +5,9 @@
 <ALERT , >
 <ABPAREN , >
 <CTEENTERA , 4>
-<OPARIT , 0>
+<OPARIT , ->
 <CTEENTERA , 5>
-<OPARIT , 1>
+<OPARIT , ->
 <CTEENTERA , 77>
 <CEPAREN , >
 <PUNTOYCOMA , >
@@ -37,7 +37,7 @@
 <ABPAREN , >
 <ABPAREN , >
 <ID , 2>
-<OPARIT , 1>
+<OPARIT , ->
 <CTEENTERA , 4>
 <OPREL , >
 <CTEENTERA , 0>
@@ -85,7 +85,7 @@
 <ID , 6>
 <OPASIG , >
 <ID , 6>
-<OPARIT , 1>
+<OPARIT , ->
 <CTEENTERA , 1>
 <PUNTOYCOMA , >
 <RETURN , >

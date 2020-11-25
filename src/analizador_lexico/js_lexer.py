@@ -31,7 +31,7 @@ class JSLexer(Lexer):
     CADENA = r'".*?"'
     CTELOGICA = r'true|false'
     OPESP = r'--'
-    OPARIT = r'\+|-'
+    OPARIT = r'-'
     OPREL = r'=='
     OPASIG = r'='
     OPLOG = r'&&'
@@ -61,6 +61,9 @@ class JSLexer(Lexer):
         return t
 
     def OPESP(self, t):
+        return self.empty(t)
+
+    def OPARIT(self, t):
         return self.empty(t)
 
     def OPREL(self, t):
@@ -147,19 +150,6 @@ class JSLexer(Lexer):
             self.error(t, "CTEENTERA")
         return t
 
-    def CADENA(self, t):
-        """If the string length is bigger than 64 calls self.error.
-
-        Args:
-            t(Token): The string constant token.
-
-        Returns:
-            Token: the same token.
-        """
-        if len(t.value) > 64:
-            self.error(t, "CADENA")
-        return t
-
     def CTELOGICA(self, t):
         """Modifies the argument token changing its str value
             to an integer value.
@@ -179,27 +169,22 @@ class JSLexer(Lexer):
             t.value = 1
         return t
 
+    def CADENA(self, t):
+        """If the string length is bigger than 64 calls self.error.
+
+        Args:
+            t(Token): The string constant token.
+
+        Returns:
+            Token: the same token.
+        """
+        if len(t.value) > 64:
+            self.error(t, "CADENA")
+        return t
+
     def ID(self, t):
         self.ts.add_entry(0, t.value)
         t.value = self.ts.get_pos(0, t.value)
-        return t
-
-    def OPARIT(self, t):
-        """Modifies the argument token changing its str value
-            to an integer value.
-
-        The token value is set 0 if "+" is found or 1 if "-"
-
-        Args:
-            t(Token): The token which matches an arithmetic operation.
-
-        Returns:
-            Token: The return token modified.
-        """
-        if t.value == '+':
-            t.value = 0
-        else:
-            t.value = 1
         return t
 
     @_('\n+',
@@ -270,6 +255,7 @@ class JSLexer(Lexer):
     #     tok_EOF.value = ''
     #     yield tok_EOF
 
+
 if __name__ == '__main__':
 
     sys.stdout = open("Tokens.txt", "w")
@@ -281,7 +267,6 @@ if __name__ == '__main__':
     tables = SymTable()
     id0 = tables.new_table()
     lexer = JSLexer(tables)
-
 
     for tok in lexer.tokenize(data):
         print(f'<{tok.type} , {tok.value}>')
