@@ -1,10 +1,3 @@
-Traceback (most recent call last):
-  File "/home/alex/PycharmProjects/PDL/src/analizador_sintactico/js_parser.py", line 311, in <module>
-    result = parser.parse(lexer.tokenize('''hola = 2;'''))
-  File "/usr/lib/python3.8/site-packages/sly/yacc.py", line 2043, in parse
-    lookahead = next(tokens, None)  # Get the next token
-  File "/usr/lib/python3.8/site-packages/sly/lex.py", line 419, in tokenize
-    tok = _token_funcs[tok.type](self, tok)
-  File "/home/alex/PycharmProjects/PDL/src/analizador_lexico/js_lexer.py", line 183, in ID
-    tables.add_entry(id0, t.value)
-NameError: name 'tables' is not defined
+Ascendente 46 18 14 15 50 49 47 19 31 26 24 22 40 28 26 24 22 44
+Error sintáctico: 
+Token ilegal CEPAREN en la linea 3

@@ -275,6 +275,9 @@ class JSParser(Parser):
         return
 
     def error(self, p):
+        res = str(self.lista_reglas).strip('[]')
+        res = res.replace(',', '')
+        print(f'Ascendente {res}', file=sys.stderr)
         print("Error sintáctico: ", file=sys.stderr)
         if not p:
             print("End of File!", file=sys.stderr)
