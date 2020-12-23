@@ -5,23 +5,23 @@ import sys
 
 
 class JSLexer(Lexer):
-    """Represents a javascript lexer.
+    """Represents a javascript lexer."""
 
-    Args:
-        data (str): the text to be set.
-
-    Attributes:
-        data (str): the code which is going to be analyzed by the lexer.
-
-    """
-
-    def __init__(self, data):
-        self.data = data
+    # Args:
+    #     data (str): the text to be set.
+    #
+    # Attributes:
+    #     data (str): the code which is going to be analyzed by the lexer.
+    #
+    # """
+    #
+    def __init__(self, ts_):
+        self.ts = ts_
 
     tokens = {CTEENTERA, CADENA, CTELOGICA, OPARIT, OPESP,
               OPREL, OPLOG, OPASIG, ID, NUMBER, STRING, BOOLEAN, LET, ALERT,
               INPUT, FUNCTION, ABPAREN, CEPAREN, ABLLAVE, CELLAVE, COMA,
-              PUNTOYCOMA, RETURN, IF, FOR, EOF
+              PUNTOYCOMA, RETURN, IF, FOR
               }
 
     ignore = ' \t'
@@ -31,7 +31,7 @@ class JSLexer(Lexer):
     CADENA = r'".*?"'
     CTELOGICA = r'true|false'
     OPESP = r'--'
-    OPARIT = r'\+|-'
+    OPARIT = r'-'
     OPREL = r'=='
     OPASIG = r'='
     OPLOG = r'&&'
@@ -61,6 +61,9 @@ class JSLexer(Lexer):
         return t
 
     def OPESP(self, t):
+        return self.empty(t)
+
+    def OPARIT(self, t):
         return self.empty(t)
 
     def OPREL(self, t):
@@ -147,19 +150,6 @@ class JSLexer(Lexer):
             self.error(t, "CTEENTERA")
         return t
 
-    def CADENA(self, t):
-        """If the string length is bigger than 64 calls self.error.
-
-        Args:
-            t(Token): The string constant token.
-
-        Returns:
-            Token: the same token.
-        """
-        if len(t.value) > 64:
-            self.error(t, "CADENA")
-        return t
-
     def CTELOGICA(self, t):
         """Modifies the argument token changing its str value
             to an integer value.
@@ -179,27 +169,22 @@ class JSLexer(Lexer):
             t.value = 1
         return t
 
-    def ID(self, t):
-        tables.add_entry(id0, t.value)
-        t.value = tables.get_pos(id0, t.value)
-        return t
-
-    def OPARIT(self, t):
-        """Modifies the argument token changing its str value
-            to an integer value.
-
-        The token value is set 0 if "+" is found or 1 if "-"
+    def CADENA(self, t):
+        """If the string length is bigger than 64 calls self.error.
 
         Args:
-            t(Token): The token which matches an arithmetic operation.
+            t(Token): The string constant token.
 
         Returns:
-            Token: The return token modified.
+            Token: the same token.
         """
-        if t.value == '+':
-            t.value = 0
-        else:
-            t.value = 1
+        if len(t.value) > 64:
+            self.error(t, "CADENA")
+        return t
+
+    def ID(self, t):
+        self.ts.add_entry(0, t.value)
+        t.value = self.ts.get_pos(0, t.value)
         return t
 
     @_('\n+',
@@ -253,33 +238,36 @@ class JSLexer(Lexer):
         print(f'{res} en la linea {self.lineno} y columna {self.find_column(t)}', file=sys.stderr)
         exit()
 
-    def get_token(self):
-        """Generator that yields tokens of the data text one by one.
+    # def get_token(self):
+    #     """Generator that yields tokens of the data text one by one.
+    #
+    #     Finally, gives a different token which represents the end of
+    #     file.
+    #
+    #     Yields:
+    #         Token: The next token until EOF.
+    #     """
+    #     for tok in self.tokenize(self.data):
+    #         yield tok
+    #
+    #     tok_EOF = Token()
+    #     tok_EOF.type = 'EOF'
+    #     tok_EOF.value = ''
+    #     yield tok_EOF
 
-        Finally, gives a different token which represents the end of
-        file.
-
-        Yields:
-            Token: The next token until EOF.
-        """
-        for tok in self.tokenize(self.data):
-            yield tok
-
-        tok_EOF = Token()
-        tok_EOF.type = 'EOF'
-        tok_EOF.value = ''
-        yield tok_EOF
 
 if __name__ == '__main__':
 
-    f = open('Input.txt', 'r')
-    data = f.read()
-    tables = SymTable()
-    id0 = tables.new_table()
     sys.stdout = open("Tokens.txt", "w")
     sys.stderr = open("Error.txt", "w")
-    lexer = JSLexer(data)
 
-    for tok in lexer.get_token():
+    f = open('Input.txt', 'r')
+    data = f.read()
+
+    tables = SymTable()
+    id0 = tables.new_table()
+    lexer = JSLexer(tables)
+
+    for tok in lexer.tokenize(data):
         print(f'<{tok.type} , {tok.value}>')
     tables.write_table("TS-Output.txt")
