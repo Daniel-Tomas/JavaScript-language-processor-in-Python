@@ -1,12 +1,24 @@
-Crear pila de atributos
-Y -> P {}
-P -> B P
-P -> F P
-P -> lambda
-B -> if ( E ) S
-B -> let T id ;
-B -> S
-B -> for ( D ; E ; Z ) { C }
+Y -> P {TSG:= CreaTS()
+        TSactual:= TSG
+        DespG:= 0
+        ZonaDecl:= true}
+P -> B P {}
+P -> F P {}
+P -> lambda {}
+B -> if ( E ) S {if E.tipo != log
+                    then Error(1)
+                 }
+B -> let T id ; {if estaEnTS(id)
+                    then Error(2)
+                else
+                    añadirTipoTS(id,T.tipo)
+                    añadirDespTS(id,desp)
+                    desp += T.ancho
+                }
+B -> S {}
+B -> for ( D ; E ; Z ) { C } { if E.tipo != log
+                                    then Error(3)
+
 S -> id = E ;
 S -> id ( L ) ;
 S -> alert ( E ) ;
