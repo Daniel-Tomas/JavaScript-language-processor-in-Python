@@ -18,7 +18,6 @@ B -> let T id ; {if estaEnTS(id)
 B -> S {}
 B -> for ( D ; E ; Z ) { C } { if E.tipo != log
                                     then Error(3)
-
 S -> id = E ;
 S -> id ( L ) ;
 S -> alert ( E ) ;
