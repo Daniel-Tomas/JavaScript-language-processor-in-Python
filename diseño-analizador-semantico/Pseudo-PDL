@@ -1,36 +1,59 @@
-Y -> P {TSG:= CreaTS()
-        TSactual:= TSG
-        DespG:= 0
-        ZonaDecl:= true}
+{TS_g:= CreaTS()
+        TS_actual:= TSG
+        desp_g:= 0
+        zona_decl:= true}
+Y -> P
 P -> B P {}
 P -> F P {}
 P -> lambda {}
 B -> if ( E ) S {if E.tipo != log
-                    then Error(1)
+                    then Error("La condición debe ser un lógico")
                  }
-B -> let T id ; {if estaEnTS(id)
-                    then Error(2)
-                else
-                    añadirTipoTS(id,T.tipo)
-                    añadirDespTS(id,desp)
-                    desp += T.ancho
+B -> K T id ; {#A MIRAR POSTERIORMENTE
+                    zona_declaración = false
+                    añadir_tipo_TS(id,T.tipo)
+                    añadir_desp_TS(id,desp)
+                    desp_g += T.ancho
                 }
+G -> let {zona_declaracion = true}
 B -> S {}
 B -> for ( D ; E ; Z ) { C } { if E.tipo != log
-                                    then Error(3)
-S -> id = E ;
-S -> id ( L ) ;
-S -> alert ( E ) ;
-S -> input ( id ) ;
-S -> return X ;
-T -> number
-T -> boolean
-T -> string
-F -> F1 F2 F3
-F1 -> function H id
-F2 -> ( A )
-F3 -> { C }
-E -> E && R
+                                    then Error("La condición debe ser un lógico") }
+S -> id = E ; { if ( id.tipo != E.tipo )
+                then Error("El tipo de la variable a asignar no corresponde con el tipo asignado") }
+S -> id ( L ) ; { if L.size != TS_params(id)
+                    then Error("El número de parámetros introducidos no son los esperados, deberían ser TS_Param(id)")
+                  if id.tipo != L.tipo
+                    then Error("El tipo de los parámetros no es el esperado, se esperaban TS_Param(id,pos),...")
+                    S.tipo = busca_tipo(id)}
+S -> alert ( E ) ; { if ( E.tipo != cadena && E.tipo != entero)
+                        then Error("La expresión introducida no es una cadena o un entero")}
+S -> input ( id ) ; { if ( busca_tipo(id) != cadena && busca_tipo(id) != entero)
+                        then Error("La variable introducida no es de tipo cadena o entero")}
+S -> return X ; { if zona_function != true
+                    if X.tipo != tipo_return
+                        then Error("El tipo de retorno no corresponde con el tipo de retorno de la función, se esperaba tipo_return")
+                  else
+                    then Error("No puede haber return fuera de una función")
+                 } #Preguntar si hay que comprobar cada posible camino dentro de una función
+T -> number {T.tipo = ent}
+T -> boolean {T.tipo = log}
+T -> string {T.tipo = cadena}
+F -> F1 F2 F3 { añadir_param_TS(F1.pos, F2.tipo, F2.tipo.size) #Preguntar si hay que apuntar el modo de paso de variables
+                destruye_TS (TS_l)
+                TS_actual:= TS_g}
+F1 -> function H id {TS_l:= crea_TS()
+                    TS_actual:= TS_l
+                    zona_function = true
+                    tipo_return = H.tipo
+                    TS_devuelto(id) = tipo_return
+                    desp_l:= 0
+                    inserta_et_TS (id.pos, nueva_et ())
+                    F1.pos = id.pos}
+F2 -> ( A ) { F2.tipo = A.tipo,
+            zona_declaración = false}
+F3 -> { C } {}
+E -> E && R {}
 E -> R
 R -> R == U
 R -> U
@@ -54,11 +77,21 @@ D -> lambda
 Z -> id = E
 Z -> -- id
 Z -> lambda
-H -> T
-H -> lambda
-A -> T id K
+H -> T { zona_declaracion = true
+         H.tipo = T.tipo}
+H -> lambda { zona_declaracion = true
+             H.tipo = void}
+A -> T id K {añadir(id,T.tipo)
+            if A.tipo.size == 0
+                then A.tipo = T.tipo
+            else
+                then A.tipo = A.tipo x T.tipo}
 A -> lambda
-K -> , T id K
-K -> lambda
+K -> , T id K1   {añadir(id,T.tipo)
+                    if K.tipo.size == 0
+                       then K.tipo = T.tipo
+                    else
+                       then K.tipo = K.tipo x T.tipo}
+K -> lambda {K.tipo = }
 C -> B C
 C -> lambda

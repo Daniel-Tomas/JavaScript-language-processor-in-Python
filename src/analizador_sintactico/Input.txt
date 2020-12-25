@@ -1,7 +1,18 @@
-function FuncionSentencia (number b, boolean z)
+let number entero;
+let string cadena;
+let boolean logico;
+let number abcdefghij________;
+function FuncionNumero ()
 {
-  for (b=1;z; ))
-  {
-	alert (88);
-  }
+let number i;
+let number j;
+logico = i = j;
 }
+function string FuncionRetorno (string hola, number x, boolean z)
+{
+let number i;
+input (i);
+alert (hola);
+return string;
+}
+
