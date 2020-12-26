@@ -1,97 +1,122 @@
+Axioma = Y
+NoTerminales = { Y P B F E R U V D L S X Q T Z F1 F2 F3 A C H K G I J }
+Terminales = { && == - -- ( ) = ; , { } id ent cad log let alert input return for if number boolean string function }
+Producciones = {
 {TS_g:= CreaTS()
-        TS_actual:= TSG
-        desp_g:= 0
-        zona_decl:= true}
-Y -> P
+        TS_actual = TSG
+        desp = 0
+        zona_decl = true }
+Y -> P {}
 P -> B P {}
 P -> F P {}
-P -> lambda {}
+P1 -> lambda {}
 B -> if ( E ) S {if E.tipo != log
-                    then Error("La condición debe ser un lógico")
-                 }
-B -> K T id ; {#A MIRAR POSTERIORMENTE
-                    zona_declaración = false
-                    añadir_tipo_TS(id,T.tipo)
-                    añadir_desp_TS(id,desp)
-                    desp_g += T.ancho
-                }
-G -> let {zona_declaracion = true}
+                    then Error("La condición debe ser un lógico") }
+B -> G T id ; { zona_declaración = false
+                añadir_tipo_TS(id, T.tipo)
+                añadir_desp_TS(id, desp)
+                desp += T.ancho }
+G -> let {zona_declaracion = true }
 B -> S {}
 B -> for ( D ; E ; Z ) { C } { if E.tipo != log
                                     then Error("La condición debe ser un lógico") }
-S -> id = E ; { if ( id.tipo != E.tipo )
+S -> J ; {}
+J -> id = E { if busca_tipo_TS(id) != E.tipo
                 then Error("El tipo de la variable a asignar no corresponde con el tipo asignado") }
-S -> id ( L ) ; { if L.size != TS_params(id)
-                    then Error("El número de parámetros introducidos no son los esperados, deberían ser TS_Param(id)")
-                  if id.tipo != L.tipo
-                    then Error("El tipo de los parámetros no es el esperado, se esperaban TS_Param(id,pos),...")
-                    S.tipo = busca_tipo(id)}
+
+S -> I ; {}
+I -> id ( L ) { if L.size != busca_num_params_TS(id)
+                    then Error("El número de parámetros introducidos no son los esperados, deberían ser {busca_num_params_TS(id)}")
+                  if busca_tipo_TS(id) != L.tipo
+                    then Error("El tipo de los parámetros no es el esperado, se esperaban {busca_tipo_params_TS(id)}") }
 S -> alert ( E ) ; { if ( E.tipo != cadena && E.tipo != entero)
-                        then Error("La expresión introducida no es una cadena o un entero")}
-S -> input ( id ) ; { if ( busca_tipo(id) != cadena && busca_tipo(id) != entero)
-                        then Error("La variable introducida no es de tipo cadena o entero")}
+                        then Error("La expresión introducida no es una cadena o un entero") }
+S -> input ( id ) ; { if ( busca_tipo_TS(id) != cadena && busca_tipo_TS(id) != entero)
+                        then Error("La variable introducida no es de tipo cadena o entero") }
 S -> return X ; { if zona_function != true
                     if X.tipo != tipo_return
                         then Error("El tipo de retorno no corresponde con el tipo de retorno de la función, se esperaba tipo_return")
-                  else
-                    then Error("No puede haber return fuera de una función")
-                 } #Preguntar si hay que comprobar cada posible camino dentro de una función
-T -> number {T.tipo = ent}
-T -> boolean {T.tipo = log}
-T -> string {T.tipo = cadena}
-F -> F1 F2 F3 { añadir_param_TS(F1.pos, F2.tipo, F2.tipo.size) #Preguntar si hay que apuntar el modo de paso de variables
+                    else
+                       Error("No puede haber return fuera de una función") } #Preguntar si hay que comprobar cada posible camino dentro de una función
+T -> number {T.tipo = ent }
+T -> boolean {T.tipo = log }
+T -> string {T.tipo = cadena }
+F -> F1 F2 F3 { añadir_param_TS(F1.id, F2.tipo, F2.tipo.size) #Preguntar si hay que apuntar el modo de paso de variables
                 destruye_TS (TS_l)
-                TS_actual:= TS_g}
+                TS_actual:= TS_g
+                desp = desp_g }
 F1 -> function H id {TS_l:= crea_TS()
                     TS_actual:= TS_l
                     zona_function = true
                     tipo_return = H.tipo
-                    TS_devuelto(id) = tipo_return
-                    desp_l:= 0
+                    añadir_tipo_devuelto_TS(id, tipo_return)
                     inserta_et_TS (id.pos, nueva_et ())
-                    F1.pos = id.pos}
+                    F1.id = id
+                    desp_g = desp
+                    desp = 0 }
 F2 -> ( A ) { F2.tipo = A.tipo,
-            zona_declaración = false}
+            zona_declaración = false }
 F3 -> { C } {}
-E -> E && R {}
-E -> R
-R -> R == U
-R -> U
-U -> U - V
-U -> V
-V -> -- id
-V -> id
-V -> ( E )
-V -> id ( L )
-V -> ent
-V -> cad
-V -> log
-X -> E
-X -> lambda
-L -> E Q
-L -> lambda
-Q -> , E Q
-Q -> lambda
-D -> id = E
-D -> lambda
-Z -> id = E
-Z -> -- id
-Z -> lambda
+E -> E1 && R { if E1.tipo != log || R.tipo != log
+                then Error("El operador lógico '&&' solo trabaja con tipos de datos lógicos")
+             E.tipo = log }
+E -> R {E.tipo = R.tipo }
+R -> R1 == U { if R1.tipo != log || U.tipo != log
+                then Error("El operador de relación '==' solo trabaja con tipos de datos lógicos")
+             E.tipo = log }
+R -> U {R.tipo = U.tipo }
+U -> U1 - V { if U1.tipo != ent || V.tipo != ent
+                then Error("El operador aritmético '-' solo trabaja con tipos de datos enteros")
+                U.tipo = ent }
+U -> V { U.tipo = V.tipo }
+V -> -- id { if busca_tipo_TS(id) != ent
+                then Error("El operador especial '--' solo trabaja con tipos de datos enteros")
+                V.tipo = ent }
+V -> id { V.tipo = busca_tipo_TS(id) }
+V -> ( E ) { V.tipo = E.tipo }
+V -> I {}
+V -> ent { V.tipo = ent }
+V -> cad { V.tipo = cad }
+V -> log { V.tipo = log }
+X -> E { X.tipo = E.tipo }
+X -> lambda { X.tipo = void }
+L -> E Q { if Q.tipo.size == 0
+                then L.tipo = E.tipo
+            else
+                L.tipo = E.tipo x Q.tipo}
+L -> lambda {  L.tipo = void }
+Q -> , E Q1 {if Q1.tipo.size == 0
+                then
+                    Q.tipo = E.tipo
+             else
+                Q.tipo = E.tipo x Q1.tipo }
+Q -> lambda { Q.tipo.size = 0 }
+
+D -> J {}
+D -> lambda {}
+Z -> J {}
+Z -> -- id {if busca_tipo_TS(id) != ent
+                then Error("El operador especial '--' solo trabaja con tipos de datos enteros" }
+Z -> lambda {}
 H -> T { zona_declaracion = true
-         H.tipo = T.tipo}
+         H.tipo = T.tipo }
 H -> lambda { zona_declaracion = true
-             H.tipo = void}
-A -> T id K {añadir(id,T.tipo)
-            if A.tipo.size == 0
+             H.tipo = void }
+A -> T id K { añadir_tipo_TS(id, T.tipo)
+             añadir_desp_TS(id, desp)
+             desp += T.ancho
+            if K.tipo.size == 0
                 then A.tipo = T.tipo
             else
-                then A.tipo = A.tipo x T.tipo}
-A -> lambda
-K -> , T id K1   {añadir(id,T.tipo)
-                    if K.tipo.size == 0
+                A.tipo = K.tipo x T.tipo }
+A -> lambda { A.tipo = void }
+K -> , T id K1   { añadir_tipo_TS(id, T.tipo)
+                    añadir_desp_TS(id, desp)
+                    desp += T.ancho
+                    if K1.tipo.size == 0
                        then K.tipo = T.tipo
                     else
-                       then K.tipo = K.tipo x T.tipo}
-K -> lambda {K.tipo = }
-C -> B C
-C -> lambda
+                        K.tipo = K1.tipo x T.tipo }
+K -> lambda { K.tipo.size = 0 }
+C -> B C {}
+C -> lambda {}
