@@ -27,7 +27,7 @@ H -> id ( I ) { if I.size != busca_num_params_TS(id)
 I -> E J { if J.tipo.size == 0
                 then I.tipo = E.tipo
             else
-                I.tipo = E.tipo x J.tipo}
+                I.tipo = E.tipo x J.tipo }
 J -> , E J1 { if J1.tipo.size == 0
                 then J.tipo = E.tipo
               else

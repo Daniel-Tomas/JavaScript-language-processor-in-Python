@@ -1,57 +1,61 @@
-Axioma = Y
-NoTerminales = { Y P B F E R U V D L S X Q T Z F1 F2 F3 A C H K G I J }
+Axioma = B
+NoTerminales = { A B C D E F G H I J K L M N O P Q R S T U V }
 Terminales = { && == - -- ( ) = ; , { } id ent cad log let alert input return for if number boolean string function }
 Producciones = {
-Y -> P
-P -> B P
-P -> F P
-P -> lambda
-B -> if ( E ) S
-B -> let T id ;
-B -> S
-B -> for ( D ; E ; Z ) { C }
-S -> id = E ;
-S -> id ( L ) ;
+B -> D
+D -> F D
+D -> G D
+D -> lambda
+G -> if ( E ) S
+G -> S
+S -> H ;
+H -> id ( I )
+I -> E J
+J -> , E J1
+J -> lambda
+I -> lambda
+S -> K ;
+K -> id = E
 S -> alert ( E ) ;
 S -> input ( id ) ;
-S -> return X ;
+S -> return L ;
+L -> E
+L -> lambda
+G -> let M T id ;
+M -> lambda
 T -> number
 T -> boolean
 T -> string
+G -> for ( N ; E ; O )
+N -> K
+N -> lambda
+O -> K
+O -> -- id
+O -> lambda
+C -> G C
+C -> lambda
 F -> F1 F2 F3
-F1 -> function H id
+F1 -> function P Q id
+P -> lambda
+Q -> T
+Q -> lambda
 F2 -> ( A )
+A -> T id R
+A -> lambda
+R -> , T id R1
+R -> lambda
 F3 -> { C }
-E -> E && R
+E -> E1 && R
 E -> R
-R -> R == U 
+R -> R1 == U
 R -> U
-U -> U - V
+U -> U1 - V
 U -> V
 V -> -- id
 V -> id
 V -> ( E )
-V -> id ( L )
+V -> H
 V -> ent
 V -> cad
 V -> log
-X -> E
-X -> lambda
-L -> E Q
-L -> lambda
-Q -> , E Q
-Q -> lambda
-D -> id = E
-D -> lambda
-Z -> id = E
-Z -> -- id
-Z -> lambda
-H -> T 
-H -> lambda
-A -> T id K 
-A -> lambda
-K -> , T id K
-K -> lambda
-C -> B C
-C -> lambda
 }
