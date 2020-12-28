@@ -14,264 +14,284 @@ class JSParser(Parser):
         self.lista_reglas = lista_reglas_
         self.TS = TS_
 
-    @_('P')
-    def Y(self, p):
+    @_('D')
+    def B(self, p):
         self.lista_reglas.append(1)
         return
 
-    @_('B P')
-    def P(self, p):
+    @_('F D')
+    def D(self, p):
         self.lista_reglas.append(2)
         return
 
-    @_('F P')
-    def P(self, p):
+    @_('G D')
+    def D(self, p):
         self.lista_reglas.append(3)
         return
 
     @_('')
-    def P(self, p):
+    def D(self, p):
         self.lista_reglas.append(4)
         return
 
     @_('IF ABPAREN E CEPAREN S')
-    def B(self, p):
+    def G(self, p):
         self.lista_reglas.append(5)
         return
 
-    @_('LET T ID PUNTOYCOMA')
-    def B(self, p):
+    @_('S')
+    def G(self, p):
         self.lista_reglas.append(6)
         return
 
-    @_('S')
-    def B(self, p):
+    @_('H PUNTOYCOMA')
+    def S(self, p):
         self.lista_reglas.append(7)
         return
 
-    @_('FOR ABPAREN D PUNTOYCOMA E PUNTOYCOMA Z CEPAREN ABLLAVE C CELLAVE')
-    def B(self, p):
+    @_('ID ABPAREN I CEPAREN')
+    def H(self, p):
         self.lista_reglas.append(8)
         return
 
-    @_('ID OPASIG E PUNTOYCOMA')
-    def S(self, p):
+    @_('E J')
+    def I(self, p):
         self.lista_reglas.append(9)
         return
 
-    @_('ID ABPAREN L CEPAREN PUNTOYCOMA')
-    def S(self, p):
+    @_('COMA E J')
+    def J(self, p):
         self.lista_reglas.append(10)
         return
 
-    @_('ALERT ABPAREN E CEPAREN PUNTOYCOMA')
-    def S(self, p):
+    @_('')
+    def J(self, p):
         self.lista_reglas.append(11)
         return
 
-    @_('INPUT ABPAREN ID CEPAREN PUNTOYCOMA')
-    def S(self, p):
+    @_('')
+    def I(self, p):
         self.lista_reglas.append(12)
         return
 
-    @_('RETURN X PUNTOYCOMA')
+    @_('K PUNTOYCOMA')
     def S(self, p):
         self.lista_reglas.append(13)
         return
 
+    @_('ID OPASIG E')
+    def K(self, p):
+        self.lista_reglas.append(14)
+        return
+
+    @_('ALERT ABPAREN E CEPAREN PUNTOYCOMA')
+    def S(self, p):
+        self.lista_reglas.append(15)
+        return
+
+    @_('INPUT ABPAREN ID CEPAREN PUNTOYCOMA')
+    def S(self, p):
+        self.lista_reglas.append(16)
+        return
+
+    @_('RETURN L PUNTOYCOMA')
+    def S(self, p):
+        self.lista_reglas.append(17)
+        return
+
+    @_('E')
+    def L(self, p):
+        self.lista_reglas.append(18)
+        return
+
+    @_('')
+    def L(self, p):
+        self.lista_reglas.append(19)
+        return
+
+    @_('LET M T ID PUNTOYCOMA')
+    def G(self, p):
+        self.lista_reglas.append(20)
+        return
+
+    @_('')
+    def M(self, p):
+        self.lista_reglas.append(21)
+        return
+
     @_('NUMBER')
     def T(self, p):
-        self.lista_reglas.append(14)
+        self.lista_reglas.append(22)
         return
 
     @_('BOOLEAN')
     def T(self, p):
-        self.lista_reglas.append(15)
+        self.lista_reglas.append(23)
         return
 
     @_('STRING')
     def T(self, p):
-        self.lista_reglas.append(16)
+        self.lista_reglas.append(24)
+        return
+
+    @_('FOR ABPAREN N PUNTOYCOMA E PUNTOYCOMA O CEPAREN ABLLAVE C CELLAVE')
+    def G(self, p):
+        self.lista_reglas.append(25)
+        return
+
+    @_('K')
+    def N(self, p):
+        self.lista_reglas.append(26)
+        return
+
+    @_('')
+    def N(self, p):
+        self.lista_reglas.append(27)
+        return
+
+    @_('K')
+    def O(self, p):
+        self.lista_reglas.append(28)
+        return
+
+    @_('OPESP ID')
+    def O(self, p):
+        self.lista_reglas.append(29)
+        return
+
+    @_('')
+    def O(self, p):
+        self.lista_reglas.append(30)
+        return
+
+    @_('G C')
+    def C(self, p):
+        self.lista_reglas.append(31)
+        return
+
+    @_('')
+    def C(self, p):
+        self.lista_reglas.append(32)
         return
 
     @_('F1 F2 F3')
     def F(self, p):
-        self.lista_reglas.append(17)
-        return
-
-    @_('FUNCTION H ID')
-    def F1(self, p):
-        self.lista_reglas.append(18)
-        return
-
-    @_('ABPAREN A CEPAREN')
-    def F2(self, p):
-        self.lista_reglas.append(19)
-        return
-
-    @_('ABLLAVE C CELLAVE')
-    def F3(self, p):
-        self.lista_reglas.append(20)
-        return
-
-    @_('E OPLOG R')
-    def E(self, p):
-        self.lista_reglas.append(21)
-        return
-
-    @_('R')
-    def E(self, p):
-        self.lista_reglas.append(22)
-        return
-
-    @_('R OPREL U')
-    def R(self, p):
-        self.lista_reglas.append(23)
-        return
-
-    @_('U')
-    def R(self, p):
-        self.lista_reglas.append(24)
-        return
-
-    @_('U OPARIT V')
-    def U(self, p):
-        self.lista_reglas.append(25)
-        return
-
-    @_('V')
-    def U(self, p):
-        self.lista_reglas.append(26)
-        return
-
-    @_('OPESP ID')
-    def V(self, p):
-        self.lista_reglas.append(27)
-        return
-
-    @_('ID')
-    def V(self, p):
-        self.lista_reglas.append(28)
-        return
-
-    @_('ABPAREN E CEPAREN')
-    def V(self, p):
-        self.lista_reglas.append(29)
-        return
-
-    @_('ID ABPAREN L CEPAREN')
-    def V(self, p):
-        self.lista_reglas.append(30)
-        return
-
-    @_('CTEENTERA')
-    def V(self, p):
-        self.lista_reglas.append(31)
-        return
-
-    @_('CADENA')
-    def V(self, p):
-        self.lista_reglas.append(32)
-        return
-
-    @_('CTELOGICA')
-    def V(self, p):
         self.lista_reglas.append(33)
         return
 
-    @_('E')
-    def X(self, p):
+    @_('FUNCTION P Q ID')
+    def F1(self, p):
         self.lista_reglas.append(34)
         return
 
     @_('')
-    def X(self, p):
+    def P(self, p):
         self.lista_reglas.append(35)
         return
 
-    @_('E Q')
-    def L(self, p):
+    @_('T')
+    def Q(self, p):
         self.lista_reglas.append(36)
         return
 
     @_('')
-    def L(self, p):
+    def Q(self, p):
         self.lista_reglas.append(37)
         return
 
-    @_('COMA E Q')
-    def Q(self, p):
+    @_('ABPAREN A CEPAREN')
+    def F2(self, p):
         self.lista_reglas.append(38)
         return
 
-    @_('')
-    def Q(self, p):
+    @_('T ID R')
+    def A(self, p):
         self.lista_reglas.append(39)
         return
 
-    @_('ID OPASIG E')
-    def D(self, p):
+    @_('')
+    def A(self, p):
         self.lista_reglas.append(40)
         return
 
-    @_('')
-    def D(self, p):
+    @_('COMA T ID R')
+    def R(self, p):
         self.lista_reglas.append(41)
         return
 
-    @_('ID OPASIG E')
-    def Z(self, p):
+    @_('')
+    def R(self, p):
         self.lista_reglas.append(42)
         return
 
-    @_('OPESP ID')
-    def Z(self, p):
+    @_('ABLLAVE C CELLAVE')
+    def F3(self, p):
         self.lista_reglas.append(43)
         return
 
-    @_('')
-    def Z(self, p):
+    @_('E OPLOG R')
+    def E(self, p):
         self.lista_reglas.append(44)
         return
 
-    @_('T')
-    def H(self, p):
+    @_('R')
+    def E(self, p):
         self.lista_reglas.append(45)
         return
 
-    @_('')
-    def H(self, p):
+    @_('R OPREL U')
+    def R(self, p):
         self.lista_reglas.append(46)
         return
 
-    @_('T ID K')
-    def A(self, p):
+    @_('U')
+    def R(self, p):
         self.lista_reglas.append(47)
         return
 
-    @_('')
-    def A(self, p):
+    @_('U OPARIT V')
+    def U(self, p):
         self.lista_reglas.append(48)
         return
 
-    @_('COMA T ID K')
-    def K(self, p):
+    @_('V')
+    def U(self, p):
         self.lista_reglas.append(49)
         return
 
-    @_('')
-    def K(self, p):
+    @_('OPESP ID')
+    def V(self, p):
         self.lista_reglas.append(50)
         return
 
-    @_('B C')
-    def C(self, p):
+    @_('ID')
+    def V(self, p):
         self.lista_reglas.append(51)
         return
 
-    @_('')
-    def C(self, p):
+    @_('ABPAREN E CEPAREN')
+    def V(self, p):
         self.lista_reglas.append(52)
+        return
+
+    @_('H')
+    def V(self, p):
+        self.lista_reglas.append(53)
+        return
+
+    @_('CTEENTERA')
+    def V(self, p):
+        self.lista_reglas.append(54)
+        return
+
+    @_('CADENA')
+    def V(self, p):
+        self.lista_reglas.append(55)
+        return
+
+    @_('CTELOGICA')
+    def V(self, p):
+        self.lista_reglas.append(56)
         return
 
     def error(self, p):
