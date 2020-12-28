@@ -1,5 +1,5 @@
 Axioma = B
-NoTerminales = { A B C D E F G H I J K L M N O P Q R S T U V }
+NoTerminales = { A B C D E F G H I J K L M N O P Q R S T U V F1 F2 F3 }
 Terminales = { && == - -- ( ) = ; , { } id ent cad log let alert input return for if number boolean string function }
 Producciones = {
 B -> D
@@ -42,7 +42,7 @@ Q -> lambda
 F2 -> ( A )
 A -> T id R
 A -> lambda
-R -> , T id R1
+R -> , T id R
 R -> lambda
 F3 -> { C }
 E -> E && R
