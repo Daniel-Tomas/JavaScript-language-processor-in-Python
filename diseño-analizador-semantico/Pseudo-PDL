@@ -143,35 +143,38 @@ V -> ent { V.tipo = ent }
 V -> cad { V.tipo = cad }
 V -> log { V.tipo = log }
 
-error(self, error_code):
+
+error_code_dict = {
+    1: "La condición debe ser un lógico",
+    2: "El número de parámetros introducidos no son los esperados, deberían ser {busca_num_params_TS(id)}",
+    3: "El tipo de los parámetros no es el esperado, se esperaban {busca_tipo_params_TS(id)}",
+    4: "La expresión introducida no es una cadena o un entero",
+    5: "La variable introducida no es de tipo cadena o entero",
+    6: "La condición debe ser un lógico",
+    7: "No puede haber return fuera de una función",
+    8: "No se permite la definición de funciones anidadas",
+    9: "El tipo de retorno no corresponde con el tipo de retorno de la función, se esperaba {tipo_return}",
+    10: "El tipo de la variable a asignar no corresponde con el tipo asignado",
+    11: "El operador especial '--' solo trabaja con tipos de datos enteros",
+    12: "El operador lógico '&&' solo trabaja con tipos de datos lógicos"
+    13: "El operador de relación '==' solo trabaja con tipos de datos enteros"
+    14: "El operador aritmético '-' solo trabaja con tipos de datos enteros"
+    15: "El operador especial '--' solo trabaja con tipos de datos enteros"
+}
+
+function error(error_code):
     res = ""
-    if error_code < 7
-       res = "ErrorDeAttributo: "
-    elif error_code > 8
+    if error_code <= 6:
+       res = "ErrorDeAtributo: "
+    elif error_code >= 9:
        res = "ErrorDeTipado: "
     else
        res = "NoImplementado: "
-    res = res + error_code_dict.get(error_code,"Código no válido")
+    res = res + error_code_dict.get(error_code, default="Código no válido")
     print(res)
 
-error_code_to_string(error_code, *args): #A revisar cuando se vaya a implementar la función
-    error_code_dict = {
-        1: "La condición debe ser un lógico",
-        2: "El número de parámetros introducidos no son los esperados, deberían ser {busca_num_params_TS(id)}",
-        3: "El tipo de los parámetros no es el esperado, se esperaban {busca_tipo_params_TS(id)}",
-        4: "La expresión introducida no es una cadena o un entero",
-        5: "La variable introducida no es de tipo cadena o entero",
-        6: "La condición debe ser un lógico",
-        7: "No puede haber return fuera de una función",
-        8: "No se permite la definición de funciones anidadas",
-        9: "El tipo de retorno no corresponde con el tipo de retorno de la función, se esperaba {tipo_return}",
-        10: "El tipo de la variable a asignar no corresponde con el tipo asignado",
-        11: "El operador especial '--' solo trabaja con tipos de datos enteros",
-        12: "El operador lógico '&&' solo trabaja con tipos de datos lógicos"
-        13: "El operador de relación '==' solo trabaja con tipos de datos enteros"
-        14: "El operador aritmético '-' solo trabaja con tipos de datos enteros"
-        15: "El operador especial '--' solo trabaja con tipos de datos enteros"
-    }
+
+# error_code_to_string(error_code, *args): #A revisar cuando se vaya a implementar la función
 
 
 
