@@ -1,5 +1,5 @@
 Axioma = B
-NoTerminales = { A B C D E F G H I J K L M N O P Q R S T U V }
+NoTerminales = { A B C D E F G H I J K L M N O P Q R S T U V F1 F2 F3 }
 Terminales = { && == - -- ( ) = ; , { } id ent cad log let alert input return for if number boolean string function }
 Producciones = {
 
@@ -144,9 +144,9 @@ V -> cad { V.tipo = cad }
 V -> log { V.tipo = log }
 
 def error(self, errorCode):
-    if error_code < 7:
-       print("ErrorDeAttributo: ", end =" ")
-    elif error_code > 8:
+    if error_code <= 6:
+       print("ErrorDeAtributo: ", end =" ")
+    elif error_code >= 9:
        print("ErrorDeTipado: ", end =" ")
     else:
        print("NoImplementado: ", end =" ")
