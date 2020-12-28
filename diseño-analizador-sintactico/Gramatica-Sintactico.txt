@@ -2,6 +2,7 @@ Axioma = B
 NoTerminales = { A B C D E F G H I J K L M N O P Q R S T U V }
 Terminales = { && == - -- ( ) = ; , { } id ent cad log let alert input return for if number boolean string function }
 Producciones = {
+
 B -> D
 D -> F D
 D -> G D
