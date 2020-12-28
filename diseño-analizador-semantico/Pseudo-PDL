@@ -15,13 +15,13 @@ D -> lambda {}
 
 
 G -> if ( E ) S { if E.tipo != log
-                    then Error("La condición debe ser un lógico") }
+                    then Error(1) }
 G -> S {}
 S -> H ; {}
 H -> id ( I ) { if I.size != busca_num_params_TS(id)
-                    then Error("El número de parámetros introducidos no son los esperados, deberían ser {busca_num_params_TS(id)}")
+                    then Error(2)
                 else if busca_tipo_TS(id) != I.tipo
-                    then Error("El tipo de los parámetros no es el esperado, se esperaban {busca_tipo_params_TS(id)}")
+                    then Error(3)
                 else
                     H.tipo = busca_tipo_devuelto_TS(id) }
 I -> E J { if J.tipo.size == 0
@@ -37,16 +37,16 @@ I -> lambda {  I.tipo = void }
 
 S -> K ; {}
 K -> id = E { if busca_tipo_TS(id) != E.tipo
-                then Error("El tipo de la variable a asignar no corresponde con el tipo asignado") }
+                then Error(10) }
 
 S -> alert ( E ) ; { if E.tipo != cadena && E.tipo != entero
-                        then Error("La expresión introducida no es una cadena o un entero") }
+                        then Error(4) }
 S -> input ( id ) ; { if busca_tipo_TS(id) != cadena && busca_tipo_TS(id) != entero
-                        then Error("La variable introducida no es de tipo cadena o entero") }
+                        then Error(5) }
 S -> return L ; { if zona_function != true
-                    then Error("No puede haber return fuera de una función") } #Preguntar si hay que comprobar cada posible camino dentro de una función
+                    then Error(7)} #Preguntar si hay que comprobar cada posible camino dentro de una función
                   else if L.tipo != tipo_return
-                    then Error("El tipo de retorno no corresponde con el tipo de retorno de la función, se esperaba {tipo_return}") }
+                    then Error(9) }
 L -> E { L.tipo = E.tipo }
 L -> lambda { L.tipo = void }
 
@@ -62,12 +62,12 @@ T -> string { T.tipo = cadena }
 
 
 G -> for ( N ; E ; O ) { C } { if E.tipo != log
-                                    then Error("La condición debe ser un lógico") }
+                                    then Error(6) }
 N -> K {}
 N -> lambda {}
 O -> K {}
 O -> -- id { if busca_tipo_TS(id) != ent
-                then Error("El operador especial '--' solo trabaja con tipos de datos enteros" }
+                then Error(11) }
 O -> lambda {}
 C -> G C {}
 C -> lambda {}
@@ -89,7 +89,7 @@ F1 -> function P Q id {TS_l = crea_TS()
                        inserta_et_TS (id.pos, nueva_et ())
                        F1.id = id }
 P -> lambda { if zona_function == true
-                then Error("No se permite la definición de funciones anidadas") }
+                then Error(8) }
 Q -> T { zona_declaracion = true
          Q.tipo = T.tipo }
 Q -> lambda { zona_declaracion = true
@@ -118,22 +118,22 @@ F3 -> { C } {}
 
 
 E -> E1 && R { if E1.tipo != log || R.tipo != log
-                then Error("El operador lógico '&&' solo trabaja con tipos de datos lógicos")
+                then Error(12)
                else
                 E.tipo = log }
 E -> R {E.tipo = R.tipo }
 R -> R1 == U { if R1.tipo != ent || U.tipo != ent
-                then Error("El operador de relación '==' solo trabaja con tipos de datos enteros")
+                then Error(13)
                else
                 E.tipo = log }
 R -> U { R.tipo = U.tipo }
 U -> U1 - V { if U1.tipo != ent || V.tipo != ent
-                then Error("El operador aritmético '-' solo trabaja con tipos de datos enteros")
+                then Error(14)
               else
                 U.tipo = ent }
 U -> V { U.tipo = V.tipo }
 V -> -- id { if busca_tipo_TS(id) != ent
-                then Error("El operador especial '--' solo trabaja con tipos de datos enteros")
+                then Error(15)
              else
                 V.tipo = ent }
 V -> id { V.tipo = busca_tipo_TS(id) }
@@ -143,10 +143,33 @@ V -> ent { V.tipo = ent }
 V -> cad { V.tipo = cad }
 V -> log { V.tipo = log }
 
+def error(self, errorCode):
+    if error_code < 7:
+       print("ErrorDeAttributo: ", end =" ")
+    elif error_code > 8:
+       print("ErrorDeTipado: ", end =" ")
+    else:
+       print("NoImplementado: ", end =" ")
+    print(error_code_dict.get(error_code,"Código no válido")
 
-
-
-
+def error_code_to_string(error_code):
+    error_code_dict = {
+        1: "La condición debe ser un lógico",
+        2: "El número de parámetros introducidos no son los esperados, deberían ser {busca_num_params_TS(id)}",
+        3: "El tipo de los parámetros no es el esperado, se esperaban {busca_tipo_params_TS(id)}",
+        4: "La expresión introducida no es una cadena o un entero",
+        5: "La variable introducida no es de tipo cadena o entero",
+        6: "La condición debe ser un lógico",
+        7: "No puede haber return fuera de una función",
+        8: "No se permite la definición de funciones anidadas",
+        9: "El tipo de retorno no corresponde con el tipo de retorno de la función, se esperaba {tipo_return}",
+        10: "El tipo de la variable a asignar no corresponde con el tipo asignado",
+        11: "El operador especial '--' solo trabaja con tipos de datos enteros",
+        12: "El operador lógico '&&' solo trabaja con tipos de datos lógicos"
+        13: "El operador de relación '==' solo trabaja con tipos de datos enteros"
+        14: "El operador aritmético '-' solo trabaja con tipos de datos enteros"
+        15: "El operador especial '--' solo trabaja con tipos de datos enteros"
+    }
 
 
 
