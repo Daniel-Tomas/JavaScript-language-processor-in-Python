@@ -2,7 +2,6 @@ Axioma = B
 NoTerminales = { A B C D E F G H I J K L M N O P Q R S T U V }
 Terminales = { && == - -- ( ) = ; , { } id ent cad log let alert input return for if number boolean string function }
 Producciones = {
-
 B -> D
 D -> F D
 D -> G D
@@ -12,7 +11,7 @@ G -> S
 S -> H ;
 H -> id ( I )
 I -> E J
-J -> , E J1
+J -> , E J
 J -> lambda
 I -> lambda
 S -> K ;
@@ -27,7 +26,7 @@ M -> lambda
 T -> number
 T -> boolean
 T -> string
-G -> for ( N ; E ; O )
+G -> for ( N ; E ; O ) { C }
 N -> K
 N -> lambda
 O -> K
@@ -46,11 +45,11 @@ A -> lambda
 R -> , T id R1
 R -> lambda
 F3 -> { C }
-E -> E1 && R
+E -> E && R
 E -> R
-R -> R1 == U
+R -> R == U
 R -> U
-U -> U1 - V
+U -> U - V
 U -> V
 V -> -- id
 V -> id
