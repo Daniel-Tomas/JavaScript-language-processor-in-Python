@@ -15,13 +15,13 @@ D -> lambda {}
 
 
 G -> if ( E ) S { if E.tipo != log
-                    then Error(1) }
+                    then error(1) }
 G -> S {}
 S -> H ; {}
 H -> id ( I ) { if I.size != busca_num_params_TS(id)
-                    then Error(2)
+                    then error(2)
                 else if busca_tipo_TS(id) != I.tipo
-                    then Error(3)
+                    then error(3)
                 else
                     H.tipo = busca_tipo_devuelto_TS(id) }
 I -> E J { if J.tipo.size == 0
@@ -37,16 +37,16 @@ I -> lambda {  I.tipo = void }
 
 S -> K ; {}
 K -> id = E { if busca_tipo_TS(id) != E.tipo
-                then Error(10) }
+                then error(10) }
 
 S -> alert ( E ) ; { if E.tipo != cadena && E.tipo != entero
-                        then Error(4) }
+                        then error(4) }
 S -> input ( id ) ; { if busca_tipo_TS(id) != cadena && busca_tipo_TS(id) != entero
-                        then Error(5) }
+                        then error(5) }
 S -> return L ; { if zona_function != true
                     then Error(7)} #Preguntar si hay que comprobar cada posible camino dentro de una función
                   else if L.tipo != tipo_return
-                    then Error(9) }
+                    then error(9) }
 L -> E { L.tipo = E.tipo }
 L -> lambda { L.tipo = void }
 
@@ -62,12 +62,12 @@ T -> string { T.tipo = cadena }
 
 
 G -> for ( N ; E ; O ) { C } { if E.tipo != log
-                                    then Error(6) }
+                                    then error(6) }
 N -> K {}
 N -> lambda {}
 O -> K {}
 O -> -- id { if busca_tipo_TS(id) != ent
-                then Error(11) }
+                then error(11) }
 O -> lambda {}
 C -> G C {}
 C -> lambda {}
@@ -89,7 +89,7 @@ F1 -> function P Q id {TS_l = crea_TS()
                        inserta_et_TS (id.pos, nueva_et ())
                        F1.id = id }
 P -> lambda { if zona_function == true
-                then Error(8) }
+                then error(8) }
 Q -> T { zona_declaracion = true
          Q.tipo = T.tipo }
 Q -> lambda { zona_declaracion = true
@@ -118,22 +118,22 @@ F3 -> { C } {}
 
 
 E -> E1 && R { if E1.tipo != log || R.tipo != log
-                then Error(12)
+                then error(12)
                else
                 E.tipo = log }
 E -> R {E.tipo = R.tipo }
 R -> R1 == U { if R1.tipo != ent || U.tipo != ent
-                then Error(13)
+                then error(13)
                else
                 E.tipo = log }
 R -> U { R.tipo = U.tipo }
 U -> U1 - V { if U1.tipo != ent || V.tipo != ent
-                then Error(14)
+                then error(14)
               else
                 U.tipo = ent }
 U -> V { U.tipo = V.tipo }
 V -> -- id { if busca_tipo_TS(id) != ent
-                then Error(15)
+                then error(15)
              else
                 V.tipo = ent }
 V -> id { V.tipo = busca_tipo_TS(id) }
@@ -143,16 +143,18 @@ V -> ent { V.tipo = ent }
 V -> cad { V.tipo = cad }
 V -> log { V.tipo = log }
 
-def error(self, errorCode):
-    if error_code < 7:
-       print("ErrorDeAttributo: ", end =" ")
-    elif error_code > 8:
-       print("ErrorDeTipado: ", end =" ")
-    else:
-       print("NoImplementado: ", end =" ")
-    print(error_code_dict.get(error_code,"Código no válido")
+error(self, error_code):
+    res = ""
+    if error_code < 7
+       res = "ErrorDeAttributo: "
+    elif error_code > 8
+       res = "ErrorDeTipado: "
+    else
+       res = "NoImplementado: "
+    res = res + error_code_dict.get(error_code,"Código no válido")
+    print(res)
 
-def error_code_to_string(error_code):
+error_code_to_string(error_code, *args): #A revisar cuando se vaya a implementar la función
     error_code_dict = {
         1: "La condición debe ser un lógico",
         2: "El número de parámetros introducidos no son los esperados, deberían ser {busca_num_params_TS(id)}",
