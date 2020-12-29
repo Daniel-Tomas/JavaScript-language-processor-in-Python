@@ -146,18 +146,7 @@ V -> ent { V.tipo = ent }
 V -> cad { V.tipo = cad }
 V -> log { V.tipo = log }
 
-error(self, error_code):
-    res = ""
-    if error_code < 7
-       res = "ErrorDeAttributo: "
-    elif error_code > 8
-       res = "ErrorDeTipado: "
-    else
-       res = "NoImplementado: "
-    res = res + error_code_dict.get(error_code,"Código no válido")
-    print(res)
-
-error_code_to_string(error_code, *args): #A revisar cuando se vaya a implementar la función
+# error_code_to_string(error_code, *args): #A revisar cuando se vaya a implementar la función
     error_code_dict = {
         1: "La condición debe ser un lógico",
         2: "El número de parámetros introducidos no son los esperados, deberían ser {busca_num_params_TS(id)}",
@@ -175,6 +164,18 @@ error_code_to_string(error_code, *args): #A revisar cuando se vaya a implementar
         14: "El operador aritmético '-' solo trabaja con tipos de datos enteros"
         15: "El operador especial '--' solo trabaja con tipos de datos enteros"
     }
+
+function error(error_code):
+    res = ""
+    if error_code <= 6:
+       res = "ErrorDeAtributo: "
+    elif error_code >= 9:
+       res = "ErrorDeTipado: "
+    else
+       res = "NoImplementado: "
+    res = res + error_code_dict.get(error_code, default="Código no válido")
+    print(res)
+
 
 
 
