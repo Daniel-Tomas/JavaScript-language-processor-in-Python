@@ -9,7 +9,7 @@ Producciones = {
         zona_decl = true }
 
 B -> D {}
-D -> F D {} # FUNCIONES SON LO MAS LARGO, LO DEJAMOS PAL FINAL
+D -> F D {}
 D -> G D {}
 D -> lambda {}
 
@@ -18,21 +18,21 @@ G -> if ( E ) S { if E.tipo != log
                     then error(1) }
 G -> S {}
 S -> H ; {}
-H -> id ( I ) { if I.size != busca_num_params_TS(id)
+H -> id ( I ) { if longitud(I.tipo) != busca_num_params_TS(id)
                     then error(2)
                 else if busca_tipo_TS(id) != I.tipo
                     then error(3)
                 else
                     H.tipo = busca_tipo_devuelto_TS(id) }
-I -> E J { if J.tipo.size == 0
+I -> E J { if longitud(J.tipo) == 0
                 then I.tipo = E.tipo
             else
                 I.tipo = E.tipo x J.tipo }
-J -> , E J1 { if J1.tipo.size == 0
+J -> , E J1 { if longitud(J1.tipo) == 0
                 then J.tipo = E.tipo
               else
                 J.tipo = E.tipo x J1.tipo }
-J -> lambda { J.tipo.size = 0 }
+J -> lambda {}
 I -> lambda {  I.tipo = void }
 
 S -> K ; {}
@@ -44,7 +44,7 @@ S -> alert ( E ) ; { if E.tipo != cadena && E.tipo != entero
 S -> input ( id ) ; { if busca_tipo_TS(id) != cadena && busca_tipo_TS(id) != entero
                         then error(5) }
 S -> return L ; { if zona_function != true
-                    then Error(7)} #Preguntar si hay que comprobar cada posible camino dentro de una función
+                    then Error(7)}
                   else if L.tipo != tipo_return
                     then error(9) }
 L -> E { L.tipo = E.tipo }
@@ -56,9 +56,12 @@ G -> let M T id ; { zona_declaración = false
                     añadir_desp_TS(id, desp)
                     desp += T.ancho }
 M -> lambda { zona_declaracion = true }
-T -> number { T.tipo = ent }
-T -> boolean { T.tipo = log }
-T -> string { T.tipo = cadena }
+T -> number { T.tipo = ent
+              T.ancho = size_of(ent)}
+T -> boolean { T.tipo = log
+               T.ancho = size_of(log)}
+T -> string { T.tipo = cadena
+               T.ancho = size_of(string)}
 
 
 G -> for ( N ; E ; O ) { C } { if E.tipo != log
@@ -73,7 +76,7 @@ C -> G C {}
 C -> lambda {}
 
 
-F -> F1 F2 F3 { añadir_param_TS(F1.id, F2.tipo, F2.tipo.size) #Preguntar si hay que apuntar el modo de paso de variables
+F -> F1 F2 F3 { añadir_param_TS(F1.id, F2.tipo, longitud(F2.tipo))
                 destruye_TS (TS_l)
                 TS_actual = TS_g
                 desp = desp_g
@@ -100,7 +103,7 @@ F2 -> ( A ) { F2.tipo = A.tipo,
 A -> T id R { añadir_tipo_TS(id, T.tipo)
               añadir_desp_TS(id, desp)
               desp += T.ancho
-              if R.tipo.size == 0
+              if longitud(R.tipo) == 0
                 then A.tipo = T.tipo
               else
                 A.tipo = R.tipo x T.tipo }
@@ -108,11 +111,11 @@ A -> lambda { A.tipo = void }
 R -> , T id R1   { añadir_tipo_TS(id, T.tipo)
                    añadir_desp_TS(id, desp)
                    desp += T.ancho
-                   if R1.tipo.size == 0
+                   if longitud(R1.tipo) == 0
                     then R.tipo = T.tipo
                    else
                     R.tipo = R1.tipo x T.tipo }
-R -> lambda { R.tipo.size = 0 }
+R -> lambda {}
 
 F3 -> { C } {}
 
