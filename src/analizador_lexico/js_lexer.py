@@ -15,8 +15,9 @@ class JSLexer(Lexer):
     #
     # """
     #
-    def __init__(self, ts_):
+    def __init__(self, ts_, zona_decl_):
         self.ts = ts_
+        self.declaration_scope = zona_decl_
 
     tokens = {CTEENTERA, CADENA, CTELOGICA, OPARIT, OPESP,
               OPREL, OPLOG, OPASIG, ID, NUMBER, STRING, BOOLEAN, LET, ALERT,
@@ -182,9 +183,21 @@ class JSLexer(Lexer):
             self.error(t, "CADENA")
         return t
 
+    # TODO: cambiar estrucutura ID. La TS es una lista de TS's. Cada una es una lista de diccionarios.
     def ID(self, t):
-        self.ts.add_entry(0, t.value)
-        t.value = self.ts.get_pos(0, t.value)
+        id_table, id_pos = self.ts.get_pos(t.value)
+        if self.declaration_scope:
+            if id_table is not None:
+            # El id ya esta declarado
+            else:
+                self.ts.add_entry(t.value)
+                t.TS_index, t.value = self.ts.get_pos(t.value)
+        else:
+            if id_table is None:
+            # El id deberia estar
+            else:
+                t.TS_index = id_table
+                t.value = id_pos
         return t
 
     @_('\n+',
