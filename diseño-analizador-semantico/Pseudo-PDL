@@ -8,7 +8,7 @@ Producciones = {
         desp = 0
         zona_decl = true }
 
-B -> D {}  --> ¿Para qué es esta??
+B -> D {}
 D -> F D {}
 D -> G D {}
 D -> lambda {}

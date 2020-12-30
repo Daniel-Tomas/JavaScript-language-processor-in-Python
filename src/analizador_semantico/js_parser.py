@@ -10,9 +10,12 @@ class JSParser(Parser):
 
     tokens = JSLexer.tokens
 
-    def __init__(self, lista_reglas_, TS_):
+    def __init__(self, lista_reglas_, TS_, declaration_scope_):
         self.lista_reglas = lista_reglas_
         self.TS = TS_
+        self.desp = 0
+        self.declaration_scope = declaration_scope_
+        self.atrib_stack = []
 
     @_('D')
     def B(self, p):
@@ -36,6 +39,9 @@ class JSParser(Parser):
 
     @_('IF ABPAREN E CEPAREN S')
     def G(self, p):
+        type = self.atrib_stack.pop()
+        if type != 'log':
+            self.sem_error(1)
         self.lista_reglas.append(5)
         return
 
@@ -51,11 +57,17 @@ class JSParser(Parser):
 
     @_('ID ABPAREN I CEPAREN')
     def H(self, p):
+        types = self.atrib_stack.pop()
+        if len(types) != self.TS.get_attribute(p.ID.TS_index, p.ID.value, "num_params"):
+            self.sem_error(2)
+        # for comparar tipos
+        self.atrib_stack.append("busca_tipo_devuelto_TS(id.pos)")
         self.lista_reglas.append(8)
         return
 
     @_('E J')
     def I(self, p):
+        types
         self.lista_reglas.append(9)
         return
 
@@ -305,6 +317,9 @@ class JSParser(Parser):
         else:
             print(f'Token ilegal {p.type} en la linea {p.lineno}', file=sys.stderr)
             exit(3)
+
+    def sem_error(self, id):
+        pass
 
 
 if __name__ == '__main__':
