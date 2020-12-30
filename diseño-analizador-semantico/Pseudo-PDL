@@ -18,7 +18,7 @@ G -> if ( E ) S { if E.tipo != log
                     then error(1) }
 G -> S {}
 S -> H ; {}
-H -> id ( I ) { if longitud(I.tipo) != busca_num_params_TS(id)
+H -> id ( I ) { if longitud(I.tipo) != busca_num_params_TS(id.pos)
                     then error(2)
                 else if busca_tipo_TS(id.pos) != I.tipo
                     then error(3)
@@ -36,12 +36,12 @@ J -> lambda {}
 I -> lambda {  I.tipo = void }
 
 S -> K ; {}
-K -> id = E { if busca_tipo_TS(id) != E.tipo
+K -> id = E { if busca_tipo_TS(id.pos) != E.tipo
                 then error(10) }
 
 S -> alert ( E ) ; { if E.tipo != cadena && E.tipo != entero
                         then error(4) }
-S -> input ( id ) ; { if busca_tipo_TS(id) != cadena && busca_tipo_TS(id) != entero
+S -> input ( id ) ; { if busca_tipo_TS(id.pos) != cadena && busca_tipo_TS(id.pos) != entero
                         then error(5) }
 S -> return L ; { if zona_function != true
                     then Error(7)}
@@ -52,8 +52,8 @@ L -> lambda { L.tipo = void }
 
 
 G -> let M T id ; { zona_declaración = false
-                    añadir_tipo_TS(id, T.tipo)
-                    añadir_desp_TS(id, desp)
+                    añadir_tipo_TS(id.pos, T.tipo)
+                    añadir_desp_TS(id.pos, desp)
                     desp += T.ancho }
 M -> lambda { zona_declaracion = true }
 T -> number { T.tipo = ent
@@ -85,7 +85,7 @@ F1 -> function P Q id {TS_l = crea_TS()
                        pos_id_fun = id.pos
                        zona_function = true
                        tipo_return = Q.tipo
-                       añadir_tipo_devuelto_TS(id, tipo_return)
+                       añadir_tipo_devuelto_TS(id.pos, tipo_return)
                        inserta_et_TS (id.pos, nueva_et ())
                         }
 P -> lambda { if zona_function == true
@@ -101,15 +101,15 @@ F2 -> ( A ) { añadir_param_TS(pos_id_fun, A.tipo, longitud(A.tipo)
               F2.tipo = A.tipo,
               zona_declaración = false }
 A -> T id R { añadir_tipo_TS(id.pos, T.tipo)
-              añadir_desp_TS(id, desp) --> idem
+              añadir_desp_TS(id.pos, desp)
               desp += T.ancho
               if longitud(R.tipo) == 0
                 then A.tipo = T.tipo
               else
                 A.tipo = T.tipo x R.tipo }
 A -> lambda { A.tipo = void }
-R -> , T id R1   { añadir_tipo_TS(id, T.tipo)
-                   añadir_desp_TS(id, desp)
+R -> , T id R1   { añadir_tipo_TS(id.pos, T.tipo)
+                   añadir_desp_TS(id.pos, desp)
                    desp += T.ancho
                    if longitud(R1.tipo) == 0
                     then R.tipo = T.tipo
@@ -135,11 +135,11 @@ U -> U1 - V { if U1.tipo != ent || V.tipo != ent
               else
                 U.tipo = ent }
 U -> V { U.tipo = V.tipo }
-V -> -- id { if busca_tipo_TS(id) != ent
+V -> -- id { if busca_tipo_TS(id.pos) != ent
                 then error(15)
              else
                 V.tipo = ent }
-V -> id { V.tipo = busca_tipo_TS(id) }
+V -> id { V.tipo = busca_tipo_TS(id.pos) }
 V -> ( E ) { V.tipo = E.tipo }
 V -> H { V.tipo = H.tipo}
 V -> ent { V.tipo = ent }
@@ -149,8 +149,8 @@ V -> log { V.tipo = log }
 # error_code_to_string(error_code, *args): #A revisar cuando se vaya a implementar la función
     error_code_dict = {
         1: "La condición debe ser un lógico",
-        2: "El número de parámetros introducidos no son los esperados, deberían ser {busca_num_params_TS(id)}",
-        3: "El tipo de los parámetros no es el esperado, se esperaban {busca_tipo_params_TS(id)}",
+        2: "El número de parámetros introducidos no son los esperados, deberían ser {busca_num_params_TS(id.pos)}",
+        3: "El tipo de los parámetros no es el esperado, se esperaban {busca_tipo_params_TS(id.pos)}",
         4: "La expresión introducida no es una cadena o un entero",
         5: "La variable introducida no es de tipo cadena o entero",
         6: "La condición debe ser un lógico",
