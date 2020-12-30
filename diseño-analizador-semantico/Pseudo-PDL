@@ -8,7 +8,7 @@ Producciones = {
         desp = 0
         zona_decl = true }
 
-B -> D {}
+B -> D {}  --> ¿Para qué es esta??
 D -> F D {}
 D -> G D {}
 D -> lambda {}
@@ -20,10 +20,10 @@ G -> S {}
 S -> H ; {}
 H -> id ( I ) { if longitud(I.tipo) != busca_num_params_TS(id)
                     then error(2)
-                else if busca_tipo_TS(id) != I.tipo
+                else if busca_tipo_TS(id.pos) != I.tipo
                     then error(3)
                 else
-                    H.tipo = busca_tipo_devuelto_TS(id) }
+                    H.tipo = busca_tipo_devuelto_TS(id.pos) }
 I -> E J { if longitud(J.tipo) == 0
                 then I.tipo = E.tipo
             else
@@ -45,7 +45,7 @@ S -> input ( id ) ; { if busca_tipo_TS(id) != cadena && busca_tipo_TS(id) != ent
                         then error(5) }
 S -> return L ; { if zona_function != true
                     then Error(7)}
-                  else if L.tipo != tipo_return
+                  else if L.tipo != tipo_return --> no queremos hacer esta comprobación con una "variable global" sino con un atributo
                     then error(9) }
 L -> E { L.tipo = E.tipo }
 L -> lambda { L.tipo = void }
@@ -57,7 +57,7 @@ G -> let M T id ; { zona_declaración = false
                     desp += T.ancho }
 M -> lambda { zona_declaracion = true }
 T -> number { T.tipo = ent
-              T.ancho = size_of(ent)}
+              T.ancho = size_of(ent)} --> no sé si necesitáis esta función size_of, porque los tamaños son conocidos y estáticos. #A debatir
 T -> boolean { T.tipo = log
                T.ancho = size_of(log)}
 T -> string { T.tipo = cadena
@@ -69,17 +69,23 @@ G -> for ( N ; E ; O ) { C } { if E.tipo != log
 N -> K {}
 N -> lambda {}
 O -> K {}
-O -> -- id { if busca_tipo_TS(id) != ent
-                then error(11) }
-O -> lambda {}
+O -> -- id { if busca_tipo_TS(id.pos) != ent
+                then error(11) }  --> seguramente habrá que comprobar que este id de O sea justamente el de N #A debatir
 C -> G C {}
 C -> lambda {}
 
 
-F -> F1 F2 F3 { añadir_param_TS(F1.id, F2.tipo, longitud(F2.tipo))
+F -> F1 F2 F3 { añadir_param_TS(F1.id, F2.tipo, longitud(F2.tipo)) --> NO, este añadir param está demasiado tarde. Hay que hacerlo al final de F2 pero antes de F3. Y recordad
+     lo que os dije de que, en el diseño, representamos el tipo de la función como hemos aprendido con el sistema de tipos: producto cartesiano de los tipos de los
+     parámetros, flecha, tipo devuelto (en vuestro caso podría ser F2.tipo --> F1.tipo, si creáis bien F1.tipo). Vuestra función "longitud" en el diseño seguramente sobra y
+     molesta. Tened en cuenta que "todo" se debe tratar con atributos y no con variables globales, salvo la creación de la tabla de símbolos, la variable desplazamiento y la variable
+     zona_declaración. También os dejo que useis una variable global para ver si el return está dentro de la función. Y os dejo porque para hacerlo bien lo más fácil es usar
+     un atributo heredado, y queremos evitar que uséis atributos heredados, así que tendriais que comprobarlo mediante la sintaxis, o usando un atributo sintetizado o con una variable
+     global; y puestos a no hacer lo "mejor" (atributo heredado), os dejo cualquiera de las otras 3 opciones, así que admito la variable global. Pero diría que ni una más. Tened en
+     cuenta que al no admitir el lenguaje que se declare una función dentro de otra, el tirar de variables globales funciona, pero si el lenguaje permitiera anidamiento, otro gallo
+     cantaría.
+
                 destruye_TS (TS_l)
-                TS_actual = TS_g
-                desp = desp_g
                 zona_function = false
                 tipo_return = NULL}
 F1 -> function P Q id {TS_l = crea_TS()
@@ -87,10 +93,10 @@ F1 -> function P Q id {TS_l = crea_TS()
                        desp_g = desp
                        desp = 0
                        zona_function = true
-                       tipo_return = Q.tipo
+                       tipo_return = Q.tipo --> no queremos una "variable global" tipo_return
                        añadir_tipo_devuelto_TS(id, tipo_return)
                        inserta_et_TS (id.pos, nueva_et ())
-                       F1.id = id }
+                        }
 P -> lambda { if zona_function == true
                 then error(8) }
 Q -> T { zona_declaracion = true
@@ -98,15 +104,18 @@ Q -> T { zona_declaracion = true
 Q -> lambda { zona_declaracion = true
               Q.tipo = void }
 
-F2 -> ( A ) { F2.tipo = A.tipo,
+F2 -> ( A ) { añadir_param_TS(get_last_id(), A.tipo, longitud(A.tipo)
+              TS_actual = TS_g
+              desp = desp_g
+              F2.tipo = A.tipo,
               zona_declaración = false }
-A -> T id R { añadir_tipo_TS(id, T.tipo)
-              añadir_desp_TS(id, desp)
+A -> T id R { añadir_tipo_TS(id.pos, T.tipo)
+              añadir_desp_TS(id, desp) --> idem
               desp += T.ancho
               if longitud(R.tipo) == 0
                 then A.tipo = T.tipo
               else
-                A.tipo = R.tipo x T.tipo }
+                A.tipo = R.tipo x T.tipo } --> le estáis dando la vuelta a la lista de los tipos
 A -> lambda { A.tipo = void }
 R -> , T id R1   { añadir_tipo_TS(id, T.tipo)
                    añadir_desp_TS(id, desp)
@@ -114,7 +123,7 @@ R -> , T id R1   { añadir_tipo_TS(id, T.tipo)
                    if longitud(R1.tipo) == 0
                     then R.tipo = T.tipo
                    else
-                    R.tipo = R1.tipo x T.tipo }
+                    R.tipo = R1.tipo x T.tipo } --> le estáis dando la vuelta a la lista de los tipos
 R -> lambda {}
 
 F3 -> { C } {}
