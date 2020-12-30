@@ -1,9 +1,9 @@
 import sys
-
+from collections import deque
 from sly import Parser
+
 from src.analizador_lexico.js_lexer import JSLexer
 from src.tabla_simbolos.sym_table import SymTable
-
 
 class JSParser(Parser):
     debugfile = 'parser.out'
@@ -15,7 +15,7 @@ class JSParser(Parser):
         self.TS = TS_
         self.desp = 0
         self.declaration_scope = declaration_scope_
-        self.atrib_stack = []
+        self.atrib_stack = deque()
 
     @_('D')
     def B(self, p):
