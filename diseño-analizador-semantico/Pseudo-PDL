@@ -3,7 +3,7 @@ NoTerminales = { A B C D E F G H I J K L M N O P Q R S T U V F1 F2 F3 }
 Terminales = { && == - -- ( ) = ; , { } id ent cad log let alert input return for if number boolean string function }
 Producciones = {
 
-{TS_g = CreaTS()
+{ TS_g = CreaTS()
         TS_actual = TSG
         desp = 0
         zona_decl = true }
@@ -33,7 +33,7 @@ J -> , E J1 { if longitud(J1.tipo) == 0
               else
                 J.tipo = E.tipo x J1.tipo }
 J -> lambda {}
-I -> lambda {  I.tipo = void }
+I -> lambda { I.tipo = void }
 
 S -> K ; {}
 K -> id = E { if busca_tipo_TS(id.pos) != E.tipo
@@ -77,17 +77,16 @@ C -> lambda {}
 
 F -> F1 F2 F3 { destruye_TS (TS_l)
                 zona_function = false
-                tipo_return = NULL}
-F1 -> function P Q id {TS_l = crea_TS()
-                       TS_actual = TS_l
-                       desp_g = desp
-                       desp = 0
-                       pos_id_fun = id.pos
-                       zona_function = true
-                       tipo_return = Q.tipo
-                       añadir_tipo_devuelto_TS(id.pos, tipo_return)
-                       inserta_et_TS (id.pos, nueva_et ())
-                        }
+                tipo_return = NULL }
+F1 -> function P Q id { TS_l = crea_TS()
+                        TS_actual = TS_l
+                        desp_g = desp
+                        desp = 0
+                        pos_id_fun = id.pos
+                        zona_function = true
+                        tipo_return = Q.tipo
+                        añadir_tipo_devuelto_TS(id.pos, tipo_return)
+                        inserta_et_TS (id.pos, nueva_et ()) }
 P -> lambda { if zona_function == true
                 then error(8) }
 Q -> T { zona_declaracion = true
@@ -141,7 +140,7 @@ V -> -- id { if busca_tipo_TS(id.pos) != ent
                 V.tipo = ent }
 V -> id { V.tipo = busca_tipo_TS(id.pos) }
 V -> ( E ) { V.tipo = E.tipo }
-V -> H { V.tipo = H.tipo}
+V -> H { V.tipo = H.tipo }
 V -> ent { V.tipo = ent }
 V -> cad { V.tipo = cad }
 V -> log { V.tipo = log }
