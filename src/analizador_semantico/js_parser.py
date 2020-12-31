@@ -128,8 +128,8 @@ class JSParser(Parser):
     @_('LET M T ID PUNTOYCOMA')
     def G(self, p):
         self.declaration_scope[0] = False
-        self.TS.add_attribute(p.ID.TS_index, p.ID.value, 'Tipo', p.T[0])
-        self.TS.add_attribute(p.ID.TS_index, p.ID.value, 'Desp', self.desp)
+        self.TS.add_attribute(p.ID[0], p.ID[1], 'Tipo', p.T[0])
+        self.TS.add_attribute(p.ID[0], p.ID[1], 'Desp', self.desp)
         self.desp += p.T[1]
 
         self.lista_reglas.append(20)

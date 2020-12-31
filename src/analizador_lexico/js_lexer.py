@@ -191,13 +191,13 @@ class JSLexer(Lexer):
             if id_table:  # TODO: buscar como comprobar que no sea None
                 pass  # El id ya esta declarado
             else:
-                t.TS_index, t.value = self.ts.add_entry(t.value)
+                id_table, id_pos = self.ts.add_entry(t.value)
+                t.value = (id_table, id_pos)
         else:
             if not id_table:
                 pass  # El id deberia estar
             else:
-                t.TS_index = id_table
-                t.value = id_pos
+                t.value = (id_table, id_pos)
         return t
 
     @_('\n+',
@@ -251,14 +251,17 @@ class JSLexer(Lexer):
         print(f'{res} en la linea {self.lineno} y columna {self.find_column(t)}', file=sys.stderr)
         exit()
 
-    def get_token(self,data):
+    def get_token(self, data):
         """Generator that yields tokens of the data text one by one and prints them.
 
         Yields:
             Token: The next token.
         """
         for tok in self.tokenize(data):
-            print(f'<{tok.type} , {tok.value}>', file=self.tokens_file)
+            if tok.type=="ID":
+                print(f'<{tok.type} , {tok.value[1]}>', file=self.tokens_file)
+            else:
+                print(f'<{tok.type} , {tok.value}>', file=self.tokens_file)
             yield tok
 
 
