@@ -15,9 +15,10 @@ class JSLexer(Lexer):
     #
     # """
     #
-    def __init__(self, ts_, zona_decl_):
+    def __init__(self, ts_, declaration_scope_, tokens_file_):
         self.ts = ts_
-        self.declaration_scope = zona_decl_
+        self.declaration_scope = declaration_scope_
+        self.tokens_file = tokens_file_
 
     tokens = {CTEENTERA, CADENA, CTELOGICA, OPARIT, OPESP,
               OPREL, OPLOG, OPASIG, ID, NUMBER, STRING, BOOLEAN, LET, ALERT,
@@ -186,15 +187,14 @@ class JSLexer(Lexer):
     # TODO: cambiar estrucutura ID. La TS es una lista de TS's. Cada una es una lista de diccionarios.
     def ID(self, t):
         id_table, id_pos = self.ts.get_pos(t.value)
-        if self.declaration_scope:
-            if id_table is not None:
-            # El id ya esta declarado
+        if self.declaration_scope[0]:
+            if id_table:  # TODO: buscar como comprobar que no sea None
+                pass  # El id ya esta declarado
             else:
-                self.ts.add_entry(t.value)
-                t.TS_index, t.value = self.ts.get_pos(t.value)
+                t.TS_index, t.value = self.ts.add_entry(t.value)
         else:
-            if id_table is None:
-            # El id deberia estar
+            if not id_table:
+                pass  # El id deberia estar
             else:
                 t.TS_index = id_table
                 t.value = id_pos
@@ -251,22 +251,15 @@ class JSLexer(Lexer):
         print(f'{res} en la linea {self.lineno} y columna {self.find_column(t)}', file=sys.stderr)
         exit()
 
-    # def get_token(self):
-    #     """Generator that yields tokens of the data text one by one.
-    #
-    #     Finally, gives a different token which represents the end of
-    #     file.
-    #
-    #     Yields:
-    #         Token: The next token until EOF.
-    #     """
-    #     for tok in self.tokenize(self.data):
-    #         yield tok
-    #
-    #     tok_EOF = Token()
-    #     tok_EOF.type = 'EOF'
-    #     tok_EOF.value = ''
-    #     yield tok_EOF
+    def get_token(self,data):
+        """Generator that yields tokens of the data text one by one and prints them.
+
+        Yields:
+            Token: The next token.
+        """
+        for tok in self.tokenize(data):
+            print(f'<{tok.type} , {tok.value}>', file=self.tokens_file)
+            yield tok
 
 
 if __name__ == '__main__':

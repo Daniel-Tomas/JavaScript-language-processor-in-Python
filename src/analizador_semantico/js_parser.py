@@ -1,9 +1,11 @@
 import sys
 from collections import deque
+
 from sly import Parser
 
 from src.analizador_lexico.js_lexer import JSLexer
 from src.tabla_simbolos.sym_table import SymTable
+
 
 class JSParser(Parser):
     debugfile = 'parser.out'
@@ -13,8 +15,11 @@ class JSParser(Parser):
     def __init__(self, lista_reglas_, TS_, declaration_scope_):
         self.lista_reglas = lista_reglas_
         self.TS = TS_
+        self.TS.new_table()
         self.desp = 0
         self.declaration_scope = declaration_scope_
+        self.declaration_scope[0] = True
+
         self.atrib_stack = deque()
 
     @_('D')
@@ -67,7 +72,6 @@ class JSParser(Parser):
 
     @_('E J')
     def I(self, p):
-        types
         self.lista_reglas.append(9)
         return
 
@@ -123,11 +127,17 @@ class JSParser(Parser):
 
     @_('LET M T ID PUNTOYCOMA')
     def G(self, p):
+        self.declaration_scope[0] = False
+        self.TS.add_attribute(p.ID.TS_index, p.ID.value, 'Tipo', p.T[0])
+        self.TS.add_attribute(p.ID.TS_index, p.ID.value, 'Desp', self.desp)
+        self.desp += p.T[1]
+
         self.lista_reglas.append(20)
         return
 
     @_('')
     def M(self, p):
+        self.declaration_scope[0] = True
         self.lista_reglas.append(21)
         return
 
@@ -144,7 +154,7 @@ class JSParser(Parser):
     @_('STRING')
     def T(self, p):
         self.lista_reglas.append(24)
-        return
+        return 'cadena', 128
 
     @_('FOR ABPAREN N PUNTOYCOMA E PUNTOYCOMA O CEPAREN ABLLAVE C CELLAVE')
     def G(self, p):
@@ -334,7 +344,7 @@ if __name__ == '__main__':
     parser = JSParser(listaReglas, tables)
     f = open('Input.txt', 'r')
     data = f.read()
-    result = parser.parse(lexer.tokenize(data))
+    result = parser.parse(lexer.get_token(data))
     res = str(listaReglas).strip('[]')
     res = res.replace(',', '')
     print(f'Ascendente {res}')

@@ -4,9 +4,9 @@ Terminales = { && == - -- ( ) = ; , { } id ent cad log let alert input return fo
 Producciones = {
 
 { TS_g = CreaTS()
-        TS_actual = TSG
-        desp = 0
-        zona_decl = true }
+  TS_actual = TSG
+  desp = 0
+  zona_decl = true }
 
 B -> D {}
 D -> F D {}

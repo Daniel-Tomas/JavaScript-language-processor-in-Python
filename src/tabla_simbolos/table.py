@@ -63,11 +63,11 @@ class Table:
             lex (str): The lexeme to add_entry in the symbol table.
 
         Returns:
-            int or None: int pos in table if lex was added, None otherwise.
+            int: pos in table where lex has been added
         """
-        for element in self.lexems:
-            if element["LEXEMA"] == lex:
-                return None
+        # for element in self.lexems:
+        #     if element["LEXEMA"] == lex:
+        #         return None
 
         self.lexems.append({"LEXEMA": lex})
         return len(self.lexems) - 1
@@ -86,23 +86,28 @@ class Table:
 
         return self.lexems.pop(pos_lex)
 
-    def add_attribute(self, lex, type_, content):
-        """Adds an attribute to a lexeme.
+    def add_attribute(self, table_pos, type_, content):
+        """Adds an attribute to a lexeme where is located in a position of a table.
 
         Args:
-            lex (str): The lexeme to find into the symbol table.
+            table_pos (int): Position of the lex in the table.
             type_ (str): The type of attribute to set.
             content (any): The value of the attribute.
 
         Returns:
             bool: True if the attribute has been added, false otherwise.
         """
-        lex_dict = self.get_lex_dict(lex)
-        if not lex_dict:
+        if self.lexems[table_pos].get(type_):
             return False
 
-        lex_dict[type_] = content
+        self.lexems[table_pos][type_] = content
         return True
+
+        # lex_dict = self.get_lex_dict(lex)
+        # if not lex_dict:
+        #     return False
+        #
+        # lex_dict[type_] = content
 
     def get_attribute(self, lex, type_):
         """Gets value of an attribute of a lexeme.
@@ -175,6 +180,5 @@ class Table:
             to_write += f'---------------- ----------------\n'
         to_write += '\n\n\n'
 
-        with open(path, 'w') as f:
-            f.write(to_write)
+        path.write(to_write)
         return True
