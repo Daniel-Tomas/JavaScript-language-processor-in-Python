@@ -241,14 +241,15 @@ class JSLexer(Lexer):
             t(Token): The only parameter.
         """
 
-        res = 'Error analizador_lexico: \n\t'
+        res = f'Error en la linea {self.lineno} y columna {self.find_column(t)}:\n\t'
         if type_error == "CADENA":
             res += f'Cadena demasiado larga: "{t.value}", con logitud mayor que 64: {len(t.value)},'
         elif type_error == "CTEENTERA":
             res += f'Número fuera de rango: "{t.value},"'
         else:
             res += f'Caracter ilegal "{t.value[0]}"'
-        print(f'{res} en la linea {self.lineno} y columna {self.find_column(t)}', file=sys.stderr)
+
+        print(res, file=sys.stderr)
         exit(1)
 
     def get_token(self, data):

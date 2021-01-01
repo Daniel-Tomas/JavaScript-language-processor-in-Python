@@ -116,7 +116,7 @@ class JSParser(Parser):
     @_('ID OPASIG E')
     def K(self, p):
         if self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE) != p.E:
-            self.sem_error(10)
+            self.sem_error(10, p.lineno)
 
         self.lista_reglas.append(14)
         return
@@ -357,10 +357,7 @@ class JSParser(Parser):
         return self.LOG_TYPE
 
     def error(self, p):
-        res = str(self.lista_reglas).strip('[]')
-        res = res.replace(',', '')
-        print(f'Ascendente {res}', file=sys.stderr)
-        print("Error sintáctico: ", file=sys.stderr)
+        print("Error en la sintaxis: ", file=sys.stderr)
         if not p:
             print("End of File!", file=sys.stderr)
             exit(2)
@@ -369,8 +366,7 @@ class JSParser(Parser):
             exit(3)
 
     def sem_error(self, id, lineno):
-        print(f'Error en la linea {lineno}:', file=sys.stderr)
-        print(f'\t{self.error_code_dict[id]}', file=sys.stderr)
+        print(f'Error en la linea {lineno}:\n\t{self.error_code_dict[id]}', file=sys.stderr)
         exit(4)
 
 # if __name__ == '__main__':

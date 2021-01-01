@@ -22,7 +22,5 @@ if __name__ == '__main__':
     data = f.read()
     result = parser.parse(lexer.get_token(data))
 
-    res = str(listaReglas).strip('[]')
-    res = res.replace(',', '')
-    print(f'Ascendente {res}', file=parse_file)
+    print(f"Ascendente {str(listaReglas).strip('[]').replace(',', '')}", file=parse_file)
     symbol_table.write_table(TS_file)
