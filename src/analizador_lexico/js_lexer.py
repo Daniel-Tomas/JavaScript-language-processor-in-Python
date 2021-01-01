@@ -188,14 +188,14 @@ class JSLexer(Lexer):
     def ID(self, t):
         id_table, id_pos = self.ts.get_pos(t.value)
         if self.declaration_scope[0]:
-            if id_table:  # TODO: buscar como comprobar que no sea None
-                pass  # El id ya esta declarado
+            if id_table is not None:  # TODO: buscar como comprobar que no sea None
+                print("Id ya declarado", file=sys.stderr)  # El id ya esta declarado
             else:
                 id_table, id_pos = self.ts.add_entry(t.value)
                 t.value = (id_table, id_pos)
         else:
-            if id_table:
-                pass  # El id deberia estar
+            if id_table is None:
+                print("Id no esta declarado", file=sys.stderr)
             else:
                 t.value = (id_table, id_pos)
         return t
@@ -259,7 +259,8 @@ class JSLexer(Lexer):
         """
         for tok in self.tokenize(data):
             if tok.type=="ID":
-                print(f'<{tok.type} , {tok.value[1]}>', file=self.tokens_file)
+                pass
+#                print(f'<{tok.type} , {tok.value[1]}>', file=self.tokens_file)
             else:
                 print(f'<{tok.type} , {tok.value}>', file=self.tokens_file)
             yield tok
