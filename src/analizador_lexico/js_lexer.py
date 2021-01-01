@@ -249,7 +249,7 @@ class JSLexer(Lexer):
         else:
             res += f'Caracter ilegal "{t.value[0]}"'
         print(f'{res} en la linea {self.lineno} y columna {self.find_column(t)}', file=sys.stderr)
-        exit()
+        exit(1)
 
     def get_token(self, data):
         """Generator that yields tokens of the data text one by one and prints them.

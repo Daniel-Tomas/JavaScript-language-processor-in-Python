@@ -1,19 +1,35 @@
 import sys
-from collections import deque
 
 from sly import Parser
 
 from src.analizador_lexico.js_lexer import JSLexer
-from src.tabla_simbolos.sym_table import SymTable
 
-ATTR_TYPE = 'Tipo'
-ATTR_DESP = 'Desp'
-
-INT_TYPE = ''
-STRING_TYPE = ''
-LOG_TYPE = ''
 
 class JSParser(Parser):
+    ATTR_TYPE = 'Tipo'
+    ATTR_DESP = 'Desp'
+
+    LOG_TYPE = 'log'
+    INT_TYPE = 'ent'
+    STRING_TYPE = 'cadena'
+
+    error_code_dict = {
+        1: "La condición debe ser un lógico",
+        2: "El número de parámetros introducidos no son los esperados, deberían ser {busca_num_params_TS(id.pos)}",
+        3: "El tipo de los parámetros no es el esperado, se esperaban {busca_tipo_params_TS(id.pos)}",
+        4: "La expresión introducida no es una cadena o un entero",
+        5: "La variable introducida no es de tipo cadena o entero",
+        6: "La condición debe ser un lógico",
+        7: "No puede haber return fuera de una función",
+        8: "No se permite la definición de funciones anidadas",
+        9: "El tipo de retorno no corresponde con el tipo de retorno de la función, se esperaba {tipo_return}",
+        10: "El tipo de la variable a asignar no corresponde con el tipo asignado",
+        11: "El operador especial '--' solo trabaja con tipos de datos enteros",
+        12: "El operador lógico '&&' solo trabaja con tipos de datos lógicos",
+        13: "El operador de relación '==' solo trabaja con tipos de datos enteros",
+        14: "El operador aritmético '-' solo trabaja con tipos de datos enteros"
+    }
+
     debugfile = 'parser.out'
     tokens = JSLexer.tokens
 
@@ -99,7 +115,7 @@ class JSParser(Parser):
 
     @_('ID OPASIG E')
     def K(self, p):
-        if self.TS.get_attribute(p.ID[0], p.ID[1], ATTR_TYPE) != p.E:
+        if self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE) != p.E:
             self.sem_error(10)
 
         self.lista_reglas.append(14)
@@ -132,10 +148,10 @@ class JSParser(Parser):
 
     @_('LET M T ID PUNTOYCOMA')
     def G(self, p):
-        self.declaration_scope[0] = False
-        self.TS.add_attribute(p.ID[0], p.ID[1], ATTR_TYPE, p.T[0])
-        self.TS.add_attribute(p.ID[0], p.ID[1], ATTR_DESP, self.desp)
+        self.TS.add_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE, p.T[0])
+        self.TS.add_attribute(p.ID[0], p.ID[1], self.ATTR_DESP, self.desp)
         self.desp += p.T[1]
+        self.declaration_scope[0] = False
 
         self.lista_reglas.append(20)
         return
@@ -143,26 +159,30 @@ class JSParser(Parser):
     @_('')
     def M(self, p):
         self.declaration_scope[0] = True
+
         self.lista_reglas.append(21)
         return
 
     @_('NUMBER')
     def T(self, p):
         self.lista_reglas.append(22)
-        return 'ent', 2
+        return self.INT_TYPE, 2
 
     @_('BOOLEAN')
     def T(self, p):
         self.lista_reglas.append(23)
-        return 'log', 2
+        return self.LOG_TYPE, 2
 
     @_('STRING')
     def T(self, p):
         self.lista_reglas.append(24)
-        return 'cadena', 128
+        return self.STRING_TYPE, 128
 
     @_('FOR ABPAREN N PUNTOYCOMA E PUNTOYCOMA O CEPAREN ABLLAVE C CELLAVE')
     def G(self, p):
+        if p.E != self.LOG_TYPE:
+            self.sem_error(6, p.lineno)
+
         self.lista_reglas.append(25)
         return
 
@@ -183,6 +203,9 @@ class JSParser(Parser):
 
     @_('OPESP ID')
     def O(self, p):
+        if self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE) != self.INT_TYPE:
+            self.sem_error(11, p.lineno)
+
         self.lista_reglas.append(29)
         return
 
@@ -258,8 +281,11 @@ class JSParser(Parser):
 
     @_('E OPLOG R')
     def E(self, p):
+        if p.E != self.LOG_TYPE or p.R != self.LOG_TYPE:
+            self.sem_error(12, p.lineno)
+
         self.lista_reglas.append(44)
-        return
+        return self.LOG_TYPE
 
     @_('R')
     def E(self, p):
@@ -268,11 +294,11 @@ class JSParser(Parser):
 
     @_('R OPREL U')
     def R(self, p):
-        if p.R != 'ent' or p.U != 'ent':
-            self.sem_error(13)
+        if p.R != self.INT_TYPE or p.U != self.INT_TYPE:
+            self.sem_error(13, p.lineno)
 
         self.lista_reglas.append(46)
-        return 'log'
+        return self.LOG_TYPE
 
     @_('U')
     def R(self, p):
@@ -281,8 +307,11 @@ class JSParser(Parser):
 
     @_('U OPARIT V')
     def U(self, p):
+        if p.U != self.INT_TYPE or p.V != self.INT_TYPE:
+            self.sem_error(14, p.lineno)
+
         self.lista_reglas.append(48)
-        return
+        return self.INT_TYPE
 
     @_('V')
     def U(self, p):
@@ -291,38 +320,41 @@ class JSParser(Parser):
 
     @_('OPESP ID')
     def V(self, p):
+        if self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE) != self.INT_TYPE:
+            self.sem_error(11, p.lineno)
+
         self.lista_reglas.append(50)
-        return
+        return self.INT_TYPE
 
     @_('ID')
     def V(self, p):
         self.lista_reglas.append(51)
-        return self.TS.get_attribute(p.ID[0],p.ID[1],ATTR_TYPE)
+        return self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE)
 
     @_('ABPAREN E CEPAREN')
     def V(self, p):
         self.lista_reglas.append(52)
-        return
+        return p.E
 
     @_('H')
     def V(self, p):
         self.lista_reglas.append(53)
-        return
+        return p.H
 
     @_('CTEENTERA')
     def V(self, p):
         self.lista_reglas.append(54)
-        return 'ent'
+        return self.INT_TYPE
 
     @_('CADENA')
     def V(self, p):
         self.lista_reglas.append(55)
-        return
+        return self.STRING_TYPE
 
     @_('CTELOGICA')
     def V(self, p):
         self.lista_reglas.append(56)
-        return
+        return self.LOG_TYPE
 
     def error(self, p):
         res = str(self.lista_reglas).strip('[]')
@@ -336,24 +368,25 @@ class JSParser(Parser):
             print(f'Token ilegal {p.type} en la linea {p.lineno}', file=sys.stderr)
             exit(3)
 
-    def sem_error(self, id): #TODO: Añadir p para imprimir linea
-        exit(5)
+    def sem_error(self, id, lineno):
+        print(f'Error en la linea {lineno}:', file=sys.stderr)
+        print(f'\t{self.error_code_dict[id]}', file=sys.stderr)
+        exit(4)
 
-
-if __name__ == '__main__':
-    sys.stdout = open("Parse.txt", "w")
-    sys.stderr = open("Error.txt", "w")
-
-    tables = SymTable()
-    id0 = tables.new_table()
-    listaReglas = []
-
-    lexer = JSLexer(tables)
-    parser = JSParser(listaReglas, tables)
-    f = open('Input.txt', 'r')
-    data = f.read()
-    result = parser.parse(lexer.get_token(data))
-    res = str(listaReglas).strip('[]')
-    res = res.replace(',', '')
-    print(f'Ascendente {res}')
-    tables.write_table("TS-Output.txt")
+# if __name__ == '__main__':
+#     sys.stdout = open("Parse.txt", "w")
+#     sys.stderr = open("Error.txt", "w")
+#
+#     tables = SymTable()
+#     id0 = tables.new_table()
+#     listaReglas = []
+#
+#     lexer = JSLexer(tables)
+#     parser = JSParser(listaReglas, tables)
+#     f = open('Input.txt', 'r')
+#     data = f.read()
+#     result = parser.parse(lexer.get_token(data))
+#     res = str(listaReglas).strip('[]')
+#     res = res.replace(',', '')
+#     print(f'Ascendente {res}')
+#     tables.write_table("TS-Output.txt")

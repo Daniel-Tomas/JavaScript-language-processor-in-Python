@@ -51,17 +51,17 @@ L -> E { L.tipo = E.tipo }
 L -> lambda { L.tipo = void }
 
 
-G -> let M T id ; { zona_declaración = false
-                    añadir_tipo_TS(id.pos, T.tipo)
+G -> let M T id ; { añadir_tipo_TS(id.pos, T.tipo)
                     añadir_desp_TS(id.pos, desp)
-                    desp += T.ancho }
+                    desp += T.ancho
+                    zona_declaración = false }
 M -> lambda { zona_declaracion = true }
 T -> number { T.tipo = ent
-              T.ancho = 2} #size_of(ent)
+              T.ancho = 2} # size_of(ent)
 T -> boolean { T.tipo = log
-               T.ancho = 2} #size_of(log)
+               T.ancho = 2} # size_of(log)
 T -> string { T.tipo = cadena
-               T.ancho = 128} #size_of(string)
+               T.ancho = 128} # size_of(string)
 
 
 G -> for ( N ; E ; O ) { C } { if E.tipo != log
@@ -71,6 +71,7 @@ N -> lambda {}
 O -> K {}
 O -> -- id { if busca_tipo_TS(id.pos) != ent
                 then error(11) }
+O -> lambda {}
 C -> G C {}
 C -> lambda {}
 
@@ -158,10 +159,9 @@ V -> log { V.tipo = log }
         9: "El tipo de retorno no corresponde con el tipo de retorno de la función, se esperaba {tipo_return}",
         10: "El tipo de la variable a asignar no corresponde con el tipo asignado",
         11: "El operador especial '--' solo trabaja con tipos de datos enteros",
-        12: "El operador lógico '&&' solo trabaja con tipos de datos lógicos"
-        13: "El operador de relación '==' solo trabaja con tipos de datos enteros"
+        12: "El operador lógico '&&' solo trabaja con tipos de datos lógicos",
+        13: "El operador de relación '==' solo trabaja con tipos de datos enteros",
         14: "El operador aritmético '-' solo trabaja con tipos de datos enteros"
-        15: "El operador especial '--' solo trabaja con tipos de datos enteros"
     }
 
 function error(error_code):
