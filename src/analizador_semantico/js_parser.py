@@ -20,8 +20,6 @@ class JSParser(Parser):
         self.declaration_scope = declaration_scope_
         self.declaration_scope[0] = True
 
-        self.atrib_stack = deque()
-
     @_('D')
     def B(self, p):
         self.lista_reglas.append(1)
@@ -44,8 +42,7 @@ class JSParser(Parser):
 
     @_('IF ABPAREN E CEPAREN S')
     def G(self, p):
-        type = self.atrib_stack.pop()
-        if type != 'log':
+        if p.E != 'log':
             self.sem_error(1)
         self.lista_reglas.append(5)
         return
