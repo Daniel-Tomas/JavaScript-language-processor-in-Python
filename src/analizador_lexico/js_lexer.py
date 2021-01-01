@@ -198,6 +198,7 @@ class JSLexer(Lexer):
                 print("Id no esta declarado", file=sys.stderr)
             else:
                 t.value = (id_table, id_pos)
+        self.declaration_scope[0]=False
         return t
 
     @_('\n+',

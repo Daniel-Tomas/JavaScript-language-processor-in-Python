@@ -120,8 +120,8 @@ class JSParser(Parser):
 
     @_('ID OPASIG E')
     def K(self, p):
-        if self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE) != p.E:
-            self.sem_error(10, p.lineno)
+#        if self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE) != p.E:
+#            self.sem_error(10, p.lineno)
 
         self.lista_reglas.append(14)
         return
