@@ -98,7 +98,6 @@ Q -> lambda { zona_declaracion = true
 F2 -> ( A ) { añadir_param_TS(pos_id_fun, A.tipo, longitud(A.tipo)
               TS_actual = TS_g
               desp = desp_g
-              F2.tipo = A.tipo,
               zona_declaración = false }
 A -> T id W { añadir_tipo_TS(id.pos, T.tipo)
               añadir_desp_TS(id.pos, desp)

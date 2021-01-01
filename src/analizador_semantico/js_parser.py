@@ -40,6 +40,11 @@ class JSParser(Parser):
         self.desp = 0
         self.declaration_scope = declaration_scope_
         self.declaration_scope[0] = True
+        self.function_scope = False
+        self.return_type = None
+        self.global_desp = 0
+        self.pos_id_fun = None
+        self.number_function = 0
 
     @_('D')
     def B(self, p):
@@ -152,7 +157,6 @@ class JSParser(Parser):
         self.TS.add_attribute(p.ID[0], p.ID[1], self.ATTR_DESP, self.desp)
         self.desp += p.T[1]
         self.declaration_scope[0] = False
-
         self.lista_reglas.append(20)
         return
 
@@ -226,53 +230,92 @@ class JSParser(Parser):
 
     @_('F1 F2 F3')
     def F(self, p):
+        self.TS.destroy_table(len(self.TS.tables) - 1)
+        self.function_scope = False
+        self.return_type = None
+        self.desp = self.global_desp
         self.lista_reglas.append(33)
         return
 
     @_('FUNCTION P Q ID')
     def F1(self, p):
+        self.TS.new_table()
+        self.global_desp = self.desp
+        self.desp = 0
+        self.pos_id_fun = p.ID
+        self.function_scope = True
+        self.return_type = p.Q
+        self.TS.add_attribute(p.ID[0], p.ID[1], 'Valor de retorno', p.Q)
+        self.TS.add_attribute(p.ID[0], p.ID[1], 'Etiqueta', self.number_function)
+        self.number_function += 1
         self.lista_reglas.append(34)
         return
 
     @_('')
     def P(self, p):
+        if self.function_scope:
+            self.sem_error(8)
         self.lista_reglas.append(35)
         return
 
     @_('T')
     def Q(self, p):
+        self.declaration_scope[0] = True
         self.lista_reglas.append(36)
-        return
+        return p.T
 
     @_('')
     def Q(self, p):
+        self.declaration_scope[0] = True
         self.lista_reglas.append(37)
-        return
+        return 'void'
 
     @_('ABPAREN A CEPAREN')
     def F2(self, p):
+        list = p.A
+        if list == 'void':
+            self.TS.add_attribute(self.pos_id_fun[0], self.pos_id_fun[1], 'Num_params', 0)
+            self.TS.add_attribute(self.pos_id_fun[0], self.pos_id_fun[1], 'Tipo_params', 'void')
+        else:
+            types = []
+            for i in range(0, len(list), 2):
+                type = list[i]
+                pos = list[i + 1]
+                self.TS.add_attribute(pos[0], pos[1], self.ATTR_TYPE, type[0])
+                self.TS.add_attribute(pos[0], pos[1], self.ATTR_DESP, self.desp)
+                self.desp += type[1]
+                types.append(type[0])
+            self.TS.add_attribute(self.pos_id_fun[0], self.pos_id_fun[1], 'Num_params', len(types))
+            self.TS.add_attribute(self.pos_id_fun[0], self.pos_id_fun[1], 'Tipo_params', types)
+        self.declaration_scope[0] = False
         self.lista_reglas.append(38)
         return
 
     @_('T ID W')
     def A(self, p):
+        list = p.W
+        list.insert(0, p.ID)
+        list.insert(0, p.T)
         self.lista_reglas.append(39)
-        return
+        return list
 
     @_('')
     def A(self, p):
         self.lista_reglas.append(40)
-        return
+        return 'void'
 
     @_('COMA T ID W')
     def W(self, p):
+        list = p.W
+        list.insert(0, p.ID)
+        list.insert(0, p.T)
         self.lista_reglas.append(41)
-        return
+        return list
 
     @_('')
     def W(self, p):
         self.lista_reglas.append(42)
-        return
+        return []
 
     @_('ABLLAVE C CELLAVE')
     def F3(self, p):
