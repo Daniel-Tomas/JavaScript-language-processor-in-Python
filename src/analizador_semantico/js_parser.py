@@ -6,10 +6,15 @@ from sly import Parser
 from src.analizador_lexico.js_lexer import JSLexer
 from src.tabla_simbolos.sym_table import SymTable
 
+ATTR_TYPE = 'Tipo'
+ATTR_DESP = 'Desp'
+
+INT_TYPE = ''
+STRING_TYPE = ''
+LOG_TYPE = ''
 
 class JSParser(Parser):
     debugfile = 'parser.out'
-
     tokens = JSLexer.tokens
 
     def __init__(self, lista_reglas_, TS_, declaration_scope_):
@@ -94,6 +99,9 @@ class JSParser(Parser):
 
     @_('ID OPASIG E')
     def K(self, p):
+        if self.TS.get_attribute(p.ID[0], p.ID[1], ATTR_TYPE) != p.E:
+            self.sem_error(10)
+
         self.lista_reglas.append(14)
         return
 
@@ -125,8 +133,8 @@ class JSParser(Parser):
     @_('LET M T ID PUNTOYCOMA')
     def G(self, p):
         self.declaration_scope[0] = False
-        self.TS.add_attribute(p.ID[0], p.ID[1], 'Tipo', p.T[0])
-        self.TS.add_attribute(p.ID[0], p.ID[1], 'Desp', self.desp)
+        self.TS.add_attribute(p.ID[0], p.ID[1], ATTR_TYPE, p.T[0])
+        self.TS.add_attribute(p.ID[0], p.ID[1], ATTR_DESP, self.desp)
         self.desp += p.T[1]
 
         self.lista_reglas.append(20)
@@ -141,12 +149,12 @@ class JSParser(Parser):
     @_('NUMBER')
     def T(self, p):
         self.lista_reglas.append(22)
-        return
+        return 'ent', 2
 
     @_('BOOLEAN')
     def T(self, p):
         self.lista_reglas.append(23)
-        return
+        return 'log', 2
 
     @_('STRING')
     def T(self, p):
@@ -223,7 +231,7 @@ class JSParser(Parser):
         self.lista_reglas.append(38)
         return
 
-    @_('T ID R')
+    @_('T ID W')
     def A(self, p):
         self.lista_reglas.append(39)
         return
@@ -233,13 +241,13 @@ class JSParser(Parser):
         self.lista_reglas.append(40)
         return
 
-    @_('COMA T ID R')
-    def R(self, p):
+    @_('COMA T ID W')
+    def W(self, p):
         self.lista_reglas.append(41)
         return
 
     @_('')
-    def R(self, p):
+    def W(self, p):
         self.lista_reglas.append(42)
         return
 
@@ -256,17 +264,20 @@ class JSParser(Parser):
     @_('R')
     def E(self, p):
         self.lista_reglas.append(45)
-        return
+        return p.R
 
     @_('R OPREL U')
     def R(self, p):
+        if p.R != 'ent' or p.U != 'ent':
+            self.sem_error(13)
+
         self.lista_reglas.append(46)
-        return
+        return 'log'
 
     @_('U')
     def R(self, p):
         self.lista_reglas.append(47)
-        return
+        return p.U
 
     @_('U OPARIT V')
     def U(self, p):
@@ -276,7 +287,7 @@ class JSParser(Parser):
     @_('V')
     def U(self, p):
         self.lista_reglas.append(49)
-        return
+        return p.V
 
     @_('OPESP ID')
     def V(self, p):
@@ -286,7 +297,7 @@ class JSParser(Parser):
     @_('ID')
     def V(self, p):
         self.lista_reglas.append(51)
-        return
+        return self.TS.get_attribute(p.ID[0],p.ID[1],ATTR_TYPE)
 
     @_('ABPAREN E CEPAREN')
     def V(self, p):
@@ -301,7 +312,7 @@ class JSParser(Parser):
     @_('CTEENTERA')
     def V(self, p):
         self.lista_reglas.append(54)
-        return
+        return 'ent'
 
     @_('CADENA')
     def V(self, p):
@@ -325,8 +336,8 @@ class JSParser(Parser):
             print(f'Token ilegal {p.type} en la linea {p.lineno}', file=sys.stderr)
             exit(3)
 
-    def sem_error(self, id):
-        pass
+    def sem_error(self, id): #TODO: Añadir p para imprimir linea
+        exit(5)
 
 
 if __name__ == '__main__':

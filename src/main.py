@@ -8,7 +8,7 @@ if __name__ == '__main__':
     tokens_file = open("Tokens.txt", "w")
     parse_file = open("Parse.txt", "w")
     TS_file = open("TS-Output.txt", "w")
-    sys.stderr = open("Error.txt", "w")
+    #sys.stderr = open("Error.txt", "w")
 
     symbol_table = SymTable()
     declaration_scope = [False]

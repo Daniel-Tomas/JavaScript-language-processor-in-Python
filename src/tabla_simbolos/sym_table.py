@@ -71,7 +71,7 @@ class SymTable:
         for index, elem in reversed(list(enumerate(self.tables))):
             if elem.exists:
                 id_pos = self.tables[index].get_pos(lex)
-                if id_pos:
+                if id_pos is not None:
                     id_table = index
                     break
 
@@ -123,18 +123,18 @@ class SymTable:
         """
         return self.tables[table_index].add_attribute(table_pos, type_, content)
 
-    def get_attribute(self, id_, lex, type_):
+    def get_attribute(self, table_index, table_pos, type_):
         """Gets value of an attribute of a lexeme in the table identified by table_index.
 
         Args:
-            id_ (int): Identifier of the symbol table.
-            lex (str): The lexem to find into the symbol table
-            type_ (str): The type of the attribute.
+            table_index (int): Table index in the symbol table.
+            table_pos (int): Position of the lex in the table.
+            type_ (str): The type of attribute to get.
 
         Returns:
              any or None: any the value of the type_, False if the type does not exist.
         """
-        return self.tables[id_].get_attribute(lex, type_)
+        return self.tables[table_index].get_attribute(table_pos, type_)
 
     def get_lex_dict(self, id_table, lex):
         """Gets the dict of a specified lexeme stored in the table identified by table_index.

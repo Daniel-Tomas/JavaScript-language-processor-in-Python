@@ -109,20 +109,18 @@ class Table:
         #
         # lex_dict[type_] = content
 
-    def get_attribute(self, lex, type_):
+    def get_attribute(self, table_pos, type_):
         """Gets value of an attribute of a lexeme.
 
         Args:
-            lex (str): The lexeme to find into the symbol table.
+            table_pos (int): Position of the lex in the table.
             type_ (str): The type of the attribute.
 
         Returns:
             any or None: any the value of the attribute if exists, False otherwise.
         """
 
-        lex_dict = self.lexems[self.get_pos(lex)]
-
-        return lex_dict.get(type_)
+        return self.lexems[table_pos].get(type_)
 
     def get_lex_dict(self, lex):
         """Gets the dict of a specified lexeme.
@@ -156,7 +154,7 @@ class Table:
             Prints the using the format provided in
             FormatoImpresiónTablaDeSímbolos.txt
         Args:
-            path (str): the path of the file.
+            path (file): File where the TS is going to be written
 
         Returns:
             bool: True if the table exists. False otherwise.

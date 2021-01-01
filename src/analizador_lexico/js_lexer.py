@@ -194,7 +194,7 @@ class JSLexer(Lexer):
                 id_table, id_pos = self.ts.add_entry(t.value)
                 t.value = (id_table, id_pos)
         else:
-            if not id_table:
+            if id_table:
                 pass  # El id deberia estar
             else:
                 t.value = (id_table, id_pos)

@@ -99,22 +99,22 @@ F2 -> ( A ) { añadir_param_TS(pos_id_fun, A.tipo, longitud(A.tipo)
               desp = desp_g
               F2.tipo = A.tipo,
               zona_declaración = false }
-A -> T id R { añadir_tipo_TS(id.pos, T.tipo)
+A -> T id W { añadir_tipo_TS(id.pos, T.tipo)
               añadir_desp_TS(id.pos, desp)
               desp += T.ancho
-              if longitud(R.tipo) == 0
+              if longitud(W.tipo) == 0
                 then A.tipo = T.tipo
               else
-                A.tipo = T.tipo x R.tipo }
+                A.tipo = T.tipo x W.tipo }
 A -> lambda { A.tipo = void }
-R -> , T id R1   { añadir_tipo_TS(id.pos, T.tipo)
+W -> , T id W1   { añadir_tipo_TS(id.pos, T.tipo)
                    añadir_desp_TS(id.pos, desp)
                    desp += T.ancho
-                   if longitud(R1.tipo) == 0
-                    then R.tipo = T.tipo
+                   if longitud(W1.tipo) == 0
+                    then W.tipo = T.tipo
                    else
-                    R.tipo = T.tipo x R1.tipo }
-R -> lambda {}
+                    W.tipo = T.tipo x W1.tipo }
+W -> lambda {}
 
 F3 -> { C } {}
 
