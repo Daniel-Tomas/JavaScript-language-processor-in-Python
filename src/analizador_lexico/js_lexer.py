@@ -187,7 +187,6 @@ class JSLexer(Lexer):
             self.error(t, "CADENA")
         return t
 
-    # TODO: cambiar estrucutura ID. La TS es una lista de TS's. Cada una es una lista de diccionarios.
     def ID(self, t):
         if self.declarando_funcion[0]:
             self.declaration_scope[0] = True

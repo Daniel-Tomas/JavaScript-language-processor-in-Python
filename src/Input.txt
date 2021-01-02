@@ -1,3 +1,17 @@
 let number s;
 let number factorial;
 s = 2;
+function number resta ( number a, number b ){
+    c = a - b;
+    let boolean bol;
+    c = resta(b , b);
+    return a;
+}
+function boolean restaa ( number a, number b ){
+    c = a - b;
+    let boolean bol;
+    bol = restaa(b , b);
+    return bol;
+}
+function nada(){}
+nada();

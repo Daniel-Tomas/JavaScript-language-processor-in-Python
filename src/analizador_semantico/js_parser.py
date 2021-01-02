@@ -8,7 +8,11 @@ from src.analizador_lexico.js_lexer import JSLexer
 class JSParser(Parser):
     ATTR_TYPE = 'Tipo'
     ATTR_DESP = 'Desp'
+    ATTR_NUM_PARAMS = 'Num_params'
+    ATTR_TYPE_PARAMS = 'Tipo_params'
+    ATTR_RETURN_VALUE = 'Valor de retorno'
 
+    FUNCTION_TYPE = 'funcion'
     LOG_TYPE = 'log'
     INT_TYPE = 'ent'
     STRING_TYPE = 'cadena'
@@ -87,33 +91,41 @@ class JSParser(Parser):
 
     @_('ID ABPAREN I CEPAREN')
     def H(self, p):
-        types = self.atrib_stack.pop()
-        if len(types) != self.TS.get_attribute(p.ID.TS_index, p.ID.value, "num_params"):
-            self.sem_error(2)
-        # for comparar tipos
-        self.atrib_stack.append("busca_tipo_devuelto_TS(id.pos)")
+        if self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE) != self.FUNCTION_TYPE:
+            self.sem_error(15, p)
+        if self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_NUM_PARAMS) == 0 and p.I == self.VOID_TYPE:
+            return self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_RETURN_VALUE)
+        if self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_NUM_PARAMS) != len(p.I):
+            self.sem_error(2, p)
+        for index, param in enumerate(self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE_PARAMS)):
+            if param != p.I[index]:
+                self.sem_error(3,p)
         self.lista_reglas.append(8)
-        return
+        return self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_RETURN_VALUE)
 
     @_('E J')
     def I(self, p):
+        list = p.J
+        list.insert(0, p.E)
         self.lista_reglas.append(9)
-        return
+        return list
 
     @_('COMA E J')
     def J(self, p):
+        list = p.J
+        list.insert(0, p.E)
         self.lista_reglas.append(10)
-        return
+        return list
 
     @_('')
     def J(self, p):
         self.lista_reglas.append(11)
-        return
+        return []
 
     @_('')
     def I(self, p):
         self.lista_reglas.append(12)
-        return
+        return self.VOID_TYPE
 
     @_('K PUNTOYCOMA')
     def S(self, p):
@@ -124,34 +136,42 @@ class JSParser(Parser):
     def K(self, p):
         if self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE) != p.E:
             self.sem_error(10, p.lineno)
-
         self.lista_reglas.append(14)
         return
 
     @_('ALERT ABPAREN E CEPAREN PUNTOYCOMA')
     def S(self, p):
+        if p.E != self.STRING_TYPE and p.E != self.INT_TYPE:
+            self.sem_error(4, p)
         self.lista_reglas.append(15)
         return
 
     @_('INPUT ABPAREN ID CEPAREN PUNTOYCOMA')
     def S(self, p):
+        type = self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE)
+        if  type != self.STRING_TYPE and type != self.INT_TYPE:
+            self.sem_error(5,p)
         self.lista_reglas.append(16)
         return
 
     @_('RETURN L PUNTOYCOMA')
     def S(self, p):
+        if not self.function_scope:
+            self.sem_error(7, p)
+        if p.L != self.return_type:
+            self.sem_error(9, p)
         self.lista_reglas.append(17)
         return
 
     @_('E')
     def L(self, p):
         self.lista_reglas.append(18)
-        return
+        return p.E
 
     @_('')
     def L(self, p):
         self.lista_reglas.append(19)
-        return
+        return self.VOID_TYPE
 
     @_('LET M T ID PUNTOYCOMA')
     def G(self, p):
@@ -167,7 +187,6 @@ class JSParser(Parser):
     @_('')
     def M(self, p):
         self.declaration_scope[0] = True
-
         self.lista_reglas.append(21)
         return
 
@@ -190,7 +209,6 @@ class JSParser(Parser):
     def G(self, p):
         if p.E != self.LOG_TYPE:
             self.sem_error(6, p.lineno)
-
         self.lista_reglas.append(25)
         return
 
@@ -213,7 +231,6 @@ class JSParser(Parser):
     def O(self, p):
         if self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE) != self.INT_TYPE:
             self.sem_error(11, p.lineno)
-
         self.lista_reglas.append(29)
         return
 
@@ -248,12 +265,12 @@ class JSParser(Parser):
         self.shift = 0
         self.pos_id_fun = p.ID
         self.function_scope = True
-        self.return_type = p.Q
-        self.TS.add_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE, 'funcion')
+        self.return_type = p.Q[0]
+        self.TS.add_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE, self.FUNCTION_TYPE)
         if p.Q == 'void':
-            self.TS.add_attribute(p.ID[0], p.ID[1], 'Valor de retorno', 'void')
+            self.TS.add_attribute(p.ID[0], p.ID[1], self.ATTR_RETURN_VALUE , self.VOID_TYPE)
         else:
-            self.TS.add_attribute(p.ID[0], p.ID[1], 'Valor de retorno', p.Q[0])
+            self.TS.add_attribute(p.ID[0], p.ID[1], self.ATTR_RETURN_VALUE, p.Q[0])
         self.TS.add_attribute(p.ID[0], p.ID[1], 'Etiqueta', 'Et_Fun_' + str(self.number_function))
         self.number_function += 1
         self.lista_reglas.append(34)
@@ -280,8 +297,8 @@ class JSParser(Parser):
     def F2(self, p):
         list = p.A
         if list == self.VOID_TYPE:
-            self.TS.add_attribute(self.pos_id_fun[0], self.pos_id_fun[1], 'Num_params', 0)
-            self.TS.add_attribute(self.pos_id_fun[0], self.pos_id_fun[1], 'Tipo_params', self.VOID_TYPE)
+            self.TS.add_attribute(self.pos_id_fun[0], self.pos_id_fun[1], self.ATTR_NUM_PARAMS, 0)
+            self.TS.add_attribute(self.pos_id_fun[0], self.pos_id_fun[1], self.ATTR_TYPE_PARAMS, self.VOID_TYPE)
         else:
             types = []
             for i in range(0, len(list), 2):
@@ -291,8 +308,8 @@ class JSParser(Parser):
                 self.TS.add_attribute(pos[0], pos[1], self.ATTR_DESP, self.shift)
                 self.shift += type[1]
                 types.append(type[0])
-            self.TS.add_attribute(self.pos_id_fun[0], self.pos_id_fun[1], 'Num_params', len(types))
-            self.TS.add_attribute(self.pos_id_fun[0], self.pos_id_fun[1], 'Tipo_params', types)
+            self.TS.add_attribute(self.pos_id_fun[0], self.pos_id_fun[1], self.ATTR_NUM_PARAMS, len(types))
+            self.TS.add_attribute(self.pos_id_fun[0], self.pos_id_fun[1], self.ATTR_TYPE_PARAMS, types)
         self.declaration_scope[0] = False
         self.declarando_funcion[0] = False
         self.lista_reglas.append(38)
