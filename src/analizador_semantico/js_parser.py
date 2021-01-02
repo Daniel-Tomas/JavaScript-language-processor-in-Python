@@ -34,16 +34,16 @@ class JSParser(Parser):
     debugfile = 'parser.out'
     tokens = JSLexer.tokens
 
-    def __init__(self, lista_reglas_, TS_, declaration_scope_, declarando_funcion_):
+    def __init__(self, lista_reglas_, TS_, declaration_scope_, declarando_funcion_, global_shift_):
         self.lista_reglas = lista_reglas_
         self.TS = TS_
         self.TS.new_table()
-        self.desp = 0
+        self.shift = 0
         self.declaration_scope = declaration_scope_
-        self.declaration_scope[0] = True
+        self.declaration_scope[0] = False
         self.function_scope = False
         self.return_type = None
-        self.global_desp = 0
+        self.global_shift = global_shift_
         self.pos_id_fun = None
         self.number_function = 0
         self.declarando_funcion = declarando_funcion_
@@ -122,8 +122,8 @@ class JSParser(Parser):
 
     @_('ID OPASIG E')
     def K(self, p):
-        #        if self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE) != p.E:
-        #            self.sem_error(10, p.lineno)
+        if self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE) != p.E:
+           self.sem_error(10, p.lineno)
 
         self.lista_reglas.append(14)
         return
@@ -156,8 +156,8 @@ class JSParser(Parser):
     @_('LET M T ID PUNTOYCOMA')
     def G(self, p):
         self.TS.add_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE, p.T[0])
-        self.TS.add_attribute(p.ID[0], p.ID[1], self.ATTR_DESP, self.desp)
-        self.desp += p.T[1]
+        self.TS.add_attribute(p.ID[0], p.ID[1], self.ATTR_DESP, self.shift)
+        self.shift += p.T[1]
         self.declaration_scope[0] = False
         self.lista_reglas.append(20)
         return
@@ -235,15 +235,15 @@ class JSParser(Parser):
         self.TS.destroy_table(len(self.TS.tables) - 1)
         self.function_scope = False
         self.return_type = None
-        self.desp = self.global_desp
+        self.shift = self.global_shift[0]
         self.lista_reglas.append(33)
         return
 
     @_('FUNCTION P Q ID')
     def F1(self, p):
         self.TS.new_table()
-        self.global_desp = self.desp
-        self.desp = 0
+        self.global_shift[0] = self.shift
+        self.shift = 0
         self.pos_id_fun = p.ID
         self.function_scope = True
         self.return_type = p.Q
@@ -259,22 +259,18 @@ class JSParser(Parser):
 
     @_('')
     def P(self, p):
-        if self.function_scope:
-            self.sem_error(8)
         self.lista_reglas.append(35)
         return
 
     @_('T')
     def Q(self, p):
         self.declaration_scope[0] = True
-        self.declarando_funcion[0] = True
         self.lista_reglas.append(36)
         return p.T
 
     @_('')
     def Q(self, p):
         self.declaration_scope[0] = True
-        self.declarando_funcion[0] = True
         self.lista_reglas.append(37)
         return self.VOID_TYPE
 
@@ -290,8 +286,8 @@ class JSParser(Parser):
                 type = list[i]
                 pos = list[i + 1]
                 self.TS.add_attribute(pos[0], pos[1], self.ATTR_TYPE, type[0])
-                self.TS.add_attribute(pos[0], pos[1], self.ATTR_DESP, self.desp)
-                self.desp += type[1]
+                self.TS.add_attribute(pos[0], pos[1], self.ATTR_DESP, self.shift)
+                self.shift += type[1]
                 types.append(type[0])
             self.TS.add_attribute(self.pos_id_fun[0], self.pos_id_fun[1], 'Num_params', len(types))
             self.TS.add_attribute(self.pos_id_fun[0], self.pos_id_fun[1], 'Tipo_params', types)

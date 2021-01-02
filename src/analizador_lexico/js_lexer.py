@@ -15,11 +15,12 @@ class JSLexer(Lexer):
     #
     # """
     #
-    def __init__(self, ts_, declaration_scope_, tokens_file_, declarando_funcion_):
+    def __init__(self, ts_, declaration_scope_, tokens_file_, declarando_funcion_, global_shift_):
         self.ts = ts_
         self.declaration_scope = declaration_scope_
         self.tokens_file = tokens_file_
         self.declarando_funcion = declarando_funcion_
+        self.global_shift = global_shift_
 
     tokens = {CTEENTERA, CADENA, CTELOGICA, OPARIT, OPESP,
               OPREL, OPLOG, OPASIG, ID, NUMBER, STRING, BOOLEAN, LET, ALERT,
@@ -194,12 +195,18 @@ class JSLexer(Lexer):
         if self.declaration_scope[0]:
             if id_table is not None:  # TODO: buscar como comprobar que no sea None
                 print("Id ya declarado", file=sys.stderr)  # El id ya esta declarado
+                print(t.lineno)
+                exit(10)
             else:
                 id_table, id_pos = self.ts.add_entry(t.value)
                 t.value = (id_table, id_pos)
         else:
             if id_table is None:
-                print("Id no esta declarado", file=sys.stderr)
+                id_table, id_pos = self.ts.add_global_entry(t.value)
+                self.ts.add_attribute(id_table, id_pos, 'Tipo', 'ent')
+                self.ts.add_attribute(id_table, id_pos, 'Desp', self.global_shift[0])
+                self.global_shift[0] += 2
+                t.value = (id_table, id_pos)
             else:
                 t.value = (id_table, id_pos)
         self.declaration_scope[0] = False

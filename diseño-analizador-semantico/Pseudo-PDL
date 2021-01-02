@@ -1,5 +1,5 @@
 Axioma = B
-NoTerminales = { A B C D E F G H I J K L M N O P Q R S T U V F1 F2 F3 }
+NoTerminales = { A AA B C D E F G H I J K L M N O P Q R S T U V F1 F2 F3 }
 Terminales = { && == - -- ( ) = ; , { } id ent cad log let alert input return for if number boolean string function }
 Producciones = {
 
@@ -18,7 +18,9 @@ G -> if ( E ) S { if E.tipo != log
                     then error(1) }
 G -> S {}
 S -> H ; {}
-H -> id ( I ) { if longitud(I.tipo) != busca_num_params_TS(id.pos)
+H -> id ( I ) { if busca_tipo_TS(id.pos) != 'funcion'
+                    then error(15)
+                else if longitud(I.tipo) != busca_num_params_TS(id.pos)
                     then error(2)
                 else if busca_tipo_TS(id.pos) != I.tipo
                     then error(3)
@@ -36,15 +38,23 @@ J -> lambda {}
 I -> lambda { I.tipo = void }
 
 S -> K ; {}
-K -> id = E { if busca_tipo_TS(id.pos) != E.tipo
-                then error(10) }
+K -> id = E {   if busca_tipo_TS(id.pos) != None
+                    añade_tipo_TS(id.pos, 'ent')
+                    añade_desp_TS(id.pos, desp)
+                    desp+=2
+                if busca_tipo_TS(id.pos) != E.tipo
+                    then error(10) }
 
 S -> alert ( E ) ; { if E.tipo != cadena && E.tipo != entero
                         then error(4) }
-S -> input ( id ) ; { if busca_tipo_TS(id.pos) != cadena && busca_tipo_TS(id.pos) != entero
-                        then error(5) }
+S -> input ( id ) ; { if busca_tipo_TS(id.pos) != None
+                           añade_tipo_TS(id.pos, 'ent')
+                           añade_desp_TS(id.pos, desp)
+                           desp+=2
+                      if busca_tipo_TS(id.pos) != cadena && busca_tipo_TS(id.pos) != entero
+                           then error(5) }
 S -> return L ; { if zona_function != true
-                    then Error(7)}
+                    then error(7)}
                   else if L.tipo != tipo_return
                     then error(9) }
 L -> E { L.tipo = E.tipo }
@@ -69,8 +79,12 @@ G -> for ( N ; E ; O ) { C } { if E.tipo != log
 N -> K {}
 N -> lambda {}
 O -> K {}
-O -> -- id { if busca_tipo_TS(id.pos) != ent
-                then error(11) }
+O -> -- id { if busca_tipo_TS(id.pos) != None
+                 añade_tipo_TS(id.pos, 'ent')
+                 añade_desp_TS(id.pos, desp)
+                 desp+=2
+             if busca_tipo_TS(id.pos) != ent
+                 then error(11) }
 O -> lambda {}
 C -> G C {}
 C -> lambda {}
@@ -88,8 +102,7 @@ F1 -> function P Q id { TS_l = crea_TS()
                         tipo_return = Q.tipo
                         añadir_tipo_devuelto_TS(id.pos, tipo_return)
                         inserta_et_TS (id.pos, nueva_et ()) }
-P -> lambda { if zona_function == true
-                then error(8) }
+P -> lambda {}
 Q -> T { zona_declaracion = true
          Q.tipo = T.tipo }
 Q -> lambda { zona_declaracion = true
@@ -99,22 +112,22 @@ F2 -> ( A ) { añadir_param_TS(pos_id_fun, A.tipo, longitud(A.tipo)
               TS_actual = TS_g
               desp = desp_g
               zona_declaración = false }
-A -> T id W { añadir_tipo_TS(id.pos, T.tipo)
+A -> T id AA { añadir_tipo_TS(id.pos, T.tipo)
               añadir_desp_TS(id.pos, desp)
               desp += T.ancho
-              if longitud(W.tipo) == 0
+              if longitud(AA.tipo) == 0
                 then A.tipo = T.tipo
               else
-                A.tipo = T.tipo x W.tipo }
+                A.tipo = T.tipo x AA.tipo }
 A -> lambda { A.tipo = void }
-W -> , T id W1   { añadir_tipo_TS(id.pos, T.tipo)
+AA -> , T id AA1   { añadir_tipo_TS(id.pos, T.tipo)
                    añadir_desp_TS(id.pos, desp)
                    desp += T.ancho
-                   if longitud(W1.tipo) == 0
-                    then W.tipo = T.tipo
+                   if longitud(AA1.tipo) == 0
+                        then AA.tipo = T.tipo
                    else
-                    W.tipo = T.tipo x W1.tipo }
-W -> lambda {}
+                        AA.tipo = T.tipo x AA1.tipo }
+AA -> lambda {}
 
 F3 -> { C } {}
 
@@ -134,11 +147,19 @@ U -> U1 - V { if U1.tipo != ent || V.tipo != ent
               else
                 U.tipo = ent }
 U -> V { U.tipo = V.tipo }
-V -> -- id { if busca_tipo_TS(id.pos) != ent
+V -> -- id { if busca_tipo_TS(id.pos) != None
+                añade_tipo_TS(id.pos, 'ent')
+                añade_desp_TS(id.pos, desp)
+                desp+=2
+             if busca_tipo_TS(id.pos) != ent
                 then error(15)
              else
                 V.tipo = ent }
-V -> id { V.tipo = busca_tipo_TS(id.pos) }
+V -> id { if busca_tipo_TS(id.pos) != None
+                añade_tipo_TS(id.pos, 'ent')
+                añade_desp_TS(id.pos, desp)
+                desp+=2
+            V.tipo = busca_tipo_TS(id.pos) }
 V -> ( E ) { V.tipo = E.tipo }
 V -> H { V.tipo = H.tipo }
 V -> ent { V.tipo = ent }
@@ -160,7 +181,8 @@ V -> log { V.tipo = log }
         11: "El operador especial '--' solo trabaja con tipos de datos enteros",
         12: "El operador lógico '&&' solo trabaja con tipos de datos lógicos",
         13: "El operador de relación '==' solo trabaja con tipos de datos enteros",
-        14: "El operador aritmético '-' solo trabaja con tipos de datos enteros"
+        14: "El operador aritmético '-' solo trabaja con tipos de datos enteros",
+        15: "La variable no se puede invocar como una funcion, con argumentos"
     }
 
 function error(error_code):

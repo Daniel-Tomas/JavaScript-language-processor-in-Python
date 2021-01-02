@@ -97,6 +97,26 @@ class SymTable:
 
         return id_table, id_pos
 
+    def add_global_entry(self, lex):
+        """Adds a lexeme into the global symbol table.
+
+        Args:
+            lex (str): The lexeme to add_entry in the symbol table.
+
+        Returns:
+            int, int or None, None: the table index and the position in that table where lex has been added or None otherwise
+        """
+        id_table = None
+        id_pos = None
+
+        for index, elem in list(enumerate(self.tables)):
+            if elem.exists:
+                id_table = index
+                id_pos = self.tables[index].add_lex(lex)
+                break
+
+        return id_table, id_pos
+
     def remove_lex_at(self, id_table, pos_lex):
         """Removes a lexeme located in pos_lex from the table identified by an table_index.
 
