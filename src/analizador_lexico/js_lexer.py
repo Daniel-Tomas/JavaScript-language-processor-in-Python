@@ -190,7 +190,10 @@ class JSLexer(Lexer):
     def ID(self, t):
         if self.declarando_funcion[0]:
             self.declaration_scope[0] = True
-        id_table, id_pos = self.ts.get_pos(t.value)
+            id_table, id_pos = self.ts.get_local_pos(t.value)
+        else:
+            id_table, id_pos = self.ts.get_pos(t.value)
+
         if self.declaration_scope[0]:
             if id_table is not None:  # TODO: buscar como comprobar que no sea None
                 print("Id ya declarado", file=sys.stderr)  # El id ya esta declarado

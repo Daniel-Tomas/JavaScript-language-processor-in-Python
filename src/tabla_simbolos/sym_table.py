@@ -77,6 +77,26 @@ class SymTable:
 
         return id_table, id_pos
 
+    def get_local_pos(self, lex):
+        """Gets the position of the local table where the lex is located.
+
+        Args:
+            lex (str): The lexeme to find into the symbol table
+
+        Returns:
+           int, int or None, None: the table index and the position in that table where lex is located or None otherwise
+        """
+        id_table = None
+        id_pos = None
+        for index, elem in reversed(list(enumerate(self.tables))):
+            if elem.exists:
+                id_pos = self.tables[index].get_pos(lex)
+                if id_pos is not None:
+                    id_table = index
+                break
+
+        return id_table, id_pos
+
     def add_entry(self, lex):
         """Adds a lexeme into the last symbol table created.
 

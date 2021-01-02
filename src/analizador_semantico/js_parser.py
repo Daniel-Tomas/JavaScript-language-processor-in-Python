@@ -7,10 +7,10 @@ from src.analizador_lexico.js_lexer import JSLexer
 
 class JSParser(Parser):
     ATTR_TYPE = 'Tipo'
-    ATTR_DESP = 'Desp'
-    ATTR_NUM_PARAMS = 'Num_params'
+    ATTR_DESP = 'Despl'
+    ATTR_NUM_PARAMS = 'numParam'
     ATTR_TYPE_PARAMS = 'Tipo_params'
-    ATTR_RETURN_VALUE = 'Valor de retorno'
+    ATTR_RETURN_VALUE = 'TipoRetorno'
 
     FUNCTION_TYPE = 'funcion'
     LOG_TYPE = 'log'
@@ -32,7 +32,8 @@ class JSParser(Parser):
         11: "El operador especial '--' solo trabaja con tipos de datos enteros",
         12: "El operador lógico '&&' solo trabaja con tipos de datos lógicos",
         13: "El operador de relación '==' solo trabaja con tipos de datos enteros",
-        14: "El operador aritmético '-' solo trabaja con tipos de datos enteros"
+        14: "El operador aritmético '-' solo trabaja con tipos de datos enteros",
+        15: "La variable no se puede invocar como una funcion, con argumentos"
     }
 
     debugfile = 'parser.out'
@@ -92,14 +93,15 @@ class JSParser(Parser):
     @_('ID ABPAREN I CEPAREN')
     def H(self, p):
         if self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE) != self.FUNCTION_TYPE:
-            self.sem_error(15, p)
+            self.sem_error(15, p.lineno)
         if self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_NUM_PARAMS) == 0 and p.I == self.VOID_TYPE:
             return self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_RETURN_VALUE)
         if self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_NUM_PARAMS) != len(p.I):
-            self.sem_error(2, p)
+            self.sem_error(2, p.lineno)
         for index, param in enumerate(self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE_PARAMS)):
             if param != p.I[index]:
-                self.sem_error(3,p)
+                self.sem_error(3, p.lineno)
+
         self.lista_reglas.append(8)
         return self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_RETURN_VALUE)
 
@@ -149,17 +151,17 @@ class JSParser(Parser):
     @_('INPUT ABPAREN ID CEPAREN PUNTOYCOMA')
     def S(self, p):
         type = self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE)
-        if  type != self.STRING_TYPE and type != self.INT_TYPE:
-            self.sem_error(5,p)
+        if type != self.STRING_TYPE and type != self.INT_TYPE:
+            self.sem_error(5, p)
         self.lista_reglas.append(16)
         return
 
     @_('RETURN L PUNTOYCOMA')
     def S(self, p):
         if not self.function_scope:
-            self.sem_error(7, p)
+            self.sem_error(7, p.lineno)
         if p.L != self.return_type:
-            self.sem_error(9, p)
+            self.sem_error(9, p.lineno)
         self.lista_reglas.append(17)
         return
 
@@ -265,13 +267,16 @@ class JSParser(Parser):
         self.shift = 0
         self.pos_id_fun = p.ID
         self.function_scope = True
-        self.return_type = p.Q[0]
+
         self.TS.add_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE, self.FUNCTION_TYPE)
         if p.Q == 'void':
-            self.TS.add_attribute(p.ID[0], p.ID[1], self.ATTR_RETURN_VALUE , self.VOID_TYPE)
+            self.return_type = p.Q
+            self.TS.add_attribute(p.ID[0], p.ID[1], self.ATTR_RETURN_VALUE, self.VOID_TYPE)
         else:
+            self.return_type = p.Q[0]
             self.TS.add_attribute(p.ID[0], p.ID[1], self.ATTR_RETURN_VALUE, p.Q[0])
-        self.TS.add_attribute(p.ID[0], p.ID[1], 'Etiqueta', 'Et_Fun_' + str(self.number_function))
+
+        self.TS.add_attribute(p.ID[0], p.ID[1], 'EtiqFuncion', 'Et_Fun_' + str(self.number_function))
         self.number_function += 1
         self.lista_reglas.append(34)
         return

@@ -1,17 +1,35 @@
-let number s;
-let number factorial;
-s = 2;
-function number resta ( number a, number b ){
-    c = a - b;
-    let boolean bol;
-    c = resta(b , b);
-    return a;
+let string s;
+let number    uno;
+let number    UNO;
+function number Factorial (number n)
+{
+	if (n == 0)	return 1;
+	return n - Factorial (n - 1);
 }
-function boolean restaa ( number a, number b ){
-    c = a - b;
-    let boolean bol;
-    bol = restaa(b , b);
-    return bol;
+let number For;
+let number functional;
+let number While;
+
+function print (string s, string msg, number f)
+{
+	alert (s); alert (msg); alert (f);
+	return;
 }
-function nada(){}
-nada();
+function string cadena (boolean log)
+{
+	for (uno=1;log;)
+	{
+		print (s, "hola", 33);
+		if (uno == UNO)	return s;
+	}
+}
+s = "El factorial ";
+
+alert (s);
+alert ("Introduce un numero.");
+input (num);
+let
+boolean
+booleano;
+if (num == 0)		alert ("No existe el factorial de un negativo.");
+print (cadena (booleano), "recursivo es: ", Factorial (num));
