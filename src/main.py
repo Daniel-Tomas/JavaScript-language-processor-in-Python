@@ -12,11 +12,12 @@ if __name__ == '__main__':
 
     symbol_table = SymTable()
     declaration_scope = [False]
+    declarando_funcion = [False]
 
-    lexer = JSLexer(symbol_table, declaration_scope, tokens_file)
+    lexer = JSLexer(symbol_table, declaration_scope, tokens_file, declarando_funcion)
 
     listaReglas = []
-    parser = JSParser(listaReglas, symbol_table, declaration_scope)
+    parser = JSParser(listaReglas, symbol_table, declaration_scope, declarando_funcion)
 
     f = open('Input.txt', 'r')
     data = f.read()

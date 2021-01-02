@@ -15,10 +15,11 @@ class JSLexer(Lexer):
     #
     # """
     #
-    def __init__(self, ts_, declaration_scope_, tokens_file_):
+    def __init__(self, ts_, declaration_scope_, tokens_file_, declarando_funcion_):
         self.ts = ts_
         self.declaration_scope = declaration_scope_
         self.tokens_file = tokens_file_
+        self.declarando_funcion = declarando_funcion_
 
     tokens = {CTEENTERA, CADENA, CTELOGICA, OPARIT, OPESP,
               OPREL, OPLOG, OPASIG, ID, NUMBER, STRING, BOOLEAN, LET, ALERT,
@@ -186,6 +187,8 @@ class JSLexer(Lexer):
 
     # TODO: cambiar estrucutura ID. La TS es una lista de TS's. Cada una es una lista de diccionarios.
     def ID(self, t):
+        if self.declarando_funcion[0]:
+            self.declaration_scope[0] = True
         id_table, id_pos = self.ts.get_pos(t.value)
         if self.declaration_scope[0]:
             if id_table is not None:  # TODO: buscar como comprobar que no sea None
@@ -198,7 +201,7 @@ class JSLexer(Lexer):
                 print("Id no esta declarado", file=sys.stderr)
             else:
                 t.value = (id_table, id_pos)
-        self.declaration_scope[0]=False
+        self.declaration_scope[0] = False
         return t
 
     @_('\n+',
@@ -260,9 +263,9 @@ class JSLexer(Lexer):
             Token: The next token.
         """
         for tok in self.tokenize(data):
-            if tok.type=="ID":
+            if tok.type == "ID":
                 pass
-#                print(f'<{tok.type} , {tok.value[1]}>', file=self.tokens_file)
+            #                print(f'<{tok.type} , {tok.value[1]}>', file=self.tokens_file)
             else:
                 print(f'<{tok.type} , {tok.value}>', file=self.tokens_file)
             yield tok

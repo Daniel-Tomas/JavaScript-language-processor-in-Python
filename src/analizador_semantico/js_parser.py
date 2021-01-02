@@ -33,7 +33,7 @@ class JSParser(Parser):
     debugfile = 'parser.out'
     tokens = JSLexer.tokens
 
-    def __init__(self, lista_reglas_, TS_, declaration_scope_):
+    def __init__(self, lista_reglas_, TS_, declaration_scope_, declarando_funcion_):
         self.lista_reglas = lista_reglas_
         self.TS = TS_
         self.TS.new_table()
@@ -45,6 +45,7 @@ class JSParser(Parser):
         self.global_desp = 0
         self.pos_id_fun = None
         self.number_function = 0
+        self.declarando_funcion = declarando_funcion_
 
     @_('D')
     def B(self, p):
@@ -120,8 +121,8 @@ class JSParser(Parser):
 
     @_('ID OPASIG E')
     def K(self, p):
-#        if self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE) != p.E:
-#            self.sem_error(10, p.lineno)
+        #        if self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE) != p.E:
+        #            self.sem_error(10, p.lineno)
 
         self.lista_reglas.append(14)
         return
@@ -245,7 +246,7 @@ class JSParser(Parser):
         self.pos_id_fun = p.ID
         self.function_scope = True
         self.return_type = p.Q
-        self.TS.add_attribute(p.ID[0], p.ID[1], 'Valor de retorno', p.Q)
+        self.TS.add_attribute(p.ID[0], p.ID[1], 'Valor de retorno', p.Q[0])
         self.TS.add_attribute(p.ID[0], p.ID[1], 'Etiqueta', self.number_function)
         self.number_function += 1
         self.lista_reglas.append(34)
@@ -255,6 +256,7 @@ class JSParser(Parser):
     def P(self, p):
         if self.function_scope:
             self.sem_error(8)
+        self.declarando_funcion[0] = True
         self.lista_reglas.append(35)
         return
 
@@ -288,6 +290,7 @@ class JSParser(Parser):
             self.TS.add_attribute(self.pos_id_fun[0], self.pos_id_fun[1], 'Num_params', len(types))
             self.TS.add_attribute(self.pos_id_fun[0], self.pos_id_fun[1], 'Tipo_params', types)
         self.declaration_scope[0] = False
+        self.declarando_funcion[0] = False
         self.lista_reglas.append(38)
         return
 
