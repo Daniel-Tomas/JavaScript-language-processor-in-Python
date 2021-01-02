@@ -12,6 +12,7 @@ class JSParser(Parser):
     LOG_TYPE = 'log'
     INT_TYPE = 'ent'
     STRING_TYPE = 'cadena'
+    VOID_TYPE = 'void'
 
     error_code_dict = {
         1: "La condición debe ser un lógico",
@@ -275,14 +276,14 @@ class JSParser(Parser):
         self.declaration_scope[0] = True
         self.declarando_funcion[0] = True
         self.lista_reglas.append(37)
-        return 'void'
+        return self.VOID_TYPE
 
     @_('ABPAREN A CEPAREN')
     def F2(self, p):
         list = p.A
-        if list == 'void':
+        if list == self.VOID_TYPE:
             self.TS.add_attribute(self.pos_id_fun[0], self.pos_id_fun[1], 'Num_params', 0)
-            self.TS.add_attribute(self.pos_id_fun[0], self.pos_id_fun[1], 'Tipo_params', 'void')
+            self.TS.add_attribute(self.pos_id_fun[0], self.pos_id_fun[1], 'Tipo_params', self.VOID_TYPE)
         else:
             types = []
             for i in range(0, len(list), 2):
@@ -310,7 +311,7 @@ class JSParser(Parser):
     @_('')
     def A(self, p):
         self.lista_reglas.append(40)
-        return 'void'
+        return self.VOID_TYPE
 
     @_('COMA T ID W')
     def W(self, p):
