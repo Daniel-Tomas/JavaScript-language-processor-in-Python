@@ -160,9 +160,6 @@ class Table:
             bool: True if the table exists. False otherwise.
         """
 
-        if not self.exist():
-            return False
-
         to_write = f'CONTENIDO DE LA TABLA # {str(self.id_)} :\n'
         to_write += '\n'
         for dict_ in self.lexems:
