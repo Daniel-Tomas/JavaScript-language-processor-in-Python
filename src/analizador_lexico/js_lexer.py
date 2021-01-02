@@ -122,6 +122,7 @@ class JSLexer(Lexer):
 
     @_(r'[a-zA-Z][a-zA-Z0-9_]*')
     def FUNCTION(self, t):
+        self.declarando_funcion[0] = True
         return self.empty(t)
 
     @_(r'[a-zA-Z][a-zA-Z0-9_]*')

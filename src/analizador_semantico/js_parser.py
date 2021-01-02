@@ -246,7 +246,11 @@ class JSParser(Parser):
         self.pos_id_fun = p.ID
         self.function_scope = True
         self.return_type = p.Q
-        self.TS.add_attribute(p.ID[0], p.ID[1], 'Valor de retorno', p.Q[0])
+        self.TS.add_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE, 'funcion')
+        if p.Q == 'void':
+            self.TS.add_attribute(p.ID[0], p.ID[1], 'Valor de retorno', 'void')
+        else:
+            self.TS.add_attribute(p.ID[0], p.ID[1], 'Valor de retorno', p.Q[0])
         self.TS.add_attribute(p.ID[0], p.ID[1], 'Etiqueta', self.number_function)
         self.number_function += 1
         self.lista_reglas.append(34)
@@ -256,19 +260,20 @@ class JSParser(Parser):
     def P(self, p):
         if self.function_scope:
             self.sem_error(8)
-        self.declarando_funcion[0] = True
         self.lista_reglas.append(35)
         return
 
     @_('T')
     def Q(self, p):
         self.declaration_scope[0] = True
+        self.declarando_funcion[0] = True
         self.lista_reglas.append(36)
         return p.T
 
     @_('')
     def Q(self, p):
         self.declaration_scope[0] = True
+        self.declarando_funcion[0] = True
         self.lista_reglas.append(37)
         return 'void'
 
