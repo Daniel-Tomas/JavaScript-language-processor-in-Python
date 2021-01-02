@@ -272,8 +272,7 @@ class JSLexer(Lexer):
         """
         for tok in self.tokenize(data):
             if tok.type == "ID":
-                pass
-            #                print(f'<{tok.type} , {tok.value[1]}>', file=self.tokens_file)
+                print(f'<{tok.type} , {tok.value[1]}>', file=self.tokens_file)
             else:
                 print(f'<{tok.type} , {tok.value}>', file=self.tokens_file)
             yield tok
