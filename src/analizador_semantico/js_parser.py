@@ -123,7 +123,7 @@ class JSParser(Parser):
     @_('ID OPASIG E')
     def K(self, p):
         if self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE) != p.E:
-           self.sem_error(10, p.lineno)
+            self.sem_error(10, p.lineno)
 
         self.lista_reglas.append(14)
         return
@@ -158,6 +158,8 @@ class JSParser(Parser):
         self.TS.add_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE, p.T[0])
         self.TS.add_attribute(p.ID[0], p.ID[1], self.ATTR_DESP, self.shift)
         self.shift += p.T[1]
+        if not self.function_scope:
+            self.global_shift[0] = self.shift
         self.declaration_scope[0] = False
         self.lista_reglas.append(20)
         return
@@ -252,7 +254,7 @@ class JSParser(Parser):
             self.TS.add_attribute(p.ID[0], p.ID[1], 'Valor de retorno', 'void')
         else:
             self.TS.add_attribute(p.ID[0], p.ID[1], 'Valor de retorno', p.Q[0])
-        self.TS.add_attribute(p.ID[0], p.ID[1], 'Etiqueta', self.number_function)
+        self.TS.add_attribute(p.ID[0], p.ID[1], 'Etiqueta', 'Et_Fun_' + str(self.number_function))
         self.number_function += 1
         self.lista_reglas.append(34)
         return
