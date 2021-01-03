@@ -13,8 +13,8 @@ class JSParser(Parser):
     ATTR_RETURN_VALUE = 'TipoRetorno'
 
     FUNCTION_TYPE = 'funcion'
-    LOG_TYPE = 'lógico'
-    INT_TYPE = 'entero'
+    LOG_TYPE = 'log'
+    INT_TYPE = 'ent'
     STRING_TYPE = 'cadena'
     VOID_TYPE = 'void'
 
@@ -75,8 +75,8 @@ class JSParser(Parser):
 
     @_('IF ABPAREN E CEPAREN S')
     def G(self, p):
-        if p.E != self.LOG_TYPE:
-            self.sem_error(1, p.lineno)
+        if p.E != 'log':
+            self.sem_error(1)
         self.lista_reglas.append(5)
         return
 
@@ -267,6 +267,7 @@ class JSParser(Parser):
         self.shift = 0
         self.pos_id_fun = p.ID
         self.function_scope = True
+
         self.TS.add_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE, self.FUNCTION_TYPE)
         if p.Q == 'void':
             self.return_type = p.Q
