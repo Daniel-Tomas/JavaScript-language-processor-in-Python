@@ -8,7 +8,7 @@ Terminales = { _ / * ( ) { } ; , ' " - = + & EOF }
     l = { a-zA-Z }
 
 Producciones = {
-    A -> del A | dD | "S | /C | lI | + | -M | =E | &N | ( | ) | { | } | ; | , | EOF
+    A -> del A | dD | "S | /C | lI | -M | =E | &N | ( | ) | { | } | ; | ,
     D -> dD | λ
     S -> " | otroC S
     C -> *C'

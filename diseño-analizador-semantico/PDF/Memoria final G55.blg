@@ -1,0 +1,14 @@
+[0] Config.pm:312> INFO - This is Biber 2.15 (beta)
+[0] Config.pm:315> INFO - Logfile is 'PDF\Memoria final G55.blg'
+[151] biber-MSWIN64:330> INFO - === 
+[186] Biber.pm:415> INFO - Reading 'PDF\Memoria final G55.bcf'
+[378] Biber.pm:952> INFO - Found 1 citekeys in bib section 0
+[409] Biber.pm:4334> INFO - Processing section 0
+[428] Biber.pm:4523> INFO - Looking for bibtex format file 'references.bib' for section 0
+[438] bibtex.pm:1682> INFO - LaTeX decoding ...
+[444] bibtex.pm:1494> INFO - Found BibTeX data source 'references.bib'
+[466] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[466] UCollate.pm:68> INFO - Overriding locale 'es-ES' defaults 'variable = shifted' with 'variable = non-ignorable'
+[466] Biber.pm:4162> INFO - Sorting list 'none/global//global/global' of type 'entry' with template 'none' and locale 'es-ES'
+[468] bbl.pm:651> INFO - Writing 'PDF\Memoria final G55.bbl' with encoding 'UTF-8'
+[468] bbl.pm:754> INFO - Output to PDF\Memoria final G55.bbl

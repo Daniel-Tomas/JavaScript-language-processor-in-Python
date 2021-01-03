@@ -35,13 +35,25 @@ J:   if palabrasReservadas.contains_lex(string)
             genToken(if,-)
         else
             genToken(for,-)
-    elif (puntero = TS.get(string)) == None
-            TS.update({string:''})
-            puntero = TS.get(string);
-            genToken(ID,puntero)
+    else
+        puntero = TS.get(string)
+        if zona_decl == True
+            if puntero != None
+                pError("Identificador ya declarado")
+            else
+                TS.update({string})
+                puntero = TS.get(string)
+                genToken(ID, puntero)
+        else
+            if puntero == None
+                TS.update({string})
+                puntero = TS.get(string);
+                genToken(ID, puntero)
+            else
+                genToken(ID, puntero)
+
    #Acaba aquí
-K: genToken(op_arit,0), leer
-L: genToken(op_arit,1)
+L: genToken(op_arit,-)
 M: genToken(op_esp,-), leer
 N: genToken(op_asig, -)
 O: genToken(op_rel,-), leer
@@ -52,6 +64,5 @@ S: genToken( { , - ), leer
 T: genToken( } , - ), leer
 U: genToken( , , - ), leer
 V: genToken( ; , - ), leer
-W: genToken( EOF , - ), leer
 
 

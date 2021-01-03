@@ -5,8 +5,7 @@ tokens:
 	<CTELOGICA, 0> // false
 	<CTELOGICA, 1> // true
 	<OPESP, -> // i--
-	<OPARIT, 0> // +
-	<OPARIT, 1> // -
+	<OPARIT, -> // -
 	<OPREL, -> // ==
 	<OPLOG, -> // &&
 	<OPASIG, -> // =
