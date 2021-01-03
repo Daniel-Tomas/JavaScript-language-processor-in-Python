@@ -9,12 +9,12 @@ class JSParser(Parser):
     ATTR_TYPE = 'Tipo'
     ATTR_DESP = 'Despl'
     ATTR_NUM_PARAMS = 'numParam'
-    ATTR_TYPE_PARAMS = 'Tipo_params'
+    ATTR_TYPE_PARAMS = 'TipoParam'
     ATTR_RETURN_VALUE = 'TipoRetorno'
 
     FUNCTION_TYPE = 'funcion'
-    LOG_TYPE = 'log'
-    INT_TYPE = 'ent'
+    LOG_TYPE = 'lógico'
+    INT_TYPE = 'entero'
     STRING_TYPE = 'cadena'
     VOID_TYPE = 'void'
 
@@ -75,8 +75,8 @@ class JSParser(Parser):
 
     @_('IF ABPAREN E CEPAREN S')
     def G(self, p):
-        if p.E != 'log':
-            self.sem_error(1)
+        if p.E != self.LOG_TYPE:
+            self.sem_error(1, p.lineo)
         self.lista_reglas.append(5)
         return
 
@@ -431,7 +431,7 @@ class JSParser(Parser):
     def error(self, p):
         print("Error en la sintaxis: ", file=sys.stderr)
         if not p:
-            print("End of File!", file=sys.stderr)
+            print("Expresión incompleta, se esperaban más elementos", file=sys.stderr)
             exit(2)
         else:
             print(f'Token ilegal {p.type} en la linea {p.lineno}', file=sys.stderr)

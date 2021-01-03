@@ -139,7 +139,7 @@ class JSLexer(Lexer):
         return self.empty(t)
 
     def CTEENTERA(self, t):
-        """ If the number found is bigger than 32767 calls self.error.
+        """ If the number found is bigger than 32767 calls self.lex_error.
 
         Casts the token values from str to int.
 
@@ -152,7 +152,7 @@ class JSLexer(Lexer):
 
         t.value = int(t.value)
         if t.value > 32767:
-            self.error(t, "CTEENTERA")
+            self.lex_error(t, "CTEENTERA")
         return t
 
     def CTELOGICA(self, t):
@@ -175,7 +175,7 @@ class JSLexer(Lexer):
         return t
 
     def CADENA(self, t):
-        """If the string length is bigger than 64 calls self.error.
+        """If the string length is bigger than 64 calls self.lex_error.
 
         Args:
             t(Token): The string constant token.
@@ -184,7 +184,7 @@ class JSLexer(Lexer):
             Token: the same token.
         """
         if len(t.value) > 64:
-            self.error(t, "CADENA")
+            self.lex_error(t, "CADENA")
         return t
 
     def ID(self, t):
@@ -195,23 +195,24 @@ class JSLexer(Lexer):
             id_table, id_pos = self.ts.get_pos(t.value)
 
         if self.declaration_scope[0]:
-            if id_table is not None:  # TODO: buscar como comprobar que no sea None
-                print("Id ya declarado", file=sys.stderr)  # El id ya esta declarado
-                print(t.lineno)
-                exit(10)
+            if id_table is not None:
+                self.lex_error(t, 'ID')
             else:
                 id_table, id_pos = self.ts.add_entry(t.value)
                 t.value = (id_table, id_pos)
+
+            self.declaration_scope[0] = False
+
         else:
             if id_table is None:
                 id_table, id_pos = self.ts.add_global_entry(t.value)
-                self.ts.add_attribute(id_table, id_pos, 'Tipo', 'ent')
-                self.ts.add_attribute(id_table, id_pos, 'Desp', self.global_shift[0])
+                self.ts.add_attribute(id_table, id_pos, 'Tipo', 'entero')
+                self.ts.add_attribute(id_table, id_pos, 'Despl', self.global_shift[0])
                 self.global_shift[0] += 2
                 t.value = (id_table, id_pos)
             else:
                 t.value = (id_table, id_pos)
-        self.declaration_scope[0] = False
+
         return t
 
     @_('\n+',
@@ -220,7 +221,7 @@ class JSLexer(Lexer):
         """Increases the line number.
 
         Increases the line number where the lexer is working to provide a
-         correct information when an error is found.
+         correct information when a lex_error is found.
 
         Args:
             t(Token): The token which contains_lex a comment or a newline.
@@ -239,11 +240,11 @@ class JSLexer(Lexer):
         column = (token.index - last_cr)
         return column
 
-    def error(self, t, type_error="default"):
+    def lex_error(self, t, type_error="default"):
         """Handles lexer errors.
 
-        An error is reported when a wrong character is found.
-        Prints a description of the error and provides the number of the
+        A lex_error is reported when a wrong character is found.
+        Prints a description of the lex_error and provides the number of the
          line and the column where it has been found.
         **Particular errors**:
             1. Value of a token which type is "CADENA" has a length
@@ -256,12 +257,14 @@ class JSLexer(Lexer):
         """
 
         res = f'Error en la linea {self.lineno} y columna {self.find_column(t)}:\n\t'
-        if type_error == "CADENA":
+        if type_error == 'CADENA':
             res += f'Cadena demasiado larga: "{t.value}", con logitud mayor que 64: {len(t.value)},'
         elif type_error == "CTEENTERA":
             res += f'Número fuera de rango: "{t.value},"'
+        elif type_error == 'ID':
+            res += f'Identificador ya declarado: "{t.value},"'
         else:
-            res += f'Caracter ilegal "{t.value[0]}"'
+            res += f'Carácter ilegal: "{t.value[0]}"'
 
         print(res, file=sys.stderr)
         exit(1)
