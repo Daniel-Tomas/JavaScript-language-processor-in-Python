@@ -205,7 +205,7 @@ class JSLexer(Lexer):
         else:
             if id_table is None:
                 id_table, id_pos = self.ts.add_global_entry(t.value)
-                self.ts.add_attribute(id_table, id_pos, 'Tipo', 'ent')
+                self.ts.add_attribute(id_table, id_pos, 'Tipo', 'entero')
                 self.ts.add_attribute(id_table, id_pos, 'Desp', self.global_shift[0])
                 self.global_shift[0] += 2
                 t.value = (id_table, id_pos)
