@@ -6,7 +6,7 @@ Producciones = {
 { TS_g = CreaTS()
   TS_actual = TSG
   desp = 0
-  zona_decl = true }
+  zona_decl = false }
 
 B -> D {}
 D -> F D {}
@@ -38,11 +38,11 @@ J -> lambda {}
 I -> lambda { I.tipo = void }
 
 S -> K ; {}
-K -> id = E {   if busca_tipo_TS(id.pos) != None
+K -> id = E { if busca_tipo_TS(id.pos) != None
                     añade_tipo_TS(id.pos, 'ent')
                     añade_desp_TS(id.pos, desp)
                     desp+=2
-                if busca_tipo_TS(id.pos) != E.tipo
+              if busca_tipo_TS(id.pos) != E.tipo
                     then error(10) }
 
 S -> alert ( E ) ; { if E.tipo != cadena && E.tipo != entero
@@ -174,7 +174,7 @@ V -> log { V.tipo = log }
         4: "La expresión introducida no es una cadena o un entero",
         5: "La variable introducida no es de tipo cadena o entero",
         6: "La condición debe ser un lógico",
-        7: "No puede haber return fuera de una función",
+        7: "No puede haber una sentencia return fuera de una función",
         8: "No se permite la definición de funciones anidadas",
         9: "El tipo de retorno no corresponde con el tipo de retorno de la función, se esperaba {tipo_return}",
         10: "El tipo de la variable a asignar no corresponde con el tipo asignado",
