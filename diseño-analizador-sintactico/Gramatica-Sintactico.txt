@@ -40,10 +40,10 @@ P -> lambda
 Q -> T
 Q -> lambda
 F2 -> ( A )
-A -> T id W
+A -> T id AA
 A -> lambda
-W -> , T id W
-W -> lambda
+AA -> , T id AA
+AA -> lambda
 F3 -> { C }
 E -> E && R
 E -> R
