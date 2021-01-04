@@ -19,10 +19,10 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {3.1}Gramática}{7}{subsection.3.1}%
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {3.2}Tabla LR}{8}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.2}Tabla LR(1) }{8}{subsection.3.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4}Diseño Analizador Semántico}{9}{section.4}%
+\contentsline {section}{\numberline {4}Diseño Analizador Semántico}{11}{section.4}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5}Diseño Tabla de Símbolos}{14}{section.5}%
+\contentsline {section}{\numberline {5}Diseño Tabla de Símbolos}{16}{section.5}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {6}Referencias}{15}{section.6}%
+\contentsline {section}{\numberline {6}Referencias}{17}{section.6}%

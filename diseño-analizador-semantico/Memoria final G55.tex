@@ -157,7 +157,7 @@
 
 \section{Introducción}
 
-El trabajo ha sido realizado con la herramienta o librería externa "SLY" \cite{SLY}.\\
+El trabajo completo, tanto el léxico, como el sintáctico y el semático, ha sido realizado con la herramienta o librería externa "SLY" \cite{SLY}.\\
 
 Opciones de grupo:
 \begin{myitemize}
@@ -166,7 +166,7 @@ Opciones de grupo:
     \item   Operadores especiales: Post-auto-decremento (\textbf{\minus \minus \hspace{0.1cm} como sufijo})
     \item     Técnicas de Análisis Sintáctico: \textbf{Ascendente}
     \item     Comentarios: Comentario de bloque (\textbf{/* */})
-    \item Cadenas: Con comillas dobles (\textbf{" "})
+    \item Cadenas: Con comillas dobles (\textbf{" \phantom{} "})
 \end{myitemize}
 \clearpage
 
@@ -217,14 +217,14 @@ Opciones de grupo:
 \subsection{Gramática Regular}
 \noindent
 Axioma = A\\
-A $\rightarrow$ del A $|$ d D $|$ " S $|$ / C $|$ l I $|$ \minus  M $|$ = E $|$ \& N $|$ ( $|$ ) $|$ \{ $|$ \} $|$ ; $|$ , \\
+A $\rightarrow$ del A $|$ d D $|$ " \hspace{1mm} S $|$ / C $|$ l I $|$ \minus  M $|$ = E $|$ \& N $|$ ( $|$ ) $|$ \{ $|$ \} $|$ ; $|$ , \\
 D $\rightarrow$ d D $|$ $\lambda$\\
-S $\rightarrow$ " $|$ c S\\
+S $\rightarrow$ " \hspace{1mm} $|$ c S\\
 C $\rightarrow$ * C'\\
 C' $\rightarrow$ * C'' $|$ c C'\\
 C'' $\rightarrow$ / A $|$ c C'\\
 I $\rightarrow$ d I $|$ l I $|$ \_ I $|$ $\lambda$\\
-M $\rightarrow$ \minus $|$ $\lambda$\\
+M $\rightarrow$ \minus \hspace{1.5mm}$|$ $\lambda$\\
 E $\rightarrow$ = $|$ $\lambda$\\
 N $\rightarrow$ \&\\
 \\
@@ -240,45 +240,45 @@ Siendo $d$ un dígito, $l$ una letra, $c$ cualquier otro carácter y $del$ un de
 \begin{flushleft}
     A: leer\\
     B: number = int(d), leer\\
-    C: number = number*10 + int(d), leer\\
-    D: if number>32767\\
+    C: number = number * 10 + int(d), leer\\
+    D: if number >\hspace{1mm} 32767\\
     \qquad pError("Número fuera de rango")\\
     \quad else \\
-    \qquad genToken(CTEENTERA,number);\\
-    E: string = '', contador = 0, leer\\
-    F: string = string + otroCS, contador++ leer\\
-    G: if contador>64\\
-    \qquad pError("Cadena demasiado larga")\\
+    \qquad genToken(CTEENTERA, number);\\
+    E: string = "\phantom{}", contador = 0, leer\\
+    F: string = string + otroCS, contador++, leer\\
+    G: if contador >\hspace{1mm} 64\\
+    \qquad pError("\phantom{}Cadena demasiado larga")\\
     \quad else\\
-    \qquad genToken(CADENA,string)\\
+    \qquad genToken(CADENA, string)\\
     \quad leer\\
     H: string = l, leer\\
     I: string = string + l/D/\_ , leer\\
     J: if palabrasReservadas.contains(string)\\
     \qquad if string == "number"\\
-    \qquad \quad      genToken(NUMBER,-)\\
+    \qquad \quad      genToken(NUMBER, -)\\
     \qquad elif string == "string"\\
     \qquad \quad     genToken(STRING,-)\\
     \qquad  elif string == "boolean"\\
-    \qquad \quad      genToken(BOOLEAN,-)\\
+    \qquad \quad      genToken(BOOLEAN, -)\\
     \qquad    elif string == "let"\\
-    \qquad \quad      genToken(LET,-)\\
-    \qquad    elif string == "alert"\\
-    \qquad \quad      genToken(ALERT,-)\\
-    \qquad    elif string == "input"\\
-    \qquad \quad      genToken(INPUT,-)\\
-    \qquad    elif string == "return"\\
-    \qquad \quad       genToken(RETURN,-)\\
-    \qquad     elif string == "if"\\
-    \qquad \quad       genToken(IF,-)\\
+    \qquad \quad      genToken(LET, -)\\
+    \qquad    elif string == "\phantom{}alert"\\
+    \qquad \quad      genToken(ALERT, -)\\
+    \qquad    elif string == "\phantom{}input"\\
+    \qquad \quad      genToken(INPUT, -)\\
+    \qquad    elif string == "\phantom{}return"\\
+    \qquad \quad       genToken(RETURN, -)\\
+    \qquad     elif string == "\phantom{}if"\\
+    \qquad \quad       genToken(IF, -)\\
     \qquad     else\\
-    \qquad \quad      genToken(FOR,-)\\
+    \qquad \quad      genToken(FOR, -)\\
     \clearpage
     \quad       else \hspace{5mm} // palabrasReservadas.contains(string) = False\\
     \qquad          puntero = TS.get(string)\\
     \qquad          if zona\_decl == True\\
     \qquad \quad        if puntero != None\\
-    \qquad \quad \quad      pError("Identificador ya declarado")\\
+    \qquad \quad \quad      pError("\phantom{}Identificador ya declarado")\\
     \qquad \quad        else\\
     \qquad \quad \quad      TS.update({string})\\
     \qquad \quad \quad      puntero = TS.get(string)\\
@@ -291,22 +291,22 @@ Siendo $d$ un dígito, $l$ una letra, $c$ cualquier otro carácter y $del$ un de
     \qquad \quad        else\\
     \qquad \quad \quad      genToken(ID, puntero)\\
     \vspace{\baselineskip}
-    L: genToken(OPARIT,-)\\
-    M: genToken(OPESP,-), leer\\
+    L: genToken(OPARIT, -)\\
+    M: genToken(OPESP, -), leer\\
     N: genToken(OPASIG, -)\\
     O: genTokeN(OPREL, -), leer\\
     P: genToken(OPLOG, -), leer\\
-    Q: genToken(ABPAREN, - ), leer\\
-    R: genToken(CEPAREN, - ), leer\\
-    S: genToken(ABLLAVE, - ), leer\\
-    T: genToken(CELLAVE, - ), leer\\
-    U: genToken(COMA, - ), leer\\
-    V: genToken(PUNTOYCOMA, - ), leer\\
-    W: genToken(EOF, - ), leer\\
+    Q: genToken(ABPAREN, -), leer\\
+    R: genToken(CEPAREN, -), leer\\
+    S: genToken(ABLLAVE, -), leer\\
+    T: genToken(CELLAVE, -), leer\\
+    U: genToken(COMA, -), leer\\
+    V: genToken(PUNTOYCOMA, -), leer\\
+    W: genToken(EOF, -), leer\\
 \end{flushleft}
 
 \subsection{Errores}
-Error léxico (siempre se lanza cuando el Analizador Léxico encuentra un error).
+Error léxico (siempre se lanza cuando el analizador léxico encuentra un error).
 \begin{enumerate}
     \item Cadena con longitud mayor de 64 caracteres.
     \item Número fuera de rango (mayor de 32767).
@@ -360,16 +360,24 @@ Producciones = \{\\
 \\\}
 \clearpage
 
-\subsection{Tabla LR}
-% \includepdf[pages=-, landscape=true]{TablaLR.pdf}
-% \includepdf[pages=-, landscape=true]{TablaLR2.pdf}
-% \includepdf[pages=-, landscape=true]{TablaLR3.pdf}
-Como puede observarse en la tabla, esta gramática es adecuada para este tipo de Analizador sintáctico, puesto que no se produce ningún tipo de conflicto.
+\subsection{Tabla LR(1) }
+\begin{changemargin}{-2.5cm}{+2.5cm}
+\begin{center}
+    \includegraphics[width=1.27\textwidth]{Tabla1.jpg}
+    \includegraphics[width=1.27\textwidth]{Tabla2.jpg}
+    \includegraphics[width=1.27\textwidth]{Tabla3.jpg}
+    \includegraphics[width=1.27\textwidth]{Tabla4.jpg}
+    \includegraphics[width=1.27\textwidth]{Tabla5.jpg}
+\end{center}
+\end{changemargin}
+
+\vspace{3mm}
+Como puede observarse en la tabla\cite{TABLA-LR}, esta gramática es adecuada para este tipo de analizador sintáctico, puesto que no se produce ningún tipo de conflicto.
 \clearpage
 
 \section{Diseño Analizador Semántico}
 \VerbatimInput{Pseudo-PDL.txt}
- 
+
 \clearpage
 \section{Diseño Tabla de Símbolos}
 

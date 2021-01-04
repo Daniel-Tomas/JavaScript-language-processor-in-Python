@@ -26,6 +26,13 @@
       \field{howpublished}{\url{https://sly.readthedocs.io/en/latest/}}
       \field{title}{Documentación libreria SLY}
     \endentry
+    \entry{TABLA-LR}{misc}{}
+      \field{sortinit}{2}
+      \field{sortinithash}{ed39bb39cf854d5250e95b1c1f94f4ed}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{http://jsmachines.sourceforge.net/machines/lr1.html}}
+      \field{title}{Generador de tabla LR(1)}
+    \endentry
   \enddatalist
 \endrefsection
 \endinput
