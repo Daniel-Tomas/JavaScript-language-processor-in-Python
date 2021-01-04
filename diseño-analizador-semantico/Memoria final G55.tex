@@ -74,13 +74,21 @@
 
 % redefine \VerbatimInput
 \RecustomVerbatimCommand{\VerbatimInput}{VerbatimInput}%
-{fontsize=\normalsize, 
- % 
+{fontfamily=cmr,
+ codes={\catcode`$=3},
  commandchars=\#\[\] % escape character and argument delimiters for
                        % commands within the verbatim
 }
 
-% \usepackage{geometry} 
+% \usepackage{geometry}
+%  \geometry{
+%  a4paper,
+%  total={210mm,297mm},
+%  left=60mm,
+%  right=20mm,
+%  top=40mm,
+%  bottom=20mm,
+%  }
  
 % \usepackage{fancyhdr}
 
@@ -362,13 +370,13 @@ Producciones = \{\\
 
 \subsection{Tabla LR(1) }
 \begin{changemargin}{-2.5cm}{+2.5cm}
-\begin{center}
-    \includegraphics[width=1.27\textwidth]{Tabla1.jpg}
-    \includegraphics[width=1.27\textwidth]{Tabla2.jpg}
-    \includegraphics[width=1.27\textwidth]{Tabla3.jpg}
-    \includegraphics[width=1.27\textwidth]{Tabla4.jpg}
-    \includegraphics[width=1.27\textwidth]{Tabla5.jpg}
-\end{center}
+    \begin{center}
+        \includegraphics[width=1.27\textwidth]{Tabla1.jpg}
+        \includegraphics[width=1.27\textwidth]{Tabla2.jpg}
+        \includegraphics[width=1.27\textwidth]{Tabla3.jpg}
+        \includegraphics[width=1.27\textwidth]{Tabla4.jpg}
+        \includegraphics[width=1.27\textwidth]{Tabla5.jpg}
+    \end{center}
 \end{changemargin}
 
 \vspace{3mm}
@@ -376,6 +384,7 @@ Como puede observarse en la tabla\cite{TABLA-LR}, esta gramática es adecuada pa
 \clearpage
 
 \section{Diseño Analizador Semántico}
+\normalfont{$\rightarrow$}
 \VerbatimInput{Pseudo-PDL.txt}
 
 \clearpage

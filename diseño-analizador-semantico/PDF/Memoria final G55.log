@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.12.14)  4 JAN 2021 11:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.12.14)  5 JAN 2021 00:17
 entering extended mode
 **"c:/Users/Daniel/OneDrive - Universidad Politécnica de Madrid/Estudios/Python/PDL2/diseño-analizador-semantico/Memoria final G55.tex"
 ("c:/Users/Daniel/OneDrive - Universidad Politécnica de Madrid/Estudios/Python/PDL2/diseño-analizador-semantico/Memoria final G55.tex"
@@ -558,25 +558,25 @@ LaTeX Info: Redefining \% on input line 29.
 )
 \openout1 = `"Memoria final G55.aux"'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 118.
-LaTeX Font Info:    ... okay on input line 118.
-LaTeX Info: Redefining \. on input line 118.
-LaTeX Info: Redefining \% on input line 118.
-Package hyperref Info: Link coloring OFF on input line 118.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 126.
+LaTeX Font Info:    ... okay on input line 126.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 126.
+LaTeX Font Info:    ... okay on input line 126.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 126.
+LaTeX Font Info:    ... okay on input line 126.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 126.
+LaTeX Font Info:    ... okay on input line 126.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 126.
+LaTeX Font Info:    ... okay on input line 126.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 126.
+LaTeX Font Info:    ... okay on input line 126.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 126.
+LaTeX Font Info:    ... okay on input line 126.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 126.
+LaTeX Font Info:    ... okay on input line 126.
+LaTeX Info: Redefining \. on input line 126.
+LaTeX Info: Redefining \% on input line 126.
+Package hyperref Info: Link coloring OFF on input line 126.
  (C:\Users\Daniel\AppData\Local\Programs\MiKTeX\tex/latex/hyperref\nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
  (C:\Users\Daniel\AppData\Local\Programs\MiKTeX\tex/latex/refcount\refcount.sty
@@ -586,9 +586,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count424
 )
-LaTeX Info: Redefining \ref on input line 118.
-LaTeX Info: Redefining \pageref on input line 118.
-LaTeX Info: Redefining \nameref on input line 118.
+LaTeX Info: Redefining \ref on input line 126.
+LaTeX Info: Redefining \pageref on input line 126.
+LaTeX Info: Redefining \nameref on input line 126.
  ("c:/Users\Daniel\OneDrive - Universidad Politécnica de Madrid\Estudios\Python\PDL2\diseño-analizador-semantico\PDF\Memoria final G55.out") ("c:/Users\Daniel\OneDrive - Universidad Politécnica de Madrid\Estudios\Python\PDL2\diseño-analizador-semantico\PDF\Memoria final G55.out")
 \@outlinefile=\write5
 \openout5 = `"Memoria final G55.out"'.
@@ -623,8 +623,8 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file '"Memoria final G55".bbl' found.
  ("c:/Users\Daniel\OneDrive - Universidad Politécnica de Madrid\Estudios\Python\PDL2\diseño-analizador-semantico\PDF\Memoria final G55.bbl")
-Package biblatex Info: Reference section=0 on input line 118.
-Package biblatex Info: Reference segment=0 on input line 118.
+Package biblatex Info: Reference section=0 on input line 126.
+Package biblatex Info: Reference segment=0 on input line 126.
  [1
 
 {C:/Users/Daniel/AppData/Local/MiKTeX/pdftex/config/pdftex.map}] ("c:/Users\Daniel\OneDrive - Universidad Politécnica de Madrid\Estudios\Python\PDL2\diseño-analizador-semantico\PDF\Memoria final G55.toc"
@@ -644,13 +644,13 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.155 \clearpage
+l.163 \clearpage
                  [1]
 
-Package xcolor Warning: Incompatible color definition on input line 158.
+Package xcolor Warning: Incompatible color definition on input line 166.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 160--161
+Underfull \hbox (badness 10000) in paragraph at lines 168--169
 
  []
 
@@ -658,12 +658,12 @@ Underfull \hbox (badness 10000) in paragraph at lines 160--161
 
 ]
 
-Package xcolor Warning: Incompatible color definition on input line 173.
+Package xcolor Warning: Incompatible color definition on input line 181.
 
 [3
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 218--232
+Underfull \hbox (badness 10000) in paragraph at lines 226--240
 
  []
 
@@ -675,10 +675,10 @@ Underfull \hbox (badness 10000) in paragraph at lines 218--232
 
 ]
 
-Package xcolor Warning: Incompatible color definition on input line 319.
+Package xcolor Warning: Incompatible color definition on input line 327.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 322--361
+Underfull \hbox (badness 10000) in paragraph at lines 330--369
 
  []
 
@@ -688,50 +688,50 @@ Underfull \hbox (badness 10000) in paragraph at lines 322--361
 <Tabla1.jpg, id=117, 1327.20844pt x 614.295pt>
 File: Tabla1.jpg Graphic file (type jpg)
 <use Tabla1.jpg>
-Package pdftex.def Info: Tabla1.jpg  used on input line 366.
+Package pdftex.def Info: Tabla1.jpg  used on input line 374.
 (pdftex.def)             Requested size: 542.83986pt x 251.2533pt.
 <Tabla2.jpg, id=118, 1326.45563pt x 651.93562pt>
 File: Tabla2.jpg Graphic file (type jpg)
 <use Tabla2.jpg>
-Package pdftex.def Info: Tabla2.jpg  used on input line 367.
+Package pdftex.def Info: Tabla2.jpg  used on input line 375.
 (pdftex.def)             Requested size: 542.83986pt x 266.79794pt.
 <Tabla3.jpg, id=119, 1327.96124pt x 643.6547pt>
 File: Tabla3.jpg Graphic file (type jpg)
 <use Tabla3.jpg>
-Package pdftex.def Info: Tabla3.jpg  used on input line 368.
+Package pdftex.def Info: Tabla3.jpg  used on input line 376.
 (pdftex.def)             Requested size: 542.83986pt x 263.11443pt.
 <Tabla4.jpg, id=120, 1327.20844pt x 650.43pt>
 File: Tabla4.jpg Graphic file (type jpg)
 <use Tabla4.jpg>
-Package pdftex.def Info: Tabla4.jpg  used on input line 369.
+Package pdftex.def Info: Tabla4.jpg  used on input line 377.
 (pdftex.def)             Requested size: 542.83986pt x 266.03291pt.
 <Tabla5.jpg, id=121, 1327.96124pt x 548.0475pt>
 File: Tabla5.jpg Graphic file (type jpg)
 <use Tabla5.jpg>
-Package pdftex.def Info: Tabla5.jpg  used on input line 370.
+Package pdftex.def Info: Tabla5.jpg  used on input line 378.
 (pdftex.def)             Requested size: 542.83986pt x 224.03192pt.
 
-Overfull \hbox (115.40833pt too wide) in paragraph at lines 366--371
+Overfull \hbox (115.40833pt too wide) in paragraph at lines 374--379
  [] 
  []
 
 
-Overfull \hbox (115.40833pt too wide) in paragraph at lines 366--371
+Overfull \hbox (115.40833pt too wide) in paragraph at lines 374--379
  [] 
  []
 
 
-Overfull \hbox (115.40833pt too wide) in paragraph at lines 366--371
+Overfull \hbox (115.40833pt too wide) in paragraph at lines 374--379
  [] 
  []
 
 
-Overfull \hbox (115.40833pt too wide) in paragraph at lines 366--371
+Overfull \hbox (115.40833pt too wide) in paragraph at lines 374--379
  [] 
  []
 
 
-Overfull \hbox (115.40833pt too wide) in paragraph at lines 366--371
+Overfull \hbox (115.40833pt too wide) in paragraph at lines 374--379
  [] 
  []
 
@@ -739,28 +739,29 @@ Overfull \hbox (115.40833pt too wide) in paragraph at lines 366--371
 
  <./Tabla1.jpg> <./Tabla2.jpg>] [9 <./Tabla3.jpg> <./Tabla4.jpg>] [10 <./Tabla5.jpg>]
 
-Package xcolor Warning: Incompatible color definition on input line 378.
+Package xcolor Warning: Incompatible color definition on input line 386.
 
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 379.
-(C:\Users\Daniel\AppData\Local\Programs\MiKTeX\tex/latex/base\t1cmtt.fd
-File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-) [11
+[11
 
 ] [12] [13] [14] [15]
 
-Package xcolor Warning: Incompatible color definition on input line 382.
+Package xcolor Warning: Incompatible color definition on input line 391.
 
 [16
 
 ]
 
-Package xcolor Warning: Incompatible color definition on input line 385.
+Package xcolor Warning: Incompatible color definition on input line 394.
 
 
-Package xcolor Warning: Incompatible color definition on input line 385.
+Package xcolor Warning: Incompatible color definition on input line 394.
 
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 394.
+(C:\Users\Daniel\AppData\Local\Programs\MiKTeX\tex/latex/base\t1cmtt.fd
+File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
 
-Package xcolor Warning: Incompatible color definition on input line 385.
+Package xcolor Warning: Incompatible color definition on input line 394.
 
 [17
 
@@ -778,15 +779,15 @@ Package logreq Info: Writing requests to '"Memoria final G55".run.xml'.
 Here is how much of TeX's memory you used:
  16388 strings out of 479714
  286931 string characters out of 2867219
- 1146050 words of memory out of 3000000
+ 1146069 words of memory out of 3000000
  33180 multiletter control sequences out of 15000+200000
  416276 words of font info for 52 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  66i,8n,73p,864b,1929s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbi1095.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1095.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1728.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk><C:/Users/Daniel/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Daniel/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on "c:/Users\Daniel\OneDrive - Universidad Politécnica de Madrid\Estudios\Python\PDL2\diseño-analizador-semantico\PDF\Memoria final G55.pdf" (18 pages, 2337932 bytes).
+ <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1095.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbi1095.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1728.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk><C:/Users/Daniel/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Daniel/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on "c:/Users\Daniel\OneDrive - Universidad Politécnica de Madrid\Estudios\Python\PDL2\diseño-analizador-semantico\PDF\Memoria final G55.pdf" (18 pages, 2320881 bytes).
 PDF statistics:
- 586 PDF objects out of 1000 (max. 8388607)
+ 530 PDF objects out of 1000 (max. 8388607)
  37 named destinations out of 1000 (max. 500000)
  130 words of extra memory for PDF output out of 10000 (max. 10000000)
 

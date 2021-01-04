@@ -12,7 +12,7 @@ class JSParser(Parser):
     ATTR_TYPE_PARAMS = 'TipoParam'
     ATTR_RETURN_VALUE = 'TipoRetorno'
 
-    FUNCTION_TYPE = 'funcion'
+    FUNCTION_TYPE = 'función'
     LOG_TYPE = 'lógico'
     INT_TYPE = 'entero'
     STRING_TYPE = 'cadena'
@@ -33,7 +33,7 @@ class JSParser(Parser):
         12: "El operador lógico '&&' solo trabaja con tipos de datos lógicos",
         13: "El operador de relación '==' solo trabaja con tipos de datos enteros",
         14: "El operador aritmético '-' solo trabaja con tipos de datos enteros",
-        15: "La variable no se puede invocar como una funcion, con argumentos"
+        15: "La variable no se puede invocar como una función, con argumentos"
     }
 
     debugfile = 'parser.out'
