@@ -6,6 +6,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[spanish]{babel}
+% \usepackage{lmodern}
 \usepackage{blindtext}
 \usepackage{vmargin}
 \usepackage[hidelinks]{hyperref}
@@ -70,15 +71,18 @@
 
 \usepackage[dvipsnames]{xcolor}
 
+\renewcommand*{\ttdefault}{\familydefault}
+
 \usepackage{fancyvrb}
 
 % redefine \VerbatimInput
 \RecustomVerbatimCommand{\VerbatimInput}{VerbatimInput}%
-{fontfamily=cmr,
+{fontfamily=cmr, %esto ya no hace falta al poner ttdefault
  codes={\catcode`$=3},
  commandchars=\#\[\] % escape character and argument delimiters for
                        % commands within the verbatim
 }
+
 
 % \usepackage{geometry}
 %  \geometry{
@@ -164,7 +168,6 @@
 
 
 \section{Introducción}
-
 El trabajo completo, tanto el léxico, como el sintáctico y el semático, ha sido realizado con la herramienta o librería externa "SLY" \cite{SLY}.\\
 
 Opciones de grupo:
@@ -253,10 +256,10 @@ Siendo $d$ un dígito, $l$ una letra, $c$ cualquier otro carácter y $del$ un de
     \qquad pError("Número fuera de rango")\\
     \quad else \\
     \qquad genToken(CTEENTERA, number);\\
-    E: string = "\phantom{}", contador = 0, leer\\
+    E: string = \verb|""|, contador = 0, leer\\ 
     F: string = string + otroCS, contador++, leer\\
     G: if contador >\hspace{1mm} 64\\
-    \qquad pError("\phantom{}Cadena demasiado larga")\\
+    \qquad pError(\verb|"Cadena| demasiado larga")\\
     \quad else\\
     \qquad genToken(CADENA, string)\\
     \quad leer\\
@@ -384,7 +387,6 @@ Como puede observarse en la tabla\cite{TABLA-LR}, esta gramática es adecuada pa
 \clearpage
 
 \section{Diseño Analizador Semántico}
-\normalfont{$\rightarrow$}
 \VerbatimInput{Pseudo-PDL.txt}
 
 \clearpage
