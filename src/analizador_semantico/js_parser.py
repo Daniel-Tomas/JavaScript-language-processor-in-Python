@@ -12,8 +12,8 @@ class JSParser(Parser):
     ATTR_TYPE_PARAMS = 'TipoParam'
     ATTR_RETURN_VALUE = 'TipoRetorno'
 
-    FUNCTION_TYPE = 'función'
-    LOG_TYPE = 'lógico'
+    FUNCTION_TYPE = 'funcion'
+    LOG_TYPE = 'logico'
     INT_TYPE = 'entero'
     STRING_TYPE = 'cadena'
     VOID_TYPE = 'void'
