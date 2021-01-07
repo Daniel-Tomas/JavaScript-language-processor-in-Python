@@ -155,7 +155,7 @@ class Table:
             if i == 2:
                 to_write_last += f'\t+ {keys} : \'{dict_[keys]}\''
                 to_write_last += '\n'
-            elif i == 4 :
+            elif i == 5 :
                 for j, element in enumerate(dict_[keys]):
                     to_write_tmp += f'\t+ TipoParam{j+1} : \'{element}\''
                     to_write_tmp += '\n'

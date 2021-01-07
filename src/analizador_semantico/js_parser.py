@@ -186,6 +186,8 @@ class JSParser(Parser):
 
     @_('LET M T ID PUNTOYCOMA')
     def G(self, p):
+        if not self.function_scope:
+            self.shift = self.global_shift[0]
         self.TS.add_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE, p.T[0])
         self.TS.add_attribute(p.ID[0], p.ID[1], self.ATTR_DESP, self.shift)
         self.shift += p.T[1]
@@ -206,17 +208,17 @@ class JSParser(Parser):
     @_('NUMBER')
     def T(self, p):
         self.lista_reglas.append(22)
-        return self.INT_TYPE, 2
+        return self.INT_TYPE, 1
 
     @_('BOOLEAN')
     def T(self, p):
         self.lista_reglas.append(23)
-        return self.LOG_TYPE, 2
+        return self.LOG_TYPE, 1
 
     @_('STRING')
     def T(self, p):
         self.lista_reglas.append(24)
-        return self.STRING_TYPE, 128
+        return self.STRING_TYPE, 64
 
     @_('FOR ABPAREN N PUNTOYCOMA E PUNTOYCOMA O CEPAREN ABLLAVE C CELLAVE')
     def G(self, p):
@@ -270,8 +272,7 @@ class JSParser(Parser):
         self.function_scope = False
         self.return_type = None
         self.shift = self.global_shift[0]
-        self.TS.add_attribute(self.pos_id_fun[0], self.pos_id_fun[1], 'EtiqFuncion',
-                              'Et_Fun_' + str(self.number_function))
+
         self.lista_reglas.append(33)
         return
 
@@ -290,6 +291,9 @@ class JSParser(Parser):
         else:
             self.return_type = p.Q[0]
             self.TS.add_attribute(p.ID[0], p.ID[1], self.ATTR_RETURN_VALUE, p.Q[0])
+        self.TS.add_attribute(p.ID[0], p.ID[1], 'EtiqFuncion',
+                              'Et_Fun_' + str(self.number_function))
+
         self.lista_reglas.append(34)
         return
 
