@@ -148,6 +148,23 @@ class Table:
 
         return self.lexems[pos_lex]
 
+    def print_function(self, dict_):
+        to_write_tmp = ''
+        to_write_last = ''
+        for i, keys in enumerate(dict_.keys()):
+            if i == 2:
+                to_write_last += f'\t+ {keys} : \'{dict_[keys]}\''
+                to_write_last += '\n'
+            elif i == 4 :
+                for j, element in enumerate(dict_[keys]):
+                    to_write_tmp += f'\t+ TipoParam{j+1} : \'{element}\''
+                    to_write_tmp += '\n'
+                to_write_tmp += to_write_last
+            elif i > 2:
+                to_write_tmp += f'\t+ {keys} : \'{dict_[keys]}\''
+                to_write_tmp += '\n'
+        return to_write_tmp
+
     def write(self, path):
         """Prints the content of the table into a file pointed by path.
 
@@ -169,6 +186,10 @@ class Table:
                 elif i == 1:
                     to_write += f'\tATRIBUTOS :\n'
                     to_write += f'\t+ {keys} : \'{dict_[keys]}\''
+                    if dict_[keys] == 'función':
+                        to_write += '\n'
+                        to_write += self.print_function(dict_)
+                        break
                 else:
                     to_write += f'\t+ {keys} : \'{dict_[keys]}\''
                 to_write += '\n'

@@ -257,6 +257,8 @@ class JSParser(Parser):
         self.function_scope = False
         self.return_type = None
         self.shift = self.global_shift[0]
+        self.TS.add_attribute(self.pos_id_fun[0], self.pos_id_fun[1], 'EtiqFuncion',
+                              'Et_Fun_' + str(self.number_function))
         self.lista_reglas.append(33)
         return
 
@@ -267,7 +269,6 @@ class JSParser(Parser):
         self.shift = 0
         self.pos_id_fun = p.ID
         self.function_scope = True
-
         self.TS.add_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE, self.FUNCTION_TYPE)
         if p.Q == 'void':
             self.return_type = p.Q
@@ -275,11 +276,8 @@ class JSParser(Parser):
         else:
             self.return_type = p.Q[0]
             self.TS.add_attribute(p.ID[0], p.ID[1], self.ATTR_RETURN_VALUE, p.Q[0])
-
-        self.TS.add_attribute(p.ID[0], p.ID[1], 'EtiqFuncion', 'Et_Fun_' + str(self.number_function))
-        self.number_function += 1
         self.lista_reglas.append(34)
-        return
+        return p.Q
 
     @_('')
     def P(self, p):
@@ -315,6 +313,9 @@ class JSParser(Parser):
                 types.append(type[0])
             self.TS.add_attribute(self.pos_id_fun[0], self.pos_id_fun[1], self.ATTR_NUM_PARAMS, len(types))
             self.TS.add_attribute(self.pos_id_fun[0], self.pos_id_fun[1], self.ATTR_TYPE_PARAMS, types)
+
+
+        self.number_function += 1
         self.declaration_scope[0] = False
         self.declarando_funcion[0] = False
         self.lista_reglas.append(38)
