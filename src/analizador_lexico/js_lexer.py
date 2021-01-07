@@ -208,7 +208,7 @@ class JSLexer(Lexer):
                 id_table, id_pos = self.ts.add_global_entry(t.value)
                 self.ts.add_attribute(id_table, id_pos, 'Tipo', 'entero')
                 self.ts.add_attribute(id_table, id_pos, 'Despl', self.global_shift[0])
-                self.global_shift[0] += 2
+                self.global_shift[0] += 1
                 t.value = (id_table, id_pos)
             else:
                 t.value = (id_table, id_pos)

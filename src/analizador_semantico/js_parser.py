@@ -25,7 +25,7 @@ class JSParser(Parser):
         4: "La expresión introducida no es una cadena o un entero",
         5: "La variable introducida no es de tipo cadena o entero",
         6: "La condición debe ser un lógico",
-        7: "No puede haber return fuera de una función",
+        7: "No puede haber una sentencia return fuera de una función",
         8: "No se permite la definición de funciones anidadas",
         9: "El tipo de retorno no corresponde con el tipo de retorno de la función, se esperaba {tipo_return}",
         10: "El tipo de la variable a asignar no corresponde con el tipo asignado",
@@ -42,16 +42,17 @@ class JSParser(Parser):
     def __init__(self, lista_reglas_, TS_, declaration_scope_, declarando_funcion_, global_shift_):
         self.lista_reglas = lista_reglas_
         self.TS = TS_
+        self.declaration_scope = declaration_scope_
+        self.declarando_funcion = declarando_funcion_
+        self.global_shift = global_shift_
+
         self.TS.new_table()
         self.shift = 0
-        self.declaration_scope = declaration_scope_
         self.declaration_scope[0] = False
         self.function_scope = False
         self.return_type = None
-        self.global_shift = global_shift_
         self.pos_id_fun = None
         self.number_function = 0
-        self.declarando_funcion = declarando_funcion_
 
     @_('D')
     def B(self, p):
@@ -76,7 +77,8 @@ class JSParser(Parser):
     @_('IF ABPAREN E CEPAREN S')
     def G(self, p):
         if p.E != self.LOG_TYPE:
-            self.sem_error(1, p.lineo)
+            self.sem_error(1, p.lineno)
+
         self.lista_reglas.append(5)
         return
 
@@ -94,12 +96,13 @@ class JSParser(Parser):
     def H(self, p):
         if self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE) != self.FUNCTION_TYPE:
             self.sem_error(15, p.lineno)
-        if self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_NUM_PARAMS) == 0 and p.I == self.VOID_TYPE:
+        elif self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_NUM_PARAMS) == 0 and p.I == self.VOID_TYPE:
             return self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_RETURN_VALUE)
-        if self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_NUM_PARAMS) != len(p.I):
+        elif self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_NUM_PARAMS) != len(p.I):
             self.sem_error(2, p.lineno)
-        for index, param in enumerate(self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE_PARAMS)):
-            if param != p.I[index]:
+
+        for expected_type, found_type in zip(self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE_PARAMS), p.I):
+            if expected_type != found_type:
                 self.sem_error(3, p.lineno)
 
         self.lista_reglas.append(8)
@@ -109,6 +112,7 @@ class JSParser(Parser):
     def I(self, p):
         list = p.J
         list.insert(0, p.E)
+
         self.lista_reglas.append(9)
         return list
 
@@ -116,6 +120,7 @@ class JSParser(Parser):
     def J(self, p):
         list = p.J
         list.insert(0, p.E)
+
         self.lista_reglas.append(10)
         return list
 
@@ -138,13 +143,15 @@ class JSParser(Parser):
     def K(self, p):
         if self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE) != p.E:
             self.sem_error(10, p.lineno)
+
         self.lista_reglas.append(14)
         return
 
     @_('ALERT ABPAREN E CEPAREN PUNTOYCOMA')
     def S(self, p):
         if p.E != self.STRING_TYPE and p.E != self.INT_TYPE:
-            self.sem_error(4, p)
+            self.sem_error(4, p.lineno)
+
         self.lista_reglas.append(15)
         return
 
@@ -152,7 +159,8 @@ class JSParser(Parser):
     def S(self, p):
         type = self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE)
         if type != self.STRING_TYPE and type != self.INT_TYPE:
-            self.sem_error(5, p)
+            self.sem_error(5, p.lineno)
+
         self.lista_reglas.append(16)
         return
 
@@ -162,6 +170,7 @@ class JSParser(Parser):
             self.sem_error(7, p.lineno)
         if p.L != self.return_type:
             self.sem_error(9, p.lineno)
+
         self.lista_reglas.append(17)
         return
 
@@ -183,12 +192,14 @@ class JSParser(Parser):
         if not self.function_scope:
             self.global_shift[0] = self.shift
         self.declaration_scope[0] = False
+
         self.lista_reglas.append(20)
         return
 
     @_('')
     def M(self, p):
         self.declaration_scope[0] = True
+
         self.lista_reglas.append(21)
         return
 
@@ -211,6 +222,7 @@ class JSParser(Parser):
     def G(self, p):
         if p.E != self.LOG_TYPE:
             self.sem_error(6, p.lineno)
+
         self.lista_reglas.append(25)
         return
 
@@ -233,6 +245,7 @@ class JSParser(Parser):
     def O(self, p):
         if self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE) != self.INT_TYPE:
             self.sem_error(11, p.lineno)
+
         self.lista_reglas.append(29)
         return
 
@@ -269,6 +282,7 @@ class JSParser(Parser):
         self.shift = 0
         self.pos_id_fun = p.ID
         self.function_scope = True
+
         self.TS.add_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE, self.FUNCTION_TYPE)
         if p.Q == 'void':
             self.return_type = p.Q
@@ -277,7 +291,7 @@ class JSParser(Parser):
             self.return_type = p.Q[0]
             self.TS.add_attribute(p.ID[0], p.ID[1], self.ATTR_RETURN_VALUE, p.Q[0])
         self.lista_reglas.append(34)
-        return p.Q
+        return
 
     @_('')
     def P(self, p):
@@ -287,12 +301,14 @@ class JSParser(Parser):
     @_('T')
     def Q(self, p):
         self.declaration_scope[0] = True
+
         self.lista_reglas.append(36)
         return p.T
 
     @_('')
     def Q(self, p):
         self.declaration_scope[0] = True
+
         self.lista_reglas.append(37)
         return self.VOID_TYPE
 
@@ -318,6 +334,7 @@ class JSParser(Parser):
         self.number_function += 1
         self.declaration_scope[0] = False
         self.declarando_funcion[0] = False
+
         self.lista_reglas.append(38)
         return
 
@@ -326,6 +343,7 @@ class JSParser(Parser):
         list = p.W
         list.insert(0, p.ID)
         list.insert(0, p.T)
+
         self.lista_reglas.append(39)
         return list
 
@@ -339,6 +357,7 @@ class JSParser(Parser):
         list = p.W
         list.insert(0, p.ID)
         list.insert(0, p.T)
+
         self.lista_reglas.append(41)
         return list
 
