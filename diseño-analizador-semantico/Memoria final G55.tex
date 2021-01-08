@@ -80,7 +80,7 @@
 
 \usepackage[dvipsnames]{xcolor}
 
-% \renewcommand*{\ttdefault}{\familydefault}
+\renewcommand*{\ttdefault}{\familydefault}
 
 \usepackage{fancyvrb}
 
@@ -476,6 +476,16 @@ Un diccionario es un hashmap que tiene como claves la palabra \verb|"lexema"| y 
 
 \subsection{Casos de prueba correctos}
 
+\RecustomVerbatimCommand{\VerbatimInput}{VerbatimInput}%
+{fontsize=\small,
+ fontfamily=cmr, % no hace falta si se cambia ttdefault
+ codes={\catcode`$=3},
+ commandchars=\#\[\] % escape character and argument delimiters for
+                       % commands within the verbatim
+}
+
+\renewcommand*{\ttdefault}{cmtt}
+
 \subsubsection{Prueba correcta 1}
 
 \begin{changemargin}{+0.5cm}{+0cm}
@@ -502,11 +512,15 @@ Un diccionario es un hashmap que tiene como claves la palabra \verb|"lexema"| y 
         \VerbatimInput{./resources/test-cases/case-1/TS-Output.txt}
     \end{changemargin}
 
+    \vspace{2mm}                                                                 
+    \clearpage                                                                 
+
     \textbf{VASt:}
     \vspace{1mm} 
     \begin{center}
         \includegraphics[width=1.4\textwidth]{./resources/test-cases/case-1/a1.jpg}
-    \end{center}                                                                
+    \end{center}             
+
 \end{changemargin}
 
 

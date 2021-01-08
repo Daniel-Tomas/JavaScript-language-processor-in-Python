@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.12.14)  8 JAN 2021 13:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.12.14)  8 JAN 2021 14:17
 entering extended mode
 **"c:/Users/Daniel/OneDrive - Universidad Politécnica de Madrid/Estudios/Python/PDL2/diseño-analizador-semantico/Memoria final G55.tex"
 ("c:/Users/Daniel/OneDrive - Universidad Politécnica de Madrid/Estudios/Python/PDL2/diseño-analizador-semantico/Memoria final G55.tex"
@@ -710,11 +710,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 300--314
 
 [4
 
-]
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 330.
- (C:\Users\Daniel\AppData\Local\Programs\MiKTeX\tex/latex/base\t1cmtt.fd
-File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
-) [5
+] [5
 
 ] [6
 
@@ -730,27 +726,27 @@ Underfull \hbox (badness 10000) in paragraph at lines 404--443
 [7
 
 ]
-<./resources/tabla-LR/Tabla1.jpg, id=133, 1327.20844pt x 614.295pt>
+<./resources/tabla-LR/Tabla1.jpg, id=132, 1327.20844pt x 614.295pt>
 File: ./resources/tabla-LR/Tabla1.jpg Graphic file (type jpg)
 <use ./resources/tabla-LR/Tabla1.jpg>
 Package pdftex.def Info: ./resources/tabla-LR/Tabla1.jpg  used on input line 448.
 (pdftex.def)             Requested size: 542.83986pt x 251.2533pt.
-<./resources/tabla-LR/Tabla2.jpg, id=134, 1326.45563pt x 651.93562pt>
+<./resources/tabla-LR/Tabla2.jpg, id=133, 1326.45563pt x 651.93562pt>
 File: ./resources/tabla-LR/Tabla2.jpg Graphic file (type jpg)
 <use ./resources/tabla-LR/Tabla2.jpg>
 Package pdftex.def Info: ./resources/tabla-LR/Tabla2.jpg  used on input line 449.
 (pdftex.def)             Requested size: 542.83986pt x 266.79794pt.
-<./resources/tabla-LR/Tabla3.jpg, id=135, 1327.96124pt x 643.6547pt>
+<./resources/tabla-LR/Tabla3.jpg, id=134, 1327.96124pt x 643.6547pt>
 File: ./resources/tabla-LR/Tabla3.jpg Graphic file (type jpg)
 <use ./resources/tabla-LR/Tabla3.jpg>
 Package pdftex.def Info: ./resources/tabla-LR/Tabla3.jpg  used on input line 450.
 (pdftex.def)             Requested size: 542.83986pt x 263.11443pt.
-<./resources/tabla-LR/Tabla4.jpg, id=136, 1327.20844pt x 650.43pt>
+<./resources/tabla-LR/Tabla4.jpg, id=135, 1327.20844pt x 650.43pt>
 File: ./resources/tabla-LR/Tabla4.jpg Graphic file (type jpg)
 <use ./resources/tabla-LR/Tabla4.jpg>
 Package pdftex.def Info: ./resources/tabla-LR/Tabla4.jpg  used on input line 451.
 (pdftex.def)             Requested size: 542.83986pt x 266.03291pt.
-<./resources/tabla-LR/Tabla5.jpg, id=137, 1327.96124pt x 548.0475pt>
+<./resources/tabla-LR/Tabla5.jpg, id=136, 1327.96124pt x 548.0475pt>
 File: ./resources/tabla-LR/Tabla5.jpg Graphic file (type jpg)
 <use ./resources/tabla-LR/Tabla5.jpg>
 Package pdftex.def Info: ./resources/tabla-LR/Tabla5.jpg  used on input line 452.
@@ -798,29 +794,34 @@ Package xcolor Warning: Incompatible color definition on input line 464.
 
 Package xcolor Warning: Incompatible color definition on input line 474.
 
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 486.
-(resources/test-cases/case-1/Input.txt) [17
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 496.
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 496.
+(C:\Users\Daniel\AppData\Local\Programs\MiKTeX\tex/latex/base\t1cmtt.fd
+File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+) (resources/test-cases/case-1/Input.txt) [17
 
 ]
-<./resources/test-cases/case-1/a1.jpg, id=188, 1013.76pt x 900.9pt>
+<./resources/test-cases/case-1/a1.jpg, id=189, 1013.76pt x 900.9pt>
 File: ./resources/test-cases/case-1/a1.jpg Graphic file (type jpg)
 <use ./resources/test-cases/case-1/a1.jpg>
-Package pdftex.def Info: ./resources/test-cases/case-1/a1.jpg  used on input line 508.
+Package pdftex.def Info: ./resources/test-cases/case-1/a1.jpg  used on input line 521.
 (pdftex.def)             Requested size: 598.40154pt x 531.77383pt.
 
-Overfull \hbox (185.19637pt too wide) in paragraph at lines 508--509
+Overfull \hbox (185.19637pt too wide) in paragraph at lines 521--522
  [] 
  []
 
-[18 <./resources/test-cases/case-1/a1.jpg>]
+[18
 
-Package xcolor Warning: Incompatible color definition on input line 515.
+ <./resources/test-cases/case-1/a1.jpg>]
+
+Package xcolor Warning: Incompatible color definition on input line 529.
 
 
-Package xcolor Warning: Incompatible color definition on input line 515.
+Package xcolor Warning: Incompatible color definition on input line 529.
 
 
-Package xcolor Warning: Incompatible color definition on input line 515.
+Package xcolor Warning: Incompatible color definition on input line 529.
 
 [19
 
@@ -836,17 +837,17 @@ Package logreq Info: Writing requests to '"Memoria final G55".run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 18171 strings out of 479714
- 311495 string characters out of 2867219
- 1168546 words of memory out of 3000000
- 34926 multiletter control sequences out of 15000+200000
- 417052 words of font info for 53 fonts, out of 3000000 for 9000
+ 18173 strings out of 479714
+ 311516 string characters out of 2867219
+ 1168545 words of memory out of 3000000
+ 34927 multiletter control sequences out of 15000+200000
+ 417815 words of font info for 54 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  66i,8n,73p,864b,1931s stack positions out of 5000i,500n,10000p,200000b,50000s
- <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbi1095.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1095.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1728.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk><C:/Users/Daniel/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Daniel/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on "c:/Users\Daniel\OneDrive - Universidad Politécnica de Madrid\Estudios\Python\PDL2\diseño-analizador-semantico\PDF\Memoria final G55.pdf" (20 pages, 2383646 bytes).
+ <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbi1095.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1095.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1728.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk><C:/Users/Daniel/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Daniel/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on "c:/Users\Daniel\OneDrive - Universidad Politécnica de Madrid\Estudios\Python\PDL2\diseño-analizador-semantico\PDF\Memoria final G55.pdf" (20 pages, 2395305 bytes).
 PDF statistics:
- 600 PDF objects out of 1000 (max. 8388607)
+ 641 PDF objects out of 1000 (max. 8388607)
  48 named destinations out of 1000 (max. 500000)
  159 words of extra memory for PDF output out of 10000 (max. 10000000)
 

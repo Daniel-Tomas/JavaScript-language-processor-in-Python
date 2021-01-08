@@ -714,11 +714,6 @@ INPUT C:\Users\Daniel\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsy6.tf
 OUTPUT c:\Users\Daniel\OneDrive - Universidad Politécnica de Madrid\Estudios\Python\PDL2\diseño-analizador-semantico\PDF\Memoria final G55.toc
 INPUT C:\Users\Daniel\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecrm1728.tfm
 INPUT C:\Users\Daniel\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecbx1728.tfm
-INPUT C:\Users\Daniel\AppData\Local\Programs\MiKTeX\tex\latex\base\t1cmtt.fd
-INPUT C:\Users\Daniel\AppData\Local\Programs\MiKTeX\tex\latex\base\t1cmtt.fd
-INPUT C:\Users\Daniel\AppData\Local\Programs\MiKTeX\tex\latex\base\t1cmtt.fd
-INPUT C:\Users\Daniel\AppData\Local\Programs\MiKTeX\tex\latex\base\t1cmtt.fd
-INPUT C:\Users\Daniel\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ectt1095.tfm
 INPUT .\resources\tabla-LR\Tabla1.jpg
 INPUT .\resources\tabla-LR\Tabla1.jpg
 INPUT resources\tabla-LR\Tabla1.jpg
@@ -758,10 +753,16 @@ INPUT Pseudo-PDL.txt
 INPUT C:\Users\Daniel\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecbx1200.tfm
 INPUT .\resources\test-cases\case-1\Input.txt
 INPUT resources\test-cases\case-1\Input.txt
+INPUT C:\Users\Daniel\AppData\Local\Programs\MiKTeX\tex\latex\base\t1cmtt.fd
+INPUT C:\Users\Daniel\AppData\Local\Programs\MiKTeX\tex\latex\base\t1cmtt.fd
+INPUT C:\Users\Daniel\AppData\Local\Programs\MiKTeX\tex\latex\base\t1cmtt.fd
+INPUT C:\Users\Daniel\AppData\Local\Programs\MiKTeX\tex\latex\base\t1cmtt.fd
+INPUT C:\Users\Daniel\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ectt1095.tfm
 INPUT .\resources\test-cases\case-1\Input.txt
 INPUT resources\test-cases\case-1\Input.txt
 INPUT .\resources\test-cases\case-1\Input.txt
 INPUT resources\test-cases\case-1\Input.txt
+INPUT C:\Users\Daniel\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecrm1000.tfm
 INPUT resources\test-cases\case-1\Tokens.txt
 INPUT resources\test-cases\case-1\TS-Output.txt
 INPUT .\resources\test-cases\case-1\a1.jpg
@@ -779,10 +780,12 @@ INPUT c:\Users\Daniel\OneDrive - Universidad Politécnica de Madrid\Estudios\Pyt
 OUTPUT c:\Users\Daniel\OneDrive - Universidad Politécnica de Madrid\Estudios\Python\PDL2\diseño-analizador-semantico\PDF\Memoria final G55.run.xml
 INPUT C:\Users\Daniel\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbi1095.pk
 INPUT C:\Users\Daniel\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbi1095.pk
-INPUT C:\Users\Daniel\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk
-INPUT C:\Users\Daniel\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk
+INPUT C:\Users\Daniel\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1000.pk
+INPUT C:\Users\Daniel\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1000.pk
 INPUT C:\Users\Daniel\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ectt1095.pk
 INPUT C:\Users\Daniel\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ectt1095.pk
+INPUT C:\Users\Daniel\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk
+INPUT C:\Users\Daniel\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1200.pk
 INPUT C:\Users\Daniel\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1728.pk
 INPUT C:\Users\Daniel\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx1728.pk
 INPUT C:\Users\Daniel\AppData\Local\MiKTeX\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1095.pk
