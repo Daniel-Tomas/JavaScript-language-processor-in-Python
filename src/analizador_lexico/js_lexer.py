@@ -240,35 +240,6 @@ class JSLexer(Lexer):
         column = (token.index - last_cr)
         return column
 
-    def lex_error(self, t, type_error="default"):
-        """Handles lexer errors.
-
-        A lex_error is reported when a wrong character is found.
-        Prints a description of the lex_error and provides the number of the
-         line and the column where it has been found.
-        **Particular errors**:
-            1. Value of a token which type is "CADENA" has a length
-             greater than 64
-            2. Value of a token which type is "CTE_ENTERA" is bigger
-             than 32767
-
-        Args:
-            t(Token): The only parameter.
-        """
-
-        res = f'Error en la linea {self.lineno} y columna {self.find_column(t)}:\n\t'
-        if type_error == 'CADENA':
-            res += f'Cadena demasiado larga: "{t.value}", con logitud mayor que 64: {len(t.value)},'
-        elif type_error == "CTEENTERA":
-            res += f'Número fuera de rango: "{t.value},"'
-        elif type_error == 'ID':
-            res += f'Identificador ya declarado: "{t.value},"'
-        else:
-            res += f'Carácter ilegal: "{t.value[0]}"'
-
-        print(res, file=sys.stderr)
-        exit(1)
-
     def get_token(self, data):
         """Generator that yields tokens of the data text one by one and prints them.
 
@@ -282,6 +253,45 @@ class JSLexer(Lexer):
                 print(f'<{tok.type} , {tok.value}>', file=self.tokens_file)
             yield tok
 
+    # -----------------------Error management functions-----------------------
+
+    def lex_error(self, t, type_error="default"):
+        """Handles lexer errors.
+
+        A lex_error is reported when a wrong character is found.
+        Prints a description of the lex_error and provides the number of the
+         line and the column where it has been found.
+        **Particular errors**:
+            1. Value of a token which type is "CADENA" has a length
+             greater than 64
+            2. Value of a token which type is "CTE_ENTERA" is bigger
+             than 32767
+
+        Args:
+            t(Token): the token that caused the error
+            type_error(str): the type of error caused by t token
+        """
+
+        res = f'Error en la linea {self.lineno} y columna {self.find_column(t)}:\n\t'
+        if type_error == 'CADENA':
+            res += f'Cadena demasiado larga: "{t.value}", con logitud mayor que 64: {len(t.value)},'
+        elif type_error == "CTEENTERA":
+            res += f'Número fuera de rango: "{t.value},"'
+        elif type_error == 'ID':
+            res += f'Identificador ya declarado: "{t.value},"'
+        else:
+            res += f'Carácter ilegal: "{t.value[0]}"'
+
+        self.perror(res)
+        exit(1)
+
+    def perror(*args, **kwargs):
+        """The C perror function equivalent in python
+        Args:
+            args(str) = the arguments to be print
+            kwargs(list) = the configuration applied to those arguments
+        """
+        print(*args, file=sys.stderr, **kwargs)
 
 if __name__ == '__main__':
 
