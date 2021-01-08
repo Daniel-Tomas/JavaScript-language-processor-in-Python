@@ -255,7 +255,7 @@ class JSLexer(Lexer):
 
     # -----------------------Error management functions-----------------------
 
-    def lex_error(self, t, type_error="default"):
+    def error(self, t, type_error="default"):
         """Handles lexer errors.
 
         A lex_error is reported when a wrong character is found.
