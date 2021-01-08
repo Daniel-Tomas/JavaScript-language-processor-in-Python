@@ -192,7 +192,6 @@ error_code_dict = {
     14: "El operador aritmético "-" solo trabaja con tipos de datos enteros",
     15: "La variable no se puede invocar como una función, con argumentos"
 }
-
 function error(error_code):
     res = ""
     if error_code <= 6:

@@ -1,4 +1,4 @@
-\documentclass[11pt, a4paper, titlepage]{article}
+\documentclass[11pt, , a4paper, titlepage]{article}
 \setlength{\parindent}{0pt} % quitamos indentacion automática en parrafos
 
 % \addtolength{\textwidth}{+100cm}
@@ -15,6 +15,15 @@
 \usepackage{adforn} % símbolo lista
 \usepackage{graphicx}
 
+% PA LA PROXIMA, HAY QUE TENERLO EN CUENTA DESDE EL PRINCIPIO 
+% \setmargins{3cm}       % margen izquierdo
+% {1cm}                        % margen superior
+% {16.5cm}                      % anchura del texto
+% {23.42cm}                    % altura del texto
+% {10pt}                           % altura de los encabezados
+% {2cm}                           % espacio entre el texto y los encabezados
+% {0pt}                             % altura del pie de página
+% {1.5cm}                           % espacio entre el texto y el pie de página
 
  
 \usepackage{color}
@@ -71,16 +80,78 @@
 
 \usepackage[dvipsnames]{xcolor}
 
-\renewcommand*{\ttdefault}{\familydefault}
+% \renewcommand*{\ttdefault}{\familydefault}
 
 \usepackage{fancyvrb}
 
 % redefine \VerbatimInput
 \RecustomVerbatimCommand{\VerbatimInput}{VerbatimInput}%
-{fontfamily=cmr, %esto ya no hace falta al poner ttdefault
+{fontfamily=cmr, % no hace falta si se cambia ttdefault
  codes={\catcode`$=3},
  commandchars=\#\[\] % escape character and argument delimiters for
                        % commands within the verbatim
+}
+
+\usepackage{booktabs}
+\usepackage{listings}
+
+
+\lstdefinelanguage{JavaScript}{
+  morekeywords=[1]{break, continue, delete, else, for, function, if, in,
+    new, return, this, typeof, var, void, while, with, let},
+  % Literals, primitive types, and reference types.
+  morekeywords=[2]{false, null, true, boolean, number, string, undefined,
+    Array, Boolean, Date, Math, Number, String, Object},
+  % Built-ins.
+  morekeywords=[3]{eval, parseInt, parseFloat, escape, unescape},
+  sensitive,
+  morecomment=[s]{/*}{*/},
+  morecomment=[l]//,
+  morecomment=[s]{/**}{*/}, % JavaDoc style comments
+  morestring=[b]',
+  morestring=[b]"
+}[keywords, comments, strings]
+
+\definecolor{mediumgray}{rgb}{0.3, 0.4, 0.4}
+\definecolor{mediumblue}{rgb}{0.0, 0.0, 0.8}
+\definecolor{forestgreen}{rgb}{0.13, 0.55, 0.13}
+\definecolor{darkviolet}{rgb}{0.58, 0.0, 0.83}
+\definecolor{royalblue}{rgb}{0.25, 0.41, 0.88}
+\definecolor{crimson}{rgb}{0.86, 0.8, 0.24}
+
+\lstdefinestyle{JSES6Base}{
+  backgroundcolor=\color{white},
+  basicstyle=\ttfamily,
+  breakatwhitespace=false,
+  breaklines=false,
+  captionpos=b,
+  columns=fullflexible,
+  commentstyle=\color{mediumgray}\upshape,
+  emph={},
+  emphstyle=\color{crimson},
+  extendedchars=true,  % requires inputenc
+  literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1,
+  fontadjust=true,
+  frame=single,
+  identifierstyle=\color{black},
+  keepspaces=true,
+  keywordstyle=\color{mediumblue},
+  keywordstyle={[2]\color{darkviolet}},
+  keywordstyle={[3]\color{royalblue}},
+  numbers=none,
+  rulecolor=\color{black},
+  showlines=false,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stringstyle=\color{forestgreen},
+  tabsize=2,
+  upquote=true  % requires textcomp
+}
+
+\lstdefinestyle{JavaScript}{
+  language=JavaScript,
+  style=JSES6Base
 }
 
 
@@ -256,7 +327,7 @@ Siendo $d$ un dígito, $l$ una letra, $c$ cualquier otro carácter y $del$ un de
     \qquad pError("Número fuera de rango")\\
     \quad else \\
     \qquad genToken(CTEENTERA, number);\\
-    E: string = \verb|""|, contador = 0, leer\\ 
+    E: string = \verb|""|, contador = 0, leer\\
     F: string = string + otroCS, contador++, leer\\
     G: if contador >\hspace{1mm} 64\\
     \qquad pError(\verb|"Cadena| demasiado larga")\\
@@ -374,11 +445,11 @@ Producciones = \{\\
 \subsection{Tabla LR(1) }
 \begin{changemargin}{-2.5cm}{+2.5cm}
     \begin{center}
-        \includegraphics[width=1.27\textwidth]{Tabla1.jpg}
-        \includegraphics[width=1.27\textwidth]{Tabla2.jpg}
-        \includegraphics[width=1.27\textwidth]{Tabla3.jpg}
-        \includegraphics[width=1.27\textwidth]{Tabla4.jpg}
-        \includegraphics[width=1.27\textwidth]{Tabla5.jpg}
+        \includegraphics[width=1.27\textwidth]{./resources/tabla-LR/Tabla1.jpg}
+        \includegraphics[width=1.27\textwidth]{./resources/tabla-LR/Tabla2.jpg}
+        \includegraphics[width=1.27\textwidth]{./resources/tabla-LR/Tabla3.jpg}
+        \includegraphics[width=1.27\textwidth]{./resources/tabla-LR/Tabla4.jpg}
+        \includegraphics[width=1.27\textwidth]{./resources/tabla-LR/Tabla5.jpg}
     \end{center}
 \end{changemargin}
 
@@ -388,9 +459,57 @@ Como puede observarse en la tabla\cite{TABLA-LR}, esta gramática es adecuada pa
 
 \section{Diseño Analizador Semántico}
 \VerbatimInput{Pseudo-PDL.txt}
-
 \clearpage
+
 \section{Diseño Tabla de Símbolos}
+La TS se compone de una lista de tablas, una de ellas es global y se crea al empezar, mientras que el resto son locales y se van creando %
+a medida que avanza la compilación. Están ordenadas en orden de creación. %
+Cada tabla tiene un flag que indica si la tabla existe (esta activa) o se ha eliminado, pero realmente no las eliminamos para posteriormente imprimirlas.
+
+A su vez cada tabla contiene una lista de diccionarios, cada diccionario simboliza una entrada en la tabla de símbolos. %
+Un diccionario es un hashmap que tiene como claves la palabra \verb|"lexema"| y los tipos de atributos que le corresponda %
+(por ejemplo \verb|"Tipo" ó "Despl"|), como valores tiene el valor del lexema y de sus atributos en si mismos (por ejemplo \verb|"main" ó "entero"|).
+\clearpage
+
+\section{Anexo}
+
+
+\subsection{Casos de prueba correctos}
+
+\subsubsection{Prueba correcta 1}
+
+\begin{changemargin}{+0.5cm}{+0cm}
+    \vspace{1mm}                                                                 
+    
+    \textbf{Programa introducido:}
+    \begin{changemargin}{+0.5cm}{+0cm}
+        \lstinputlisting[style=JavaScript]{./resources/test-cases/case-1/Input.txt}
+    \end{changemargin}
+
+    \vspace{2mm}                                                                 
+
+    \textbf{Tokens:}
+    \vspace{1mm}                                                                 
+    \begin{changemargin}{+0.5cm}{+0cm}
+        \VerbatimInput{./resources/test-cases/case-1/Tokens.txt}
+    \end{changemargin}
+
+    \vspace{2mm}                                                                 
+
+    \textbf{Tabla de símbolos:}
+    \vspace{1mm}                                                                 
+    \begin{changemargin}{+0.5cm}{+0cm}
+        \VerbatimInput{./resources/test-cases/case-1/TS-Output.txt}
+    \end{changemargin}
+
+    \textbf{VASt:}
+    \vspace{1mm} 
+    \begin{center}
+        \includegraphics[width=1.4\textwidth]{./resources/test-cases/case-1/a1.jpg}
+    \end{center}                                                                
+\end{changemargin}
+
+
 
 \clearpage
 \printbibliography[heading=bibnumbered]
