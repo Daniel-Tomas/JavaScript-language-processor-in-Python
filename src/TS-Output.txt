@@ -12,12 +12,12 @@ CONTENIDO DE LA TABLA # 0 :
 ---------------- ----------------
 *	LEXEMA : 'l1'
 	ATRIBUTOS :
-	+ Tipo : 'lógico'
+	+ Tipo : 'logico'
 	+ Despl : '2'
 ---------------- ----------------
 *	LEXEMA : 'l2'
 	ATRIBUTOS :
-	+ Tipo : 'lógico'
+	+ Tipo : 'logico'
 	+ Despl : '3'
 ---------------- ----------------
 *	LEXEMA : 'cad'
@@ -27,11 +27,11 @@ CONTENIDO DE LA TABLA # 0 :
 ---------------- ----------------
 *	LEXEMA : 'ff'
 	ATRIBUTOS :
-	+ Tipo : 'función'
+	+ Tipo : 'funcion'
+	+ TipoRetorno : 'logico'
 	+ EtiqFuncion : 'Et_Fun_0'
 	+ numParam : '1'
-	+ TipoParam1 : 'lógico'
-	+ TipoRetorno : 'lógico'
+	+ TipoParam : '['logico']'
 ---------------- ----------------
 *	LEXEMA : 'varglobal'
 	ATRIBUTOS :
@@ -45,7 +45,7 @@ CONTENIDO DE LA TABLA # 1 :
 
 *	LEXEMA : 'ss'
 	ATRIBUTOS :
-	+ Tipo : 'lógico'
+	+ Tipo : 'logico'
 	+ Despl : '0'
 ---------------- ----------------
 
