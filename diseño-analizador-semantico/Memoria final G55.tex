@@ -25,8 +25,8 @@
 % {0pt}                             % altura del pie de página
 % {1.5cm}                           % espacio entre el texto y el pie de página
 
- 
-\usepackage{color}
+
+\usepackage[dvipsnames]{xcolor}
 \usepackage{csquotes}   
 \usepackage[style=numeric-comp, sorting=none, block=par]{biblatex} 
 \addbibresource{references.bib}
@@ -78,7 +78,6 @@
 \item[]}{\end{list}}
 
 
-\usepackage[dvipsnames]{xcolor}
 
 \renewcommand*{\ttdefault}{\familydefault}
 
@@ -120,33 +119,34 @@
 \definecolor{crimson}{rgb}{0.86, 0.8, 0.24}
 
 \lstdefinestyle{JSES6Base}{
-  backgroundcolor=\color{white},
-  basicstyle=\ttfamily,
-  breakatwhitespace=false,
-  breaklines=false,
-  captionpos=b,
-  columns=fullflexible,
-  commentstyle=\color{mediumgray}\upshape,
-  emph={},
-  emphstyle=\color{crimson},
-  extendedchars=true,  % requires inputenc
-  literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1,
-  fontadjust=true,
-  frame=single,
-  identifierstyle=\color{black},
-  keepspaces=true,
-  keywordstyle=\color{mediumblue},
-  keywordstyle={[2]\color{darkviolet}},
-  keywordstyle={[3]\color{royalblue}},
-  numbers=none,
-  rulecolor=\color{black},
-  showlines=false,
-  showspaces=false,
-  showstringspaces=false,
-  showtabs=false,
-  stringstyle=\color{forestgreen},
-  tabsize=2,
-  upquote=true  % requires textcomp
+    backgroundcolor=\color{white},
+    basicstyle=\ttfamily,
+    breakatwhitespace=false,
+    breaklines=false,
+    captionpos=b,
+    columns=fullflexible,
+    commentstyle=\color{mediumgray}\upshape,
+    emph={},
+    emphstyle=\color{crimson},
+    extendedchars=true,  % requires inputenc
+    literate={á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1,
+    fontadjust=true,
+    frame=single,
+    identifierstyle=\color{black},
+    keepspaces=true,
+    keywordstyle=\color{mediumblue},
+    keywordstyle={[2]\color{darkviolet}},
+    keywordstyle={[3]\color{royalblue}},
+    numbers=none,
+    rulecolor=\color{black},
+    showlines=false,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    stringstyle=\color{forestgreen},
+    tabsize=2,
+    upquote=true,  % requires textcomp
+    numbers=left, numberstyle=\scriptsize
 }
 
 \lstdefinestyle{JavaScript}{
@@ -225,7 +225,7 @@
     \Large{Grupo 55}\\
     \vspace{0.3cm}
 
-    {\large Daniel Tomás Sánchez\\ Aarón Cabero Blanco\\ Alejandro Cuadrón \par}
+    {\large Daniel Tomás Sánchez\\ Aarón Cabero Blanco\\ Alejandro Cuadrón Lafuente\par}
 
     \vspace{2cm}
     {\Large Curso 2020/2021 \par}
@@ -476,6 +476,8 @@ Un diccionario es un hashmap que tiene como claves la palabra \verb|"lexema"| y 
 
 \subsection{Casos de prueba correctos}
 
+\renewcommand*{\ttdefault}{cmtt}
+
 \RecustomVerbatimCommand{\VerbatimInput}{VerbatimInput}%
 {fontsize=\small,
  fontfamily=cmr, % no hace falta si se cambia ttdefault
@@ -483,8 +485,6 @@ Un diccionario es un hashmap que tiene como claves la palabra \verb|"lexema"| y 
  commandchars=\#\[\] % escape character and argument delimiters for
                        % commands within the verbatim
 }
-
-\renewcommand*{\ttdefault}{cmtt}
 
 \subsubsection{Prueba correcta 1}
 
@@ -518,12 +518,261 @@ Un diccionario es un hashmap que tiene como claves la palabra \verb|"lexema"| y 
     \textbf{VASt:}
     \vspace{1mm} 
     \begin{center}
-        \includegraphics[width=1.4\textwidth]{./resources/test-cases/case-1/a1.jpg}
+        \includegraphics[width=1.4\textwidth]{./resources/test-cases/case-1/tree.jpg}
+    \end{center}             
+
+\end{changemargin}
+\clearpage
+
+\subsubsection{Prueba correcta 2}
+
+\begin{changemargin}{+0.5cm}{+0cm}
+    \vspace{1mm}                                                                 
+    
+    \textbf{Programa introducido:}
+    \begin{changemargin}{+0.5cm}{+0cm}
+        \lstinputlisting[style=JavaScript]{./resources/test-cases/case-2/Input.txt}
+    \end{changemargin}
+
+    \vspace{2mm}                                                                 
+
+    \textbf{Tokens:}
+    \vspace{1mm}                                                                 
+    \begin{changemargin}{+0.5cm}{+0cm}
+        \VerbatimInput{./resources/test-cases/case-2/Tokens.txt}
+    \end{changemargin}
+
+    \vspace{3mm}                                                                 
+
+    \textbf{Tabla de símbolos:}
+    \vspace{1mm}                                                                 
+    \begin{changemargin}{+0.5cm}{+0cm}
+        \VerbatimInput{./resources/test-cases/case-2/TS-Output.txt}
+    \end{changemargin}
+
+    \vspace{2mm}                                                                  
+
+    \textbf{VASt:}
+    \vspace{1mm} 
+    \begin{center}
+        \includegraphics[width=0.8\textwidth]{./resources/test-cases/case-2/tree.jpg}
+    \end{center}             
+
+\end{changemargin}
+
+\subsubsection{Prueba correcta 3}
+
+\begin{changemargin}{+0.5cm}{+0cm}
+    \vspace{1mm}                                                                 
+    
+    \textbf{Programa introducido:}
+    \begin{changemargin}{+0.5cm}{+0cm}
+        \lstinputlisting[style=JavaScript]{./resources/test-cases/case-3/Input.txt}
+    \end{changemargin}
+
+    \vspace{2mm}                                                                 
+
+    \textbf{Tokens:}
+    \vspace{1mm}                                                                 
+    \begin{changemargin}{+0.5cm}{+0cm}
+        \VerbatimInput{./resources/test-cases/case-3/Tokens.txt}
+    \end{changemargin}
+
+    \vspace{2mm}                                                                 
+
+    \textbf{Tabla de símbolos:}
+    \vspace{1mm}                                                                 
+    \begin{changemargin}{+0.5cm}{+0cm}
+        \VerbatimInput{./resources/test-cases/case-3/TS-Output.txt}
+    \end{changemargin}
+
+    \clearpage                                                             
+
+    \textbf{VASt:}
+    \vspace{1mm} 
+    \begin{center}
+        \includegraphics[width=1.4\textwidth]{./resources/test-cases/case-3/tree.jpg}
+    \end{center}             
+
+\end{changemargin}
+\clearpage
+
+\subsubsection{Prueba correcta 4}
+
+\begin{changemargin}{+0.5cm}{+0cm}
+    \vspace{1mm}                                                                 
+    
+    \textbf{Programa introducido:}
+    \begin{changemargin}{+0.5cm}{+0cm}
+        \lstinputlisting[style=JavaScript]{./resources/test-cases/case-4/Input.txt}
+    \end{changemargin}
+
+    \vspace{2mm}                                                                 
+
+    \textbf{Tokens:}
+    \vspace{1mm}                                                                 
+    \begin{changemargin}{+0.5cm}{+0cm}
+        \VerbatimInput{./resources/test-cases/case-4/Tokens.txt}
+    \end{changemargin}
+
+    \vspace{2mm}                                                                 
+
+    \textbf{Tabla de símbolos:}
+    \vspace{1mm}                                                                 
+    \begin{changemargin}{+0.5cm}{+0cm}
+        \VerbatimInput{./resources/test-cases/case-4/TS-Output.txt}
+    \end{changemargin}
+
+    \clearpage                                                                 
+
+    \textbf{VASt:}
+    \vspace{1mm} 
+    \begin{center}
+        \includegraphics[width=0.54\textwidth]{./resources/test-cases/case-4/tree.jpg}
+    \end{center}             
+
+\end{changemargin}
+\clearpage
+
+\subsubsection{Prueba correcta 5}
+
+\begin{changemargin}{+0.5cm}{+0cm}
+    \vspace{1mm}                                                                 
+    
+    \textbf{Programa introducido:}
+    \begin{changemargin}{+0.5cm}{+0cm}
+        \lstinputlisting[style=JavaScript]{./resources/test-cases/case-5/Input.txt}
+    \end{changemargin}
+
+    \vspace{2mm}                                                                 
+
+    \textbf{Tokens:}
+    \vspace{1mm}                                                                 
+    \begin{changemargin}{+0.5cm}{+0cm}
+        \VerbatimInput{./resources/test-cases/case-5/Tokens.txt}
+    \end{changemargin}
+
+    \vspace{2mm}                                                                 
+
+    \textbf{Tabla de símbolos:}
+    \vspace{1mm}                                                                 
+    \begin{changemargin}{+0.5cm}{+0cm}
+        \VerbatimInput{./resources/test-cases/case-5/TS-Output.txt}
+    \end{changemargin}
+
+    \vspace{2mm}                                                                 
+    \clearpage                                                                 
+
+    \textbf{VASt:}
+    \vspace{1mm} 
+    \begin{center}
+        \includegraphics[width=0.5\textwidth]{./resources/test-cases/case-5/tree.jpg}
     \end{center}             
 
 \end{changemargin}
 
 
+\subsection{Casos de prueba erróneos}
+
+\subsubsection{Prueba errónea 1}
+
+\begin{changemargin}{+0.5cm}{+0cm}
+    \vspace{1mm}                                                                 
+    
+    \textbf{Programa introducido:}
+    \begin{changemargin}{+0.5cm}{+0cm}
+        \lstinputlisting[style=JavaScript]{./resources/test-cases/case-6/Input.txt}
+    \end{changemargin}
+
+    \vspace{2mm}
+    
+    \textbf{Mensaje de error:}
+    \vspace{1mm}                                                                 
+    \begin{changemargin}{+0.5cm}{+0cm}
+        \VerbatimInput{./resources/test-cases/case-6/Error.txt}
+    \end{changemargin}
+
+\end{changemargin}
+
+\subsubsection{Prueba errónea 2}
+
+\begin{changemargin}{+0.5cm}{+0cm}
+    \vspace{1mm}                                                                 
+    
+    \textbf{Programa introducido:}
+    \begin{changemargin}{+0.5cm}{+0cm}
+        \lstinputlisting[style=JavaScript]{./resources/test-cases/case-7/Input.txt}
+    \end{changemargin}
+
+    \vspace{2mm}
+    
+    \textbf{Mensaje de error:}
+    \vspace{1mm}                                                                 
+    \begin{changemargin}{+0.5cm}{+0cm}
+        \VerbatimInput{./resources/test-cases/case-7/Error.txt}
+    \end{changemargin}
+
+\end{changemargin}
+
+% \subsubsection{Prueba errónea 3}
+
+% \begin{changemargin}{+0.5cm}{+0cm}
+%     \vspace{1mm}                                                                 
+    
+%     \textbf{Programa introducido:}
+%     \begin{changemargin}{+0.5cm}{+0cm}
+%         \lstinputlisting[style=JavaScript]{./resources/test-cases/case-8/Input.txt}
+%     \end{changemargin}
+
+%     \vspace{2mm}
+    
+%     \textbf{Mensaje de error:}
+%     \vspace{1mm}                                                                 
+%     \begin{changemargin}{+0.5cm}{+0cm}
+%         \VerbatimInput{./resources/test-cases/case-8/Error.txt}
+%     \end{changemargin}
+
+% \end{changemargin}
+
+% \subsubsection{Prueba errónea 4}
+
+% \begin{changemargin}{+0.5cm}{+0cm}
+%     \vspace{1mm}                                                                 
+    
+%     \textbf{Programa introducido:}
+%     \begin{changemargin}{+0.5cm}{+0cm}
+%         \lstinputlisting[style=JavaScript]{./resources/test-cases/case-9/Input.txt}
+%     \end{changemargin}
+
+%     \vspace{2mm}
+    
+%     \textbf{Mensaje de error:}
+%     \vspace{1mm}                                                                 
+%     \begin{changemargin}{+0.5cm}{+0cm}
+%         \VerbatimInput{./resources/test-cases/case-9/Error.txt}
+%     \end{changemargin}
+
+% \end{changemargin}
+
+% \subsubsection{Prueba errónea 5}
+
+% \begin{changemargin}{+0.5cm}{+0cm}
+%     \vspace{1mm}                                                                 
+    
+%     \textbf{Programa introducido:}
+%     \begin{changemargin}{+0.5cm}{+0cm}
+%         \lstinputlisting[style=JavaScript]{./resources/test-cases/case-10/Input.txt}
+%     \end{changemargin}
+
+%     \vspace{2mm}
+    
+%     \textbf{Mensaje de error:}
+%     \vspace{1mm}                                                                 
+%     \begin{changemargin}{+0.5cm}{+0cm}
+%         \VerbatimInput{./resources/test-cases/case-10/Error.txt}
+%     \end{changemargin}
+
+% \end{changemargin}
 
 \clearpage
 \printbibliography[heading=bibnumbered]

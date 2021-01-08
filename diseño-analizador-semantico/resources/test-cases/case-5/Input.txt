@@ -1,0 +1,13 @@
+function FuncionSentencia (number b, boolean z)
+{
+    for (b=0;true; --b )
+    {
+    alert ("hola");
+    }
+}
+function Funcion (number x, boolean b)
+{
+    if ( x == 0 ) FuncionSentencia(x,b);
+    alert
+        (cadena); return;
+}

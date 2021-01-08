@@ -1,0 +1,21 @@
+CONTENIDO DE LA TABLA # 0 :
+
+*	LEXEMA : 'Factorial'
+	ATRIBUTOS :
+	+ Tipo : 'funcion'
+	+ TipoRetorno : 'entero'
+	+ EtiqFuncion : 'Et_Fun_0'
+	+ numParam : '1'
+	+ TipoParam1 : 'entero'
+
+---------------- ----------------
+
+
+
+CONTENIDO DE LA TABLA # 1 :
+
+*	LEXEMA : 'n'
+	ATRIBUTOS :
+	+ Tipo : 'entero'
+	+ Despl : '0'
+---------------- ----------------

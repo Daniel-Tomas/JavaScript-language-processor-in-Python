@@ -1,0 +1,2 @@
+Error en la linea 2:
+	La variable no se puede invocar como una función, con argumentos

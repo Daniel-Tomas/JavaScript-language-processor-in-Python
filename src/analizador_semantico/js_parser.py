@@ -453,9 +453,9 @@ class JSParser(Parser):
         return self.LOG_TYPE
 
     def error(self, p):
-        print("Error en la sintaxis: ", file=sys.stderr)
+        print('Error en la sintaxis: ', file=sys.stderr)
         if not p:
-            print("Expresión incompleta, se esperaban más elementos", file=sys.stderr)
+            print('Expresión incompleta, se esperaban más elementos', file=sys.stderr)
             exit(2)
         else:
             print(f'Token ilegal {p.type} en la linea {p.lineno}', file=sys.stderr)

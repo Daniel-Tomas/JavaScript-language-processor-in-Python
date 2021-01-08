@@ -1,0 +1,2 @@
+Error en la linea 2:
+	El operador especial '--' solo trabaja con tipos de datos enteros

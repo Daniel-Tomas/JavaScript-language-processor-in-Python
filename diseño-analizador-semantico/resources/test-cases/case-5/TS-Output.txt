@@ -1,0 +1,60 @@
+CONTENIDO DE LA TABLA # 0 :
+
+*	LEXEMA : 'FuncionSentencia'
+	ATRIBUTOS :
+	+ Tipo : 'funcion'
+	+ TipoRetorno : 'void'
+	+ EtiqFuncion : 'Et_Fun_0'
+	+ numParam : '2'
+	+ TipoParam1 : 'entero'
+	+ TipoParam2 : 'logico'
+
+---------------- ----------------
+*	LEXEMA : 'Funcion'
+	ATRIBUTOS :
+	+ Tipo : 'funcion'
+	+ TipoRetorno : 'void'
+	+ EtiqFuncion : 'Et_Fun_1'
+	+ numParam : '2'
+	+ TipoParam1 : 'entero'
+	+ TipoParam2 : 'logico'
+
+---------------- ----------------
+*	LEXEMA : 'cadena'
+	ATRIBUTOS :
+	+ Tipo : 'entero'
+	+ Despl : '0'
+---------------- ----------------
+
+
+
+CONTENIDO DE LA TABLA # 1 :
+
+*	LEXEMA : 'b'
+	ATRIBUTOS :
+	+ Tipo : 'entero'
+	+ Despl : '0'
+---------------- ----------------
+*	LEXEMA : 'z'
+	ATRIBUTOS :
+	+ Tipo : 'logico'
+	+ Despl : '1'
+---------------- ----------------
+
+
+
+CONTENIDO DE LA TABLA # 2 :
+
+*	LEXEMA : 'x'
+	ATRIBUTOS :
+	+ Tipo : 'entero'
+	+ Despl : '0'
+---------------- ----------------
+*	LEXEMA : 'b'
+	ATRIBUTOS :
+	+ Tipo : 'logico'
+	+ Despl : '1'
+---------------- ----------------
+
+
+
