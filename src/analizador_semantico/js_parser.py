@@ -18,24 +18,7 @@ class JSParser(Parser):
     STRING_TYPE = 'cadena'
     VOID_TYPE = 'void'
 
-    error_code_dict = {
-        1: "La condición debe ser un lógico",
-        2: "El número de parámetros introducidos no son los esperados, deberían ser {busca_num_params_TS(id.pos)}",
-        3: "El tipo de los parámetros no es el esperado, se esperaban {busca_tipo_params_TS(id.pos)}",
-        4: "La expresión introducida no es una cadena o un entero",
-        5: "La variable introducida no es de tipo cadena o entero",
-        6: "La condición debe ser un lógico",
-        7: "No puede haber una sentencia return fuera de una función",
-        8: "No se permite la definición de funciones anidadas",
-        9: "El tipo de retorno no corresponde con el tipo de retorno de la función, se esperaba {tipo_return}",
-        10: "El tipo de la variable a asignar no corresponde con el tipo asignado",
-        11: "El operador especial '--' solo trabaja con tipos de datos enteros",
-        12: "El operador lógico '&&' solo trabaja con tipos de datos lógicos",
-        13: "El operador de relación '==' solo trabaja con tipos de datos enteros",
-        14: "El operador aritmético '-' solo trabaja con tipos de datos enteros",
-        15: "La variable no se puede invocar como una función, con argumentos"
-    }
-
+    error_id = [0, 0]
     debugfile = 'parser.out'
     tokens = JSLexer.tokens
 
@@ -77,7 +60,7 @@ class JSParser(Parser):
     @_('IF ABPAREN E CEPAREN S')
     def G(self, p):
         if p.E != self.LOG_TYPE:
-            self.sem_error(1, p.lineno)
+            self.semantic_error(1, p.lineno)
 
         self.lista_reglas.append(5)
         return
@@ -95,15 +78,18 @@ class JSParser(Parser):
     @_('ID ABPAREN I CEPAREN')
     def H(self, p):
         if self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE) != self.FUNCTION_TYPE:
-            self.sem_error(15, p.lineno)
+            self.error_id = p.ID
+            self.semantic_error(15, p.lineno)
         elif self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_NUM_PARAMS) == 0 and p.I == self.VOID_TYPE:
             return self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_RETURN_VALUE)
         elif self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_NUM_PARAMS) != len(p.I):
-            self.sem_error(2, p.lineno)
+            self.error_id = p.ID
+            self.semantic_error(2, p.lineno)
 
         for expected_type, found_type in zip(self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE_PARAMS), p.I):
             if expected_type != found_type:
-                self.sem_error(3, p.lineno)
+                self.error_id = p.ID
+                self.semantic_error(3, p.lineno)
 
         self.lista_reglas.append(8)
         return self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_RETURN_VALUE)
@@ -142,7 +128,8 @@ class JSParser(Parser):
     @_('ID OPASIG E')
     def K(self, p):
         if self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE) != p.E:
-            self.sem_error(10, p.lineno)
+            self.error_id = p.ID
+            self.semantic_error(10, p.lineno)
 
         self.lista_reglas.append(14)
         return
@@ -150,7 +137,7 @@ class JSParser(Parser):
     @_('ALERT ABPAREN E CEPAREN PUNTOYCOMA')
     def S(self, p):
         if p.E != self.STRING_TYPE and p.E != self.INT_TYPE:
-            self.sem_error(4, p.lineno)
+            self.semantic_error(4, p.lineno)
 
         self.lista_reglas.append(15)
         return
@@ -159,7 +146,8 @@ class JSParser(Parser):
     def S(self, p):
         type = self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE)
         if type != self.STRING_TYPE and type != self.INT_TYPE:
-            self.sem_error(5, p.lineno)
+            self.error_id = p.ID
+            self.semantic_error(5, p.lineno)
 
         self.lista_reglas.append(16)
         return
@@ -167,9 +155,9 @@ class JSParser(Parser):
     @_('RETURN L PUNTOYCOMA')
     def S(self, p):
         if not self.function_scope:
-            self.sem_error(7, p.lineno)
+            self.semantic_error(7, p.lineno)
         if p.L != self.return_type:
-            self.sem_error(9, p.lineno)
+            self.semantic_error(9, p.lineno)
 
         self.lista_reglas.append(17)
         return
@@ -223,7 +211,7 @@ class JSParser(Parser):
     @_('FOR ABPAREN N PUNTOYCOMA E PUNTOYCOMA O CEPAREN ABLLAVE C CELLAVE')
     def G(self, p):
         if p.E != self.LOG_TYPE:
-            self.sem_error(6, p.lineno)
+            self.semantic_error(6, p.lineno)
 
         self.lista_reglas.append(25)
         return
@@ -246,7 +234,8 @@ class JSParser(Parser):
     @_('OPESP ID')
     def O(self, p):
         if self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE) != self.INT_TYPE:
-            self.sem_error(11, p.lineno)
+            self.error_id = p.ID
+            self.semantic_error(11, p.lineno)
 
         self.lista_reglas.append(29)
         return
@@ -378,7 +367,7 @@ class JSParser(Parser):
     @_('E OPLOG R')
     def E(self, p):
         if p.E != self.LOG_TYPE or p.R != self.LOG_TYPE:
-            self.sem_error(12, p.lineno)
+            self.semantic_error(12, p.lineno)
 
         self.lista_reglas.append(44)
         return self.LOG_TYPE
@@ -391,7 +380,7 @@ class JSParser(Parser):
     @_('R OPREL U')
     def R(self, p):
         if p.R != self.INT_TYPE or p.U != self.INT_TYPE:
-            self.sem_error(13, p.lineno)
+            self.semantic_error(13, p.lineno)
 
         self.lista_reglas.append(46)
         return self.LOG_TYPE
@@ -404,7 +393,7 @@ class JSParser(Parser):
     @_('U OPARIT V')
     def U(self, p):
         if p.U != self.INT_TYPE or p.V != self.INT_TYPE:
-            self.sem_error(14, p.lineno)
+            self.semantic_error(14, p.lineno)
 
         self.lista_reglas.append(48)
         return self.INT_TYPE
@@ -417,7 +406,8 @@ class JSParser(Parser):
     @_('OPESP ID')
     def V(self, p):
         if self.TS.get_attribute(p.ID[0], p.ID[1], self.ATTR_TYPE) != self.INT_TYPE:
-            self.sem_error(11, p.lineno)
+            self.error_id = p.ID
+            self.semantic_error(11, p.lineno)
 
         self.lista_reglas.append(50)
         return self.INT_TYPE
@@ -452,18 +442,69 @@ class JSParser(Parser):
         self.lista_reglas.append(56)
         return self.LOG_TYPE
 
-    def error(self, p):
-        print("Error en la sintaxis: ", file=sys.stderr)
+    # -----------------------Error management functions-----------------------
+
+    def syntax_error(self, p):
+        """This function will output through standard error
+         the syntax error detected showing the user some hints to solve the problem
+         Args:
+             p(Rule): The syntactic rule where the problem was located
+         """
+        res = 'Error en la sintaxis: '
         if not p:
-            print("Expresión incompleta, se esperaban más elementos", file=sys.stderr)
+            res += 'Expresión incompleta, se esperaban más elementos'
+            self.perror(res)
             exit(2)
         else:
-            print(f'Token ilegal {p.type} en la linea {p.lineno}', file=sys.stderr)
+            res += f'Elemento no esperado "{p.type.lower()}" en la linea {p.lineno}'
+            self.perror(res)
             exit(3)
 
-    def sem_error(self, id, lineno):
-        print(f'Error en la linea {lineno}:\n\t{self.error_code_dict[id]}', file=sys.stderr)
+    def semantic_error(self, error_code, lineno):
+        """This function will output through standard error
+        the semantic error detected showing the user some hints to solve the problem
+        Args:
+            error_code(int): The error code of issue
+            lineno(int): The line where the error occurred
+        """
+        self.perror(f'Error en la linea {lineno}:\n\t{self.get_error_code(error_code)}')
         exit(4)
+
+    def get_error_code(self, error_code):
+        """This function will return the error line indicated by the error_code parameter.
+            It will also update to the last error_id provided.
+            Args:
+                error_code(int): The error code of issue
+        """
+        params = self.TS.get_attribute(self.error_id[0], self.error_id[1], self.ATTR_TYPE_PARAMS)
+        if params is None:
+            params = []
+        error_code_dict = {
+            1: f'La condición debe ser un lógico',
+            2: f'El número de parámetros introducidos no son los esperados, deberían ser {len(params)}',
+            3: f'El tipo de los parámetros no es el esperado, se esperaban {params}',
+            4: f'La expresión introducida no es una cadena o un entero',
+            5: f'La variable introducida no es de tipo cadena o entero',
+            6: f'La condición debe ser un lógico',
+            7: f'No puede haber una sentencia return fuera de una función',
+            8: f'No se permite la definición de funciones anidadas',
+            9: f'El tipo de retorno no corresponde con el tipo de retorno de la función, se esperaba {self.return_type}',
+            10:f'El tipo de la variable a asignar no corresponde con el tipo asignado',
+            11: f'El operador especial "--" solo trabaja con tipos de datos enteros',
+            12: f'El operador lógico "&&" solo trabaja con tipos de datos lógicos',
+            13: f'El operador de relación "==" solo trabaja con tipos de datos enteros',
+            14: f'El operador aritmético "-" solo trabaja con tipos de datos enteros',
+            15: f'La variable no se puede invocar como una función, con argumentos'
+        }
+        return error_code_dict.get(error_code)
+
+    def perror(*args, **kwargs):
+        """The C perror function equivalent in python
+        Args:
+            args(str) = the arguments to be printed
+            kwargs(list) = the configuration applied to those arguments
+        """
+        print(*args, file=sys.stderr, **kwargs)
 
 # if __name__ == '__main__':
 #     sys.stdout = open("Parse.txt", "w")
