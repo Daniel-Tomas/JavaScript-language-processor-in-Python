@@ -451,13 +451,13 @@ class JSParser(Parser):
         """
         print(*args, file=sys.stderr, **kwargs)
 
-    def syntax_error(self, p):
+    def error(self, p):
         """This function will output through standard error
          the syntax error detected showing the user some hints to solve the problem
          Args:
              p(Rule): The syntactic rule where the problem was located
          """
-        res = 'Error en la sintaxis: '
+        res = 'Error en la sintaxis:\n\t '
         if not p:
             res += 'Expresión incompleta, se esperaban más elementos'
             self.perror(res)
