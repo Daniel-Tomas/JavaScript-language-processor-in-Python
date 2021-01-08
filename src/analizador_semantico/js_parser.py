@@ -323,7 +323,6 @@ class JSParser(Parser):
             self.TS.add_attribute(self.pos_id_fun[0], self.pos_id_fun[1], self.ATTR_NUM_PARAMS, len(types))
             self.TS.add_attribute(self.pos_id_fun[0], self.pos_id_fun[1], self.ATTR_TYPE_PARAMS, types)
 
-
         self.number_function += 1
         self.declaration_scope[0] = False
         self.declarando_funcion[0] = False
@@ -444,6 +443,14 @@ class JSParser(Parser):
 
     # -----------------------Error management functions-----------------------
 
+    def perror(*args, **kwargs):
+        """The C perror function equivalent in python
+        Args:
+            args(str) = the arguments to be printed
+            kwargs(list) = the configuration applied to those arguments
+        """
+        print(*args, file=sys.stderr, **kwargs)
+
     def syntax_error(self, p):
         """This function will output through standard error
          the syntax error detected showing the user some hints to solve the problem
@@ -481,15 +488,15 @@ class JSParser(Parser):
             params = []
         error_code_dict = {
             1: f'La condición debe ser un lógico',
-            2: f'El número de parámetros introducidos no son los esperados, deberían ser {len(params)}',
-            3: f'El tipo de los parámetros no es el esperado, se esperaban {params}',
+            2: f'El número de parámetros introducidos no son los esperados, deberían ser "{len(params)}"',
+            3: f'El tipo de los parámetros no es el esperado, se esperaban "{params}"',
             4: f'La expresión introducida no es una cadena o un entero',
             5: f'La variable introducida no es de tipo cadena o entero',
             6: f'La condición debe ser un lógico',
             7: f'No puede haber una sentencia return fuera de una función',
             8: f'No se permite la definición de funciones anidadas',
-            9: f'El tipo de retorno no corresponde con el tipo de retorno de la función, se esperaba {self.return_type}',
-            10:f'El tipo de la variable a asignar no corresponde con el tipo asignado',
+            9: f'El tipo de retorno no corresponde con el tipo de retorno de la función, se esperaba "{self.return_type}"',
+            10: f'El tipo de la variable a asignar no corresponde con el tipo asignado',
             11: f'El operador especial "--" solo trabaja con tipos de datos enteros',
             12: f'El operador lógico "&&" solo trabaja con tipos de datos lógicos',
             13: f'El operador de relación "==" solo trabaja con tipos de datos enteros',
@@ -497,14 +504,6 @@ class JSParser(Parser):
             15: f'La variable no se puede invocar como una función, con argumentos'
         }
         return error_code_dict.get(error_code)
-
-    def perror(*args, **kwargs):
-        """The C perror function equivalent in python
-        Args:
-            args(str) = the arguments to be printed
-            kwargs(list) = the configuration applied to those arguments
-        """
-        print(*args, file=sys.stderr, **kwargs)
 
 # if __name__ == '__main__':
 #     sys.stdout = open("Parse.txt", "w")

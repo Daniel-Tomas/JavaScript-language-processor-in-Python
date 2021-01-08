@@ -1,8 +1,2 @@
-function Funcion (number a, boolean b, string c){
-    a = a - 1;
-}
-
-let number a;
-let boolean b;
-let string c;
-Funcion(a,b,c)
+function Funcion (number a, boolean b, string c){}
+Funcion()
