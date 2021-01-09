@@ -443,11 +443,11 @@ class JSParser(Parser):
 
     # -----------------------Error management functions-----------------------
 
-    def perror(*args, **kwargs):
+    def perror(self, *args, **kwargs):
         """The C perror function equivalent in python
         Args:
-            args(str) = the arguments to be printed
-            kwargs(list) = the configuration applied to those arguments
+            args(Direct pointer) = the arguments to be printed
+            kwargs(Indirect pointer) = the configuration applied to those arguments
         """
         print(*args, file=sys.stderr, **kwargs)
 
@@ -455,7 +455,7 @@ class JSParser(Parser):
         """This function will output through standard error
          the syntax error detected showing the user some hints to solve the problem
          Args:
-             p(Rule): The syntactic rule where the problem was located
+             p(Token): The syntactic rule where the problem was located
          """
         res = 'Error en la sintaxis:\n\t '
         if not p:
@@ -501,7 +501,7 @@ class JSParser(Parser):
             12: f'El operador lógico "&&" solo trabaja con tipos de datos lógicos',
             13: f'El operador de relación "==" solo trabaja con tipos de datos enteros',
             14: f'El operador aritmético "-" solo trabaja con tipos de datos enteros',
-            15: f'La variable no se puede invocar como una función, con argumentos'
+            15: f'La variable no se puede invocar como una función'
         }
         return error_code_dict.get(error_code)
 

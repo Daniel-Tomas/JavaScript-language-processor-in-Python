@@ -266,6 +266,7 @@ class JSLexer(Lexer):
              greater than 64
             2. Value of a token which type is "CTE_ENTERA" is bigger
              than 32767
+            3. The ID was previously declared
 
         Args:
             t(Token): the token that caused the error
@@ -274,22 +275,22 @@ class JSLexer(Lexer):
 
         res = f'Error en la linea {self.lineno} y columna {self.find_column(t)}:\n\t'
         if type_error == 'CADENA':
-            res += f'Cadena demasiado larga: "{t.value}", con logitud mayor que 64: {len(t.value)},'
+            res += f'Cadena demasiado larga: "{t.value}", con logitud mayor que 64: {len(t.value)}'
         elif type_error == "CTEENTERA":
-            res += f'Número fuera de rango: "{t.value},"'
+            res += f'Número fuera de rango: "{t.value}"'
         elif type_error == 'ID':
-            res += f'Identificador ya declarado: "{t.value},"'
+            res += f'Identificador ya declarado: "{t.value}"'
         else:
             res += f'Carácter ilegal: "{t.value[0]}"'
 
         self.perror(res)
         exit(1)
 
-    def perror(*args, **kwargs):
+    def perror(self, *args, **kwargs):
         """The C perror function equivalent in python
         Args:
-            args(str) = the arguments to be print
-            kwargs(list) = the configuration applied to those arguments
+            args(Direct Pointer) = the arguments to be print
+            kwargs(Indirect Pointer) = the configuration applied to those arguments
         """
         print(*args, file=sys.stderr, **kwargs)
 
