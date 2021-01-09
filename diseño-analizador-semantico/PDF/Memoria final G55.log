@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.12.14)  8 JAN 2021 19:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.12.14)  9 JAN 2021 14:24
 entering extended mode
 **"c:/Users/Daniel/OneDrive - Universidad Politécnica de Madrid/Estudios/Python/PDL2/diseño-analizador-semantico/Memoria final G55.tex"
 ("c:/Users/Daniel/OneDrive - Universidad Politécnica de Madrid/Estudios/Python/PDL2/diseño-analizador-semantico/Memoria final G55.tex"
@@ -707,27 +707,27 @@ Underfull \hbox (badness 10000) in paragraph at lines 404--443
 [7
 
 ]
-<./resources/tabla-LR/Tabla1.jpg, id=167, 1327.20844pt x 614.295pt>
+<./resources/tabla-LR/Tabla1.jpg, id=182, 1327.20844pt x 614.295pt>
 File: ./resources/tabla-LR/Tabla1.jpg Graphic file (type jpg)
 <use ./resources/tabla-LR/Tabla1.jpg>
 Package pdftex.def Info: ./resources/tabla-LR/Tabla1.jpg  used on input line 448.
 (pdftex.def)             Requested size: 542.83986pt x 251.2533pt.
-<./resources/tabla-LR/Tabla2.jpg, id=168, 1326.45563pt x 651.93562pt>
+<./resources/tabla-LR/Tabla2.jpg, id=183, 1326.45563pt x 651.93562pt>
 File: ./resources/tabla-LR/Tabla2.jpg Graphic file (type jpg)
 <use ./resources/tabla-LR/Tabla2.jpg>
 Package pdftex.def Info: ./resources/tabla-LR/Tabla2.jpg  used on input line 449.
 (pdftex.def)             Requested size: 542.83986pt x 266.79794pt.
-<./resources/tabla-LR/Tabla3.jpg, id=169, 1327.96124pt x 643.6547pt>
+<./resources/tabla-LR/Tabla3.jpg, id=184, 1327.96124pt x 643.6547pt>
 File: ./resources/tabla-LR/Tabla3.jpg Graphic file (type jpg)
 <use ./resources/tabla-LR/Tabla3.jpg>
 Package pdftex.def Info: ./resources/tabla-LR/Tabla3.jpg  used on input line 450.
 (pdftex.def)             Requested size: 542.83986pt x 263.11443pt.
-<./resources/tabla-LR/Tabla4.jpg, id=170, 1327.20844pt x 650.43pt>
+<./resources/tabla-LR/Tabla4.jpg, id=185, 1327.20844pt x 650.43pt>
 File: ./resources/tabla-LR/Tabla4.jpg Graphic file (type jpg)
 <use ./resources/tabla-LR/Tabla4.jpg>
 Package pdftex.def Info: ./resources/tabla-LR/Tabla4.jpg  used on input line 451.
 (pdftex.def)             Requested size: 542.83986pt x 266.03291pt.
-<./resources/tabla-LR/Tabla5.jpg, id=171, 1327.96124pt x 548.0475pt>
+<./resources/tabla-LR/Tabla5.jpg, id=186, 1327.96124pt x 548.0475pt>
 File: ./resources/tabla-LR/Tabla5.jpg Graphic file (type jpg)
 <use ./resources/tabla-LR/Tabla5.jpg>
 Package pdftex.def Info: ./resources/tabla-LR/Tabla5.jpg  used on input line 452.
@@ -771,7 +771,7 @@ File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 ) (resources/test-cases/case-1/Input.txt) [17
 
 ]
-<./resources/test-cases/case-1/tree.jpg, id=225, 1013.76pt x 900.9pt>
+<./resources/test-cases/case-1/tree.jpg, id=240, 1013.76pt x 900.9pt>
 File: ./resources/test-cases/case-1/tree.jpg Graphic file (type jpg)
 <use ./resources/test-cases/case-1/tree.jpg>
 Package pdftex.def Info: ./resources/test-cases/case-1/tree.jpg  used on input line 521.
@@ -786,13 +786,13 @@ Overfull \hbox (185.19637pt too wide) in paragraph at lines 521--522
  <./resources/test-cases/case-1/tree.jpg>] (resources/test-cases/case-2/Input.txt) [19
 
 ]
-<./resources/test-cases/case-2/tree.jpg, id=241, 1013.76pt x 1633.5pt>
+<./resources/test-cases/case-2/tree.jpg, id=256, 1013.76pt x 1633.5pt>
 File: ./resources/test-cases/case-2/tree.jpg Graphic file (type jpg)
 <use ./resources/test-cases/case-2/tree.jpg>
 Package pdftex.def Info: ./resources/test-cases/case-2/tree.jpg  used on input line 558.
 (pdftex.def)             Requested size: 341.94652pt x 550.9709pt.
  [20 <./resources/test-cases/case-2/tree.jpg>] (resources/test-cases/case-3/Input.txt) [21]
-<./resources/test-cases/case-3/tree.jpg, id=256, 1013.76pt x 1015.74pt>
+<./resources/test-cases/case-3/tree.jpg, id=271, 1013.76pt x 1015.74pt>
 File: ./resources/test-cases/case-3/tree.jpg Graphic file (type jpg)
 <use ./resources/test-cases/case-3/tree.jpg>
 Package pdftex.def Info: ./resources/test-cases/case-3/tree.jpg  used on input line 594.
@@ -807,7 +807,7 @@ Overfull \hbox (185.19637pt too wide) in paragraph at lines 594--595
  <./resources/test-cases/case-3/tree.jpg>] (resources/test-cases/case-4/Input.txt) [23
 
 ] [24]
-<./resources/test-cases/case-4/tree.jpg, id=286, 1013.76pt x 2746.26pt>
+<./resources/test-cases/case-4/tree.jpg, id=301, 1013.76pt x 2746.26pt>
 File: ./resources/test-cases/case-4/tree.jpg Graphic file (type jpg)
 <use ./resources/test-cases/case-4/tree.jpg>
 Package pdftex.def Info: ./resources/test-cases/case-4/tree.jpg  used on input line 631.
@@ -817,14 +817,14 @@ Package pdftex.def Info: ./resources/test-cases/case-4/tree.jpg  used on input l
  <./resources/test-cases/case-4/tree.jpg>] (resources/test-cases/case-5/Input.txt) [26
 
 ] [27] [28]
-<./resources/test-cases/case-5/tree.jpg, id=317, 1013.76pt x 3069.0pt>
+<./resources/test-cases/case-5/tree.jpg, id=332, 1013.76pt x 3069.0pt>
 File: ./resources/test-cases/case-5/tree.jpg Graphic file (type jpg)
 <use ./resources/test-cases/case-5/tree.jpg>
 Package pdftex.def Info: ./resources/test-cases/case-5/tree.jpg  used on input line 669.
 (pdftex.def)             Requested size: 213.71576pt x 646.99098pt.
  [29
 
- <./resources/test-cases/case-5/tree.jpg>] (resources/test-cases/case-6/Input.txt) (resources/test-cases/case-7/Input.txt) [30] [31
+ <./resources/test-cases/case-5/tree.jpg>] (resources/test-cases/case-6/Input.txt) (resources/test-cases/case-7/Input.txt) (resources/test-cases/case-8/Input.txt) (resources/test-cases/case-9/Input.txt) [30] (resources/test-cases/case-10/Input.txt) [31] [32
 
 ] ("c:/Users\Daniel\OneDrive - Universidad Politécnica de Madrid\Estudios\Python\PDL2\diseño-analizador-semantico\PDF\Memoria final G55.aux"
 LaTeX Info: Redefining \sptext on input line 29.
@@ -832,23 +832,23 @@ LaTeX Info: Redefining \. on input line 29.
 LaTeX Info: Redefining \% on input line 29.
 )
 Package rerunfilecheck Info: File `"Memoria final G55".out' has not changed.
-(rerunfilecheck)             Checksum: 3AD7BCD5F4C1222A0690A6AC6144BAB9;1558.
+(rerunfilecheck)             Checksum: 7574F8B4348B84BF75012DE43228FC81;1795.
 Package logreq Info: Writing requests to '"Memoria final G55".run.xml'.
 \openout1 = `"Memoria final G55.run.xml"'.
 
  ) 
 Here is how much of TeX's memory you used:
- 18316 strings out of 479714
- 315636 string characters out of 2867219
- 1178440 words of memory out of 3000000
- 34981 multiletter control sequences out of 15000+200000
+ 18361 strings out of 479714
+ 317239 string characters out of 2867219
+ 1183440 words of memory out of 3000000
+ 34995 multiletter control sequences out of 15000+200000
  418579 words of font info for 55 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  66i,8n,73p,864b,1931s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbi1095.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1095.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0800.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1728.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk><C:/Users/Daniel/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Daniel/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on "c:/Users\Daniel\OneDrive - Universidad Politécnica de Madrid\Estudios\Python\PDL2\diseño-analizador-semantico\PDF\Memoria final G55.pdf" (32 pages, 2908624 bytes).
+Output written on "c:/Users\Daniel\OneDrive - Universidad Politécnica de Madrid\Estudios\Python\PDL2\diseño-analizador-semantico\PDF\Memoria final G55.pdf" (33 pages, 2915161 bytes).
 PDF statistics:
- 849 PDF objects out of 1000 (max. 8388607)
- 115 named destinations out of 1000 (max. 500000)
- 235 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 889 PDF objects out of 1000 (max. 8388607)
+ 134 named destinations out of 1000 (max. 500000)
+ 259 words of extra memory for PDF output out of 10000 (max. 10000000)
 

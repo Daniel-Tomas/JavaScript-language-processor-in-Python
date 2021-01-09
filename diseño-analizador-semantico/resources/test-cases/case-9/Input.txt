@@ -1,0 +1,8 @@
+let string texto;
+function pideTexto ()
+{
+	alert ("Introduce un texto");
+	input (texto);
+}
+
+        return;

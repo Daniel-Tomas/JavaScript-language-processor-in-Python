@@ -1,0 +1,2 @@
+function Funcion (number a, boolean b, string c){}
+Funcion(a,a,a);

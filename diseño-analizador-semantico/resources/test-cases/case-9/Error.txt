@@ -1,0 +1,2 @@
+Error en la linea 8:
+	No puede haber una sentencia return fuera de una función

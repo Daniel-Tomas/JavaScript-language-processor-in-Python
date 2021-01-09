@@ -1,0 +1,2 @@
+Error en la linea 2:
+	El tipo de los parámetros no es el esperado, se esperaban "['entero', 'logico', 'cadena']"

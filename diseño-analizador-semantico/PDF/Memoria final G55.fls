@@ -833,6 +833,27 @@ INPUT resources\test-cases\case-7\Input.txt
 INPUT .\resources\test-cases\case-7\Input.txt
 INPUT resources\test-cases\case-7\Input.txt
 INPUT resources\test-cases\case-7\Error.txt
+INPUT .\resources\test-cases\case-8\Input.txt
+INPUT resources\test-cases\case-8\Input.txt
+INPUT .\resources\test-cases\case-8\Input.txt
+INPUT resources\test-cases\case-8\Input.txt
+INPUT .\resources\test-cases\case-8\Input.txt
+INPUT resources\test-cases\case-8\Input.txt
+INPUT resources\test-cases\case-8\Error.txt
+INPUT .\resources\test-cases\case-9\Input.txt
+INPUT resources\test-cases\case-9\Input.txt
+INPUT .\resources\test-cases\case-9\Input.txt
+INPUT resources\test-cases\case-9\Input.txt
+INPUT .\resources\test-cases\case-9\Input.txt
+INPUT resources\test-cases\case-9\Input.txt
+INPUT resources\test-cases\case-9\Error.txt
+INPUT .\resources\test-cases\case-10\Input.txt
+INPUT resources\test-cases\case-10\Input.txt
+INPUT .\resources\test-cases\case-10\Input.txt
+INPUT resources\test-cases\case-10\Input.txt
+INPUT .\resources\test-cases\case-10\Input.txt
+INPUT resources\test-cases\case-10\Input.txt
+INPUT resources\test-cases\case-10\Error.txt
 INPUT C:\Users\Daniel\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecbi1095.tfm
 INPUT c:\Users\Daniel\OneDrive - Universidad Politécnica de Madrid\Estudios\Python\PDL2\diseño-analizador-semantico\PDF\Memoria final G55.aux
 INPUT c:\Users\Daniel\OneDrive - Universidad Politécnica de Madrid\Estudios\Python\PDL2\diseño-analizador-semantico\PDF\Memoria final G55.out

@@ -1,0 +1,2 @@
+Error en la linea 2:
+	La expresión introducida no es una cadena o un entero

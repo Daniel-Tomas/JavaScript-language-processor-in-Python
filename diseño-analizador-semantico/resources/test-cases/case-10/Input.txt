@@ -1,0 +1,2 @@
+let boolean bool;
+alert(bool);
