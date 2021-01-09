@@ -700,6 +700,13 @@ INPUT C:\Users\Daniel\AppData\Local\Programs\MiKTeX\fonts\tfm\public\cm\cmsy6.tf
 OUTPUT c:\Users\Daniel\OneDrive - Universidad Politécnica de Madrid\Estudios\Python\PDL2\diseño-analizador-semantico\PDF\Memoria final G55.toc
 INPUT C:\Users\Daniel\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecrm1728.tfm
 INPUT C:\Users\Daniel\AppData\Local\Programs\MiKTeX\fonts\tfm\jknappen\ec\ecbx1728.tfm
+INPUT .\resources\automata.jpg
+INPUT .\resources\automata.jpg
+INPUT resources\automata.jpg
+INPUT .\resources\automata.jpg
+INPUT .\resources\automata.jpg
+INPUT .\resources\automata.jpg
+INPUT .\resources\automata.jpg
 INPUT .\resources\tabla-LR\Tabla1.jpg
 INPUT .\resources\tabla-LR\Tabla1.jpg
 INPUT resources\tabla-LR\Tabla1.jpg
