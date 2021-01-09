@@ -1,0 +1,25 @@
+CONTENIDO DE LA TABLA # 0 :
+
+*	LEXEMA : 'b'
+	ATRIBUTOS :
+	+ Tipo : 'logico'
+	+ Despl : '0'
+---------------- ----------------
+*	LEXEMA : 'x'
+	ATRIBUTOS :
+	+ Tipo : 'entero'
+	+ Despl : '1'
+---------------- ----------------
+*	LEXEMA : 'z'
+	ATRIBUTOS :
+	+ Tipo : 'entero'
+	+ Despl : '2'
+---------------- ----------------
+*	LEXEMA : 'y'
+	ATRIBUTOS :
+	+ Tipo : 'entero'
+	+ Despl : '3'
+---------------- ----------------
+
+
+

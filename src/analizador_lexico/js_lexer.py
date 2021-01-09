@@ -139,7 +139,7 @@ class JSLexer(Lexer):
         return self.empty(t)
 
     def CTEENTERA(self, t):
-        """ If the number found is bigger than 32767 calls self.lex_error.
+        """ If the number found is bigger than 32767 calls self.error.
 
         Casts the token values from str to int.
 
@@ -152,7 +152,7 @@ class JSLexer(Lexer):
 
         t.value = int(t.value)
         if t.value > 32767:
-            self.lex_error(t, "CTEENTERA")
+            self.error(t, "CTEENTERA")
         return t
 
     def CTELOGICA(self, t):
@@ -175,7 +175,7 @@ class JSLexer(Lexer):
         return t
 
     def CADENA(self, t):
-        """If the string length is bigger than 64 calls self.lex_error.
+        """If the string length is bigger than 64 calls self.error.
 
         Args:
             t(Token): The string constant token.
@@ -184,7 +184,7 @@ class JSLexer(Lexer):
             Token: the same token.
         """
         if len(t.value) > 64:
-            self.lex_error(t, "CADENA")
+            self.error(t, "CADENA")
         return t
 
     def ID(self, t):
@@ -196,7 +196,7 @@ class JSLexer(Lexer):
 
         if self.declaration_scope[0]:
             if id_table is not None:
-                self.lex_error(t, 'ID')
+                self.error(t, 'ID')
             else:
                 id_table, id_pos = self.ts.add_entry(t.value)
                 t.value = (id_table, id_pos)
@@ -221,7 +221,7 @@ class JSLexer(Lexer):
         """Increases the line number.
 
         Increases the line number where the lexer is working to provide a
-         correct information when a lex_error is found.
+         correct information when a error is found.
 
         Args:
             t(Token): The token which contains_lex a comment or a newline.
@@ -255,11 +255,11 @@ class JSLexer(Lexer):
 
     # -----------------------Error management functions-----------------------
 
-    def lex_error(self, t, type_error="default"):
+    def error(self, t, type_error="default"):
         """Handles lexer errors.
 
-        A lex_error is reported when a wrong character is found.
-        Prints a description of the lex_error and provides the number of the
+        A error is reported when a wrong character is found.
+        Prints a description of the error and provides the number of the
          line and the column where it has been found.
         **Particular errors**:
             1. Value of a token which type is "CADENA" has a length

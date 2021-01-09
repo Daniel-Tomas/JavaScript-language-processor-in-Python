@@ -1,0 +1,15 @@
+CONTENIDO DE LA TABLA # 0 :
+
+*	LEXEMA : 'texto'
+	ATRIBUTOS :
+	+ Tipo : 'cadena'
+	+ Despl : '0'
+---------------- ----------------
+*	LEXEMA : 'textoAux'
+	ATRIBUTOS :
+	+ Tipo : 'cadena'
+	+ Despl : '64'
+---------------- ----------------
+
+
+

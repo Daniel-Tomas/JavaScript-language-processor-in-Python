@@ -1,0 +1,5 @@
+let string texto;
+let string textoAux;
+textoAux = texto;
+alert
+        (textoAux); 

@@ -1,0 +1,5 @@
+let boolean z;
+for (b=1;z; )
+{
+alert (88);
+}
