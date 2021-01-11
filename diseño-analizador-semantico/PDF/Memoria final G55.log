@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.12.14)  9 JAN 2021 16:35
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.10) (preloaded format=pdflatex 2020.12.14)  11 JAN 2021 12:59
 entering extended mode
 **"c:/Users/Daniel/OneDrive - Universidad Politécnica de Madrid/Estudios/Python/PDL2/diseño-analizador-semantico/Memoria final G55.tex"
 ("c:/Users/Daniel/OneDrive - Universidad Politécnica de Madrid/Estudios/Python/PDL2/diseño-analizador-semantico/Memoria final G55.tex"
@@ -680,7 +680,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has b
                    \relax 
 l.238 \clearpage
                  [1]
-Underfull \hbox (badness 10000) in paragraph at lines 242--243
+Underfull \hbox (badness 10000) in paragraph at lines 242--244
 
  []
 
@@ -689,14 +689,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 242--243
 ] [3
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 300--314
+Underfull \hbox (badness 10000) in paragraph at lines 301--315
 
  []
 
 <./resources/automata.jpg, id=160, 1065.9825pt x 1171.37625pt>
 File: ./resources/automata.jpg Graphic file (type jpg)
 <use ./resources/automata.jpg>
-Package pdftex.def Info: ./resources/automata.jpg  used on input line 317.
+Package pdftex.def Info: ./resources/automata.jpg  used on input line 318.
 (pdftex.def)             Requested size: 351.77531pt x 386.55536pt.
 [4
 
@@ -705,7 +705,7 @@ Package pdftex.def Info: ./resources/automata.jpg  used on input line 317.
 ] [6
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 404--443
+Underfull \hbox (badness 10000) in paragraph at lines 405--444
 
  []
 
@@ -715,50 +715,50 @@ Underfull \hbox (badness 10000) in paragraph at lines 404--443
 <./resources/tabla-LR/Tabla1.jpg, id=183, 1327.20844pt x 614.295pt>
 File: ./resources/tabla-LR/Tabla1.jpg Graphic file (type jpg)
 <use ./resources/tabla-LR/Tabla1.jpg>
-Package pdftex.def Info: ./resources/tabla-LR/Tabla1.jpg  used on input line 448.
+Package pdftex.def Info: ./resources/tabla-LR/Tabla1.jpg  used on input line 449.
 (pdftex.def)             Requested size: 542.83986pt x 251.2533pt.
 <./resources/tabla-LR/Tabla2.jpg, id=184, 1326.45563pt x 651.93562pt>
 File: ./resources/tabla-LR/Tabla2.jpg Graphic file (type jpg)
 <use ./resources/tabla-LR/Tabla2.jpg>
-Package pdftex.def Info: ./resources/tabla-LR/Tabla2.jpg  used on input line 449.
+Package pdftex.def Info: ./resources/tabla-LR/Tabla2.jpg  used on input line 450.
 (pdftex.def)             Requested size: 542.83986pt x 266.79794pt.
 <./resources/tabla-LR/Tabla3.jpg, id=185, 1327.96124pt x 643.6547pt>
 File: ./resources/tabla-LR/Tabla3.jpg Graphic file (type jpg)
 <use ./resources/tabla-LR/Tabla3.jpg>
-Package pdftex.def Info: ./resources/tabla-LR/Tabla3.jpg  used on input line 450.
+Package pdftex.def Info: ./resources/tabla-LR/Tabla3.jpg  used on input line 451.
 (pdftex.def)             Requested size: 542.83986pt x 263.11443pt.
 <./resources/tabla-LR/Tabla4.jpg, id=186, 1327.20844pt x 650.43pt>
 File: ./resources/tabla-LR/Tabla4.jpg Graphic file (type jpg)
 <use ./resources/tabla-LR/Tabla4.jpg>
-Package pdftex.def Info: ./resources/tabla-LR/Tabla4.jpg  used on input line 451.
+Package pdftex.def Info: ./resources/tabla-LR/Tabla4.jpg  used on input line 452.
 (pdftex.def)             Requested size: 542.83986pt x 266.03291pt.
 <./resources/tabla-LR/Tabla5.jpg, id=187, 1327.96124pt x 548.0475pt>
 File: ./resources/tabla-LR/Tabla5.jpg Graphic file (type jpg)
 <use ./resources/tabla-LR/Tabla5.jpg>
-Package pdftex.def Info: ./resources/tabla-LR/Tabla5.jpg  used on input line 452.
+Package pdftex.def Info: ./resources/tabla-LR/Tabla5.jpg  used on input line 453.
 (pdftex.def)             Requested size: 542.83986pt x 224.03192pt.
 
-Overfull \hbox (115.40833pt too wide) in paragraph at lines 448--453
+Overfull \hbox (115.40833pt too wide) in paragraph at lines 449--454
  [] 
  []
 
 
-Overfull \hbox (115.40833pt too wide) in paragraph at lines 448--453
+Overfull \hbox (115.40833pt too wide) in paragraph at lines 449--454
  [] 
  []
 
 
-Overfull \hbox (115.40833pt too wide) in paragraph at lines 448--453
+Overfull \hbox (115.40833pt too wide) in paragraph at lines 449--454
  [] 
  []
 
 
-Overfull \hbox (115.40833pt too wide) in paragraph at lines 448--453
+Overfull \hbox (115.40833pt too wide) in paragraph at lines 449--454
  [] 
  []
 
 
-Overfull \hbox (115.40833pt too wide) in paragraph at lines 448--453
+Overfull \hbox (115.40833pt too wide) in paragraph at lines 449--454
  [] 
  []
 
@@ -769,8 +769,8 @@ Overfull \hbox (115.40833pt too wide) in paragraph at lines 448--453
 ] [12] [13] [14] [15] [16
 
 ]
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 496.
-LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 496.
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on input line 497.
+LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 497.
  (C:\Users\Daniel\AppData\Local\Programs\MiKTeX\tex/latex/base\t1cmtt.fd
 File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 ) (resources/test-cases/case-1/Input.txt) [17
@@ -779,10 +779,10 @@ File: t1cmtt.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 <./resources/test-cases/case-1/tree.jpg, id=241, 1013.76pt x 900.9pt>
 File: ./resources/test-cases/case-1/tree.jpg Graphic file (type jpg)
 <use ./resources/test-cases/case-1/tree.jpg>
-Package pdftex.def Info: ./resources/test-cases/case-1/tree.jpg  used on input line 521.
+Package pdftex.def Info: ./resources/test-cases/case-1/tree.jpg  used on input line 522.
 (pdftex.def)             Requested size: 598.40154pt x 531.77383pt.
 
-Overfull \hbox (185.19637pt too wide) in paragraph at lines 521--522
+Overfull \hbox (185.19637pt too wide) in paragraph at lines 522--523
  [] 
  []
 
@@ -794,16 +794,16 @@ Overfull \hbox (185.19637pt too wide) in paragraph at lines 521--522
 <./resources/test-cases/case-2/tree.jpg, id=257, 1013.76pt x 1633.5pt>
 File: ./resources/test-cases/case-2/tree.jpg Graphic file (type jpg)
 <use ./resources/test-cases/case-2/tree.jpg>
-Package pdftex.def Info: ./resources/test-cases/case-2/tree.jpg  used on input line 558.
+Package pdftex.def Info: ./resources/test-cases/case-2/tree.jpg  used on input line 559.
 (pdftex.def)             Requested size: 341.94652pt x 550.9709pt.
  [20 <./resources/test-cases/case-2/tree.jpg>] (resources/test-cases/case-3/Input.txt) [21]
 <./resources/test-cases/case-3/tree.jpg, id=272, 1013.76pt x 1015.74pt>
 File: ./resources/test-cases/case-3/tree.jpg Graphic file (type jpg)
 <use ./resources/test-cases/case-3/tree.jpg>
-Package pdftex.def Info: ./resources/test-cases/case-3/tree.jpg  used on input line 594.
+Package pdftex.def Info: ./resources/test-cases/case-3/tree.jpg  used on input line 595.
 (pdftex.def)             Requested size: 598.40154pt x 599.5604pt.
 
-Overfull \hbox (185.19637pt too wide) in paragraph at lines 594--595
+Overfull \hbox (185.19637pt too wide) in paragraph at lines 595--596
  [] 
  []
 
@@ -815,7 +815,7 @@ Overfull \hbox (185.19637pt too wide) in paragraph at lines 594--595
 <./resources/test-cases/case-4/tree.jpg, id=302, 1013.76pt x 2746.26pt>
 File: ./resources/test-cases/case-4/tree.jpg Graphic file (type jpg)
 <use ./resources/test-cases/case-4/tree.jpg>
-Package pdftex.def Info: ./resources/test-cases/case-4/tree.jpg  used on input line 631.
+Package pdftex.def Info: ./resources/test-cases/case-4/tree.jpg  used on input line 632.
 (pdftex.def)             Requested size: 230.81015pt x 625.25703pt.
  [25
 
@@ -825,11 +825,13 @@ Package pdftex.def Info: ./resources/test-cases/case-4/tree.jpg  used on input l
 <./resources/test-cases/case-5/tree.jpg, id=333, 1013.76pt x 3069.0pt>
 File: ./resources/test-cases/case-5/tree.jpg Graphic file (type jpg)
 <use ./resources/test-cases/case-5/tree.jpg>
-Package pdftex.def Info: ./resources/test-cases/case-5/tree.jpg  used on input line 669.
+Package pdftex.def Info: ./resources/test-cases/case-5/tree.jpg  used on input line 670.
 (pdftex.def)             Requested size: 213.71576pt x 646.99098pt.
  [29
 
- <./resources/test-cases/case-5/tree.jpg>] (resources/test-cases/case-6/Input.txt) (resources/test-cases/case-7/Input.txt) (resources/test-cases/case-8/Input.txt) (resources/test-cases/case-9/Input.txt) [30] (resources/test-cases/case-10/Input.txt) [31] ("c:/Users\Daniel\OneDrive - Universidad Politécnica de Madrid\Estudios\Python\PDL2\diseño-analizador-semantico\PDF\Memoria final G55.aux"
+ <./resources/test-cases/case-5/tree.jpg>] (resources/test-cases/case-6/Input.txt) (resources/test-cases/case-7/Input.txt) (resources/test-cases/case-8/Input.txt) (resources/test-cases/case-9/Input.txt) [30] (resources/test-cases/case-10/Input.txt) [31] [32
+
+] ("c:/Users\Daniel\OneDrive - Universidad Politécnica de Madrid\Estudios\Python\PDL2\diseño-analizador-semantico\PDF\Memoria final G55.aux"
 LaTeX Info: Redefining \sptext on input line 29.
 LaTeX Info: Redefining \. on input line 29.
 LaTeX Info: Redefining \% on input line 29.
@@ -841,17 +843,17 @@ Package logreq Info: Writing requests to '"Memoria final G55".run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 18367 strings out of 479714
- 317395 string characters out of 2867219
+ 18368 strings out of 479714
+ 317402 string characters out of 2867219
  1183440 words of memory out of 3000000
  35000 multiletter control sequences out of 15000+200000
  418579 words of font info for 55 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  66i,8n,73p,864b,1931s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbi1095.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1000.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ectt1095.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0800.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1200.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1728.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1095.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1095.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx1440.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1200.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm1440.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecxc1728.pk> <C:\Users\Daniel\AppData\Local\MiKTeX\fonts/pk/ljfour/jknappen/ec/dpi600\ecbx2488.pk><C:/Users/Daniel/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/Daniel/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on "c:/Users\Daniel\OneDrive - Universidad Politécnica de Madrid\Estudios\Python\PDL2\diseño-analizador-semantico\PDF\Memoria final G55.pdf" (32 pages, 3048803 bytes).
+Output written on "c:/Users\Daniel\OneDrive - Universidad Politécnica de Madrid\Estudios\Python\PDL2\diseño-analizador-semantico\PDF\Memoria final G55.pdf" (33 pages, 3049505 bytes).
 PDF statistics:
- 886 PDF objects out of 1000 (max. 8388607)
- 133 named destinations out of 1000 (max. 500000)
+ 890 PDF objects out of 1000 (max. 8388607)
+ 134 named destinations out of 1000 (max. 500000)
  264 words of extra memory for PDF output out of 10000 (max. 10000000)
 
