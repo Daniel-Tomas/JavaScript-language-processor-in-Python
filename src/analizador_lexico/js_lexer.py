@@ -260,12 +260,13 @@ class JSLexer(Lexer):
 
         A error is reported when a wrong character is found.
         Prints a description of the error and provides the number of the
-         line and the column where it has been found.
+        line and the column where it has been found.
+
         **Particular errors**:
             1. Value of a token which type is "CADENA" has a length
-             greater than 64
+                greater than 64
             2. Value of a token which type is "CTE_ENTERA" is bigger
-             than 32767
+                than 32767
             3. The ID was previously declared
 
         Args:
