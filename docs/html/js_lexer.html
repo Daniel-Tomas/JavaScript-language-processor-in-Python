@@ -1,0 +1,384 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>js_lexer module &#8212; Procesador del lenguaje Javascript-PDL  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="js_parser module" href="js_parser.html" />
+    <link rel="prev" title="src" href="modules.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-js_lexer">
+<span id="js-lexer-module"></span><h1>js_lexer module<a class="headerlink" href="#module-js_lexer" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="js_lexer.JSLexer">
+<em class="property">class </em><code class="sig-prename descclassname">js_lexer.</code><code class="sig-name descname">JSLexer</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">ts_</span></em>, <em class="sig-param"><span class="n">declaration_scope_</span></em>, <em class="sig-param"><span class="n">tokens_file_</span></em>, <em class="sig-param"><span class="n">declarando_funcion_</span></em>, <em class="sig-param"><span class="n">global_shift_</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sly.lex.Lexer</span></code></p>
+<p>Represents a javascript lexer.</p>
+<dl class="py method">
+<dt id="js_lexer.JSLexer.ABLLAVE">
+<code class="sig-name descname">ABLLAVE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.ABLLAVE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_lexer.JSLexer.ABPAREN">
+<code class="sig-name descname">ABPAREN</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.ABPAREN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_lexer.JSLexer.ALERT">
+<code class="sig-name descname">ALERT</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.ALERT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_lexer.JSLexer.BOOLEAN">
+<code class="sig-name descname">BOOLEAN</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.BOOLEAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_lexer.JSLexer.CADENA">
+<code class="sig-name descname">CADENA</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.CADENA" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the string length is bigger than 64 calls self.error.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t</strong> (<em>Token</em>) – The string constant token.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the same token.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Token</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="js_lexer.JSLexer.CELLAVE">
+<code class="sig-name descname">CELLAVE</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.CELLAVE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_lexer.JSLexer.CEPAREN">
+<code class="sig-name descname">CEPAREN</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.CEPAREN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_lexer.JSLexer.COMA">
+<code class="sig-name descname">COMA</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.COMA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_lexer.JSLexer.CTEENTERA">
+<code class="sig-name descname">CTEENTERA</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.CTEENTERA" title="Permalink to this definition">¶</a></dt>
+<dd><p>If the number found is bigger than 32767 calls self.error.</p>
+<p>Casts the token values from str to int.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t</strong> (<em>Token</em>) – The integer constant token.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The token modified.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Token</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="js_lexer.JSLexer.CTELOGICA">
+<code class="sig-name descname">CTELOGICA</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.CTELOGICA" title="Permalink to this definition">¶</a></dt>
+<dd><p>Modifies the argument token changing its str value to an integer value.</p>
+<p>The token value is set 0 if “false” is found or 1 if “true”</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t</strong> (<em>Token</em>) – Token which matches the logical constant pattern</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Token modified</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>Token</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="js_lexer.JSLexer.FOR">
+<code class="sig-name descname">FOR</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.FOR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_lexer.JSLexer.FUNCTION">
+<code class="sig-name descname">FUNCTION</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.FUNCTION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_lexer.JSLexer.ID">
+<code class="sig-name descname">ID</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.ID" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_lexer.JSLexer.IF">
+<code class="sig-name descname">IF</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.IF" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_lexer.JSLexer.INPUT">
+<code class="sig-name descname">INPUT</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.INPUT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_lexer.JSLexer.LET">
+<code class="sig-name descname">LET</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.LET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_lexer.JSLexer.NUMBER">
+<code class="sig-name descname">NUMBER</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.NUMBER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_lexer.JSLexer.OPARIT">
+<code class="sig-name descname">OPARIT</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.OPARIT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_lexer.JSLexer.OPASIG">
+<code class="sig-name descname">OPASIG</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.OPASIG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_lexer.JSLexer.OPESP">
+<code class="sig-name descname">OPESP</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.OPESP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_lexer.JSLexer.OPLOG">
+<code class="sig-name descname">OPLOG</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.OPLOG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_lexer.JSLexer.OPREL">
+<code class="sig-name descname">OPREL</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.OPREL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_lexer.JSLexer.PUNTOYCOMA">
+<code class="sig-name descname">PUNTOYCOMA</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.PUNTOYCOMA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_lexer.JSLexer.RETURN">
+<code class="sig-name descname">RETURN</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.RETURN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_lexer.JSLexer.STRING">
+<code class="sig-name descname">STRING</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.STRING" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_lexer.JSLexer.empty">
+<code class="sig-name descname">empty</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.empty" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_lexer.JSLexer.error">
+<code class="sig-name descname">error</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em>, <em class="sig-param"><span class="n">type_error</span><span class="o">=</span><span class="default_value">'default'</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles lexer errors.</p>
+<p>A error is reported when a wrong character is found.
+Prints a description of the error and provides the number of the
+line and the column where it has been found.</p>
+<dl class="simple">
+<dt><strong>Particular errors</strong>:</dt><dd><ol class="arabic simple">
+<li><dl class="simple">
+<dt>Value of a token which type is “CADENA” has a length</dt><dd><p>greater than 64</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Value of a token which type is “CTE_ENTERA” is bigger</dt><dd><p>than 32767</p>
+</dd>
+</dl>
+</li>
+<li><p>The ID was previously declared</p></li>
+</ol>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>t</strong> (<em>Token</em>) – the token that caused the error</p></li>
+<li><p><strong>type_error</strong> (<em>str</em>) – the type of error caused by t token</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="js_lexer.JSLexer.find_column">
+<code class="sig-name descname">find_column</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">token</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.find_column" title="Permalink to this definition">¶</a></dt>
+<dd><p>Finds the column where the first letter of a token is placed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>token</strong> (<em>Token</em>) – The only parameter.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="js_lexer.JSLexer.get_token">
+<code class="sig-name descname">get_token</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.get_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Generator that yields tokens of the data text one by one and prints them.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Yields</dt>
+<dd class="field-odd"><p><em>Token(Token)</em> – The next token.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="js_lexer.JSLexer.ignore">
+<code class="sig-name descname">ignore</code><em class="property"> = ' \t'</em><a class="headerlink" href="#js_lexer.JSLexer.ignore" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_lexer.JSLexer.new_line">
+<code class="sig-name descname">new_line</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">t</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.new_line" title="Permalink to this definition">¶</a></dt>
+<dd><p>Increases the line number.</p>
+<p>Increases the line number where the lexer is working to provide a
+correct information when a error is found.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>t</strong> (<em>Token</em>) – The token which contains_lex a comment or a newline.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="js_lexer.JSLexer.perror">
+<code class="sig-name descname">perror</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_lexer.JSLexer.perror" title="Permalink to this definition">¶</a></dt>
+<dd><p>The C perror function equivalent in python.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<em>Direct Pointer</em>) – the arguments to be print</p></li>
+<li><p><strong>kwargs</strong> (<em>Indirect Pointer</em>) – the configuration applied to those arguments</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="js_lexer.JSLexer.tokens">
+<code class="sig-name descname">tokens</code><em class="property"> = {'ABLLAVE', 'ABPAREN', 'ALERT', 'BOOLEAN', 'CADENA', 'CELLAVE', 'CEPAREN', 'COMA', 'CTEENTERA', 'CTELOGICA', 'FOR', 'FUNCTION', 'ID', 'IF', 'INPUT', 'LET', 'NUMBER', 'OPARIT', 'OPASIG', 'OPESP', 'OPLOG', 'OPREL', 'PUNTOYCOMA', 'RETURN', 'STRING'}</em><a class="headerlink" href="#js_lexer.JSLexer.tokens" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Procesador del lenguaje Javascript-PDL</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">js_lexer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="js_parser.html">js_parser module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sym_table.html">sym_table module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="table.html">table module</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">src</a><ul>
+      <li>Previous: <a href="modules.html" title="previous chapter">src</a></li>
+      <li>Next: <a href="js_parser.html" title="next chapter">js_parser module</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Daniel Tomás, Aarón Cabero, Alejandro Cuadrón.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/js_lexer.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

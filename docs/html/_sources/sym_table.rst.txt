@@ -1,0 +1,7 @@
+sym\_table module
+=================
+
+.. automodule:: sym_table
+   :members:
+   :undoc-members:
+   :show-inheritance:

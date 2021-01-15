@@ -1,0 +1,7 @@
+js\_lexer module
+================
+
+.. automodule:: js_lexer
+   :members:
+   :undoc-members:
+   :show-inheritance:

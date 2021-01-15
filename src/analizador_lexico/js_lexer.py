@@ -221,7 +221,7 @@ class JSLexer(Lexer):
         """Increases the line number.
 
         Increases the line number where the lexer is working to provide a
-         correct information when a error is found.
+        correct information when a error is found.
 
         Args:
             t(Token): The token which contains_lex a comment or a newline.
@@ -288,10 +288,11 @@ class JSLexer(Lexer):
         exit(1)
 
     def perror(self, *args, **kwargs):
-        """The C perror function equivalent in python
+        """The C perror function equivalent in python.
+
         Args:
-            args(Direct Pointer) = the arguments to be print
-            kwargs(Indirect Pointer) = the configuration applied to those arguments
+            args(Direct Pointer): the arguments to be print
+            kwargs(Indirect Pointer): the configuration applied to those arguments
         """
         print(*args, file=sys.stderr, **kwargs)
 

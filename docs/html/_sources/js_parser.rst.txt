@@ -1,0 +1,7 @@
+js\_parser module
+=================
+
+.. automodule:: js_parser
+   :members:
+   :undoc-members:
+   :show-inheritance:

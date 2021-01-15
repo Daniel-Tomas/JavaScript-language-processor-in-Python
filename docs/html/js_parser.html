@@ -1,0 +1,369 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>js_parser module &#8212; Procesador del lenguaje Javascript-PDL  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="sym_table module" href="sym_table.html" />
+    <link rel="prev" title="js_lexer module" href="js_lexer.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-js_parser">
+<span id="js-parser-module"></span><h1>js_parser module<a class="headerlink" href="#module-js_parser" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="js_parser.JSParser">
+<em class="property">class </em><code class="sig-prename descclassname">js_parser.</code><code class="sig-name descname">JSParser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lista_reglas_</span></em>, <em class="sig-param"><span class="n">TS_</span></em>, <em class="sig-param"><span class="n">declaration_scope_</span></em>, <em class="sig-param"><span class="n">declarando_funcion_</span></em>, <em class="sig-param"><span class="n">global_shift_</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">sly.yacc.Parser</span></code></p>
+<dl class="py method">
+<dt id="js_parser.JSParser.A">
+<code class="sig-name descname">A</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser.A" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="js_parser.JSParser.ATTR_DESP">
+<code class="sig-name descname">ATTR_DESP</code><em class="property"> = 'Despl'</em><a class="headerlink" href="#js_parser.JSParser.ATTR_DESP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="js_parser.JSParser.ATTR_NUM_PARAMS">
+<code class="sig-name descname">ATTR_NUM_PARAMS</code><em class="property"> = 'numParam'</em><a class="headerlink" href="#js_parser.JSParser.ATTR_NUM_PARAMS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="js_parser.JSParser.ATTR_RETURN_VALUE">
+<code class="sig-name descname">ATTR_RETURN_VALUE</code><em class="property"> = 'TipoRetorno'</em><a class="headerlink" href="#js_parser.JSParser.ATTR_RETURN_VALUE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="js_parser.JSParser.ATTR_TYPE">
+<code class="sig-name descname">ATTR_TYPE</code><em class="property"> = 'Tipo'</em><a class="headerlink" href="#js_parser.JSParser.ATTR_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="js_parser.JSParser.ATTR_TYPE_PARAMS">
+<code class="sig-name descname">ATTR_TYPE_PARAMS</code><em class="property"> = 'TipoParam'</em><a class="headerlink" href="#js_parser.JSParser.ATTR_TYPE_PARAMS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_parser.JSParser.B">
+<code class="sig-name descname">B</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser.B" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_parser.JSParser.C">
+<code class="sig-name descname">C</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser.C" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_parser.JSParser.D">
+<code class="sig-name descname">D</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser.D" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_parser.JSParser.E">
+<code class="sig-name descname">E</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser.E" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_parser.JSParser.F">
+<code class="sig-name descname">F</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser.F" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_parser.JSParser.F1">
+<code class="sig-name descname">F1</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser.F1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_parser.JSParser.F2">
+<code class="sig-name descname">F2</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser.F2" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_parser.JSParser.F3">
+<code class="sig-name descname">F3</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser.F3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="js_parser.JSParser.FUNCTION_TYPE">
+<code class="sig-name descname">FUNCTION_TYPE</code><em class="property"> = 'funcion'</em><a class="headerlink" href="#js_parser.JSParser.FUNCTION_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_parser.JSParser.G">
+<code class="sig-name descname">G</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser.G" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_parser.JSParser.H">
+<code class="sig-name descname">H</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser.H" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_parser.JSParser.I">
+<code class="sig-name descname">I</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser.I" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="js_parser.JSParser.INT_TYPE">
+<code class="sig-name descname">INT_TYPE</code><em class="property"> = 'entero'</em><a class="headerlink" href="#js_parser.JSParser.INT_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_parser.JSParser.J">
+<code class="sig-name descname">J</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser.J" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_parser.JSParser.K">
+<code class="sig-name descname">K</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser.K" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_parser.JSParser.L">
+<code class="sig-name descname">L</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser.L" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="js_parser.JSParser.LOG_TYPE">
+<code class="sig-name descname">LOG_TYPE</code><em class="property"> = 'logico'</em><a class="headerlink" href="#js_parser.JSParser.LOG_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_parser.JSParser.M">
+<code class="sig-name descname">M</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser.M" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_parser.JSParser.N">
+<code class="sig-name descname">N</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser.N" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_parser.JSParser.O">
+<code class="sig-name descname">O</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser.O" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_parser.JSParser.P">
+<code class="sig-name descname">P</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser.P" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_parser.JSParser.Q">
+<code class="sig-name descname">Q</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser.Q" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_parser.JSParser.R">
+<code class="sig-name descname">R</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser.R" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_parser.JSParser.S">
+<code class="sig-name descname">S</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser.S" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="js_parser.JSParser.STRING_TYPE">
+<code class="sig-name descname">STRING_TYPE</code><em class="property"> = 'cadena'</em><a class="headerlink" href="#js_parser.JSParser.STRING_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_parser.JSParser.T">
+<code class="sig-name descname">T</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser.T" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_parser.JSParser.U">
+<code class="sig-name descname">U</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser.U" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_parser.JSParser.V">
+<code class="sig-name descname">V</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser.V" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt id="js_parser.JSParser.VOID_TYPE">
+<code class="sig-name descname">VOID_TYPE</code><em class="property"> = 'void'</em><a class="headerlink" href="#js_parser.JSParser.VOID_TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_parser.JSParser.W">
+<code class="sig-name descname">W</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser.W" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_parser.JSParser.error">
+<code class="sig-name descname">error</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">p</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser.error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles syntax errors</p>
+<p>This function will output through standard error the syntax error detected
+showing the user some hints to solve the problem</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>p</strong> (<em>Token</em>) – The syntactic rule where the problem was located</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="js_parser.JSParser.error_id">
+<code class="sig-name descname">error_id</code><em class="property"> = [0, 0]</em><a class="headerlink" href="#js_parser.JSParser.error_id" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="js_parser.JSParser.get_error_code">
+<code class="sig-name descname">get_error_code</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">error_code</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser.get_error_code" title="Permalink to this definition">¶</a></dt>
+<dd><p>semantic_error auxiliary function</p>
+<p>Returns the error line indicated by the error_code parameter.
+It will also update to the last error_id provided.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>error_code</strong> (<em>int</em>) – The error code of issue</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="js_parser.JSParser.perror">
+<code class="sig-name descname">perror</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser.perror" title="Permalink to this definition">¶</a></dt>
+<dd><p>The C perror function equivalent in python.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<em>Direct Pointer</em>) – the arguments to be print</p></li>
+<li><p><strong>kwargs</strong> (<em>Indirect Pointer</em>) – the configuration applied to those arguments</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="js_parser.JSParser.semantic_error">
+<code class="sig-name descname">semantic_error</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">error_code</span></em>, <em class="sig-param"><span class="n">lineno</span></em><span class="sig-paren">)</span><a class="headerlink" href="#js_parser.JSParser.semantic_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles semantic errors</p>
+<p>This function will output through standard error
+the semantic error detected showing the user some hints to solve the problem</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>error_code</strong> (<em>int</em>) – The error code of issue</p></li>
+<li><p><strong>lineno</strong> (<em>int</em>) – The line where the error occurred</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="js_parser.JSParser.tokens">
+<code class="sig-name descname">tokens</code><em class="property"> = {'ABLLAVE', 'ABPAREN', 'ALERT', 'BOOLEAN', 'CADENA', 'CELLAVE', 'CEPAREN', 'COMA', 'CTEENTERA', 'CTELOGICA', 'FOR', 'FUNCTION', 'ID', 'IF', 'INPUT', 'LET', 'NUMBER', 'OPARIT', 'OPASIG', 'OPESP', 'OPLOG', 'OPREL', 'PUNTOYCOMA', 'RETURN', 'STRING'}</em><a class="headerlink" href="#js_parser.JSParser.tokens" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Procesador del lenguaje Javascript-PDL</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="js_lexer.html">js_lexer module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">js_parser module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sym_table.html">sym_table module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="table.html">table module</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">src</a><ul>
+      <li>Previous: <a href="js_lexer.html" title="previous chapter">js_lexer module</a></li>
+      <li>Next: <a href="sym_table.html" title="next chapter">sym_table module</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Daniel Tomás, Aarón Cabero, Alejandro Cuadrón.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/js_parser.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

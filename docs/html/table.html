@@ -1,0 +1,335 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>table module &#8212; Procesador del lenguaje Javascript-PDL  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="sym_table module" href="sym_table.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-table">
+<span id="table-module"></span><h1>table module<a class="headerlink" href="#module-table" title="Permalink to this headline">¶</a></h1>
+<dl class="py class">
+<dt id="table.Table">
+<em class="property">class </em><code class="sig-prename descclassname">table.</code><code class="sig-name descname">Table</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">id_</span></em><span class="sig-paren">)</span><a class="headerlink" href="#table.Table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a symbol table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>id</strong> (<em>int</em>) – Set the identifier of this table.</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt id="table.Table.lexems">
+<code class="sig-name descname">lexems</code><a class="headerlink" href="#table.Table.lexems" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list which represents the lexems in the table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list of dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="table.Table.exists">
+<code class="sig-name descname">exists</code><a class="headerlink" href="#table.Table.exists" title="Permalink to this definition">¶</a></dt>
+<dd><p>Represents if the table exists or not.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt id="table.Table.id_">
+<code class="sig-name descname">id_</code><a class="headerlink" href="#table.Table.id_" title="Permalink to this definition">¶</a></dt>
+<dd><p>The identifier of the table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="table.Table.add_attribute">
+<code class="sig-name descname">add_attribute</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">table_pos</span></em>, <em class="sig-param"><span class="n">type_</span></em>, <em class="sig-param"><span class="n">content</span></em><span class="sig-paren">)</span><a class="headerlink" href="#table.Table.add_attribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Adds an attribute to a lexeme where is located in a position of a table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>table_pos</strong> (<em>int</em>) – Position of the lexeme in the table.</p></li>
+<li><p><strong>type</strong> (<em>str</em>) – The type of attribute to set.</p></li>
+<li><p><strong>content</strong> (<em>any</em>) – The value of the attribute.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if the attribute has been added, false otherwise.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="table.Table.add_lex">
+<code class="sig-name descname">add_lex</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lex</span></em><span class="sig-paren">)</span><a class="headerlink" href="#table.Table.add_lex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a lexeme into the symbol table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>lex</strong> (<em>str</em>) – The lexeme to be added.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>index in table where lex has been added</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="table.Table.contains_lex">
+<code class="sig-name descname">contains_lex</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lex</span></em><span class="sig-paren">)</span><a class="headerlink" href="#table.Table.contains_lex" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if lex is in the table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>lex</strong> (<em>str</em>) – The lexeme to find in the symbol table.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>True if lex exists, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="table.Table.delete">
+<code class="sig-name descname">delete</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#table.Table.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Marks the table as deleted</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="table.Table.exist">
+<code class="sig-name descname">exist</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#table.Table.exist" title="Permalink to this definition">¶</a></dt>
+<dd><p>Checks if the symbol table exists.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if it exists, False otherwise.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="table.Table.get_attribute">
+<code class="sig-name descname">get_attribute</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">table_pos</span></em>, <em class="sig-param"><span class="n">type_</span></em><span class="sig-paren">)</span><a class="headerlink" href="#table.Table.get_attribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets value of an attribute of a lexeme.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>table_pos</strong> (<em>int</em>) – Position of the lexeme in the table.</p></li>
+<li><p><strong>type</strong> (<em>str</em>) – The type of the attribute.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>any the value of the attribute if exists, False otherwise.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>any or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="table.Table.get_lex_dict">
+<code class="sig-name descname">get_lex_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lex</span></em><span class="sig-paren">)</span><a class="headerlink" href="#table.Table.get_lex_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the dict of a specified lexeme.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>dictionary of lexeme “lex” if exists, None otherwise.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="table.Table.get_lex_entry">
+<code class="sig-name descname">get_lex_entry</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pos_lex</span></em><span class="sig-paren">)</span><a class="headerlink" href="#table.Table.get_lex_entry" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the lexeme which is located in a given position.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pos_lex</strong> (<em>int</em>) – The index in the table</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>The lexeme dictionary located into pos_lex, None otherwise.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="table.Table.get_pos">
+<code class="sig-name descname">get_pos</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">lex</span></em><span class="sig-paren">)</span><a class="headerlink" href="#table.Table.get_pos" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gets the lexeme position in symbol table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>lex</strong> (<em>str</em>) – The lexeme to find in the symbol table.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the position where lex is located, None otherwise.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>int or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="table.Table.remove_lex_at">
+<code class="sig-name descname">remove_lex_at</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">pos_lex</span></em><span class="sig-paren">)</span><a class="headerlink" href="#table.Table.remove_lex_at" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes a lexeme in a given position from the table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pos_lex</strong> (<em>int</em>) – The position that is going to be removed.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>dict the lexeme deleted, None if index is out of bounds.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict or None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="table.Table.write">
+<code class="sig-name descname">write</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">file</span></em><span class="sig-paren">)</span><a class="headerlink" href="#table.Table.write" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="simple">
+<dt>Prints the content of the table into the file provided.</dt><dd><p>Prints the using the format provided in
+FormatoImpresiónTablaDeSímbolos.txt</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file</strong> (<em>file</em>) – File where the TS is going to be written</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">Procesador del lenguaje Javascript-PDL</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">src</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="js_lexer.html">js_lexer module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="js_parser.html">js_parser module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sym_table.html">sym_table module</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">table module</a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">src</a><ul>
+      <li>Previous: <a href="sym_table.html" title="previous chapter">sym_table module</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2021, Daniel Tomás, Aarón Cabero, Alejandro Cuadrón.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/table.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

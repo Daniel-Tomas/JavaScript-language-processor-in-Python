@@ -443,17 +443,21 @@ class JSParser(Parser):
     # -----------------------Error management functions-----------------------
 
     def perror(self, *args, **kwargs):
-        """The C perror function equivalent in python
+        """The C perror function equivalent in python.
+
         Args:
-            args(Direct pointer) = the arguments to be printed
-            kwargs(Indirect pointer) = the configuration applied to those arguments
+            args(Direct Pointer): the arguments to be print
+            kwargs(Indirect Pointer): the configuration applied to those arguments
         """
         print(*args, file=sys.stderr, **kwargs)
 
     def error(self, p):
-        """This function will output through standard error
-         the syntax error detected showing the user some hints to solve the problem
-         Args:
+        """Handles syntax errors
+
+        This function will output through standard error the syntax error detected
+        showing the user some hints to solve the problem
+
+        Args:
              p(Token): The syntactic rule where the problem was located
          """
         res = 'Error en la sintaxis:\n\t '
@@ -467,8 +471,11 @@ class JSParser(Parser):
             exit(3)
 
     def semantic_error(self, error_code, lineno):
-        """This function will output through standard error
+        """Handles semantic errors
+
+        This function will output through standard error
         the semantic error detected showing the user some hints to solve the problem
+
         Args:
             error_code(int): The error code of issue
             lineno(int): The line where the error occurred
@@ -477,10 +484,13 @@ class JSParser(Parser):
         exit(4)
 
     def get_error_code(self, error_code):
-        """This function will return the error line indicated by the error_code parameter.
-            It will also update to the last error_id provided.
-            Args:
-                error_code(int): The error code of issue
+        """semantic_error auxiliary function
+
+        Returns the error line indicated by the error_code parameter.
+        It will also update to the last error_id provided.
+
+        Args:
+            error_code(int): The error code of issue
         """
         params = self.TS.get_attribute(self.error_id[0], self.error_id[1], self.ATTR_TYPE_PARAMS)
         if params is None:
