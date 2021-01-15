@@ -294,18 +294,3 @@ class JSLexer(Lexer):
         """
         print(*args, file=sys.stderr, **kwargs)
 
-if __name__ == '__main__':
-
-    sys.stdout = open("Tokens.txt", "w")
-    sys.stderr = open("Error.txt", "w")
-
-    f = open('Input.txt', 'r')
-    data = f.read()
-
-    tables = SymTable()
-    id0 = tables.new_table()
-    lexer = JSLexer(tables)
-
-    for tok in lexer.tokenize(data):
-        print(f'<{tok.type} , {tok.value}>')
-    tables.write_table("TS-Output.txt")

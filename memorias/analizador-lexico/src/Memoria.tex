@@ -1,0 +1,503 @@
+\documentclass{article}
+% preámbulo
+
+\usepackage[utf8]{inputenc} % Para escribir tildes
+\usepackage[T1]{fontenc}    % Para usar fuentes con letras acentuadas, etc.
+\usepackage[spanish]{babel} % Definimos el idioma principal
+\usepackage{graphicx} %Para las imagenes
+\usepackage{vmargin}
+
+\setpapersize{A4}
+\setmargins{2.5cm}       % margen izquierdo
+{1cm}                        % margen superior
+{16.5cm}                      % anchura del texto
+{23.42cm}                    % altura del texto
+{10pt}                           % altura de los encabezados
+{2cm}                           % espacio entre el texto y los encabezados
+{0pt}                             % altura del pie de página
+{2cm}                           % espacio entre el texto y el pie de página
+
+\title{Analizador Léxico y Tabla de Símbolos}
+\author{Aarón Cabero Blanco \\ Daniel Tomás Sanchez \\ Alejandro Cuadrón Lafuente}
+
+\begin{document}
+
+\maketitle
+En este documento se realizará la memoria del analizador léxico y la tabla de símbolos correspondiente a la primera entrega de la practica de PDL.
+%dividimos en secciones
+\tableofcontents
+\clearpage
+\section {Tokens}
+\begin{flushleft}
+\begin{itemize}
+\item Identificador \qquad\qquad<ID, punteroTS>
+\item Constante Entera \qquad\qquad<CTEENTERA, valor>
+\item String \qquad\qquad<CADENA, lexema>	
+\item False \qquad\qquad<CTELOGICA, 0> 
+\item True \qquad\qquad<CTELOGICA, 1> 
+\item Palabra Reservada Number\qquad\qquad<NUMBER, ->
+\item Palabra Reservada String\qquad\qquad<STRING, ->
+\item Palabra Reservada Boolean\qquad\qquad<BOOLEAN, ->
+\item Palabra Reservada Let\qquad\qquad<LET, ->
+\item Palabra Reservada Alert\qquad\qquad<ALERT, ->
+\item Palabra Reservada Input\qquad\qquad<INPUT, ->
+\item Palabra Reservada Function\qquad\qquad<FUNCTION, ->
+\item Palabra Reservada Return \qquad\qquad<RETURN, ->
+\item Palabra Reservada If \qquad\qquad<IF, ->
+\item Palabra Reservada For\qquad\qquad<FOR, ->
+\item -- \qquad\qquad<OPESP, -> 
+\item + \qquad\qquad<OPARIT, 0> 
+\item -  \qquad\qquad<OPARIT, 1>
+\item =\qquad\qquad <OPASIGN, -> 
+\item == \qquad\qquad<OPREL, ->
+\item \&\& \qquad\qquad<OPLOG, -> 
+\item ( \qquad\qquad<ABREPAR, ->
+\item ) \qquad\qquad<CIERRAPAR,> 
+\item \{ \qquad\qquad<ABRELLAVE, ->
+\item \} \qquad\qquad<CIERRALLAVE, ->
+\item , \qquad\qquad<COMA, ->
+\item ; \qquad\qquad<PUNTOYCOMA, ->
+\item End Of File \qquad\qquad<EOF, ->
+\end{itemize}
+\end{flushleft}
+\clearpage
+
+
+\section{Gramática Regular}
+\noindent
+Axioma = A\\
+A $\rightarrow$ del A $|$ dD $|$ "S $|$ /C $|$ lI $|$ + $|$ -M $|$ =E $|$ \&N $|$ ( $|$ ) $|$ \{ $|$ \} $|$ ; $|$ , $|$ EOF\\
+D $\rightarrow$ dD $|$ $\lambda$\\
+S $\rightarrow$ " $|$ cS\\
+C $\rightarrow$ *C'\\
+C' $\rightarrow$ *C'' $|$ cC'\\
+C'' $\rightarrow$ /A $|$ cC'\\
+I $\rightarrow$ dI $|$ lI $|$ \_I $|$ $\lambda$\\
+M $\rightarrow$ - $|$ $\lambda$\\
+E $\rightarrow$ = $|$ $\lambda$\\
+N $\rightarrow$ \&\\
+\\
+Siendo $d$ un dígito, $l$ una letra, $c$ cualquier otro carácter y $del$ un delimitador.
+\section{Autómata Finito Determinista}
+\begin{center}
+\includegraphics[scale=0.33]{automata.jpg}
+\end{center}
+
+\clearpage
+\section{Acciones Semánticas}
+\begin{flushleft}
+A: leer\\
+B: number = int(d), leer\\
+C: number = number*10 + int(d), leer\\
+D: if number>32767\\
+       \qquad pError("Número fuera de rango")\\
+   \quad else \\
+        \qquad genToken(CTEENTERA,number);\\
+E: string = '', contador = 0, leer\\
+F: string = string + otroCS, contador++ leer\\
+G: if contador>64\\
+       \qquad pError("Cadena demasiado larga")\\
+   \quad else\\
+        \qquad genToken(CADENA,string)\\
+  \quad leer\\
+H: string = l, leer\\
+I: string = string + l/D/\_ , leer\\
+J: if palabrasReservadas.contains(string)\\
+       \qquad if string == "number"\\
+      \qquad \quad      genToken(NUMBER,-)\\
+       \qquad elif string == "string"\\
+       \qquad \quad     genToken(STRING,-)\\
+      \qquad  elif string == "boolean"\\
+      \qquad \quad      genToken(BOOLEAN,-)\\
+    \qquad    elif string == "let"\\
+      \qquad \quad      genToken(LET,-)\\
+    \qquad    elif string == "alert"\\
+      \qquad \quad      genToken(ALERT,-)\\
+    \qquad    elif string == "input"\\
+      \qquad \quad      genToken(INPUT,-)\\
+    \qquad    elif string == "return"\\
+     \qquad \quad       genToken(RETURN,-)\\
+   \qquad     elif string == "if"\\
+     \qquad \quad       genToken(IF,-)\\
+   \qquad     else\\
+      \qquad \quad      genToken(FOR,-)\\
+    \quad elif ((puntero = TS.get(string)) == None)\\
+         \qquad  TS.update({string})\\
+        \qquad    puntero = TS.get(string);\\
+         \qquad    genToken(ID,puntero)\\
+K: genToken(OPARIT,0), leer\\
+L: genToken(OPARIT,1)\\
+M: genToken(OPESP,-), leer\\
+N: genToken(OPASIGN, -)\\
+O: genTokeN(OPREL, -), leer\\
+P: genToken(OPLOG, -), leer\\
+Q: genToken(ABREPAR, - ), leer\\ 
+R: genToken(CIERRAPAR, - ), leer\\
+S: genToken(ABRELLAVE, - ), leer\\
+T: genToken(CIERRALLAVE, - ), leer\\
+U: genToken(COMA, - ), leer\\
+V: genToken(PUNTOYCOMA, - ), leer\\
+W: genToken(EOF, - ), leer\\
+\end{flushleft}
+\section{Errores}
+Error léxico (siempre se lanza cuando el Analizador Léxico encuentra un error).
+\begin{enumerate}
+\item Cadena con longitud mayor de 64 caracteres.
+\item Número fuera de rango (mayor de 32767).
+\item Carácter ilegal. 
+\end{enumerate}
+Todo error va acompañado de la $linea$ y $columna$ en el que se ha encontrado dicho error.
+\section{Formato inicial de la Tabla de Símbolos}
+La tabla de símbolos sigue el formato presentado en la página web de la asignatura:
+\begin{center}
+\begin{verbatim}
+TS Global #0:
+* Lexema: 'variable1'
+* Lexema: 'funcion1'
+\end{verbatim}
+\end{center}
+Por el momento la tabla solo dispone de la capacidad de guardar los $tokens$ y asignarles un número para su identificación. Los otros módulos del procesador serán los encargados de terminar la tabla añadiendo el resto de campos\\ necesarios. \\
+Las tablas generadas a partir del ámbito de las funciones tendrán el mismo formato presentado arriba pero con un número asignado correspondiente a su posición en la tabla de símbolos global.
+\section{Casos de Prueba}
+%En este caso hay subsecciones
+
+
+\subsection{Casos de Prueba Correctos}
+\subsubsection{Caso de Prueba Correcto Nº1}
+\begin{center} 
+El programa empleado es el siguiente:
+\end{center}
+\begin{flushleft}
+let string texto;\\
+function print (string msg)\{ \\
+\qquad	alert (msg);\\
+\} \\
+function pideTexto ()\{ \\
+\qquad	alert ("Introduce un texto");\\
+\qquad	input (texto);\\
+\}\\
+pideTexto();\\
+let string textoAux;\\
+textoAux = texto;\\
+print (textoAux);\\
+\quad\\
+Los $tokens$ generados son los siguientes:\\
+<LET , >\\
+<STRING , >\\
+<ID , 0>\\
+<PUNTOYCOMA , >\\
+<FUNCTION , >\\
+<ID , 1>\\
+<ABPAREN , >\\
+<STRING , >\\
+<ID , 2>\\
+<CEPAREN , >\\
+<ABLLAVE , >\\
+<ALERT , >\\
+<ABPAREN , >\\
+<ID , 2>\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<CELLAVE , >\\
+<FUNCTION , >\\
+<ID , 3>\\
+<ABPAREN , >\\
+<CEPAREN , >\\
+<ABLLAVE , >\\
+<ALERT , >\\
+<ABPAREN , >\\
+<CADENA , ''Introduce un texto''>\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<INPUT , >\\
+<ABPAREN , >\\
+<ID , 0>\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<CELLAVE , >\\
+<ID , 3>\\
+<ABPAREN , >\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<LET , >\\
+<STRING , >\\
+<ID , 4>\\
+<PUNTOYCOMA , >\\
+<ID , 4>\\
+<OPASIG , >\\
+<ID , 0>\\
+<PUNTOYCOMA , >\\
+<ID , 1>\\
+<ABPAREN , >\\
+<ID , 4>\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<EOF , >\\
+La tabla de símbolos generada es la siguiente:\\
+\quad\\
+CONTENIDO DE LA TABLA \# 0 :\\
+
+*	LEXEMA : 'texto'\\
+---------------- ----------------\\
+
+*	LEXEMA : 'print'\\
+---------------- ----------------\\
+
+*	LEXEMA : 'msg'\\
+---------------- ----------------\\
+
+*	LEXEMA : 'pideTexto'\\
+---------------- ----------------\\
+
+*	LEXEMA : 'textoAux'\\
+---------------- ----------------\\
+\end{flushleft}
+\clearpage
+\subsubsection{Caso de Prueba Correcto Nº2}
+\begin{center} 
+El programa empleado es el siguiente:
+\end{center}
+\begin{flushleft}
+let string texto;\\
+function print (string msg)\{\\
+\qquad	alert ("Mensage introducido:");\\
+\qquad	alert (msg);\\
+\}
+function pideTexto ()\{\\
+\qquad	alert (" Introduce un texto");\\
+\qquad	input (texto);\\
+\}\\
+pideTexto();\\
+print (texto);\\
+\quad\\
+Los $tokens$ generados son los siguientes:\\
+<LET , >\\
+<STRING , >\\
+<ID , 0>\\
+<PUNTOYCOMA , >\\
+<FUNCTION , >\\
+<ID , 1>\\
+<ABPAREN , >\\
+<STRING , >\\
+<ID , 2>\\
+<CEPAREN , >\\
+<ABLLAVE , >\\
+<ALERT , >\\
+<ABPAREN , >\\
+<CADENA , ''Mensage introducido:''>\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<ALERT , >\\
+<ABPAREN , >\\
+<ID , 2>\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<CELLAVE , >\\
+<FUNCTION , >\\
+<ID , 3>\\
+<ABPAREN , >\\
+<CEPAREN , >\\
+<ABLLAVE , >\\
+<ALERT , >\\
+<ABPAREN , >\\
+<CADENA , ''Introduce un texto''>\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<INPUT , >\\
+<ABPAREN , >\\
+<ID , 0>\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<CELLAVE , >\\
+<ID , 3>\\
+<ABPAREN , >\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<ID , 1>\\
+<ABPAREN , >\\
+<ID , 0>\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<EOF , >\\
+\quad\\
+La tabla de símbolos generada es la siguiente:\\
+\quad\\
+CONTENIDO DE LA TABLA \# 0 :\\
+
+*	LEXEMA : 'texto'\\
+---------------- ----------------\\
+
+*	LEXEMA : 'print'\\
+---------------- ----------------\\
+
+*	LEXEMA : 'msg'\\
+---------------- ----------------\\
+
+*	LEXEMA : 'pideTexto'\\
+---------------- ----------------\\
+\end{flushleft}
+\subsubsection{Caso de Prueba Correcto Nº3}
+\begin{center} 
+El programa empleado es el siguiente:
+\end{center}
+\begin{flushleft}
+let number a;\\
+let number b;\\
+let number int;\\
+alert (''Introduce el primer operando");\\
+input (a);\\
+alert (''Introduce el segundo operando");\\
+input (b);\\
+function number operacion (number num1, number num2)\{\\
+\qquad	return num1 + num2-77;\\
+\}\\
+int = 0;\\
+alert (operacion (a, b));\\
+\quad\\
+Los $tokens$ generados son los siguientes:\\
+<LET , >\\
+<NUMBER , >\\
+<ID , 0>\\
+<PUNTOYCOMA , >\\
+<LET , >\\
+<NUMBER , >\\
+<ID , 1>\\
+<PUNTOYCOMA , >\\
+<LET , >\\
+<NUMBER , >\\
+<ID , 2>\\
+<PUNTOYCOMA , >\\
+<ALERT , >\\
+<ABPAREN , >\\
+<CADENA , "Introduce el primer operando">\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<INPUT , >\\
+<ABPAREN , >\\
+<ID , 0>\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<ALERT , >\\
+<ABPAREN , >\\
+<CADENA , "Introduce el segundo operando">\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<INPUT , >\\
+<ABPAREN , >\\
+<ID , 1>\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<FUNCTION , >\\
+<NUMBER , >\\
+<ID , 3>\\
+<ABPAREN , >\\
+<NUMBER , >\\
+<ID , 4>\\
+<COMA , >\\
+<NUMBER , >\\
+<ID , 5>\\
+<CEPAREN , >\\
+<ABLLAVE , >\\
+<RETURN , >\\
+<ID , 4>\\
+<OPARIT , 0>\\
+<ID , 5>\\
+<OPARIT , 1>\\
+<CTEENTERA , 77>\\
+<PUNTOYCOMA , >\\
+<CELLAVE , >\\
+<ID , 2>\\
+<OPASIG , >\\
+<CTEENTERA , 0>\\
+<PUNTOYCOMA , >\\
+<ALERT , >\\
+<ABPAREN , >\\
+<ID , 3>\\
+<ABPAREN , >\\
+<ID , 0>\\
+<COMA , >\\
+<ID , 1>\\
+<CEPAREN , >\\
+<CEPAREN , >\\
+<PUNTOYCOMA , >\\
+<EOF , >\\
+\quad\\
+\clearpage
+La tabla de símbolos generada es la siguiente:\\
+\quad\\
+CONTENIDO DE LA TABLA \# 0 :\\
+
+*	LEXEMA : 'a'\\
+---------------- ----------------\\
+
+*	LEXEMA : 'b'\\
+---------------- ----------------\\
+
+*	LEXEMA : 'int'\\
+---------------- ----------------\\
+
+*	LEXEMA : 'operacion'\\
+---------------- ----------------\\
+
+*	LEXEMA : 'num1'\\
+---------------- ----------------\\
+
+*	LEXEMA : 'num2'\\
+---------------- ----------------\\
+\end{flushleft}
+\clearpage
+\subsection{Casos de Prueba Fallidos}
+\subsubsection{Caso de Prueba Fallido Nº1}
+\begin{center} 
+El programa empleado es el siguiente:
+\end{center}
+\begin{flushleft}
+var number b;\\
+b = 5;\\
+print("hola);\\
+\quad\\
+Errores generados:\\
+\quad\\
+Error lexico: \\
+	\qquad Illegal character ' '' ' en la linea 3 y columna 7
+\end{flushleft}
+
+\subsubsection{Caso de Prueba Fallido Nº2}
+\begin{center} 
+El programa empleado es el siguiente:
+\end{center}
+\begin{flushleft}
+var number a=3;\\
+if((a==2) \& (b==1))\\
+alert("No se que poner")\\
+\quad\\
+Errores generados:\\
+\quad\\
+Error léxico: \\
+\qquad Illegal character '\&' en la linea 2 y columna 11
+\end{flushleft}
+
+\subsubsection{Caso de Prueba Fallido Nº3}
+\begin{center} 
+El programa empleado es el siguiente:
+\end{center}
+\begin{flushleft}
+alert("Vamos a crear un número muy grande");\\
+let number x=2341234134;\\
+\quad\\
+Errores generados:\\
+\quad\\
+Error léxico: \\
+	\qquad Número fuera de rango: ''2341234134'' en la linea 2 y columna 14
+	\end{flushleft}
+\clearpage
+
+
+\end{document}
+
+
+
+
+
+
+
