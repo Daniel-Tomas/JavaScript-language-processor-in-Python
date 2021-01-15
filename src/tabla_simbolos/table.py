@@ -2,12 +2,12 @@ class Table:
     """Represents a symbol table.
 
     Args:
-        id_ (int): id to be set.
+        id_ (int): Set the identifier of this table.
 
     Attributes:
-        lexems (list of dict): A list which represents lexems in the table.
+        lexems (list of dict): A list which represents the lexems in the table.
         exists (bool): Represents if the table exists or not.
-        id_ (int): Represents the identifying of the table.
+        id_ (int): The identifier of the table.
 
     """
 
@@ -20,19 +20,19 @@ class Table:
         """Checks if the symbol table exists.
 
         Returns:
-            bool: True if it exists,False otherwise.
+            bool: True if it exists, False otherwise.
         """
         return self.exists
 
     def delete(self):
-        """Marks the table as deleted, it will not exit."""
+        """Marks the table as deleted"""
         self.exists = False
 
     def contains_lex(self, lex):
         """Checks if lex is in the table.
 
         Args:
-            lex (str): The lexeme to find into the symbol table.
+            lex (str): The lexeme to find in the symbol table.
 
         Returns:
             bool: True if lex exists, False otherwise.
@@ -44,7 +44,7 @@ class Table:
         """Gets the lexeme position in symbol table.
 
         Args:
-            lex (str): The lexeme to find into the symbol table.
+            lex (str): The lexeme to find in the symbol table.
 
         Returns:
              int or None: the position where lex is located, None otherwise.
@@ -60,14 +60,11 @@ class Table:
         """Add a lexeme into the symbol table.
 
         Args:
-            lex (str): The lexeme to add_entry in the symbol table.
+            lex (str): The lexeme to be added.
 
         Returns:
-            int: pos in table where lex has been added
+            int: index in table where lex has been added
         """
-        # for element in self.lexems:
-        #     if element["LEXEMA"] == lex:
-        #         return None
 
         self.lexems.append({"LEXEMA": lex})
         return len(self.lexems) - 1
@@ -90,7 +87,7 @@ class Table:
         """Adds an attribute to a lexeme where is located in a position of a table.
 
         Args:
-            table_pos (int): Position of the lex in the table.
+            table_pos (int): Position of the lexeme in the table.
             type_ (str): The type of attribute to set.
             content (any): The value of the attribute.
 
@@ -103,17 +100,11 @@ class Table:
         self.lexems[table_pos][type_] = content
         return True
 
-        # lex_dict = self.get_lex_dict(lex)
-        # if not lex_dict:
-        #     return False
-        #
-        # lex_dict[type_] = content
-
     def get_attribute(self, table_pos, type_):
         """Gets value of an attribute of a lexeme.
 
         Args:
-            table_pos (int): Position of the lex in the table.
+            table_pos (int): Position of the lexeme in the table.
             type_ (str): The type of the attribute.
 
         Returns:
@@ -126,7 +117,7 @@ class Table:
         """Gets the dict of a specified lexeme.
 
          Returns:
-            dict or None: dict dictionary of lexeme lex if exists, None otherwise.
+            dict or None: dictionary of lexeme "lex" if exists, None otherwise.
         """
         for entry in self.lexems:
             if entry["LEXEMA"] == lex:
@@ -137,10 +128,10 @@ class Table:
         """Gets the lexeme which is located in a given position.
 
         Args:
-            pos_lex (int): The position into the table
+            pos_lex (int): The index in the table
 
         Returns:
-            dict or None: dict lexeme located into pos_lex, None otherwise.
+            dict or None: The lexeme dictionary located into pos_lex, None otherwise.
         """
 
         if pos_lex >= len(self.lexems):
@@ -148,16 +139,12 @@ class Table:
 
         return self.lexems[pos_lex]
 
-    def write(self, path):
-        """Prints the content of the table into a file pointed by path.
-
+    def write(self, file):
+        """Prints the content of the table into the file provided.
             Prints the using the format provided in
             FormatoImpresiónTablaDeSímbolos.txt
         Args:
-            path (file): File where the TS is going to be written
-
-        Returns:
-            bool: True if the table exists. False otherwise.
+            file (file): File where the TS is going to be written
         """
 
         to_write = f'CONTENIDO DE LA TABLA # {str(self.id_)} :\n'
@@ -180,5 +167,4 @@ class Table:
             to_write += f'---------------- ----------------\n'
         to_write += '\n\n\n'
 
-        path.write(to_write)
-        return True
+        file.write(to_write)
