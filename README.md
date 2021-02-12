@@ -6,7 +6,7 @@ Therefore, we chose Python as a base languaje because it fullfilled all the requ
 
 ## What is exactly a languaje processor?
 As you probably already know, computers need to work in binary. However, humans aren't able to write code in binary as it is extremely difficult. So in order to overcome this issue people began working on compilers.
-A compiler is a piece of software which translates from human readable code to binary. Therefore, enabling humans to write complex pieces of software with less difficulty. You can check out more about them [here](https://en.wikipedia.org/wiki/Compiler)
+A compiler is a piece of software which translates from human readable code to binary. Therefore, enabling humans to write complex pieces of software with less difficulty. You can check out more about them [here](https://en.wikipedia.org/wiki/Compiler).
 In a compiler there are two main parts, the languaje processor and the languaje translator. The first one is the one being developed in this proyect. We have chosen this specific part as it is the most versatile part. Its aplications vary from compilers to data processing.
 
 The languaje processor has three main modules:
@@ -36,7 +36,7 @@ If you see mistakes in the code or parts that could be better, please fix or imp
 Hope you find usefull and like the proyect!
 
 ## Acknowledgment
-This proyect was built by Daniel Tomás, Aarón Cabrero and Alejandro Cuadrón.
+This proyect was built by Daniel Tomás, Aarón Cabero and Alejandro Cuadrón.
 
 
 
