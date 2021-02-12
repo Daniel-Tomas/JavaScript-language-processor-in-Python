@@ -1,4 +1,4 @@
-# Languaje processor of a modified version of JS
+# Language processor of a modified version of JS
 ## Description of the proyect
 The goal of this proyect is to create a languaje processor for a modified version of the JS languaje, which you can find more about [here.](https://dlsiisv.fi.upm.es/procesadores/IntroJavaScript.html)
 For the development of the languaje processor we needed a base languaje in which all the different components of the processor could be done. So we needed a languaje capable of working with OOP, easy to use and stable. We didn't pursue a fast processor as this proyect wasn't going to be used commercially.
