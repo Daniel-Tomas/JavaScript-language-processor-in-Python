@@ -1,0 +1,145 @@
+Y -> P1{
+    Y.cod=P1.cod
+    }
+P -> B P1{
+    P.cod=B.cod || P1.cod
+    }
+P -> F P1{
+    P.cod=F.cod || P1.cod
+    }
+P -> lambda{
+    P.cod=vacio
+    }
+B -> if ( E ) S{
+    S.sig=nuevaetiq()
+    E.verdad=nuevaetiq()
+    E.falso=S.sig
+    B.cod=E.cod || gen(:, E.verdad) || S.cod || gen(goto, S.sig) || gen(:, S.sig)
+    }
+B -> let T id ;{
+    B.cod=vacio
+    }
+B -> S{
+    B.cod=S.cod
+    }
+B -> for ( D ; E ; Z ) { C }    {
+    B.inicio=nuevaetiq()
+    E.verdad=nuevaetiq()
+    E.falso=nuevaetiq()
+    B.cod=D.cod || gen(:, B.inicio) || E.cod || gen(:, E.verdad) || C.cod || Z.cod || gen(goto, B.inicio) || gen(:, E.falso)
+    }
+S -> id = E ;{
+    S.cod=E.cod || gen(BLTS(id.pos),=,E.lugar)
+    }
+S -> id ( L ) ;{
+    S.cod=L.codE || L.codP || gen(call, BETS(id.pos))
+    }
+S -> alert ( E ) ;
+S -> input ( id ) ;
+S -> return X ;{
+    if(X.cod=vacio)
+        S.cod=gen(return)
+    else
+        S.cod=gen(return, X.lugar)
+    }
+T -> number{
+    T.lugar=nuevatemp()
+    T.cod=gen(T.lugar,=,number.value)
+    }
+T -> boolean{
+    T.lugar=nuevatemp()
+    T.cod=gen(T.lugar,=,boolean.value)
+    }
+T -> string{
+    T.lugar=nuevatemp()
+    T.cod=gen(T.lugar,=,string.value)
+    }
+F -> F1 F2 F3{
+    F.cod=F1.cod || F2.cod || F3.cod || gen(return)
+    }
+F1 -> function H id{
+    F1.cod=gen(:, BETS(id.pos))
+    }
+F2 -> ( A ){
+    F2.cod=vacio
+    }
+F3 -> { C }     {
+    F3.cod=C.cod
+    }
+E -> E1 && R{
+    E1.verdad=nuevaetiq()
+    E1.falso=E.falso
+    R.verdad=E.verdad
+    R.falso=E.falso
+    E.cod=E1.cod || gen(:, E1.verdad) || R.cod
+    }
+E -> R{
+    E.cod=R.cod
+    }
+R -> R1 == U{
+    R.cod= gen(if,R1.lugar,=,U.lugar,goto,R.verdad) || gen(goto, R.falso)
+    }
+R -> U{
+    R.cod=U.cod
+    R.lugar=U.lugar
+    }
+U -> U1 - V{
+    U.lugar=nuevatemp()
+    U.cod=gen(U.lugar,=,U1.lugar,-,V.lugar)
+    }
+U -> V{
+    U.cod=V.cod
+    U.lugar=V.lugar
+    }
+V -> -- id{
+    V.lugar=nuevatemp()
+    id.lugar=BLTS(id.pos)
+    V.cod=gen(id.lugar,=,id.lugar,-,1) || gen(V.lugar,=,id.lugar)
+    }
+V -> id{
+    V.lugar=nuevatemp()
+    V.cod=gen(V.lugar,=,BLTS(id.pos)
+    }
+V -> ( E ){
+    V.cod=E.cod
+    }
+V -> id ( L ){
+    }
+V -> ent{
+    V.lugar=nuevatemp()
+    gen(V.lugar,=,ent.valor)
+    }
+V -> cad{
+    V.lugar=nuevatemp()
+    gen(V.lugar,=,cad.valor)
+    }
+V -> log{
+    V.cod=gen(if,log.valor,=,1,goto,V.verdad) || gen(goto,V.falso)
+    }
+X -> E{
+    X.cod=E.cod
+    X.lugar=E.lugar
+    }
+X -> lambda{
+    X.cod=vacio
+    }
+L -> E Q{
+    L.codE=E.cod || Q.codE
+
+L -> lambda
+Q -> , E Q
+Q -> lambda
+D -> id = E
+D -> lambda
+Z -> id = E
+Z -> -- id
+Z -> lambda
+H -> T
+H -> lambda
+A -> T id K
+A -> lambda
+K -> , T id K
+K -> lambda
+C -> B C
+C -> lambda
+}
